@@ -1,28 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Admin - Exam Portal">
-  <div class="bg-gradient-to-br from-primary-600 to-primary-900 text-white py-12 px-4 text-center">
-    <h1 class="text-3xl font-extrabold">⚙️ Admin Panel</h1>
-    <p class="opacity-80 mt-1">Upload and manage exams</p>
-  </div>
-  <div class="max-w-3xl mx-auto px-4 py-8 space-y-6">
-    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg animate-fade-in">
-      <h2 class="text-xl font-bold mb-4 pb-3 border-b border-slate-100">Upload Exam JSON</h2>
-      <input type="file" id="json-file" accept=".json" class="mb-4">
-      <textarea id="json-text" placeholder='{"subject":"CSE College Teacher","examTitle":"Chapter 1","durationMinutes":20,"questions":[...]}' class="w-full min-h-[120px] p-3 border-2 border-slate-200 rounded-xl font-mono text-sm focus:border-primary-500 outline-none transition mb-4"></textarea>
-      <button id="preview-btn" class="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold hover:shadow-lg transition-all">Preview</button>
-      <div id="preview-area" class="hidden mt-4">
-        <div id="preview-content" class="bg-slate-50 rounded-xl p-4 text-sm max-h-[400px] overflow-auto border border-slate-200 mb-3"></div>
-        <button id="confirm-btn" class="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all">Confirm Upload</button>
+<Layout title="Admin - ExamText" navBack={true} navTitle="Admin Panel">
+  <div class="max-w-4xl mx-auto px-4 py-10 space-y-6">
+
+    <!-- Upload Section -->
+    <div class="card p-7 animate-fade-in">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-lg">📤</div>
+        <div>
+          <h2 class="text-lg font-bold text-surface-900">Upload Exam</h2>
+          <p class="text-sm text-surface-400">Paste JSON or upload a file</p>
+        </div>
+      </div>
+      <input type="file" id="json-file" accept=".json" class="mb-4 text-sm text-surface-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-brand-50 file:text-brand-600 hover:file:bg-brand-100 file:cursor-pointer">
+      <textarea id="json-text" placeholder='{"subject":"CSE College Teacher","examTitle":"Chapter 1","durationMinutes":20,"questions":[...]}' class="w-full min-h-[140px] p-4 border-2 border-surface-200 rounded-2xl font-mono text-sm focus:border-brand-500 outline-none transition resize-none text-surface-600 placeholder:text-surface-300"></textarea>
+      <div class="flex gap-3 mt-4">
+        <button id="preview-btn" class="btn-primary text-sm">Preview</button>
+      </div>
+      <div id="preview-area" class="hidden mt-5">
+        <div id="preview-content" class="bg-surface-50 rounded-2xl p-5 text-sm max-h-[400px] overflow-auto border border-surface-200 mb-4"></div>
+        <button id="confirm-btn" class="px-6 py-3 bg-emerald-500 text-white rounded-2xl font-semibold hover:bg-emerald-600 transition-all">Confirm Upload</button>
       </div>
       <div id="upload-result" class="mt-4"></div>
     </div>
-    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg animate-fade-in-up" style="animation-delay:0.1s;opacity:0;">
-      <h2 class="text-xl font-bold mb-4 pb-3 border-b border-slate-100">Existing Subjects & Exams</h2>
-      <div id="manage-list"><div class="flex justify-center py-8"><div class="w-8 h-8 border-4 border-slate-200 border-t-primary-500 rounded-full animate-spin"></div></div></div>
+
+    <!-- Manage Section -->
+    <div class="card p-7 animate-fade-up" style="animation-delay:0.1s;opacity:0;">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-lg">📚</div>
+        <div>
+          <h2 class="text-lg font-bold text-surface-900">Existing Data</h2>
+          <p class="text-sm text-surface-400">Manage subjects and exams</p>
+        </div>
+      </div>
+      <div id="manage-list">
+        <div class="flex justify-center py-8">
+          <div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
+        </div>
+      </div>
     </div>
   </div>
+
   <script is:inline>
     let parsedData = null;
     const labels = ['A','B','C','D'];
@@ -37,11 +56,11 @@ import Layout from '../layouts/Layout.astro';
       try {
         parsedData = JSON.parse(document.getElementById('json-text').value.trim());
         if (!parsedData.questions || !Array.isArray(parsedData.questions)) { window.showToast('Invalid format'); parsedData = null; return; }
-        let html = `<strong>Subject:</strong> ${parsedData.subject}<br><strong>Title:</strong> ${parsedData.examTitle}<br><strong>Duration:</strong> ${parsedData.durationMinutes||0} min<br><strong>Questions:</strong> ${parsedData.questions.length}<br><br>`;
+        let html = `<div class="space-y-1 mb-4"><div class="text-sm"><strong>Subject:</strong> ${parsedData.subject}</div><div class="text-sm"><strong>Title:</strong> ${parsedData.examTitle}</div><div class="text-sm"><strong>Duration:</strong> ${parsedData.durationMinutes||0} min</div><div class="text-sm"><strong>Questions:</strong> ${parsedData.questions.length}</div></div><hr class="border-surface-200 mb-4">`;
         parsedData.questions.forEach((q, i) => {
-          html += `<div class="mb-3 pb-3 border-b border-slate-200"><strong>Q${i+1}:</strong> ${q.questionText}<br>`;
-          q.options.forEach((opt, oi) => { html += `<span class="ml-3">${labels[oi]}. ${opt}${oi===q.correctOptionIndex?' ✓':''}</span><br>`; });
-          if (q.explanation) html += `<em class="text-slate-500">Explanation:</em> ${q.explanation}`;
+          html += `<div class="mb-3 pb-3 border-b border-surface-200 last:border-0"><div class="font-semibold text-sm mb-1">Q${i+1}: ${q.questionText}</div>`;
+          q.options.forEach((opt, oi) => { html += `<div class="text-sm ml-4 ${oi===q.correctOptionIndex?'text-emerald-600 font-semibold':''}">${labels[oi]}. ${opt}${oi===q.correctOptionIndex?' ✓':''}</div>`; });
+          if (q.explanation) html += `<div class="text-xs text-surface-400 mt-1 ml-4">💡 ${q.explanation}</div>`;
           html += '</div>';
         });
         document.getElementById('preview-content').innerHTML = html;
@@ -58,10 +77,10 @@ import Layout from '../layouts/Layout.astro';
         const data = await res.json();
         if (res.ok) {
           const url = window.location.origin + '/exam-intro/' + data.id;
-          document.getElementById('upload-result').innerHTML = `<div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4"><h3 class="font-bold text-emerald-700">Upload Successful!</h3><p class="mt-2 text-sm">Shareable link:</p><div class="flex gap-2 mt-2"><input value="${url}" readonly class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm"><button onclick="navigator.clipboard.writeText('${url}');window.showToast('Copied!')" class="px-4 py-2 bg-primary-500 text-white rounded-lg text-sm font-semibold">Copy</button></div></div>`;
+          document.getElementById('upload-result').innerHTML = `<div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl"><h3 class="font-bold text-emerald-700 mb-2">Uploaded!</h3><div class="flex gap-2"><input value="${url}" readonly class="flex-1 px-3 py-2 border border-emerald-200 rounded-xl text-sm bg-white"><button onclick="navigator.clipboard.writeText('${url}');window.showToast('Copied!')" class="px-4 py-2 bg-emerald-500 text-white rounded-xl text-sm font-semibold">Copy</button></div></div>`;
           loadManageList();
-        } else { document.getElementById('upload-result').innerHTML = `<p class="text-red-500">Error: ${data.error}</p>`; }
-      } catch(e) { document.getElementById('upload-result').innerHTML = `<p class="text-red-500">Error: ${e.message}</p>`; }
+        } else { document.getElementById('upload-result').innerHTML = `<p class="text-red-500 text-sm">Error: ${data.error}</p>`; }
+      } catch(e) { document.getElementById('upload-result').innerHTML = `<p class="text-red-500 text-sm">Error: ${e.message}</p>`; }
       btn.disabled = false; btn.textContent = 'Confirm Upload';
     });
 
@@ -70,24 +89,27 @@ import Layout from '../layouts/Layout.astro';
         const res = await fetch('/api/admin/all');
         const text = await res.text();
         let subjects;
-        try { subjects = JSON.parse(text); } catch { document.getElementById('manage-list').innerHTML = `<p class="text-red-500">API returned non-JSON (${res.status}): ${text.substring(0, 200)}</p>`; return; }
-        if (subjects.error) { document.getElementById('manage-list').innerHTML = `<p class="text-red-500">API Error: ${subjects.error}</p>`; return; }
-        if (!subjects.length) { document.getElementById('manage-list').innerHTML = '<p class="text-slate-400 text-center py-4">No subjects yet.</p>'; return; }
+        try { subjects = JSON.parse(text); } catch { document.getElementById('manage-list').innerHTML = `<p class="text-red-500 text-sm">API returned non-JSON (${res.status})</p>`; return; }
+        if (subjects.error) { document.getElementById('manage-list').innerHTML = `<p class="text-red-500 text-sm">${subjects.error}</p>`; return; }
+        if (!subjects.length) { document.getElementById('manage-list').innerHTML = '<p class="text-surface-400 text-center py-6">No data yet.</p>'; return; }
         document.getElementById('manage-list').innerHTML = subjects.map(s => `
-          <div class="mb-5">
-            <div class="flex items-center justify-between mb-2"><strong class="text-lg">${s.name}</strong><button onclick="deleteSubject('${s.id}')" class="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition">Delete Subject</button></div>
-            ${s.exams.length===0 ? '<p class="text-slate-400 text-sm">No exams.</p>' : s.exams.map(e => `
-              <div class="flex items-center justify-between p-3 border border-slate-200 rounded-xl mb-2 hover:border-primary-300 transition">
-                <div><strong>${e.title}</strong><br><small class="text-slate-500">${e.totalQuestions} Q · ${e.durationMinutes||0}m</small></div>
-                <div class="flex items-center gap-3">
-                  <label class="relative inline-block w-11 h-6"><input type="checkbox" ${e.published?'checked':''} onchange="togglePub('${e.id}',this.checked)" class="sr-only peer"><span class="absolute inset-0 bg-slate-300 rounded-full peer-checked:bg-emerald-500 transition cursor-pointer before:content-[''] before:absolute before:w-5 before:h-5 before:bg-white before:rounded-full before:left-0.5 before:top-0.5 before:transition peer-checked:before:translate-x-5"></span></label>
-                  <button onclick="deleteExam('${e.id}')" class="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition">Delete</button>
+          <div class="mb-6 last:mb-0">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-surface-800">${s.name}</h3>
+              <button onclick="deleteSubject('${s.id}')" class="px-3 py-1.5 bg-red-50 text-red-600 rounded-xl text-xs font-semibold hover:bg-red-100 transition">Delete Subject</button>
+            </div>
+            ${s.exams.length===0 ? '<p class="text-surface-300 text-sm">No exams.</p>' : s.exams.map(e => `
+              <div class="flex items-center justify-between p-4 border border-surface-100 rounded-2xl mb-2 hover:border-brand-200 transition">
+                <div class="min-w-0"><div class="font-semibold text-sm text-surface-800 truncate">${e.title}</div><div class="text-xs text-surface-400 mt-0.5">${e.totalQuestions} Q · ${e.durationMinutes||0}m</div></div>
+                <div class="flex items-center gap-3 shrink-0 ml-4">
+                  <label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" ${e.published?'checked':''} onchange="togglePub('${e.id}',this.checked)" class="sr-only peer"><div class="w-11 h-6 bg-surface-200 rounded-full peer peer-checked:bg-emerald-500 transition-colors after:content-[''] after:absolute after:w-5 after:h-5 after:bg-white after:rounded-full after:left-0.5 after:top-0.5 after:transition peer-checked:after:translate-x-5"></div></label>
+                  <button onclick="deleteExam('${e.id}')" class="px-3 py-1.5 bg-red-50 text-red-600 rounded-xl text-xs font-semibold hover:bg-red-100 transition">Delete</button>
                 </div>
               </div>
             `).join('')}
           </div>
         `).join('');
-      } catch(e) { document.getElementById('manage-list').innerHTML = `<p class="text-red-500">Error: ${e.message}</p>`; }
+      } catch(e) { document.getElementById('manage-list').innerHTML = `<p class="text-red-500 text-sm">${e.message}</p>`; }
     }
 
     window.togglePub = async (id, val) => { await fetch(`/api/admin/exam/${id}/publish`, {method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({published:val})}); window.showToast(val?'Published':'Unpublished'); };

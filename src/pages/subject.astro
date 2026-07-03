@@ -13,28 +13,40 @@ try {
   if (exams.length > 0) subjectName = exams[0].subjectId || subjectId;
 } catch {}
 ---
-<Layout title={`${subjectName} - Exam Portal`}>
-  <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white py-12 px-4 text-center relative">
-    <a href="/" class="absolute top-4 left-4 text-white/80 hover:text-white transition text-sm font-medium">← Back</a>
-    <h1 class="text-3xl font-extrabold">{subjectName}</h1>
-  </div>
-  <div class="max-w-3xl mx-auto px-4 py-8">
+<Layout title={`${subjectName} - ExamText`} navBack={true} navTitle={subjectName}>
+  <div class="max-w-4xl mx-auto px-4 py-10">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold text-surface-900 mb-2">{subjectName}</h1>
+      <p class="text-surface-400">{exams.length} exam{exams.length !== 1 ? 's' : ''} available</p>
+    </div>
+
     {exams.length === 0 ? (
-      <div class="text-center py-20 text-slate-400">
-        <div class="text-6xl mb-4">📭</div>
-        <p>No exams available yet.</p>
+      <div class="text-center py-20">
+        <div class="w-20 h-20 rounded-3xl bg-surface-100 flex items-center justify-center text-4xl mx-auto mb-6">📭</div>
+        <h3 class="text-xl font-semibold text-surface-700 mb-2">No exams available</h3>
+        <p class="text-surface-400">Check back later for new exams</p>
       </div>
     ) : (
       <div class="space-y-4">
         {exams.map((e, i) => (
-          <div class="bg-white rounded-xl p-5 border border-slate-200 hover:border-primary-400 hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in-up" style={`animation-delay:${i * 0.06}s;opacity:0;`}>
+          <div class="card p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 animate-fade-up" style={`animation-delay:${i * 0.06}s;opacity:0;`}>
             <div class="flex-1 min-w-0">
-              <h4 class="text-lg font-bold text-slate-800 truncate">{e.title}</h4>
-              <p class="text-sm text-slate-500">{e.totalQuestions} questions · {e.durationMinutes || 0} min</p>
+              <h3 class="text-lg font-bold text-surface-900 mb-1">{e.title}</h3>
+              <div class="flex items-center gap-4 text-sm text-surface-400">
+                <span class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  {e.totalQuestions} Questions
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  {e.durationMinutes || 0} min
+                </span>
+              </div>
             </div>
-            <div class="flex gap-2 shrink-0">
-              <a href={`/exam-intro/${e.id}`} class="px-5 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 btn-glow">Start</a>
-              <button onclick={`navigator.share ? navigator.share({title:'${e.title}',url:window.location.origin+'/exam-intro/${e.id}'}) : navigator.clipboard.writeText(window.location.origin+'/exam-intro/${e.id}');window.showToast('Link copied!')`} class="px-4 py-2.5 border-2 border-primary-500 text-primary-600 rounded-lg font-semibold text-sm hover:bg-primary-50 transition-all">Share</button>
+            <div class="flex gap-3 shrink-0">
+              <a href={`/exam-intro/${e.id}`} class="btn-primary text-sm px-6 py-2.5">Start Exam</a>
+              <button onclick={`navigator.share ? navigator.share({title:'${e.title}',url:window.location.origin+'/exam-intro/${e.id}'}) : navigator.clipboard.writeText(window.location.origin+'/exam-intro/${e.id}');window.showToast('Link copied!')`}
+                      class="btn-ghost text-sm px-4 py-2.5">Share</button>
             </div>
           </div>
         ))}

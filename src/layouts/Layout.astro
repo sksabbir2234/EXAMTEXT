@@ -1,6 +1,23 @@
 ---
-interface Props { title?: string; ogTitle?: string; ogDescription?: string; ogImage?: string; }
-const { title = 'Exam Portal', ogTitle = 'Exam Portal', ogDescription = 'Take exams online', ogImage = '/exam-preview.png' } = Astro.props;
+interface Props {
+  title?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  navBack?: boolean;
+  navTitle?: string;
+  showNav?: boolean;
+}
+
+const {
+  title = 'ExamText',
+  ogTitle = 'ExamText',
+  ogDescription = 'Online Exam Portal - CSE College Teacher',
+  ogImage = '/exam-preview.png',
+  navBack = false,
+  navTitle = '',
+  showNav = true,
+} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="bn">
@@ -16,10 +33,35 @@ const { title = 'Exam Portal', ogTitle = 'Exam Portal', ogDescription = 'Take ex
   <meta name="twitter:title" content={ogTitle}>
   <meta name="twitter:description" content={ogDescription}>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+<body class="min-h-screen bg-surface-50 text-surface-800 antialiased">
+  {showNav && (
+    <nav class="sticky top-0 z-40 glass border-b border-surface-100/60">
+      <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          {navBack ? (
+            <a href="/" class="w-9 h-9 rounded-xl bg-surface-100 hover:bg-surface-200 flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </a>
+          ) : (
+            <a href="/" class="flex items-center gap-2.5">
+              <span class="text-2xl">📝</span>
+              <span class="text-lg font-bold gradient-text hidden sm:inline">ExamText</span>
+            </a>
+          )}
+          {navTitle && <span class="font-semibold text-surface-800 text-sm sm:text-base truncate max-w-[200px]">{navTitle}</span>}
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="/" class="px-3 py-1.5 text-sm font-medium text-surface-500 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all">Home</a>
+          <a href="/admin" class="px-3 py-1.5 text-sm font-medium text-surface-500 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all">Admin</a>
+        </div>
+      </div>
+    </nav>
+  )}
   <slot />
   <div id="toast" class="toast"></div>
   <script is:inline>

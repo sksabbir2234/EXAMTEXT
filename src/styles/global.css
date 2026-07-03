@@ -2,29 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+
+* { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', 'Noto Sans Bengali', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .toast {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
-  background: #1e293b; color: white; padding: 12px 24px; border-radius: 8px;
-  font-weight: 500; z-index: 1000; transition: transform 0.3s ease;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  background: #0f172a; color: white; padding: 12px 28px; border-radius: 12px;
+  font-weight: 500; font-size: 14px; z-index: 1000; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
-.katex { font-size: 1.1em; }
+.katex { font-size: 1.05em; }
 .katex-display { margin: 0.5em 0; overflow-x: auto; overflow-y: hidden; }
 
 @layer components {
-  .glass { @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl; }
-  .btn-glow { @apply relative overflow-hidden transition-all duration-300; }
-  .btn-glow::after { content: ''; @apply absolute inset-0 bg-white/20 rounded-lg opacity-0 transition-opacity duration-300; }
-  .btn-glow:active::after { @apply opacity-100; }
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #5c7cfa, #7c3aed, #a855f7);
+  }
+  .card {
+    @apply bg-white rounded-3xl border border-surface-100 shadow-card;
+    @apply hover:shadow-card-hover hover:border-surface-200;
+    @apply transition-all duration-300;
+  }
+  .btn-primary {
+    @apply px-6 py-3 bg-brand-600 text-white rounded-2xl font-semibold;
+    @apply hover:bg-brand-700 hover:shadow-glow active:scale-[0.98];
+    @apply transition-all duration-200;
+  }
+  .btn-ghost {
+    @apply px-6 py-3 border-2 border-surface-200 text-surface-700 rounded-2xl font-semibold;
+    @apply hover:border-brand-300 hover:text-brand-600 hover:bg-brand-50 active:scale-[0.98];
+    @apply transition-all duration-200;
+  }
 }

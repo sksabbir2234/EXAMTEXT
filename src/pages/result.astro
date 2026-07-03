@@ -1,28 +1,37 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { renderLatex } from '../lib/katex';
 
 const examId = Astro.url.searchParams.get('examId') || '';
 const attemptId = Astro.url.searchParams.get('id') || '';
 const scoreParam = Astro.url.searchParams.get('score') || '0';
 ---
-<Layout title="Result - Exam Portal">
-  <div class="bg-gradient-to-br from-primary-600 to-primary-900 text-white py-12 px-4 text-center">
-    <h1 class="text-3xl font-extrabold">Exam Result</h1>
+<Layout title="Result - ExamText" navBack={true} navTitle="Exam Result">
+  <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
+
+    <!-- Result Card -->
+    <div id="result-card" class="card p-8 text-center animate-scale-in">
+      <div class="flex justify-center py-8">
+        <div class="w-10 h-10 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
+      </div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div id="leaderboard-card" class="card p-6 hidden animate-fade-up" style="animation-delay:0.2s;opacity:0;">
+      <h2 class="text-lg font-bold text-surface-900 mb-4 flex items-center gap-2">
+        <span class="text-xl">🏆</span> Leaderboard
+      </h2>
+      <div id="leaderboard" class="divide-y divide-surface-100"></div>
+    </div>
+
+    <!-- Review -->
+    <div id="review-card" class="card p-6 hidden animate-fade-up" style="animation-delay:0.3s;opacity:0;">
+      <h2 class="text-lg font-bold text-surface-900 mb-5 flex items-center gap-2">
+        <span class="text-xl">📝</span> Review Answers
+      </h2>
+      <div id="review" class="space-y-1"></div>
+    </div>
   </div>
-  <div class="max-w-3xl mx-auto px-4 py-8 space-y-6">
-    <div id="result-card" class="bg-white rounded-2xl p-8 border border-slate-100 shadow-lg text-center animate-scale-in">
-      <div class="flex justify-center py-8"><div class="w-10 h-10 border-4 border-slate-200 border-t-primary-500 rounded-full animate-spin"></div></div>
-    </div>
-    <div id="leaderboard-card" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg hidden animate-fade-in-up" style="animation-delay:0.2s;opacity:0;">
-      <h2 class="text-xl font-bold mb-4">🏆 Leaderboard</h2>
-      <div id="leaderboard"></div>
-    </div>
-    <div id="review-card" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg hidden animate-fade-in-up" style="animation-delay:0.3s;opacity:0;">
-      <h2 class="text-xl font-bold mb-4">Review Answers</h2>
-      <div id="review"></div>
-    </div>
-  </div>
+
   <script is:inline define:vars={{ examId, scoreParam }}>
     const labels = ['A','B','C','D'];
     const score = parseInt(scoreParam);
@@ -32,35 +41,49 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
         const exRes = await fetch(`/api/exam/${examId}`);
         const exam = await exRes.json();
         const total = exam.totalQuestions;
+        const pct = Math.round(score/total*100);
+        const grade = pct >= 80 ? 'Excellent' : pct >= 60 ? 'Good' : pct >= 40 ? 'Fair' : 'Needs Work';
+        const gradeColor = pct >= 80 ? 'text-emerald-500' : pct >= 60 ? 'text-brand-500' : pct >= 40 ? 'text-amber-500' : 'text-red-500';
+
         document.getElementById('result-card').innerHTML = `
-          <div class="flex justify-center gap-12 mb-6">
-            <div class="text-center"><div class="text-5xl font-extrabold text-emerald-500">${score}</div><div class="text-sm text-slate-500 mt-1">Correct</div></div>
-            <div class="text-center"><div class="text-5xl font-extrabold text-red-500">${total - score}</div><div class="text-sm text-slate-500 mt-1">Wrong</div></div>
-            <div class="text-center"><div class="text-5xl font-extrabold text-primary-600">${total}</div><div class="text-sm text-slate-500 mt-1">Total</div></div>
+          <div class="w-20 h-20 rounded-3xl bg-brand-50 flex items-center justify-center text-4xl mx-auto mb-6">🎯</div>
+          <div class="text-sm font-semibold text-surface-400 uppercase tracking-wider mb-2">${grade}</div>
+          <div class="text-6xl font-black ${gradeColor} mb-2">${pct}%</div>
+          <div class="flex justify-center gap-10 mt-8 mb-8">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-emerald-500">${score}</div>
+              <div class="text-xs text-surface-400 mt-1 font-medium">Correct</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-red-500">${total - score}</div>
+              <div class="text-xs text-surface-400 mt-1 font-medium">Wrong</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-brand-500">${total}</div>
+              <div class="text-xs text-surface-400 mt-1 font-medium">Total</div>
+            </div>
           </div>
-          <div class="text-4xl font-extrabold text-primary-600 mb-6">${Math.round(score/total*100)}%</div>
           <div class="flex flex-wrap justify-center gap-3">
-            <button onclick="navigator.share && navigator.share({title:'My Result',url:window.location.href})" class="px-5 py-2.5 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition">Facebook</button>
-            <button onclick="window.open('https://wa.me/?text='+encodeURIComponent('Check my result: '+window.location.href))" class="px-5 py-2.5 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition">WhatsApp</button>
-            <button onclick="navigator.clipboard.writeText(window.location.href);window.showToast('Copied!')" class="px-5 py-2.5 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition">Copy Link</button>
+            <button onclick="navigator.share && navigator.share({title:'My Result',url:window.location.href})" class="btn-ghost text-sm px-5 py-2.5">Share</button>
+            <button onclick="navigator.clipboard.writeText(window.location.href);window.showToast('Link copied!')" class="btn-ghost text-sm px-5 py-2.5">Copy Link</button>
           </div>`;
 
         const qRes = await fetch(`/api/exam/${examId}/questions`);
         const questions = await qRes.json();
         document.getElementById('review-card').classList.remove('hidden');
         document.getElementById('review').innerHTML = questions.map((q, i) => `
-          <div class="py-4 border-b border-slate-100 last:border-0">
-            <div class="flex items-start gap-3 mb-2">
-              <span class="w-7 h-7 bg-primary-500 text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">${i+1}</span>
-              <p class="font-medium leading-relaxed">${q.questionText}</p>
+          <div class="py-4">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="shrink-0 w-7 h-7 rounded-lg bg-brand-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">${i+1}</span>
+              <p class="font-medium text-surface-800 leading-relaxed">${q.questionText}</p>
             </div>
-            <div class="ml-10 space-y-1.5">
+            <div class="ml-10 space-y-2">
               ${q.options.map((opt, oi) => {
-                const cls = oi === q.correctOptionIndex ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-200';
-                return `<div class="flex items-center gap-2 p-2.5 border-2 rounded-lg text-sm ${cls}"><span class="font-bold">${labels[oi]}.</span> ${opt}</div>`;
+                const cls = oi === q.correctOptionIndex ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-surface-200';
+                return `<div class="flex items-center gap-2.5 p-3 border-2 rounded-xl text-sm ${cls}"><span class="font-bold">${labels[oi]}.</span> ${opt}</div>`;
               }).join('')}
             </div>
-            ${q.explanation ? `<div class="ml-10 mt-2 p-3 bg-amber-50 border-l-4 border-amber-400 rounded-lg text-sm text-amber-800">💡 ${q.explanation}</div>` : ''}
+            ${q.explanation ? `<div class="ml-10 mt-3 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-xl text-sm text-amber-800">💡 ${q.explanation}</div>` : ''}
           </div>
         `).join('');
 
@@ -69,9 +92,12 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
         if (attempts.length > 0) {
           document.getElementById('leaderboard-card').classList.remove('hidden');
           document.getElementById('leaderboard').innerHTML = attempts.map((a, i) => `
-            <div class="flex items-center gap-3 p-3 border-b border-slate-100 last:border-0">
-              <span class="text-lg">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</span>
-              <div class="flex-1"><span class="font-semibold">${a.studentName}</span><span class="text-sm text-slate-500 ml-2">${a.score}/${a.total} · ${Math.round(a.score/a.total*100)}%</span></div>
+            <div class="flex items-center gap-4 py-3">
+              <span class="text-lg font-bold w-8 text-center">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</span>
+              <div class="flex-1 min-w-0">
+                <span class="font-semibold text-surface-800">${a.studentName}</span>
+              </div>
+              <span class="text-sm font-medium text-surface-500">${a.score}/${a.total} · ${Math.round(a.score/a.total*100)}%</span>
             </div>
           `).join('');
         }

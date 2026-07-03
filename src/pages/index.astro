@@ -9,28 +9,70 @@ try {
   subjects = snap.docs.map(d => ({ id: d.id, ...d.data() }));
 } catch {}
 ---
-<Layout title="Exam Portal - Home" ogTitle="Exam Portal" ogDescription="Take exams online - CSE College Teacher">
-  <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white py-16 px-4 text-center relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] animate-gradient bg-[length:200%_200%]"></div>
-    <h1 class="text-4xl md:text-5xl font-extrabold mb-3 relative z-10 animate-fade-in">📝 Exam Portal</h1>
-    <p class="text-lg opacity-90 relative z-10 animate-fade-in" style="animation-delay:0.1s;opacity:0;">Select a subject to begin</p>
-  </div>
-  <div class="max-w-5xl mx-auto px-4 py-8">
+<Layout title="ExamText - Online Exam Portal" ogTitle="ExamText" ogDescription="Take exams online - CSE College Teacher">
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-600 via-brand-700 to-surface-900"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(124,58,237,0.3),transparent_50%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(59,130,246,0.2),transparent_50%)]"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-20 md:py-28 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium mb-8 animate-fade-in">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        CSE College Teacher - 10 Chapters
+      </div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight animate-fade-up" style="animation-delay:0.1s;opacity:0;">
+        Master Your<br>
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-200 via-purple-200 to-pink-200">Exam Preparation</span>
+      </h1>
+      <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 animate-fade-up" style="animation-delay:0.2s;opacity:0;">
+        Practice with 300+ MCQs across 10 chapters. Track your progress, compete on leaderboards.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 animate-fade-up" style="animation-delay:0.3s;opacity:0;">
+        <a href="/cse-exams" class="px-8 py-4 bg-white text-brand-700 rounded-2xl font-bold text-lg hover:shadow-glow-lg hover:-translate-y-1 transition-all duration-300">
+          Start Practice
+        </a>
+        <a href="/admin" class="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-2xl font-bold text-lg hover:bg-white/20 transition-all duration-300">
+          Admin Panel
+        </a>
+      </div>
+    </div>
+    <!-- Decorative -->
+    <div class="absolute -bottom-1 left-0 right-0 h-24 bg-surface-50 rounded-t-[3rem]"></div>
+  </section>
+
+  <!-- Subjects Grid -->
+  <section class="max-w-6xl mx-auto px-4 -mt-8 pb-20 relative z-10">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-surface-900 mb-3">Available Subjects</h2>
+      <p class="text-surface-500">Choose a subject to begin your practice</p>
+    </div>
+
     {subjects.length === 0 ? (
-      <div class="text-center py-20 text-slate-400">
-        <div class="text-6xl mb-4">📚</div>
-        <p>No subjects available yet.</p>
+      <div class="text-center py-20">
+        <div class="w-20 h-20 rounded-3xl bg-surface-100 flex items-center justify-center text-4xl mx-auto mb-6">📚</div>
+        <h3 class="text-xl font-semibold text-surface-700 mb-2">No subjects yet</h3>
+        <p class="text-surface-400 mb-6">Upload exams via the admin panel to get started</p>
+        <a href="/admin" class="btn-primary inline-flex">Go to Admin</a>
       </div>
     ) : (
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {subjects.map((s, i) => (
-          <a href={`/subject?id=${s.id}`} class="group block bg-white rounded-2xl p-6 border-2 border-slate-100 hover:border-primary-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-fade-in-up" style={`animation-delay:${i * 0.08}s;opacity:0;`}>
-            <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">📖</div>
-            <h3 class="text-lg font-bold text-slate-800 mb-1">{s.name}</h3>
-            <p class="text-sm text-slate-500">{s.description || 'Click to view exams →'}</p>
+          <a href={`/subject?id=${s.id}`}
+             class="card p-7 group cursor-pointer animate-fade-up"
+             style={`animation-delay:${i * 0.08}s;opacity:0;`}>
+            <div class="w-14 h-14 rounded-2xl bg-brand-50 group-hover:bg-brand-100 flex items-center justify-center text-2xl mb-5 transition-colors duration-300 group-hover:scale-110 transition-transform">
+              📖
+            </div>
+            <h3 class="text-xl font-bold text-surface-900 mb-2 group-hover:text-brand-600 transition-colors">{s.name}</h3>
+            <p class="text-surface-400 text-sm flex items-center gap-2">
+              View exams
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </p>
           </a>
         ))}
       </div>
     )}
-  </div>
+  </section>
+
 </Layout>
