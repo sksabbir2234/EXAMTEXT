@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Admin - Exam Portal">
+  <div class="bg-gradient-to-br from-primary-600 to-primary-900 text-white py-12 px-4 text-center">
+    <h1 class="text-3xl font-extrabold">⚙️ Admin Panel</h1>
+    <p class="opacity-80 mt-1">Upload and manage exams</p>
+  </div>
+  <div class="max-w-3xl mx-auto px-4 py-8 space-y-6">
+    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg animate-fade-in">
+      <h2 class="text-xl font-bold mb-4 pb-3 border-b border-slate-100">Upload Exam JSON</h2>
+      <input type="file" id="json-file" accept=".json" class="mb-4">
+      <textarea id="json-text" placeholder='{"subject":"CSE College Teacher","examTitle":"Chapter 1","durationMinutes":20,"questions":[...]}' class="w-full min-h-[120px] p-3 border-2 border-slate-200 rounded-xl font-mono text-sm focus:border-primary-500 outline-none transition mb-4"></textarea>
+      <button id="preview-btn" class="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold hover:shadow-lg transition-all">Preview</button>
+      <div id="preview-area" class="hidden mt-4">
+        <div id="preview-content" class="bg-slate-50 rounded-xl p-4 text-sm max-h-[400px] overflow-auto border border-slate-200 mb-3"></div>
+        <button id="confirm-btn" class="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all">Confirm Upload</button>
+      </div>
+      <div id="upload-result" class="mt-4"></div>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg animate-fade-in-up" style="animation-delay:0.1s;opacity:0;">
+      <h2 class="text-xl font-bold mb-4 pb-3 border-b border-slate-100">Existing Subjects & Exams</h2>
+      <div id="manage-list"><div class="flex justify-center py-8"><div class="w-8 h-8 border-4 border-slate-200 border-t-primary-500 rounded-full animate-spin"></div></div></div>
+    </div>
+  </div>
+  <script is:inline>
+    let parsedData = null;
+    const labels = ['A','B','C','D'];
+
+    document.getElementById('json-file').addEventListener('change', e => {
+      const reader = new FileReader();
+      reader.onload = ev => document.getElementById('json-text').value = ev.target.result;
+      if (e.target.files[0]) reader.readAsText(e.target.files[0]);
+    });
+
+    document.getElementById('preview-btn').addEventListener('click', () => {
+      try {
+        parsedData = JSON.parse(document.getElementById('json-text').value.trim());
+        if (!parsedData.questions || !Array.isArray(parsedData.questions)) { window.showToast('Invalid format'); parsedData = null; return; }
+        let html = `<strong>Subject:</strong> ${parsedData.subject}<br><strong>Title:</strong> ${parsedData.examTitle}<br><strong>Duration:</strong> ${parsedData.durationMinutes||0} min<br><strong>Questions:</strong> ${parsedData.questions.length}<br><br>`;
+        parsedData.questions.forEach((q, i) => {
+          html += `<div class="mb-3 pb-3 border-b border-slate-200"><strong>Q${i+1}:</strong> ${q.questionText}<br>`;
+          q.options.forEach((opt, oi) => { html += `<span class="ml-3">${labels[oi]}. ${opt}${oi===q.correctOptionIndex?' ✓':''}</span><br>`; });
+          if (q.explanation) html += `<em class="text-slate-500">Explanation:</em> ${q.explanation}`;
+          html += '</div>';
+        });
+        document.getElementById('preview-content').innerHTML = html;
+        document.getElementById('preview-area').classList.remove('hidden');
+      } catch(e) { window.showToast('Invalid JSON: ' + e.message); parsedData = null; }
+    });
+
+    document.getElementById('confirm-btn').addEventListener('click', async () => {
+      if (!parsedData) return;
+      const btn = document.getElementById('confirm-btn');
+      btn.disabled = true; btn.textContent = 'Uploading...';
+      try {
+        const res = await fetch('/api/admin/upload', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(parsedData) });
+        const data = await res.json();
+        if (res.ok) {
+          const url = window.location.origin + '/exam-intro/' + data.id;
+          document.getElementById('upload-result').innerHTML = `<div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4"><h3 class="font-bold text-emerald-700">Upload Successful!</h3><p class="mt-2 text-sm">Shareable link:</p><div class="flex gap-2 mt-2"><input value="${url}" readonly class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm"><button onclick="navigator.clipboard.writeText('${url}');window.showToast('Copied!')" class="px-4 py-2 bg-primary-500 text-white rounded-lg text-sm font-semibold">Copy</button></div></div>`;
+          loadManageList();
+        } else { document.getElementById('upload-result').innerHTML = `<p class="text-red-500">Error: ${data.error}</p>`; }
+      } catch(e) { document.getElementById('upload-result').innerHTML = `<p class="text-red-500">Error: ${e.message}</p>`; }
+      btn.disabled = false; btn.textContent = 'Confirm Upload';
+    });
+
+    async function loadManageList() {
+      try {
+        const res = await fetch('/api/admin/all');
+        const subjects = await res.json();
+        if (!subjects.length) { document.getElementById('manage-list').innerHTML = '<p class="text-slate-400 text-center py-4">No subjects yet.</p>'; return; }
+        document.getElementById('manage-list').innerHTML = subjects.map(s => `
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2"><strong class="text-lg">${s.name}</strong><button onclick="deleteSubject('${s.id}')" class="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition">Delete Subject</button></div>
+            ${s.exams.length===0 ? '<p class="text-slate-400 text-sm">No exams.</p>' : s.exams.map(e => `
+              <div class="flex items-center justify-between p-3 border border-slate-200 rounded-xl mb-2 hover:border-primary-300 transition">
+                <div><strong>${e.title}</strong><br><small class="text-slate-500">${e.totalQuestions} Q · ${e.durationMinutes||0}m</small></div>
+                <div class="flex items-center gap-3">
+                  <label class="relative inline-block w-11 h-6"><input type="checkbox" ${e.published?'checked':''} onchange="togglePub('${e.id}',this.checked)" class="sr-only peer"><span class="absolute inset-0 bg-slate-300 rounded-full peer-checked:bg-emerald-500 transition cursor-pointer before:content-[''] before:absolute before:w-5 before:h-5 before:bg-white before:rounded-full before:left-0.5 before:top-0.5 before:transition peer-checked:before:translate-x-5"></span></label>
+                  <button onclick="deleteExam('${e.id}')" class="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition">Delete</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `).join('');
+      } catch { document.getElementById('manage-list').innerHTML = '<p class="text-red-500">Error loading data.</p>'; }
+    }
+
+    window.togglePub = async (id, val) => { await fetch(`/api/admin/exam/${id}/publish`, {method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({published:val})}); window.showToast(val?'Published':'Unpublished'); };
+    window.deleteExam = async (id) => { if(!confirm('Delete this exam?'))return; await fetch(`/api/admin/exam/${id}`,{method:'DELETE'}); window.showToast('Deleted'); loadManageList(); };
+    window.deleteSubject = async (id) => { if(!confirm('Delete this subject and ALL exams?'))return; await fetch(`/api/admin/subject/${id}`,{method:'DELETE'}); window.showToast('Deleted'); loadManageList(); };
+    loadManageList();
+  </script>
+</Layout>

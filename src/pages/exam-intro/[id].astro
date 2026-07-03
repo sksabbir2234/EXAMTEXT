@@ -1,0 +1,66 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import { doc, getDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../lib/firebase';
+
+const { id } = Astro.params;
+let exam: any = { title: 'Exam', totalQuestions: 0, durationMinutes: 0, subjectName: '' };
+
+try {
+  const snap = await getDoc(doc(db, 'exams', id!));
+  if (snap.exists()) {
+    exam = { id: snap.id, ...snap.data() };
+    try {
+      const subSnap = await getDoc(doc(db, 'subjects', exam.subjectId));
+      if (subSnap.exists()) exam.subjectName = subSnap.data().name;
+    } catch {}
+  }
+} catch {}
+---
+<Layout
+  title={`${exam.title} - Exam Portal`}
+  ogTitle={`${exam.title} - Exam Portal`}
+  ogDescription={`${exam.totalQuestions} questions | ${exam.durationMinutes || 0} min | Take this exam now!`}
+>
+  <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white py-12 px-4 text-center relative">
+    <a href="/" class="absolute top-4 left-4 text-white/80 hover:text-white transition text-sm font-medium">← Back</a>
+    <h1 class="text-3xl font-extrabold mb-2">{exam.title}</h1>
+    <p class="opacity-80">{exam.subjectName}</p>
+  </div>
+  <div class="max-w-lg mx-auto px-4 py-8 space-y-6">
+    <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-lg animate-scale-in">
+      <div class="flex justify-center gap-12">
+        <div class="text-center animate-fade-in" style="animation-delay:0.1s;opacity:0;">
+          <div class="text-4xl font-extrabold text-primary-600">{exam.totalQuestions}</div>
+          <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Questions</div>
+        </div>
+        <div class="text-center animate-fade-in" style="animation-delay:0.2s;opacity:0;">
+          <div class="text-4xl font-extrabold text-primary-600">{exam.durationMinutes > 0 ? `${exam.durationMinutes}m` : '∞'}</div>
+          <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Duration</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-lg animate-fade-in-up" style="animation-delay:0.2s;opacity:0;">
+      <h2 class="text-xl font-bold mb-5">Enter Your Name</h2>
+      <form id="name-form" class="space-y-4">
+        <input type="text" id="student-name" placeholder="Your name" required autocomplete="name" class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-primary-500 focus:ring-0 outline-none transition font-medium">
+        <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 btn-glow">Start Exam →</button>
+      </form>
+    </div>
+  </div>
+  <script is:inline define:vars={{ examId: id }}>
+    const form = document.getElementById('name-form');
+    const nameInput = document.getElementById('student-name');
+    const saved = sessionStorage.getItem('studentName');
+    if (saved) nameInput.value = saved;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      if (!name) return;
+      sessionStorage.setItem('studentName', name);
+      window.location.href = `/exam?id=${examId}`;
+    });
+  </script>
+</Layout>

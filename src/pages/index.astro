@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../lib/firebase';
+
+let subjects: any[] = [];
+try {
+  const snap = await getDocs(collection(db, 'subjects'));
+  subjects = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+} catch {}
+---
+<Layout title="Exam Portal - Home" ogTitle="Exam Portal" ogDescription="Take exams online - CSE College Teacher">
+  <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white py-16 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] animate-gradient bg-[length:200%_200%]"></div>
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-3 relative z-10 animate-fade-in">📝 Exam Portal</h1>
+    <p class="text-lg opacity-90 relative z-10 animate-fade-in" style="animation-delay:0.1s;opacity:0;">Select a subject to begin</p>
+  </div>
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    {subjects.length === 0 ? (
+      <div class="text-center py-20 text-slate-400">
+        <div class="text-6xl mb-4">📚</div>
+        <p>No subjects available yet.</p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {subjects.map((s, i) => (
+          <a href={`/subject?id=${s.id}`} class="group block bg-white rounded-2xl p-6 border-2 border-slate-100 hover:border-primary-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-fade-in-up" style={`animation-delay:${i * 0.08}s;opacity:0;`}>
+            <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">📖</div>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">{s.name}</h3>
+            <p class="text-sm text-slate-500">{s.description || 'Click to view exams →'}</p>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>

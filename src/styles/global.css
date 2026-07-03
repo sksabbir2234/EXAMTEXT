@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', 'Noto Sans Bengali', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: #1e293b; color: white; padding: 12px 24px; border-radius: 8px;
+  font-weight: 500; z-index: 1000; transition: transform 0.3s ease;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+.katex { font-size: 1.1em; }
+.katex-display { margin: 0.5em 0; overflow-x: auto; overflow-y: hidden; }
+
+@layer components {
+  .glass { @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl; }
+  .btn-glow { @apply relative overflow-hidden transition-all duration-300; }
+  .btn-glow::after { content: ''; @apply absolute inset-0 bg-white/20 rounded-lg opacity-0 transition-opacity duration-300; }
+  .btn-glow:active::after { @apply opacity-100; }
+}

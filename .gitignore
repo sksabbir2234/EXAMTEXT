@@ -1,4 +1,7 @@
 node_modules/
-serviceAccountKey.json
+dist/
+.astro/
 .env
+.env.*
+!.env.example
 .vercel

@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../lib/firebase';
+
+const subjectId = Astro.url.searchParams.get('id') || '';
+let exams: any[] = [];
+let subjectName = subjectId;
+
+try {
+  const snap = await getDocs(query(collection(db, 'exams'), where('subjectId', '==', subjectId), where('published', '==', true)));
+  exams = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  if (exams.length > 0) subjectName = exams[0].subjectId || subjectId;
+} catch {}
+---
+<Layout title={`${subjectName} - Exam Portal`}>
+  <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white py-12 px-4 text-center relative">
+    <a href="/" class="absolute top-4 left-4 text-white/80 hover:text-white transition text-sm font-medium">← Back</a>
+    <h1 class="text-3xl font-extrabold">{subjectName}</h1>
+  </div>
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    {exams.length === 0 ? (
+      <div class="text-center py-20 text-slate-400">
+        <div class="text-6xl mb-4">📭</div>
+        <p>No exams available yet.</p>
+      </div>
+    ) : (
+      <div class="space-y-4">
+        {exams.map((e, i) => (
+          <div class="bg-white rounded-xl p-5 border border-slate-200 hover:border-primary-400 hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in-up" style={`animation-delay:${i * 0.06}s;opacity:0;`}>
+            <div class="flex-1 min-w-0">
+              <h4 class="text-lg font-bold text-slate-800 truncate">{e.title}</h4>
+              <p class="text-sm text-slate-500">{e.totalQuestions} questions · {e.durationMinutes || 0} min</p>
+            </div>
+            <div class="flex gap-2 shrink-0">
+              <a href={`/exam-intro/${e.id}`} class="px-5 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 btn-glow">Start</a>
+              <button onclick={`navigator.share ? navigator.share({title:'${e.title}',url:window.location.origin+'/exam-intro/${e.id}'}) : navigator.clipboard.writeText(window.location.origin+'/exam-intro/${e.id}');window.showToast('Link copied!')`} class="px-4 py-2.5 border-2 border-primary-500 text-primary-600 rounded-lg font-semibold text-sm hover:bg-primary-50 transition-all">Share</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>

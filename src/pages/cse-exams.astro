@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="CSE College Teacher - Exam Portal" ogTitle="CSE College Teacher Exams" ogDescription="10 chapters × 30 MCQs each">
+  <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white py-12 px-4 text-center relative">
+    <a href="/" class="absolute top-4 left-4 text-white/80 hover:text-white transition text-sm font-medium">← Back</a>
+    <h1 class="text-3xl font-extrabold mb-2">📚 CSE College Teacher</h1>
+    <p class="opacity-80">10 chapters × 30 MCQs each</p>
+  </div>
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <div id="chapters" class="space-y-4">
+      <div class="flex justify-center py-12"><div class="w-10 h-10 border-4 border-slate-200 border-t-primary-500 rounded-full animate-spin"></div></div>
+    </div>
+  </div>
+  <script is:inline>
+    async function load() {
+      const el = document.getElementById('chapters');
+      try {
+        const res = await fetch('/api/exams/cse-college-teacher');
+        const exams = await res.json();
+        if (exams.length === 0) { el.innerHTML = '<div class="text-center py-20 text-slate-400"><div class="text-6xl mb-4">📭</div><p>No CSE exams uploaded yet.</p><a href="/admin" class="text-primary-500 mt-2 inline-block">Upload via Admin →</a></div>'; return; }
+        el.innerHTML = exams.map((e, i) => `
+          <div class="bg-white rounded-xl p-5 border border-slate-200 hover:border-primary-400 hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fade-in-up" style="animation-delay:${i*0.05}s;opacity:0;">
+            <div class="flex-1 min-w-0"><h4 class="text-lg font-bold text-slate-800 truncate">${e.title}</h4><p class="text-sm text-slate-500">${e.totalQuestions} questions · ${e.durationMinutes||0} min</p></div>
+            <div class="flex gap-2 shrink-0">
+              <a href="/exam-intro/${e.id}" class="px-5 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 btn-glow">Start</a>
+              <button onclick="navigator.clipboard.writeText(window.location.origin+'/exam-intro/${e.id}');window.showToast('Link copied!')" class="px-4 py-2.5 border-2 border-primary-500 text-primary-600 rounded-lg font-semibold text-sm hover:bg-primary-50 transition-all">Share</button>
+            </div>
+          </div>
+        `).join('');
+      } catch { el.innerHTML = '<p class="text-center text-red-500 py-12">Error loading chapters.</p>'; }
+    }
+    load();
+  </script>
+</Layout>
