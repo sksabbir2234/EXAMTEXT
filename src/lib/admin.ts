@@ -1,4 +1,4 @@
-import admin from 'firebase-admin';
+import * as admin from 'firebase-admin';
 
 let db: admin.firestore.Firestore;
 
@@ -14,7 +14,7 @@ if (!admin.apps.length) {
   if (!raw.endsWith('}')) raw = raw + '}';
 
   const serviceAccount = JSON.parse(raw);
-  admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+  admin.initializeApp({ credential: admin.cert(serviceAccount) });
   console.log('[Admin] Firebase Admin initialized');
 }
 
