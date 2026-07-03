@@ -1,8 +1,6 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const admin = require('firebase-admin');
+import admin from 'firebase-admin';
 
-let db: any;
+let db: admin.firestore.Firestore;
 
 if (!admin.apps.length) {
   let raw = process.env.FIREBASE_SERVICE_ACCOUNT || '';

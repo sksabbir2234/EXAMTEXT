@@ -6,4 +6,9 @@ export default defineConfig({
   output: 'server',
   adapter: vercel(),
   integrations: [tailwind()],
+  vite: {
+    ssr: {
+      external: ['firebase-admin', 'firebase-admin/app', 'firebase-admin/firestore'],
+    },
+  },
 });
