@@ -6,12 +6,17 @@ const admin = require('firebase-admin');
 
 // Initialize Firebase Admin
 if (!admin.apps.length) {
-  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-  } else {
-    const serviceAccount = require('./serviceAccountKey.json');
-    admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+  try {
+    if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+      const sa = process.env.FIREBASE_SERVICE_ACCOUNT;
+      const serviceAccount = typeof sa === 'string' ? JSON.parse(sa) : sa;
+      admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+    } else {
+      const serviceAccount = require('./serviceAccountKey.json');
+      admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+    }
+  } catch (err) {
+    console.error('Firebase init error:', err.message);
   }
 }
 const db = admin.firestore();
