@@ -70,22 +70,39 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
 
         const qRes = await fetch(`/api/exam/${examId}/questions`);
         const questions = await qRes.json();
+
+        // Fetch attempt to get student's answers
+        let studentAnswers = {};
+        try {
+          const attRes = await fetch(`/api/attempt/${attemptId}`);
+          if (attRes.ok) {
+            const attData = await attRes.json();
+            studentAnswers = attData.answers || {};
+          }
+        } catch {}
+
         document.getElementById('review-card').classList.remove('hidden');
-        document.getElementById('review').innerHTML = questions.map((q, i) => `
+        document.getElementById('review').innerHTML = questions.map((q, i) => {
+          const studentAns = studentAnswers[i];
+          const isCorrect = studentAns === q.correctOptionIndex;
+          return `
           <div class="py-4">
             <div class="flex items-start gap-3 mb-3">
-              <span class="shrink-0 w-7 h-7 rounded-lg bg-brand-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">${i+1}</span>
+              <span class="shrink-0 w-7 h-7 rounded-lg ${isCorrect ? 'bg-emerald-500' : 'bg-red-500'} text-white flex items-center justify-center text-xs font-bold mt-0.5">${i+1}</span>
               <p class="font-medium text-surface-800 leading-relaxed">${q.questionText}</p>
             </div>
             <div class="ml-10 space-y-2">
               ${q.options.map((opt, oi) => {
-                const cls = oi === q.correctOptionIndex ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-surface-200';
-                return `<div class="flex items-center gap-2.5 p-3 border-2 rounded-xl text-sm ${cls}"><span class="font-bold">${labels[oi]}.</span> ${opt}</div>`;
+                let cls = 'border-surface-200';
+                if (oi === q.correctOptionIndex) cls = 'border-emerald-500 bg-emerald-50 text-emerald-700';
+                else if (oi === studentAns && !isCorrect) cls = 'border-red-500 bg-red-50 text-red-700';
+                const icon = oi === q.correctOptionIndex ? ' ✓' : (oi === studentAns && !isCorrect ? ' ✗' : '');
+                return `<div class="flex items-center gap-2.5 p-3 border-2 rounded-xl text-sm ${cls}"><span class="font-bold">${labels[oi]}.</span> ${opt}${icon}</div>`;
               }).join('')}
             </div>
             ${q.explanation ? `<div class="ml-10 mt-3 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-xl text-sm text-amber-800">💡 ${q.explanation}</div>` : ''}
-          </div>
-        `).join('');
+          </div>`;
+        }).join('');
 
         const lbRes = await fetch(`/api/leaderboard/${examId}`);
         const attempts = await lbRes.json();
