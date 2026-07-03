@@ -5,7 +5,8 @@ export const GET: APIRoute = async () => {
   const info = {
     hasEnvVar: !!raw,
     envVarLength: raw.length,
-    startsCorrectly: raw.startsWith('{'),
+    first20Chars: raw.substring(0, 20),
+    last10Chars: raw.substring(raw.length - 10),
     parsed: false,
     error: null as string | null
   };
