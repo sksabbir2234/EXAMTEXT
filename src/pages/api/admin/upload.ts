@@ -1,18 +1,64 @@
 import type { APIRoute } from 'astro';
 import { db } from '../../../lib/firebase';
-import { collection, addDoc, doc, setDoc, writeBatch } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, writeBatch, getDoc } from 'firebase/firestore';
+import { checkAuth } from '../../../lib/auth';
 
-export const POST: APIRoute = async ({ request }) => {
+function validateQuestions(questions: any[]): string[] {
+  const errors: string[] = [];
+  if (!Array.isArray(questions) || questions.length === 0) {
+    errors.push('questions must be a non-empty array');
+    return errors;
+  }
+  questions.forEach((q, i) => {
+    const n = i + 1;
+    if (!q.questionText || typeof q.questionText !== 'string') errors.push(`Q${n}: missing questionText`);
+    if (!Array.isArray(q.options) || q.options.length < 2) errors.push(`Q${n}: options must have ≥2 items`);
+    if (typeof q.correctOptionIndex !== 'number' || q.correctOptionIndex < 0 || (Array.isArray(q.options) && q.correctOptionIndex >= q.options.length)) {
+      errors.push(`Q${n}: correctOptionIndex out of range`);
+    }
+  });
+  return errors;
+}
+
+export const POST: APIRoute = async (ctx) => {
+  const auth = checkAuth(ctx);
+  if (!auth.ok) return auth.response;
+
   try {
-    const data = await request.json();
-    const slug = (data.subject || 'general').toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+    const data = await ctx.request.json();
+
+    if (!data.subject || typeof data.subject !== 'string' || !data.subject.trim()) {
+      return new Response(JSON.stringify({ error: 'subject is required' }), { status: 400 });
+    }
+    if (!data.examTitle || typeof data.examTitle !== 'string' || !data.examTitle.trim()) {
+      return new Response(JSON.stringify({ error: 'examTitle is required' }), { status: 400 });
+    }
+    if (!data.questions || !Array.isArray(data.questions) || data.questions.length === 0) {
+      return new Response(JSON.stringify({ error: 'questions must be a non-empty array' }), { status: 400 });
+    }
+
+    const questionErrors = validateQuestions(data.questions);
+    if (questionErrors.length > 0) {
+      return new Response(JSON.stringify({ error: 'Validation failed', details: questionErrors }), { status: 400 });
+    }
+
+    const slug = data.subject.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+
+    // Slug collision check
+    let slugWarning: string | null = null;
+    try {
+      const existing = await getDoc(doc(db, 'subjects', slug));
+      if (existing.exists() && existing.data().name !== data.subject.trim()) {
+        slugWarning = `Slug "${slug}" already exists for "${existing.data().name}". Your subject "${data.subject.trim()}" may have merged.`;
+      }
+    } catch {}
 
     await setDoc(doc(db, 'subjects', slug), {
-      name: data.subject || 'General', slug, description: '', createdAt: new Date()
+      name: data.subject.trim(), slug, description: '', createdAt: new Date()
     }, { merge: true });
 
     const examRef = await addDoc(collection(db, 'exams'), {
-      subjectId: slug, title: data.examTitle || 'Untitled',
+      subjectId: slug, title: data.examTitle.trim(),
       durationMinutes: data.durationMinutes || 0, totalQuestions: data.questions.length,
       createdAt: new Date(), published: true
     });
@@ -27,7 +73,9 @@ export const POST: APIRoute = async ({ request }) => {
     });
     await batch.commit();
 
-    return new Response(JSON.stringify({ id: examRef.id }), { headers: { 'Content-Type': 'application/json' } });
+    const result: any = { id: examRef.id };
+    if (slugWarning) result.warning = slugWarning;
+    return new Response(JSON.stringify(result), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
     console.error('[Upload Error]', e.message);
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });

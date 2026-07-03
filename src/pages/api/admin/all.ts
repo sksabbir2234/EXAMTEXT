@@ -1,8 +1,12 @@
 import type { APIRoute } from 'astro';
 import { db } from '../../../lib/firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
+import { checkAuth } from '../../../lib/auth';
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async (ctx) => {
+  const auth = checkAuth(ctx);
+  if (!auth.ok) return auth.response;
+
   try {
     const subSnap = await getDocs(collection(db, 'subjects'));
     const subjects = [];

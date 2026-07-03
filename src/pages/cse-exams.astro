@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
         const res = await fetch('/api/exams/cse-college-teacher');
         const exams = await res.json();
         if (exams.length === 0) {
-          el.innerHTML = '<div class="text-center py-20"><div class="w-20 h-20 rounded-3xl bg-surface-100 flex items-center justify-center text-4xl mx-auto mb-6">📭</div><h3 class="text-xl font-semibold text-surface-700 mb-2">No CSE exams yet</h3><p class="text-surface-400 mb-6">Upload exams via the admin panel</p><a href="/admin" class="btn-primary inline-flex">Go to Admin</a></div>';
+          el.innerHTML = '<div class="text-center py-20"><div class="w-20 h-20 rounded-3xl bg-surface-100 flex items-center justify-center text-4xl mx-auto mb-6">📭</div><h3 class="text-xl font-semibold text-surface-700 mb-2">No CSE exams yet</h3><p class="text-surface-400">Check back later</p></div>';
           return;
         }
         el.innerHTML = exams.map((e, i) => `
