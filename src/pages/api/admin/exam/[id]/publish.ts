@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
-import { db } from '../../../../../lib/firebase';
-import { doc, updateDoc } from 'firebase/firestore';
+import { getAdminDb } from '../../../../../lib/firebase-admin';
 import { checkAuth } from '../../../../../lib/auth';
 
 export const PUT: APIRoute = async (ctx) => {
@@ -9,7 +8,8 @@ export const PUT: APIRoute = async (ctx) => {
 
   try {
     const { published } = await ctx.request.json();
-    await updateDoc(doc(db, 'exams', ctx.params!.id!), { published });
+    const db = getAdminDb();
+    await db.collection('exams').doc(ctx.params!.id!).update({ published });
     return new Response(JSON.stringify({ message: 'Updated' }), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });

@@ -2,25 +2,25 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Subjects - public read, write for admin (open in v1)
+    // Subjects - public read only, writes via Admin SDK only
     match /subjects/{subjectId} {
       allow read: if true;
-      allow write: if true;
+      allow write: if false;
     }
 
-    // Exams - public read for published, write for admin
+    // Exams - public read only, writes via Admin SDK only
     match /exams/{examId} {
       allow read: if true;
-      allow write: if true;
+      allow write: if false;
 
-      // Questions subcollection
+      // Questions subcollection - public read only, writes via Admin SDK only
       match /questions/{questionId} {
         allow read: if true;
-        allow write: if true;
+        allow write: if false;
       }
     }
 
-    // Attempts - public create (students), public read (leaderboard)
+    // Attempts - students create + read, no update/delete
     match /attempts/{attemptId} {
       allow create: if true;
       allow read: if true;

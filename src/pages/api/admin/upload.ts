@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
-import { db } from '../../../lib/firebase';
-import { collection, addDoc, doc, setDoc, writeBatch, getDoc } from 'firebase/firestore';
+import { getAdminDb } from '../../../lib/firebase-admin';
 import { checkAuth } from '../../../lib/auth';
 
 function validateQuestions(questions: any[]): string[] {
@@ -43,28 +42,27 @@ export const POST: APIRoute = async (ctx) => {
     }
 
     const slug = data.subject.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+    const db = getAdminDb();
 
     let slugWarning: string | null = null;
-    try {
-      const existing = await getDoc(doc(db, 'subjects', slug));
-      if (existing.exists() && existing.data().name !== data.subject.trim()) {
-        slugWarning = `Slug "${slug}" already exists for "${existing.data().name}". Your subject "${data.subject.trim()}" may have merged.`;
-      }
-    } catch {}
+    const existing = await db.collection('subjects').doc(slug).get();
+    if (existing.exists && existing.data()!.name !== data.subject.trim()) {
+      slugWarning = `Slug "${slug}" already exists for "${existing.data()!.name}". Your subject "${data.subject.trim()}" may have merged.`;
+    }
 
-    await setDoc(doc(db, 'subjects', slug), {
+    await db.collection('subjects').doc(slug).set({
       name: data.subject.trim(), slug, description: '', createdAt: new Date()
     }, { merge: true });
 
-    const examRef = await addDoc(collection(db, 'exams'), {
+    const examRef = await db.collection('exams').add({
       subjectId: slug, title: data.examTitle.trim(),
       durationMinutes: data.durationMinutes || 0, totalQuestions: data.questions.length,
       createdAt: new Date(), published: true
     });
 
-    const batch = writeBatch(db);
+    const batch = db.batch();
     data.questions.forEach((q: any, i: number) => {
-      const qRef = doc(collection(db, 'exams', examRef.id, 'questions'));
+      const qRef = db.collection('exams').doc(examRef.id).collection('questions').doc();
       batch.set(qRef, {
         order: i + 1, questionText: q.questionText, options: q.options,
         correctOptionIndex: q.correctOptionIndex, explanation: q.explanation || null, marks: q.marks || 1
