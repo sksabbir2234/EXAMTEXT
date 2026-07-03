@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <%- include('partials/head', { title: 'Subject - Exam Portal' }) %>
+</head>
+<body>
+  <div class="header">
+    <a href="/" class="back-link">← Back</a>
+    <h1 id="subject-name">Loading...</h1>
+    <p id="subject-desc"></p>
+  </div>
+  <div class="container">
+    <div id="exams" class="exam-list">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const subjectId = params.get('id');
+      if (!subjectId) { window.location.href = '/'; return; }
+
+      const nameEl = document.getElementById('subject-name');
+      const descEl = document.getElementById('subject-desc');
+      const container = document.getElementById('exams');
+
+      try {
+        const res = await fetch(`/api/exams/${subjectId}`);
+        const exams = await res.json();
+
+        if (exams.length > 0) {
+          nameEl.textContent = exams[0].subjectId || subjectId;
+        } else {
+          nameEl.textContent = subjectId;
+        }
+
+        if (exams.length === 0) {
+          container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>No exams available yet.</p></div>';
+          return;
+        }
+
+        container.innerHTML = exams.map((e, i) => `
+          <div class="exam-item animate-fadeInUp stagger-${i % 4 + 1}">
+            <div class="exam-item-info">
+              <h4>${e.title}</h4>
+              <small>${e.totalQuestions} questions | ${e.durationMinutes || 0} min</small>
+            </div>
+            <div class="exam-item-actions">
+              <a href="/exam-intro?id=${e.id}" class="btn btn-primary btn-sm">Start</a>
+              <button class="btn btn-outline btn-sm" onclick="shareExam('${e.id}', '${e.title}')">Share</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<div class="empty-state"><p>Error loading exams.</p></div>';
+      }
+
+      window.shareExam = (id, title) => {
+        const url = window.location.origin + '/exam-intro?id=' + id;
+        if (navigator.share) {
+          navigator.share({ title: title, url: url });
+        } else {
+          navigator.clipboard.writeText(url);
+          showToast('Link copied!');
+        }
+      };
+    });
+  </script>
+</body>
+</html>

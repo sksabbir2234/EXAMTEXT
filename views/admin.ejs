@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <%- include('partials/head', { title: 'Admin - Exam Portal' }) %>
+</head>
+<body>
+  <div class="header">
+    <h1>⚙️ Admin Panel</h1>
+    <p>Upload and manage exams</p>
+  </div>
+  <div class="container">
+    <div class="admin-section animate-fadeInUp">
+      <h2>Upload Exam JSON</h2>
+      <div class="form-group">
+        <label>Choose JSON file</label>
+        <input type="file" id="json-file" accept=".json">
+      </div>
+      <div class="form-group">
+        <label>Or paste JSON here</label>
+        <textarea id="json-text" placeholder='{"subject":"CSE College Teacher","examTitle":"Chapter 1","durationMinutes":20,"questions":[...]}'></textarea>
+      </div>
+      <button class="btn btn-primary" id="preview-btn">Preview</button>
+      <div id="preview-area" style="display:none;margin-top:16px;">
+        <div class="card-flat" id="preview-content"></div>
+        <button class="btn btn-success" id="confirm-btn" style="margin-top:12px;">Confirm Upload</button>
+      </div>
+      <div id="upload-result" style="margin-top:16px;"></div>
+    </div>
+
+    <div class="admin-section animate-fadeInUp stagger-2">
+      <h2>Existing Subjects & Exams</h2>
+      <div id="manage-list">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/js/app.js"></script>
+  <script>
+    let parsedData = null;
+
+    document.getElementById('json-file').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => { document.getElementById('json-text').value = ev.target.result; };
+      reader.readAsText(file);
+    });
+
+    document.getElementById('preview-btn').addEventListener('click', () => {
+      const raw = document.getElementById('json-text').value.trim();
+      if (!raw) { showToast('Please provide JSON data'); return; }
+      try {
+        parsedData = JSON.parse(raw);
+        if (!parsedData.questions || !Array.isArray(parsedData.questions)) {
+          showToast('Invalid format: missing questions array');
+          parsedData = null;
+          return;
+        }
+        const labels = ['A', 'B', 'C', 'D'];
+        let html = `<strong>Subject:</strong> ${parsedData.subject || 'N/A'}<br>`;
+        html += `<strong>Title:</strong> ${parsedData.examTitle || 'N/A'}<br>`;
+        html += `<strong>Duration:</strong> ${parsedData.durationMinutes || 0} min<br>`;
+        html += `<strong>Questions:</strong> ${parsedData.questions.length}<br><br>`;
+        parsedData.questions.forEach((q, i) => {
+          html += `<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #eee;">`;
+          html += `<strong>Q${i + 1}:</strong> ${q.questionText}<br>`;
+          q.options.forEach((opt, oi) => {
+            const marker = oi === q.correctOptionIndex ? ' ✓' : '';
+            html += `<span style="margin-left:10px;">${labels[oi]}. ${opt}${marker}</span><br>`;
+          });
+          if (q.explanation) html += `<em style="color:#666;">Explanation:</em> ${q.explanation}`;
+          html += `</div>`;
+        });
+        document.getElementById('preview-content').innerHTML = html;
+        document.getElementById('preview-area').style.display = 'block';
+      } catch (err) {
+        showToast('Invalid JSON: ' + err.message);
+        parsedData = null;
+      }
+    });
+
+    document.getElementById('confirm-btn').addEventListener('click', async () => {
+      if (!parsedData) return;
+      const btn = document.getElementById('confirm-btn');
+      btn.disabled = true;
+      btn.textContent = 'Uploading...';
+      try {
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(parsedData)
+        });
+        const data = await res.json();
+        if (res.ok) {
+          const url = window.location.origin + '/exam-intro?id=' + data.id;
+          document.getElementById('upload-result').innerHTML = `
+            <div class="card-flat" style="background:#d4edda;">
+              <h3 style="color:#155724;">Upload Successful!</h3>
+              <p style="margin:10px 0;">Shareable exam link:</p>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <input type="text" value="${url}" readonly style="flex:1;padding:8px;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;">
+                <button class="btn btn-primary btn-sm" onclick="navigator.clipboard.writeText('${url}');showToast('Copied!')">Copy</button>
+              </div>
+            </div>`;
+          showToast('Exam uploaded!');
+          loadManageList();
+        } else {
+          document.getElementById('upload-result').innerHTML = `<div style="color:red;">Error: ${data.error}</div>`;
+        }
+      } catch (err) {
+        document.getElementById('upload-result').innerHTML = `<div style="color:red;">Error: ${err.message}</div>`;
+      }
+      btn.disabled = false;
+      btn.textContent = 'Confirm Upload';
+    });
+
+    async function loadManageList() {
+      const container = document.getElementById('manage-list');
+      try {
+        const res = await fetch('/api/admin/all');
+        const subjects = await res.json();
+        if (subjects.length === 0) {
+          container.innerHTML = '<div class="empty-state"><p>No subjects yet.</p></div>';
+          return;
+        }
+        container.innerHTML = subjects.map(s => `
+          <div style="margin-bottom:20px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+              <strong style="font-size:1.1rem;">${s.name}</strong>
+              <button class="btn btn-danger btn-xs" onclick="deleteSubject('${s.id}')">Delete Subject</button>
+            </div>
+            ${s.exams.length === 0 ? '<p style="color:#888;">No exams.</p>' : s.exams.map(e => `
+              <div class="exam-item">
+                <div class="exam-item-info">
+                  <h4>${e.title}</h4>
+                  <small>${e.totalQuestions} questions | ${e.durationMinutes || 0} min</small>
+                </div>
+                <div class="exam-item-actions">
+                  <label class="toggle-switch">
+                    <input type="checkbox" ${e.published ? 'checked' : ''} onchange="togglePub('${e.id}', this.checked)">
+                    <span class="toggle-slider"></span>
+                  </label>
+                  <button class="btn btn-danger btn-xs" onclick="deleteExam('${e.id}')">Delete</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<div class="empty-state"><p>Error loading data.</p></div>';
+      }
+    }
+
+    window.togglePub = async (examId, published) => {
+      try {
+        await fetch(`/api/admin/exam/${examId}/publish`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ published })
+        });
+        showToast(published ? 'Published' : 'Unpublished');
+      } catch (err) { showToast('Error'); }
+    };
+
+    window.deleteExam = async (examId) => {
+      if (!confirm('Delete this exam and all its questions?')) return;
+      try {
+        await fetch(`/api/admin/exam/${examId}`, { method: 'DELETE' });
+        showToast('Exam deleted');
+        loadManageList();
+      } catch (err) { showToast('Error'); }
+    };
+
+    window.deleteSubject = async (subjectId) => {
+      if (!confirm('Delete this subject and ALL its exams?')) return;
+      try {
+        await fetch(`/api/admin/subject/${subjectId}`, { method: 'DELETE' });
+        showToast('Subject deleted');
+        loadManageList();
+      } catch (err) { showToast('Error'); }
+    };
+
+    loadManageList();
+  </script>
+</body>
+</html>

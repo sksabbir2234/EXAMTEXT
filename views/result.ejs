@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <%- include('partials/head', { title: 'Result - Exam Portal' }) %>
+</head>
+<body>
+  <div class="header">
+    <h1>Exam Result</h1>
+  </div>
+  <div class="container">
+    <div class="card animate-scaleIn" id="result-card">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+    <div class="card animate-fadeInUp stagger-2" id="leaderboard-card" style="display:none;">
+      <h2 style="margin-bottom:16px;">🏆 Leaderboard</h2>
+      <div id="leaderboard"></div>
+    </div>
+    <div class="card animate-fadeInUp stagger-3" id="questions-card" style="display:none;">
+      <h2 style="margin-bottom:16px;">Review Answers</h2>
+      <div id="review"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/js/app.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const attemptId = params.get('id');
+    const examId = params.get('examId');
+    let examData = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadResult();
+      await loadLeaderboard();
+      await loadReview();
+    });
+
+    async function loadResult() {
+      try {
+        const res = await fetch(`/api/exam/${examId}`);
+        examData = await res.json();
+
+        const labels = ['A', 'B', 'C', 'D'];
+        const score = parseInt(new URLSearchParams(window.location.search).get('score')) || 0;
+        const total = examData.totalQuestions;
+
+        document.getElementById('result-card').innerHTML = `
+          <div class="stats-row">
+            <div class="stat-item"><div class="stat-value green">${score}</div><div class="stat-label">Correct</div></div>
+            <div class="stat-item"><div class="stat-value red">${total - score}</div><div class="stat-label">Wrong</div></div>
+            <div class="stat-item"><div class="stat-value blue">${total}</div><div class="stat-label">Total</div></div>
+          </div>
+          <div style="text-align:center;margin-top:16px;">
+            <p style="font-size:1.5rem;font-weight:700;color:var(--primary);">${Math.round(score/total*100)}%</p>
+          </div>
+          <div class="share-buttons" style="margin-top:20px;">
+            <button class="share-btn facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),'_blank')">Facebook</button>
+            <button class="share-btn whatsapp" onclick="window.open('https://wa.me/?text='+encodeURIComponent('Check my result: '+window.location.href),'_blank')">WhatsApp</button>
+            <button class="share-btn copy" onclick="navigator.clipboard.writeText(window.location.href);showToast('Copied!')">Copy Link</button>
+          </div>`;
+      } catch (err) {
+        document.getElementById('result-card').innerHTML = '<div class="empty-state"><p>Error loading result.</p></div>';
+      }
+    }
+
+    async function loadLeaderboard() {
+      try {
+        const res = await fetch(`/api/leaderboard/${examId}`);
+        const attempts = await res.json();
+        if (attempts.length === 0) return;
+
+        document.getElementById('leaderboard-card').style.display = 'block';
+        document.getElementById('leaderboard').innerHTML = attempts.map((a, i) => `
+          <div class="exam-item" style="animation-delay:${i * 0.05}s;">
+            <div class="exam-item-info">
+              <h4>${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (i+1)} ${a.studentName}</h4>
+              <small>${a.score}/${a.total} correct | ${Math.round(a.score/a.total*100)}%</small>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {}
+    }
+
+    async function loadReview() {
+      try {
+        const qRes = await fetch(`/api/exam/${examId}/questions`);
+        const questions = await qRes.json();
+        const labels = ['A', 'B', 'C', 'D'];
+
+        document.getElementById('questions-card').style.display = 'block';
+        document.getElementById('review').innerHTML = questions.map((q, i) => `
+          <div class="question-card" style="animation-delay:${i * 0.03}s;opacity:0;" class="animate-fadeInUp">
+            <div class="question-number">${i + 1}</div>
+            <div class="question-text">${q.questionText}</div>
+            <div class="options">
+              ${q.options.map((opt, oi) => {
+                let cls = '';
+                if (oi === q.correctOptionIndex) cls = 'correct';
+                return `<div class="option ${cls}"><span class="option-label">${labels[oi]}</span><span>${opt}</span></div>`;
+              }).join('')}
+            </div>
+            ${q.explanation ? `<div class="explanation">💡 ${q.explanation}</div>` : ''}
+          </div>
+        `).join('');
+      } catch (err) {}
+    }
+  </script>
+</body>
+</html>
