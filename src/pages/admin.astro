@@ -1,48 +1,100 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const adminPassword = import.meta.env.PUBLIC_ADMIN_PASSWORD || 'admin123';
 ---
-<Layout title="Admin - ExamText" navBack={true} navTitle="Admin Panel">
-  <div class="max-w-4xl mx-auto px-4 py-10 space-y-6">
+<Layout title="Admin - ExamText" navBack={true} navTitle="Admin Panel" showNav={false}>
 
-    <!-- Upload Section -->
-    <div class="card p-7 animate-fade-in">
-      <div class="flex items-center gap-3 mb-6">
-        <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-lg">📤</div>
-        <div>
-          <h2 class="text-lg font-bold text-surface-900">Upload Exam</h2>
-          <p class="text-sm text-surface-400">Paste JSON or upload a file</p>
-        </div>
-      </div>
-      <input type="file" id="json-file" accept=".json" class="mb-4 text-sm text-surface-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-brand-50 file:text-brand-600 hover:file:bg-brand-100 file:cursor-pointer">
-      <textarea id="json-text" placeholder='{"subject":"CSE College Teacher","examTitle":"Chapter 1","durationMinutes":20,"questions":[...]}' class="w-full min-h-[140px] p-4 border-2 border-surface-200 rounded-2xl font-mono text-sm focus:border-brand-500 outline-none transition resize-none text-surface-600 placeholder:text-surface-300"></textarea>
-      <div class="flex gap-3 mt-4">
-        <button id="preview-btn" class="btn-primary text-sm">Preview</button>
-      </div>
-      <div id="preview-area" class="hidden mt-5">
-        <div id="preview-content" class="bg-surface-50 rounded-2xl p-5 text-sm max-h-[400px] overflow-auto border border-surface-200 mb-4"></div>
-        <button id="confirm-btn" class="px-6 py-3 bg-emerald-500 text-white rounded-2xl font-semibold hover:bg-emerald-600 transition-all">Confirm Upload</button>
-      </div>
-      <div id="upload-result" class="mt-4"></div>
+  <!-- Password Gate -->
+  <div id="gate" class="min-h-screen flex items-center justify-center px-4">
+    <div class="card p-8 w-full max-w-sm text-center animate-scale-in">
+      <div class="w-16 h-16 rounded-3xl bg-brand-50 flex items-center justify-center text-3xl mx-auto mb-6">🔒</div>
+      <h1 class="text-xl font-bold text-surface-900 mb-2">Admin Access</h1>
+      <p class="text-surface-400 text-sm mb-6">Enter password to continue</p>
+      <form id="gate-form" class="space-y-4">
+        <input type="password" id="gate-pass" placeholder="Password" required
+               class="w-full px-4 py-3.5 rounded-2xl border-2 border-surface-200 focus:border-brand-500 focus:ring-0 outline-none transition text-center font-mono text-lg tracking-widest placeholder:text-surface-300 placeholder:tracking-normal placeholder:text-base">
+        <button type="submit" class="btn-primary w-full">Unlock</button>
+        <p id="gate-error" class="text-red-500 text-sm hidden">Wrong password</p>
+      </form>
     </div>
+  </div>
 
-    <!-- Manage Section -->
-    <div class="card p-7 animate-fade-up" style="animation-delay:0.1s;opacity:0;">
-      <div class="flex items-center gap-3 mb-6">
-        <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-lg">📚</div>
-        <div>
-          <h2 class="text-lg font-bold text-surface-900">Existing Data</h2>
-          <p class="text-sm text-surface-400">Manage subjects and exams</p>
+  <!-- Admin Content (hidden until authenticated) -->
+  <div id="admin-content" class="hidden">
+    <div class="max-w-4xl mx-auto px-4 py-10 space-y-6">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center gap-3">
+          <a href="/" class="w-9 h-9 rounded-xl bg-surface-100 hover:bg-surface-200 flex items-center justify-center transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </a>
+          <h1 class="text-xl font-bold text-surface-900">Admin Panel</h1>
         </div>
+        <button onclick="sessionStorage.removeItem('adminAuth');location.reload()" class="px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-50 rounded-xl transition">Lock</button>
       </div>
-      <div id="manage-list">
-        <div class="flex justify-center py-8">
-          <div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
+
+      <!-- Upload Section -->
+      <div class="card p-7 animate-fade-in">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-lg">📤</div>
+          <div>
+            <h2 class="text-lg font-bold text-surface-900">Upload Exam</h2>
+            <p class="text-sm text-surface-400">Paste JSON or upload a file</p>
+          </div>
+        </div>
+        <input type="file" id="json-file" accept=".json" class="mb-4 text-sm text-surface-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-brand-50 file:text-brand-600 hover:file:bg-brand-100 file:cursor-pointer">
+        <textarea id="json-text" placeholder='{"subject":"CSE College Teacher","examTitle":"Chapter 1","durationMinutes":20,"questions":[...]}' class="w-full min-h-[140px] p-4 border-2 border-surface-200 rounded-2xl font-mono text-sm focus:border-brand-500 outline-none transition resize-none text-surface-600 placeholder:text-surface-300"></textarea>
+        <div class="flex gap-3 mt-4">
+          <button id="preview-btn" class="btn-primary text-sm">Preview</button>
+        </div>
+        <div id="preview-area" class="hidden mt-5">
+          <div id="preview-content" class="bg-surface-50 rounded-2xl p-5 text-sm max-h-[400px] overflow-auto border border-surface-200 mb-4"></div>
+          <button id="confirm-btn" class="px-6 py-3 bg-emerald-500 text-white rounded-2xl font-semibold hover:bg-emerald-600 transition-all">Confirm Upload</button>
+        </div>
+        <div id="upload-result" class="mt-4"></div>
+      </div>
+
+      <!-- Manage Section -->
+      <div class="card p-7 animate-fade-up" style="animation-delay:0.1s;opacity:0;">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-lg">📚</div>
+          <div>
+            <h2 class="text-lg font-bold text-surface-900">Existing Data</h2>
+            <p class="text-sm text-surface-400">Manage subjects and exams</p>
+          </div>
+        </div>
+        <div id="manage-list">
+          <div class="flex justify-center py-8">
+            <div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script is:inline>
+  <script is:inline define:vars={{ adminPassword }}>
+    // Password gate
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('admin-content');
+    const stored = sessionStorage.getItem('adminAuth');
+
+    if (stored === adminPassword) {
+      gate.classList.add('hidden');
+      content.classList.remove('hidden');
+    }
+
+    document.getElementById('gate-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const pass = document.getElementById('gate-pass').value;
+      if (pass === adminPassword) {
+        sessionStorage.setItem('adminAuth', pass);
+        gate.classList.add('hidden');
+        content.classList.remove('hidden');
+      } else {
+        document.getElementById('gate-error').classList.remove('hidden');
+      }
+    });
+
+    // Admin logic (only runs after auth)
     let parsedData = null;
     const labels = ['A','B','C','D'];
 
@@ -115,6 +167,7 @@ import Layout from '../layouts/Layout.astro';
     window.togglePub = async (id, val) => { await fetch(`/api/admin/exam/${id}/publish`, {method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({published:val})}); window.showToast(val?'Published':'Unpublished'); };
     window.deleteExam = async (id) => { if(!confirm('Delete this exam?'))return; await fetch(`/api/admin/exam/${id}`,{method:'DELETE'}); window.showToast('Deleted'); loadManageList(); };
     window.deleteSubject = async (id) => { if(!confirm('Delete this subject and ALL exams?'))return; await fetch(`/api/admin/subject/${id}`,{method:'DELETE'}); window.showToast('Deleted'); loadManageList(); };
-    loadManageList();
+
+    if (stored === adminPassword) loadManageList();
   </script>
 </Layout>
