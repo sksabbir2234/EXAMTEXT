@@ -9,10 +9,31 @@ export const GET: APIRoute = async (ctx) => {
   try {
     const db = getAdminDb();
     const subSnap = await db.collection('subjects').get();
+
+    // Get attempt counts per exam
+    const attemptsSnap = await db.collection('attempts').get();
+    const attemptCounts: Record<string, number> = {};
+    const avgScores: Record<string, number> = {};
+    const scoreSums: Record<string, number> = {};
+    attemptsSnap.docs.forEach(d => {
+      const data = d.data();
+      const eid = data.examId;
+      attemptCounts[eid] = (attemptCounts[eid] || 0) + 1;
+      scoreSums[eid] = (scoreSums[eid] || 0) + (data.score || 0);
+    });
+
     const subjects = [];
     for (const subDoc of subSnap.docs) {
       const examSnap = await db.collection('exams').where('subjectId', '==', subDoc.id).get();
-      subjects.push({ id: subDoc.id, ...subDoc.data(), exams: examSnap.docs.map(e => ({ id: e.id, ...e.data() })) });
+      subjects.push({
+        id: subDoc.id, ...subDoc.data(),
+        exams: examSnap.docs.map(e => {
+          const eid = e.id;
+          const count = attemptCounts[eid] || 0;
+          const avg = count > 0 ? Math.round((scoreSums[eid] || 0) / count) : 0;
+          return { id: eid, ...e.data(), attemptCount: count, avgScore: avg };
+        })
+      });
     }
     return new Response(JSON.stringify(subjects), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
