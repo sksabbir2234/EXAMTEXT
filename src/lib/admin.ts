@@ -1,8 +1,8 @@
-import admin from 'firebase-admin';
+import { initializeApp, cert, getApps, getFirestore } from 'firebase-admin/app';
 
-let db: admin.firestore.Firestore;
+let db: any;
 
-if (!admin.apps.length) {
+if (getApps().length === 0) {
   let raw = process.env.FIREBASE_SERVICE_ACCOUNT || '';
   
   if (!raw) throw new Error('FIREBASE_SERVICE_ACCOUNT env var is not set');
@@ -14,9 +14,9 @@ if (!admin.apps.length) {
   if (!raw.endsWith('}')) raw = raw + '}';
 
   const serviceAccount = JSON.parse(raw);
-  admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+  initializeApp({ credential: cert(serviceAccount) });
   console.log('[Admin] Firebase Admin initialized');
 }
 
-db = admin.firestore();
+db = getFirestore();
 export { db };
