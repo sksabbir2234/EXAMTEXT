@@ -68,11 +68,16 @@ export const PUT: APIRoute = async (ctx) => {
   }
 };
 
-export const DELETE: APIRoute = async (ctx) => {
+export const POST: APIRoute = async (ctx) => {
   const auth = await checkAuth(ctx);
   if (!auth.ok) return auth.response;
 
   try {
+    const body = await ctx.request.json();
+    if (body.action !== 'delete') {
+      return new Response(JSON.stringify({ error: 'Unknown action' }), { status: 400 });
+    }
+
     const db = getAdminDb();
     const qSnap = await db.collection('exams').doc(ctx.params!.id!).collection('questions').get();
     const batch = db.batch();

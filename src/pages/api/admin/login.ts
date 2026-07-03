@@ -8,8 +8,16 @@ export const POST: APIRoute = async (ctx) => {
     return new Response(JSON.stringify({ error: 'Admin password not configured' }), { status: 500 });
   }
   try {
-    const { password } = await ctx.request.json();
-    if (password !== ADMIN_PASSWORD) {
+    const body = await ctx.request.json();
+
+    // Logout
+    if (body.action === 'logout') {
+      clearSessionCookie(ctx);
+      return new Response(JSON.stringify({ ok: true }), { headers: { 'Content-Type': 'application/json' } });
+    }
+
+    // Login
+    if (body.password !== ADMIN_PASSWORD) {
       return new Response(JSON.stringify({ error: 'Wrong password' }), { status: 401 });
     }
     const token = await createSession();
@@ -18,9 +26,4 @@ export const POST: APIRoute = async (ctx) => {
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });
   }
-};
-
-export const DELETE: APIRoute = async (ctx) => {
-  clearSessionCookie(ctx);
-  return new Response(JSON.stringify({ ok: true }), { headers: { 'Content-Type': 'application/json' } });
 };

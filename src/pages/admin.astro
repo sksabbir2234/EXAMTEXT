@@ -177,7 +177,7 @@ import Layout from '../layouts/Layout.astro';
       });
 
       document.getElementById('lock-btn').addEventListener('click', async () => {
-        await fetch('/api/admin/login', { method: 'DELETE' });
+        await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'logout' }) });
         content.classList.add('hidden');
         gate.classList.remove('hidden');
         gatePass.value = '';
@@ -467,13 +467,13 @@ import Layout from '../layouts/Layout.astro';
       window.deleteExamConfirm = async (id, title) => {
         const ok = await showConfirm('Delete Exam?', `Delete "${title}" and all its questions.`, 'Delete');
         if (!ok) return;
-        try { await fetch(`/api/admin/exam/${id}`, { method: 'DELETE' }); window.showToast('Deleted'); loadManageList(); } catch { window.showToast('Error'); }
+        try { await fetch(`/api/admin/exam/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); window.showToast('Deleted'); loadManageList(); } catch { window.showToast('Error'); }
       };
 
       window.deleteSubjectConfirm = async (id, name) => {
         const ok = await showConfirm('Delete Subject?', `Delete "${name}" and ALL its exams.`, 'Delete All');
         if (!ok) return;
-        try { await fetch(`/api/admin/subject/${id}`, { method: 'DELETE' }); window.showToast('Deleted'); loadManageList(); } catch { window.showToast('Error'); }
+        try { await fetch(`/api/admin/subject/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); window.showToast('Deleted'); loadManageList(); } catch { window.showToast('Error'); }
       };
     })();
   </script>

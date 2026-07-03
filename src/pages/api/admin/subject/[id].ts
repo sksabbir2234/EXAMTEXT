@@ -2,11 +2,16 @@ import type { APIRoute } from 'astro';
 import { getAdminDb } from '../../../../lib/firebase-admin';
 import { checkAuth } from '../../../../lib/auth';
 
-export const DELETE: APIRoute = async (ctx) => {
+export const POST: APIRoute = async (ctx) => {
   const auth = await checkAuth(ctx);
   if (!auth.ok) return auth.response;
 
   try {
+    const body = await ctx.request.json();
+    if (body.action !== 'delete') {
+      return new Response(JSON.stringify({ error: 'Unknown action' }), { status: 400 });
+    }
+
     const db = getAdminDb();
     const examSnap = await db.collection('exams').where('subjectId', '==', ctx.params!.id!).get();
     for (const examDoc of examSnap.docs) {
