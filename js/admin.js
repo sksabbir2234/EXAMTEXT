@@ -134,7 +134,7 @@ async function loadManageList() {
     let html = '';
     for (const subDoc of subSnap.docs) {
       const sub = subDoc.data();
-      html += `<div style="margin-bottom:16px;"><strong>${sub.name}</strong></div>`;
+      html += `<div style="margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;"><strong>${sub.name}</strong><button class="btn btn-danger" style="padding:4px 10px;font-size:0.75rem;" onclick="window._deleteSubject('${subDoc.id}')">Delete Subject</button></div>`;
 
       const examSnap = await getDocs(query(collection(db, 'exams'), where('subjectId', '==', subDoc.id)));
       if (examSnap.empty) {
@@ -180,15 +180,42 @@ window._togglePub = async (examId, published) => {
 window._deleteExam = async (examId) => {
   if (!confirm('Delete this exam and all its questions?')) return;
   try {
+    console.log('Deleting exam:', examId);
     const qSnap = await getDocs(collection(db, 'exams', examId, 'questions'));
     const batch = writeBatch(db);
     qSnap.forEach(d => batch.delete(d.ref));
     await batch.commit();
     await deleteDoc(doc(db, 'exams', examId));
+    console.log('Exam deleted:', examId);
     showToast('Exam deleted');
     loadManageList();
   } catch (err) {
-    console.error(err);
+    console.error('Delete exam error:', err);
+    showToast('Error: ' + err.message);
+  }
+};
+
+window._deleteSubject = async (subjectId) => {
+  if (!confirm(`Delete subject "${subjectId}" and ALL its exams?`)) return;
+  try {
+    console.log('Deleting subject:', subjectId);
+    const examSnap = await getDocs(query(collection(db, 'exams'), where('subjectId', '==', subjectId)));
+    console.log('Found exams:', examSnap.size);
+    for (const examDoc of examSnap.docs) {
+      console.log('Deleting exam:', examDoc.id);
+      const qSnap = await getDocs(collection(db, 'exams', examDoc.id, 'questions'));
+      const batch = writeBatch(db);
+      qSnap.forEach(d => batch.delete(d.ref));
+      await batch.commit();
+      await deleteDoc(doc(db, 'exams', examDoc.id));
+    }
+    await deleteDoc(doc(db, 'subjects', subjectId));
+    console.log('Subject deleted:', subjectId);
+    showToast('Subject deleted');
+    loadManageList();
+  } catch (err) {
+    console.error('Delete subject error:', err);
+    showToast('Error: ' + err.message);
   }
 };
 
