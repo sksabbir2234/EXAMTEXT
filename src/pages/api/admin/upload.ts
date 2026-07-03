@@ -28,6 +28,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({ id: examRef.id }), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
+    console.error('[Upload Error]', e.message);
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });
   }
 };

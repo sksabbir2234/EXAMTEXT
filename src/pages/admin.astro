@@ -68,7 +68,10 @@ import Layout from '../layouts/Layout.astro';
     async function loadManageList() {
       try {
         const res = await fetch('/api/admin/all');
-        const subjects = await res.json();
+        const text = await res.text();
+        let subjects;
+        try { subjects = JSON.parse(text); } catch { document.getElementById('manage-list').innerHTML = `<p class="text-red-500">API returned non-JSON (${res.status}): ${text.substring(0, 200)}</p>`; return; }
+        if (subjects.error) { document.getElementById('manage-list').innerHTML = `<p class="text-red-500">API Error: ${subjects.error}</p>`; return; }
         if (!subjects.length) { document.getElementById('manage-list').innerHTML = '<p class="text-slate-400 text-center py-4">No subjects yet.</p>'; return; }
         document.getElementById('manage-list').innerHTML = subjects.map(s => `
           <div class="mb-5">
@@ -84,7 +87,7 @@ import Layout from '../layouts/Layout.astro';
             `).join('')}
           </div>
         `).join('');
-      } catch { document.getElementById('manage-list').innerHTML = '<p class="text-red-500">Error loading data.</p>'; }
+      } catch(e) { document.getElementById('manage-list').innerHTML = `<p class="text-red-500">Error: ${e.message}</p>`; }
     }
 
     window.togglePub = async (id, val) => { await fetch(`/api/admin/exam/${id}/publish`, {method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({published:val})}); window.showToast(val?'Published':'Unpublished'); };
