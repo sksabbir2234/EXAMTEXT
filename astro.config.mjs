@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [tailwind()],
   vite: {
     ssr: {
-      external: ['firebase-admin', 'firebase-admin/app', 'firebase-admin/firestore'],
+      noExternal: ['firebase-admin', 'firebase-admin/app', 'firebase-admin/firestore'],
     },
   },
 });
