@@ -8,19 +8,26 @@ function initAdmin() {
     return;
   }
 
-  const raw = process.env.FIREBASE_SERVICE_ACCOUNT || '';
+  let raw = process.env.FIREBASE_SERVICE_ACCOUNT || '';
   
   if (!raw) {
-    console.error('[Admin] FIREBASE_SERVICE_ACCOUNT env var is EMPTY or UNDEFINED');
     throw new Error('FIREBASE_SERVICE_ACCOUNT env var is not set');
   }
+
+  // Vercel sometimes wraps the value in extra quotes
+  raw = raw.trim();
+  if (raw.startsWith('"') && raw.endsWith('"')) {
+    raw = raw.slice(1, -1);
+  }
+  // Unescape escaped quotes
+  raw = raw.replace(/\\"/g, '"');
 
   try {
     const serviceAccount = JSON.parse(raw);
     admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-    console.log('[Admin] Firebase Admin initialized successfully');
+    console.log('[Admin] Firebase Admin initialized OK');
   } catch (e: any) {
-    console.error('[Admin] Failed to initialize Firebase Admin:', e.message);
+    console.error('[Admin] Parse error:', e.message);
     throw e;
   }
 
