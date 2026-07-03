@@ -11,7 +11,7 @@ export const GET: APIRoute = async () => {
     }
     return new Response(JSON.stringify(subjects), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
-    console.error('[Admin All] Error:', e.message);
-    return new Response(JSON.stringify({ error: e.message }), { status: 500 });
+    console.error('[Admin All] Error:', e.message, e.stack);
+    return new Response(JSON.stringify({ error: e.message, stack: e.stack }), { status: 500 });
   }
 };

@@ -1,46 +1,31 @@
 import admin from 'firebase-admin';
 
-let db: admin.firestore.Firestore;
+let _db: admin.firestore.Firestore | null = null;
 
-function initAdmin() {
-  if (admin.apps.length) {
-    db = admin.firestore();
-    return;
-  }
+function initDb(): admin.firestore.Firestore {
+  if (_db) return _db;
 
-  let raw = process.env.FIREBASE_SERVICE_ACCOUNT || '';
-  
-  if (!raw) {
-    throw new Error('FIREBASE_SERVICE_ACCOUNT env var is not set');
-  }
+  if (!admin.apps.length) {
+    let raw = process.env.FIREBASE_SERVICE_ACCOUNT || '';
+    
+    if (!raw) throw new Error('FIREBASE_SERVICE_ACCOUNT env var is not set');
 
-  // Vercel may strip wrapping quotes or mangle the value
-  raw = raw.trim();
-  if (raw.startsWith('"') && raw.endsWith('"')) {
-    raw = raw.slice(1, -1);
-  }
-  raw = raw.replace(/\\"/g, '"');
+    raw = raw.trim();
+    if (raw.startsWith('"') && raw.endsWith('"')) raw = raw.slice(1, -1);
+    raw = raw.replace(/\\"/g, '"');
+    if (!raw.startsWith('{')) raw = '{' + raw;
+    if (!raw.endsWith('}')) raw = raw + '}';
 
-  // If Vercel stripped the opening {, add it back
-  if (!raw.startsWith('{')) {
-    raw = '{' + raw;
-  }
-  // If Vercel stripped the closing }, add it back
-  if (!raw.endsWith('}')) {
-    raw = raw + '}';
-  }
-
-  try {
     const serviceAccount = JSON.parse(raw);
     admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-    console.log('[Admin] Firebase Admin initialized OK');
-  } catch (e: any) {
-    console.error('[Admin] Parse error:', e.message);
-    throw e;
   }
 
-  db = admin.firestore();
+  _db = admin.firestore();
+  return _db;
 }
 
-initAdmin();
-export { db };
+export const db = new Proxy({} as admin.firestore.Firestore, {
+  get(_, prop) {
+    return (initDb() as any)[prop];
+  }
+});
