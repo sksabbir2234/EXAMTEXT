@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { collection, getDocs, doc, setDoc, addDoc } from 'firebase/firestore';
+import { collection, doc, setDoc, writeBatch, getFirestore } from 'firebase/firestore';
 import { db } from '../../../lib/firebase';
 
 function slugify(text: string) {
@@ -15,18 +15,21 @@ export const POST: APIRoute = async ({ request }) => {
       name: data.subject || 'General', slug: subjectSlug, description: '', createdAt: new Date()
     }, { merge: true });
 
-    const examRef = await addDoc(collection(db, 'exams'), {
+    const examRef = doc(collection(db, 'exams'));
+    await setDoc(examRef, {
       subjectId: subjectSlug, title: data.examTitle || 'Untitled', slug: slugify(data.examTitle || 'untitled'),
       durationMinutes: data.durationMinutes || 0, totalQuestions: data.questions.length, createdAt: new Date(), published: true
     });
 
-    for (let i = 0; i < data.questions.length; i++) {
-      const q = data.questions[i];
-      await addDoc(collection(db, 'exams', examRef.id, 'questions'), {
+    const batch = writeBatch(db);
+    data.questions.forEach((q: any, i: number) => {
+      const qRef = doc(collection(db, 'exams', examRef.id, 'questions'));
+      batch.set(qRef, {
         order: i + 1, questionText: q.questionText, options: q.options,
         correctOptionIndex: q.correctOptionIndex, explanation: q.explanation || null, marks: q.marks || 1
       });
-    }
+    });
+    await batch.commit();
 
     return new Response(JSON.stringify({ id: examRef.id, message: 'Uploaded' }), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
