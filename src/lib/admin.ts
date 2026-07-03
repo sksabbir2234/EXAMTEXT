@@ -1,6 +1,8 @@
-import * as admin from 'firebase-admin';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const admin = require('firebase-admin');
 
-let db: admin.firestore.Firestore;
+let db: any;
 
 if (!admin.apps.length) {
   let raw = process.env.FIREBASE_SERVICE_ACCOUNT || '';
@@ -14,7 +16,7 @@ if (!admin.apps.length) {
   if (!raw.endsWith('}')) raw = raw + '}';
 
   const serviceAccount = JSON.parse(raw);
-  admin.initializeApp({ credential: admin.cert(serviceAccount) });
+  admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
   console.log('[Admin] Firebase Admin initialized');
 }
 
