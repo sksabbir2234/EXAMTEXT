@@ -48,14 +48,16 @@ const examId = Astro.url.searchParams.get('id') || '';
       try {
         const res = await fetch(`/api/exam/${examId}`);
         const exam = await res.json();
+        if (exam.error) { document.getElementById('questions').innerHTML = `<p class="text-center text-red-500 py-16">Error: ${exam.error}</p>`; return; }
         document.getElementById('exam-title').textContent = exam.title;
         const qRes = await fetch(`/api/exam/${examId}/questions`);
         questions = await qRes.json();
+        if (!Array.isArray(questions) || questions.length === 0) { document.getElementById('questions').innerHTML = '<p class="text-center text-red-500 py-16">No questions found.</p>'; return; }
         renderQuestions();
         document.getElementById('submit-btn').classList.remove('hidden');
         if (exam.durationMinutes > 0) startTimer(exam.durationMinutes * 60);
-      } catch {
-        document.getElementById('questions').innerHTML = '<p class="text-center text-red-500 py-16">Error loading exam.</p>';
+      } catch (e) {
+        document.getElementById('questions').innerHTML = `<p class="text-center text-red-500 py-16">Error loading exam: ${e.message}</p>`;
       }
     }
 
@@ -68,8 +70,8 @@ const examId = Astro.url.searchParams.get('id') || '';
           </div>
           <div class="space-y-3 ml-11">
             ${q.options.map((opt, oi) => `
-              <div class="flex items-center gap-3 p-4 border-2 border-surface-200 rounded-2xl cursor-pointer hover:border-brand-300 hover:bg-brand-50/50 transition-all duration-200 group"
-                   onclick="selectOption(${i},${oi})" id="opt-${i}-${oi}">
+              <div class="option-card flex items-center gap-3 p-4 border-2 border-surface-200 rounded-2xl cursor-pointer hover:border-brand-300 hover:bg-brand-50/50 transition-all duration-200 group"
+                   data-qi="${i}" data-oi="${oi}">
                 <span class="w-8 h-8 rounded-full bg-surface-100 group-hover:bg-brand-100 flex items-center justify-center text-xs font-bold shrink-0 transition-colors">${labels[oi]}</span>
                 <span class="font-medium text-surface-700">${opt}</span>
               </div>
@@ -78,17 +80,30 @@ const examId = Astro.url.searchParams.get('id') || '';
         </div>
       `).join('');
       updateCount();
+
+      document.getElementById('questions').addEventListener('click', (e) => {
+        const card = e.target.closest('.option-card');
+        if (!card) return;
+        const qi = parseInt(card.dataset.qi);
+        const oi = parseInt(card.dataset.oi);
+        selectOption(qi, oi);
+      });
     }
 
     function selectOption(qi, oi) {
-      questions[qi].options.forEach((_, j) => {
-        const el = document.getElementById(`opt-${qi}-${j}`);
-        el.classList.remove('border-brand-500','bg-brand-50');
-        el.classList.add('border-surface-200');
+      document.querySelectorAll('.option-card').forEach(el => {
+        const eQi = parseInt(el.dataset.qi);
+        const eOi = parseInt(el.dataset.oi);
+        if (eQi === qi) {
+          el.classList.remove('border-brand-500','bg-brand-50');
+          el.classList.add('border-surface-200');
+        }
       });
-      const el = document.getElementById(`opt-${qi}-${oi}`);
-      el.classList.remove('border-surface-200');
-      el.classList.add('border-brand-500','bg-brand-50');
+      const sel = document.querySelector(`.option-card[data-qi="${qi}"][data-oi="${oi}"]`);
+      if (sel) {
+        sel.classList.remove('border-surface-200');
+        sel.classList.add('border-brand-500','bg-brand-50');
+      }
       answers[qi] = oi;
       document.getElementById('progress').style.width = (Object.keys(answers).length / questions.length * 100) + '%';
       updateCount();
