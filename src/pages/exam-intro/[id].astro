@@ -2,19 +2,19 @@
 export const prerender = false;
 
 import Layout from '../../layouts/Layout.astro';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../lib/firebase';
+import { getAdminDb } from '../../lib/firebase-admin';
 
 const { id } = Astro.params;
 let exam: any = { title: 'Exam', totalQuestions: 0, durationMinutes: 0, subjectName: '' };
 
 try {
-  const snap = await getDoc(doc(db, 'exams', id!));
-  if (snap.exists()) {
+  const db = getAdminDb();
+  const snap = await db.collection('exams').doc(id!).get();
+  if (snap.exists) {
     exam = { id: snap.id, ...snap.data() };
     try {
-      const subSnap = await getDoc(doc(db, 'subjects', exam.subjectId));
-      if (subSnap.exists()) exam.subjectName = subSnap.data().name;
+      const subSnap = await db.collection('subjects').doc(exam.subjectId).get();
+      if (subSnap.exists) exam.subjectName = subSnap.data()!.name;
     } catch {}
   }
 } catch {}

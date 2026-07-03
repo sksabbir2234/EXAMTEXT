@@ -10,7 +10,6 @@
   "dependencies": {
     "@astrojs/vercel": "^8.1.0",
     "astro": "^5.7.0",
-    "firebase": "^11.0.0",
     "firebase-admin": "^14.1.0",
     "katex": "^0.16.11"
   },

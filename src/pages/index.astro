@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../lib/firebase';
+import { getAdminDb } from '../lib/firebase-admin';
 
 let subjects: any[] = [];
 try {
-  const snap = await getDocs(collection(db, 'subjects'));
+  const db = getAdminDb();
+  const snap = await db.collection('subjects').get();
   subjects = snap.docs.map(d => ({ id: d.id, ...d.data() }));
 } catch {}
 ---

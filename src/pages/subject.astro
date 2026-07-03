@@ -1,14 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../lib/firebase';
+import { getAdminDb } from '../lib/firebase-admin';
 
 const subjectId = Astro.url.searchParams.get('id') || '';
 let exams: any[] = [];
 let subjectName = subjectId;
 
 try {
-  const snap = await getDocs(query(collection(db, 'exams'), where('subjectId', '==', subjectId), where('published', '==', true)));
+  const db = getAdminDb();
+  const snap = await db.collection('exams').where('subjectId', '==', subjectId).where('published', '==', true).get();
   exams = snap.docs.map(d => ({ id: d.id, ...d.data() }));
   if (exams.length > 0) subjectName = exams[0].subjectId || subjectId;
 } catch {}
