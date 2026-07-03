@@ -14,13 +14,21 @@ function initAdmin() {
     throw new Error('FIREBASE_SERVICE_ACCOUNT env var is not set');
   }
 
-  // Vercel sometimes wraps the value in extra quotes
+  // Vercel may strip wrapping quotes or mangle the value
   raw = raw.trim();
   if (raw.startsWith('"') && raw.endsWith('"')) {
     raw = raw.slice(1, -1);
   }
-  // Unescape escaped quotes
   raw = raw.replace(/\\"/g, '"');
+
+  // If Vercel stripped the opening {, add it back
+  if (!raw.startsWith('{')) {
+    raw = '{' + raw;
+  }
+  // If Vercel stripped the closing }, add it back
+  if (!raw.endsWith('}')) {
+    raw = raw + '}';
+  }
 
   try {
     const serviceAccount = JSON.parse(raw);
