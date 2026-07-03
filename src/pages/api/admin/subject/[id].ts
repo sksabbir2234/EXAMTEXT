@@ -4,7 +4,7 @@ import { doc, deleteDoc, collection, getDocs, query, where, writeBatch } from 'f
 import { checkAuth } from '../../../../lib/auth';
 
 export const DELETE: APIRoute = async (ctx) => {
-  const auth = checkAuth(ctx);
+  const auth = await checkAuth(ctx);
   if (!auth.ok) return auth.response;
 
   try {

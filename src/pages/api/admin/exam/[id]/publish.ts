@@ -4,7 +4,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { checkAuth } from '../../../../../lib/auth';
 
 export const PUT: APIRoute = async (ctx) => {
-  const auth = checkAuth(ctx);
+  const auth = await checkAuth(ctx);
   if (!auth.ok) return auth.response;
 
   try {

@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro';
 import { db } from '../../../../lib/firebase';
-import { doc, deleteDoc, getDoc, collection, getDocs, query, orderBy, writeBatch } from 'firebase/firestore';
+import { doc, deleteDoc, getDoc, collection, getDocs, query, orderBy, writeBatch, updateDoc } from 'firebase/firestore';
 import { checkAuth } from '../../../../lib/auth';
 
 export const GET: APIRoute = async (ctx) => {
-  const auth = checkAuth(ctx);
+  const auth = await checkAuth(ctx);
   if (!auth.ok) return auth.response;
 
   try {
@@ -15,7 +15,6 @@ export const GET: APIRoute = async (ctx) => {
     if (!examSnap.exists()) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 });
 
     const examData = { id: examSnap.id, ...examSnap.data() };
-
     const qSnap = await getDocs(query(collection(db, 'exams', examId, 'questions'), orderBy('order')));
     const questions = qSnap.docs.map(d => ({ id: d.id, ...d.data() }));
 
@@ -26,7 +25,7 @@ export const GET: APIRoute = async (ctx) => {
 };
 
 export const PUT: APIRoute = async (ctx) => {
-  const auth = checkAuth(ctx);
+  const auth = await checkAuth(ctx);
   if (!auth.ok) return auth.response;
 
   try {
@@ -34,28 +33,23 @@ export const PUT: APIRoute = async (ctx) => {
     if (!examId) return new Response(JSON.stringify({ error: 'Missing id' }), { status: 400 });
     const data = await ctx.request.json();
 
-    // Validate
     if (!data.questions || !Array.isArray(data.questions) || data.questions.length === 0) {
       return new Response(JSON.stringify({ error: 'questions must be a non-empty array' }), { status: 400 });
     }
 
-    // Update exam metadata
-    const updateData: any = {};
+    const updateData: any = { updatedAt: new Date() };
     if (data.examTitle) updateData.title = data.examTitle;
     if (data.durationMinutes !== undefined) updateData.durationMinutes = data.durationMinutes;
     if (data.totalQuestions !== undefined) updateData.totalQuestions = data.totalQuestions;
-    updateData.updatedAt = new Date();
 
     if (Object.keys(updateData).length > 1) {
-      const { updateDoc } = await import('firebase/firestore');
       await updateDoc(doc(db, 'exams', examId), updateData);
     }
 
-    // Replace questions subcollection
     const oldQSnap = await getDocs(collection(db, 'exams', examId, 'questions'));
-    const batch = writeBatch(db);
-    oldQSnap.docs.forEach(d => batch.delete(d.ref));
-    await batch.commit();
+    const delBatch = writeBatch(db);
+    oldQSnap.docs.forEach(d => delBatch.delete(d.ref));
+    await delBatch.commit();
 
     const newBatch = writeBatch(db);
     data.questions.forEach((q: any, i: number) => {
@@ -74,7 +68,7 @@ export const PUT: APIRoute = async (ctx) => {
 };
 
 export const DELETE: APIRoute = async (ctx) => {
-  const auth = checkAuth(ctx);
+  const auth = await checkAuth(ctx);
   if (!auth.ok) return auth.response;
 
   try {

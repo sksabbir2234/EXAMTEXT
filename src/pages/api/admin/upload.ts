@@ -21,7 +21,7 @@ function validateQuestions(questions: any[]): string[] {
 }
 
 export const POST: APIRoute = async (ctx) => {
-  const auth = checkAuth(ctx);
+  const auth = await checkAuth(ctx);
   if (!auth.ok) return auth.response;
 
   try {
@@ -44,7 +44,6 @@ export const POST: APIRoute = async (ctx) => {
 
     const slug = data.subject.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
 
-    // Slug collision check
     let slugWarning: string | null = null;
     try {
       const existing = await getDoc(doc(db, 'subjects', slug));
