@@ -1,29 +1,24 @@
 import type { APIRoute } from 'astro';
-import { collection, doc, setDoc, writeBatch, getFirestore } from 'firebase/firestore';
-import { db } from '../../../lib/firebase';
-
-function slugify(text: string) {
-  return text.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
-}
+import { db } from '../../../lib/admin';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const data = await request.json();
-    const subjectSlug = slugify(data.subject || 'general');
+    const slug = (data.subject || 'general').toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
 
-    await setDoc(doc(db, 'subjects', subjectSlug), {
-      name: data.subject || 'General', slug: subjectSlug, description: '', createdAt: new Date()
+    await db.collection('subjects').doc(slug).set({
+      name: data.subject || 'General', slug, description: '', createdAt: new Date()
     }, { merge: true });
 
-    const examRef = doc(collection(db, 'exams'));
-    await setDoc(examRef, {
-      subjectId: subjectSlug, title: data.examTitle || 'Untitled', slug: slugify(data.examTitle || 'untitled'),
-      durationMinutes: data.durationMinutes || 0, totalQuestions: data.questions.length, createdAt: new Date(), published: true
+    const examRef = await db.collection('exams').add({
+      subjectId: slug, title: data.examTitle || 'Untitled',
+      durationMinutes: data.durationMinutes || 0, totalQuestions: data.questions.length,
+      createdAt: new Date(), published: true
     });
 
-    const batch = writeBatch(db);
+    const batch = db.batch();
     data.questions.forEach((q: any, i: number) => {
-      const qRef = doc(collection(db, 'exams', examRef.id, 'questions'));
+      const qRef = db.collection('exams').doc(examRef.id).collection('questions').doc();
       batch.set(qRef, {
         order: i + 1, questionText: q.questionText, options: q.options,
         correctOptionIndex: q.correctOptionIndex, explanation: q.explanation || null, marks: q.marks || 1
@@ -31,7 +26,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
     await batch.commit();
 
-    return new Response(JSON.stringify({ id: examRef.id, message: 'Uploaded' }), { headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ id: examRef.id }), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });
   }

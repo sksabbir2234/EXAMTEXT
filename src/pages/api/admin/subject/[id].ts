@@ -1,16 +1,17 @@
 import type { APIRoute } from 'astro';
-import { collection, getDocs, doc, deleteDoc, query, where } from 'firebase/firestore';
-import { db } from '../../../../lib/firebase';
+import { db } from '../../../../lib/admin';
 
 export const DELETE: APIRoute = async ({ params }) => {
   try {
-    const examSnap = await getDocs(query(collection(db, 'exams'), where('subjectId', '==', params.id!)));
+    const examSnap = await db.collection('exams').where('subjectId', '==', params.id!).get();
     for (const examDoc of examSnap.docs) {
-      const qSnap = await getDocs(collection(db, 'exams', examDoc.id, 'questions'));
-      for (const d of qSnap.docs) await deleteDoc(d.ref);
-      await deleteDoc(doc(db, 'exams', examDoc.id));
+      const qSnap = await db.collection('exams').doc(examDoc.id).collection('questions').get();
+      const batch = db.batch();
+      qSnap.docs.forEach(d => batch.delete(d.ref));
+      await batch.commit();
+      await db.collection('exams').doc(examDoc.id).delete();
     }
-    await deleteDoc(doc(db, 'subjects', params.id!));
+    await db.collection('subjects').doc(params.id!).delete();
     return new Response(JSON.stringify({ message: 'Deleted' }), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });
