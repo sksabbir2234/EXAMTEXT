@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam - Exam Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="header">
+    <h1 id="exam-title">Loading...</h1>
+    <p id="exam-subject"></p>
+  </div>
+  <div class="container">
+    <div class="admin-section" id="exam-info">
+      <div class="loading">
+        <div class="spinner"></div>
+      </div>
+    </div>
+    <div class="admin-section">
+      <h2>Enter Your Name</h2>
+      <form id="name-form">
+        <div class="form-group">
+          <input type="text" id="student-name" placeholder="Your name" required autocomplete="name">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Start Exam</button>
+      </form>
+    </div>
+  </div>
+  <script type="module" src="js/exam-intro.js"></script>
+</body>
+</html>

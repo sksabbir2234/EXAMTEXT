@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Subjects - public read, write for admin (open in v1)
+    match /subjects/{subjectId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Exams - public read for published, write for admin
+    match /exams/{examId} {
+      allow read: if true;
+      allow write: if true;
+
+      // Questions subcollection
+      match /questions/{questionId} {
+        allow read: if true;
+        allow write: if true;
+      }
+    }
+
+    // Attempts - public create (students), public read (leaderboard)
+    match /attempts/{attemptId} {
+      allow create: if true;
+      allow read: if true;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}

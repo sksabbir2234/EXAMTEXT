@@ -1,0 +1,77 @@
+{
+  "subject": "HSC ICT",
+  "examTitle": "Chapter 3 - Number System",
+  "durationMinutes": 20,
+  "questions": [
+    {
+      "questionText": "বাইনারি সংখ্যা পদ্ধতির base কত?",
+      "options": ["2", "8", "10", "16"],
+      "correctOptionIndex": 0,
+      "explanation": "বাইনারি সংখ্যা পদ্ধতিতে মাত্র দুটি digit থাকে: 0 এবং 1, তাই base = 2।",
+      "marks": 1
+    },
+    {
+      "questionText": "দশমিক সংখ্যা 13 কে বাইনারিতে রূপান্তর করলে কী পাওয়া যায়?",
+      "options": ["1101", "1011", "1110", "1001"],
+      "correctOptionIndex": 0,
+      "explanation": "13 = 8+4+1 = 1101 (বাইনারি)।",
+      "marks": 1
+    },
+    {
+      "questionText": "অষ্টমিক সংখ্যা পদ্ধতির (Octal) base কত?",
+      "options": ["2", "8", "10", "16"],
+      "correctOptionIndex": 1,
+      "explanation": "অষ্টমিক সংখ্যা পদ্ধতিতে 0-7 পর্যন্ত digit থাকে, তাই base = 8।",
+      "marks": 1
+    },
+    {
+      "questionText": "হেক্সাডেসিমাল সংখ্যা পদ্ধতির base কত?",
+      "options": ["8", "10", "12", "16"],
+      "correctOptionIndex": 3,
+      "explanation": "হেক্সাডেসিমাল সংখ্যা পদ্ধতিতে 0-9 এবং A-F পর্যন্ত digit থাকে, তাই base = 16।",
+      "marks": 1
+    },
+    {
+      "questionText": "বাইনারি 1010 কে দশমিকে রূপান্তর করুন।",
+      "options": ["8", "10", "12", "14"],
+      "correctOptionIndex": 1,
+      "explanation": "1010 = 1×8 + 0×4 + 1×2 + 0×1 = 8+2 = 10।",
+      "marks": 1
+    },
+    {
+      "questionText": "ASCII কোডে 'A' এর মান কত?",
+      "options": ["65", "97", "48", "90"],
+      "correctOptionIndex": 0,
+      "explanation": "ASCII কোডে বড় হাতের 'A' এর মান 65।",
+      "marks": 1
+    },
+    {
+      "questionText": "BCD (Binary Coded Decimal) কোডে প্রতিটি দশমিক সংখ্যা কত বিটে প্রকাশ করা হয়?",
+      "options": ["2", "4", "8", "16"],
+      "correctOptionIndex": 1,
+      "explanation": "BCD কোডে প্রতিটি দশমিক সংখ্যা (0-9) 4 বিটে প্রকাশ করা হয়।",
+      "marks": 1
+    },
+    {
+      "questionText": "পূরক (Complement) কত প্রকার?",
+      "options": ["1", "2", "3", "4"],
+      "correctOptionIndex": 1,
+      "explanation": "পূরক দুই প্রকার: 1's complement এবং 2's complement।",
+      "marks": 1
+    },
+    {
+      "questionText": "বাইনারি সংখ্যা 1111 এর 1's complement কত?",
+      "options": ["0000", "1111", "0001", "1110"],
+      "correctOptionIndex": 0,
+      "explanation": "1's complement হলো প্রতিটি বিট উল্টে দেওয়া। 1111 → 0000।",
+      "marks": 1
+    },
+    {
+      "questionText": "বাইনারি 1011 এর 2's complement কত?",
+      "options": ["0101", "0100", "0110", "1101"],
+      "correctOptionIndex": 0,
+      "explanation": "1011 → 1's complement: 0100 → +1 = 0101।",
+      "marks": 1
+    }
+  ]
+}

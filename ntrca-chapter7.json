@@ -1,0 +1,77 @@
+{
+  "subject": "HSC ICT",
+  "examTitle": "Chapter 7 - Database Management System",
+  "durationMinutes": 15,
+  "questions": [
+    {
+      "questionText": "DBMS এর পূর্ণরূপ কী?",
+      "options": ["Database Management System", "Data Bank Management System", "Digital Base Management System", "Direct Backend Management System"],
+      "correctOptionIndex": 0,
+      "explanation": "DBMS অর্থ Database Management System।",
+      "marks": 1
+    },
+    {
+      "questionText": "রিলেশনাল ডেটাবেসে একটি সারিকে কী বলে?",
+      "options": ["Field", "Record", "Table", "Query"],
+      "correctOptionIndex": 1,
+      "explanation": "রিলেশনাল ডেটাবেসে একটি সারিকে Record (রেকর্ড) বলে।",
+      "marks": 1
+    },
+    {
+      "questionText": "SQL এর পূর্ণরূপ কী?",
+      "options": ["Structured Query Language", "Simple Query Language", "System Query Language", "Standard Query Language"],
+      "correctOptionIndex": 0,
+      "explanation": "SQL অর্থ Structured Query Language।",
+      "marks": 1
+    },
+    {
+      "questionText": "প্রাইমারি কী কী কাজ করে?",
+      "options": ["তথ্য সংরক্ষণ করে", "প্রতিটি রেকর্ডকে অনন্যভাবে চিহ্নিত করে", "তথ্য মুছে ফেলে", "তথ্য আপডেট করে"],
+      "correctOptionIndex": 1,
+      "explanation": "প্রাইমারি কী প্রতিটি রেকর্ডকে অনন্যভাবে চিহ্নিত করে।",
+      "marks": 1
+    },
+    {
+      "questionText": "SELECT স্টেটমেন্ট কী কাজ করে?",
+      "options": ["তথ্য সংযোজন করে", "তথ্য নির্বাচন করে", "তথ্য মুছে ফেলে", "তথ্য আপডেট করে"],
+      "correctOptionIndex": 1,
+      "explanation": "SELECT স্টেটমেন্ট ডেটাবেস থেকে তথ্য নির্বাচন করতে ব্যবহৃত হয়।",
+      "marks": 1
+    },
+    {
+      "questionText": "INSERT স্টেটমেন্ট কী কাজ করে?",
+      "options": ["তথ্য পড়ে", "নতুন তথ্য যোগ করে", "তথ্য আপডেট করে", "তথ্য মুছে ফেলে"],
+      "correctOptionIndex": 1,
+      "explanation": "INSERT স্টেটমেন্ট ডেটাবেসে নতুন তথ্য যোগ করতে ব্যবহৃত হয়।",
+      "marks": 1
+    },
+    {
+      "questionText": "UPDATE স্টেটমেন্ট কী কাজ করে?",
+      "options": ["তথ্য পড়ে", "তথ্য যোগ করে", "বিদ্যমান তথ্য পরিবর্তন করে", "তথ্য মুছে ফেলে"],
+      "correctOptionIndex": 2,
+      "explanation": "UPDATE স্টেটমেন্ট বিদ্যমান তথ্য পরিবর্তন করতে ব্যবহৃত হয়।",
+      "marks": 1
+    },
+    {
+      "questionText": "DELETE স্টেটমেন্ট কী কাজ করে?",
+      "options": ["তথ্য পড়ে", "তথ্য যোগ করে", "তথ্য আপডেট করে", "তথ্য মুছে ফেলে"],
+      "correctOptionIndex": 3,
+      "explanation": "DELETE স্টেটমেন্ট ডেটাবেস থেকে তথ্য মুছে ফেলতে ব্যবহৃত হয়।",
+      "marks": 1
+    },
+    {
+      "questionText": "WHERE ক্লজ কী কাজ করে?",
+      "options": ["তথ্য সাজায়", "শর্ত নির্ধারণ করে", "তথ্য গ্রুপ করে", "তথ্য যোগ করে"],
+      "correctOptionIndex": 1,
+      "explanation": "WHERE ক্লজ নির্দিষ্ট শর্ত অনুযায়ী তথ্য নির্বাচন করতে ব্যবহৃত হয়।",
+      "marks": 1
+    },
+    {
+      "questionText": "JOIN অপারেটর কী কাজ করে?",
+      "options": ["একটি টেবিলে তথ্য যোগ করে", "দুই বা ততোধিক টেবিলকে একত্রিত করে", "তথ্য মুছে ফেলে", "তথ্য সাজায়"],
+      "correctOptionIndex": 1,
+      "explanation": "JOIN অপারেটর দুই বা ততোধিক টেবিলকে একত্রিত করতে ব্যবহৃত হয়।",
+      "marks": 1
+    }
+  ]
+}

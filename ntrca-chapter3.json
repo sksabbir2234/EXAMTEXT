@@ -1,0 +1,77 @@
+{
+  "subject": "HSC ICT",
+  "examTitle": "Chapter 3 - Computer Network",
+  "durationMinutes": 15,
+  "questions": [
+    {
+      "questionText": "LAN দ্বারা কী বোঝায়?",
+      "options": ["Local Area Network", "Large Area Network", "Long Area Network", "Light Area Network"],
+      "correctOptionIndex": 0,
+      "explanation": "LAN অর্থ Local Area Network, যা সীমিত এলাকায় ডিভাইস সংযুক্ত করে।",
+      "marks": 1
+    },
+    {
+      "questionText": "WAN এর পূর্ণরূপ কী?",
+      "options": ["Wide Area Network", "Wireless Area Network", "Web Area Network", "World Area Network"],
+      "correctOptionIndex": 0,
+      "explanation": "WAN অর্থ Wide Area Network, যা বৃহৎ ভৌগোলিক এলাকা জুড়ে নেটওয়ার্ক তৈরি করে।",
+      "marks": 1
+    },
+    {
+      "questionText": "OSI মডেলে মোট কয়টি লেয়ার আছে?",
+      "options": ["পাঁচ", "ছয়", "সাত", "আট"],
+      "correctOptionIndex": 2,
+      "explanation": "OSI মডেলে মোট ৭টি লেয়ার আছে।",
+      "marks": 1
+    },
+    {
+      "questionText": "TCP/IP মডেলে মোট কয়টি লেয়ার?",
+      "options": ["তিন", "চার", "পাঁচ", "সাত"],
+      "correctOptionIndex": 1,
+      "explanation": "TCP/IP মডেলে ৪টি লেয়ার — Application, Transport, Internet, Network Access।",
+      "marks": 1
+    },
+    {
+      "questionText": "HTTP এর ডিফল্ট পোর্ট নম্বর কত?",
+      "options": ["21", "25", "80", "443"],
+      "correctOptionIndex": 2,
+      "explanation": "HTTP এর ডিফল্ট পোর্ট নম্বর 80।",
+      "marks": 1
+    },
+    {
+      "questionText": "HTTPS এর ডিফল্ট পোর্ট নম্বর কত?",
+      "options": ["80", "443", "21", "25"],
+      "correctOptionIndex": 1,
+      "explanation": "HTTPS এর ডিফল্ট পোর্ট নম্বর 443।",
+      "marks": 1
+    },
+    {
+      "questionText": "DNS এর কাজ কী?",
+      "options": ["ডোমেন নামকে IP ঠিকানায় রূপান্তর", "IP ঠিকানাকে ডোমেন নামে রূপান্তর", "তথ্য এনক্রিপ্ট করা", "তথ্য সংরক্ষণ করা"],
+      "correctOptionIndex": 0,
+      "explanation": "DNS (Domain Name System) ডোমেন নামকে IP ঠিকানায় রূপান্তরিত করে।",
+      "marks": 1
+    },
+    {
+      "questionText": "TCP কোন লেয়ারে কাজ করে?",
+      "options": ["Application Layer", "Transport Layer", "Internet Layer", "Network Access Layer"],
+      "correctOptionIndex": 1,
+      "explanation": "TCP (Transmission Control Protocol) Transport Layer-এ কাজ করে।",
+      "marks": 1
+    },
+    {
+      "questionText": "IP কোন লেয়ারে কাজ করে?",
+      "options": ["Application Layer", "Transport Layer", "Internet Layer", "Network Access Layer"],
+      "correctOptionIndex": 2,
+      "explanation": "IP (Internet Protocol) Internet Layer-এ কাজ করে।",
+      "marks": 1
+    },
+    {
+      "questionText": "ইথারনেট কোন ধরনের নেটওয়ার্ক?",
+      "options": ["WAN", "MAN", "LAN", "PAN"],
+      "correctOptionIndex": 2,
+      "explanation": "ইথারনেট মূলত LAN (Local Area Network) এ ব্যবহৃত হয়।",
+      "marks": 1
+    }
+  ]
+}
