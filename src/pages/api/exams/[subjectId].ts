@@ -4,7 +4,7 @@ import { getAdminDb } from '../../../lib/firebase-admin';
 export const GET: APIRoute = async ({ params }) => {
   try {
     const db = getAdminDb();
-    const snap = await db.collection('exams').where('subjectId', '==', params.subjectId).where('published', '==', true).get();
+    const snap = await db.collection('exams').where('subjectId', '==', params.subjectId).where('published', '==', true).orderBy('createdAt').get();
     const exams = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     return new Response(JSON.stringify(exams), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {

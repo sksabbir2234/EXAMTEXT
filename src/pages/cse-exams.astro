@@ -2,13 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="CSE College Teacher - ExamText" ogTitle="CSE College Teacher Exams" ogDescription="10 chapters × 30 MCQs each" navBack={true} navTitle="CSE College Teacher">
-  <div class="max-w-4xl mx-auto px-4 py-10">
+  <div class="max-w-3xl mx-auto px-4 py-10">
     <div class="text-center mb-10">
       <div class="w-16 h-16 rounded-3xl bg-brand-50 flex items-center justify-center text-3xl mx-auto mb-5">📚</div>
       <h1 class="text-3xl font-bold text-surface-900 mb-2">CSE College Teacher</h1>
       <p class="text-surface-400">10 chapters × 30 MCQs each</p>
+      <div class="flex justify-center gap-2 mt-4">
+        <div class="h-1.5 w-16 bg-brand-500 rounded-full"></div>
+        <div class="h-1.5 w-8 bg-brand-200 rounded-full"></div>
+        <div class="h-1.5 w-4 bg-brand-100 rounded-full"></div>
+      </div>
     </div>
-    <div id="chapters" class="space-y-4">
+    <div id="chapters" class="relative">
       <div class="flex justify-center py-12">
         <div class="w-10 h-10 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
       </div>
@@ -24,21 +29,47 @@ import Layout from '../layouts/Layout.astro';
           el.innerHTML = '<div class="text-center py-20"><div class="w-20 h-20 rounded-3xl bg-surface-100 flex items-center justify-center text-4xl mx-auto mb-6">📭</div><h3 class="text-xl font-semibold text-surface-700 mb-2">No CSE exams yet</h3><p class="text-surface-400">Check back later</p></div>';
           return;
         }
-        el.innerHTML = exams.map((e, i) => `
-          <div class="card p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 animate-fade-up" style="animation-delay:${i*0.05}s;opacity:0;">
-            <div class="flex-1 min-w-0">
-              <h3 class="text-lg font-bold text-surface-900 mb-1">${e.title}</h3>
-              <div class="flex items-center gap-4 text-sm text-surface-400">
-                <span>${e.totalQuestions} questions</span>
-                <span>${e.durationMinutes||0} min</span>
+        el.innerHTML = `
+          <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-500 via-brand-300 to-surface-200 hidden sm:block"></div>
+          <div class="space-y-6">
+            ${exams.map((e, i) => `
+              <div class="relative flex gap-5 animate-fade-up" style="animation-delay:${i*0.08}s;opacity:0;">
+                <div class="hidden sm:flex shrink-0 w-12 h-12 rounded-2xl bg-brand-500 text-white items-center justify-center text-sm font-bold z-10 shadow-glow">${i+1}</div>
+                <div class="flex-1 card p-6 hover:border-brand-200 hover:shadow-card-hover transition-all duration-200 group">
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2 mb-1">
+                        <span class="sm:hidden inline-flex w-7 h-7 rounded-lg bg-brand-500 text-white items-center justify-center text-xs font-bold">${i+1}</span>
+                        <span class="text-xs font-semibold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">Chapter ${i+1}</span>
+                      </div>
+                      <h3 class="text-lg font-bold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">${e.title}</h3>
+                      <div class="flex flex-wrap items-center gap-3 text-sm text-surface-400">
+                        <span class="flex items-center gap-1.5">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                          ${e.totalQuestions} Q
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                          ${e.durationMinutes||0}m
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex gap-2 shrink-0">
+                      <a href="/exam-intro/${e.id}" class="btn-primary text-sm px-5 py-2.5">Start</a>
+                      <button onclick="navigator.clipboard.writeText(window.location.origin+'/exam-intro/${e.id}');window.showToast('Link copied!')" class="btn-ghost text-sm px-3 py-2.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="flex gap-3 shrink-0">
-              <a href="/exam-intro/${e.id}" class="btn-primary text-sm px-6 py-2.5">Start</a>
-              <button onclick="navigator.clipboard.writeText(window.location.origin+'/exam-intro/${e.id}');window.showToast('Link copied!')" class="btn-ghost text-sm px-4 py-2.5">Share</button>
-            </div>
+            `).join('')}
           </div>
-        `).join('');
+          <div class="flex gap-5 mt-6">
+            <div class="hidden sm:flex shrink-0 w-12 h-12 rounded-2xl bg-surface-200 text-surface-400 items-center justify-center text-sm font-bold z-10">✓</div>
+            <div class="flex-1 py-4 text-center text-sm font-medium text-surface-400">${exams.length} chapters available</div>
+          </div>
+        `;
       } catch { el.innerHTML = '<p class="text-center text-red-500 py-12">Error loading chapters.</p>'; }
     }
     load();
