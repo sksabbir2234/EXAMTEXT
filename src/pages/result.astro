@@ -68,6 +68,19 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
             <button onclick="navigator.clipboard.writeText(window.location.href);window.showToast('Link copied!')" class="btn-ghost text-sm px-5 py-2.5">Copy Link</button>
           </div>`;
 
+        // Save progress to localStorage
+        try {
+          const progressKey = 'examtext_progress_' + examId;
+          const existing = JSON.parse(localStorage.getItem(progressKey) || '{}');
+          const bestScore = Math.max(existing.bestScore ?? 0, score);
+          localStorage.setItem(progressKey, JSON.stringify({
+            attempted: true,
+            bestScore,
+            lastAttempt: new Date().toISOString(),
+            totalQuestions: total,
+          }));
+        } catch {}
+
         const qRes = await fetch(`/api/exam/${examId}/questions`);
         const questions = await qRes.json();
 

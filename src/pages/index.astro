@@ -71,4 +71,26 @@ try {
     )}
   </section>
 
+  <!-- Coming Soon -->
+  <section class="max-w-6xl mx-auto px-4 pb-20">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-surface-400">Coming Soon</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {[
+        { icon: '🏦', title: 'Bangladesh Bank AD (ICT)', desc: 'Full syllabus MCQ bank' },
+        { icon: '📡', title: 'BCS (ICT Cadre)', desc: 'Preliminary + Written prep' },
+        { icon: '🎓', title: 'NTRCA (School/College)', desc: 'Subject-wise practice' },
+        { icon: '🏛️', title: 'NPCBL Engineering', desc: '150 topics, 1500+ MCQs' },
+      ].map((item, i) => (
+        <div class="rounded-2xl border-2 border-dashed border-surface-200 bg-surface-50 p-5 opacity-60 cursor-not-allowed animate-fade-up" style={`animation-delay:${i * 0.08}s;opacity:0;`}>
+          <div class="text-2xl mb-2">{item.icon}</div>
+          <h3 class="font-semibold text-surface-700">{item.title}</h3>
+          <p class="text-sm text-surface-400 mt-1">{item.desc}</p>
+          <span class="inline-block mt-3 text-xs bg-amber-50 text-amber-600 font-semibold px-2.5 py-1 rounded-full">Coming Soon</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
 </Layout>
