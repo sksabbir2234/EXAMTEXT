@@ -8,8 +8,14 @@ let subjectName = subjectId;
 
 try {
   const db = getAdminDb();
-  const snap = await db.collection('exams').where('subjectId', '==', subjectId).where('published', '==', true).orderBy('createdAt').get();
-  exams = snap.docs.map((d, i) => ({ id: d.id, ...d.data(), chapterNum: i + 1 }));
+  const snap = await db.collection('exams').where('subjectId', '==', subjectId).where('published', '==', true).get();
+  exams = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  exams.sort((a, b) => {
+    const ta = a.createdAt?._seconds || a.createdAt?.seconds || 0;
+    const tb = b.createdAt?._seconds || b.createdAt?.seconds || 0;
+    return ta - tb;
+  });
+  exams = exams.map((e, i) => ({ ...e, chapterNum: i + 1 }));
   if (exams.length > 0) subjectName = exams[0].subjectId || subjectId;
 } catch {}
 ---
