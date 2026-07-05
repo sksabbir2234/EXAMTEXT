@@ -3,8 +3,16 @@ import Layout from '../layouts/Layout.astro';
 
 const examId = Astro.url.searchParams.get('examId') || '';
 const attemptId = Astro.url.searchParams.get('id') || '';
-const score = parseInt(Astro.url.searchParams.get('score') ?? '0', 10) || 0;
-const total = parseInt(Astro.url.searchParams.get('total') ?? '0', 10) || 0;
+const rawScore = Astro.url.searchParams.get('score') || '0';
+const rawTotal = Astro.url.searchParams.get('total') || '0';
+
+function safeInt(v: string): number {
+  const m = v.match(/\d+/);
+  return m ? parseInt(m[0], 10) : 0;
+}
+
+const score = safeInt(rawScore);
+const total = safeInt(rawTotal);
 ---
 <Layout title="Result - ExamText" navBack={true} navTitle="Exam Result">
   <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
@@ -47,9 +55,10 @@ const total = parseInt(Astro.url.searchParams.get('total') ?? '0', 10) || 0;
 
   <script is:inline define:vars={{ examId }}>
     const labels = ['A','B','C','D'];
+    function safeInt(v) { var m = (v||'').match(/\d+/); return m ? parseInt(m[0], 10) : 0; }
     const params = new URLSearchParams(window.location.search);
-    const score = parseInt(params.get('score') ?? '0', 10) || 0;
-    const total = parseInt(params.get('total') ?? '0', 10) || 0;
+    const score = safeInt(params.get('score'));
+    const total = safeInt(params.get('total'));
 
     async function init() {
       try {
