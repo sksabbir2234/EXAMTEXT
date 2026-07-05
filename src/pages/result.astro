@@ -162,7 +162,7 @@ const total = safeInt(rawTotal);
           const blogRes = await fetch(`/api/blogs/${exam.subjectId || ''}`);
           if (blogRes.ok) {
             const blogs = await blogRes.json();
-            const related = blogs.find((b: any) => b.examId === examId);
+            const related = blogs.find((b) => b.examId === examId);
             if (related) {
               document.getElementById('related-blog').classList.remove('hidden');
               document.getElementById('related-blog').innerHTML = `
