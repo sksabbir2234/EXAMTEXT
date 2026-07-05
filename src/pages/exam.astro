@@ -139,7 +139,7 @@ const examId = Astro.url.searchParams.get('id') || '';
       try {
         const res = await fetch('/api/attempt', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ examId, studentName, score, total: questions.length, answers, timeTaken: secondsElapsed }) });
         const data = await res.json();
-        window.location.href = `/result?id=${data.id}&examId=${examId}&score=${score}`;
+        window.location.href = `/result?id=${data.id}&examId=${examId}&score=${score}&total=${questions.length}`;
       } catch { window.showToast('Error submitting exam'); }
     }
 

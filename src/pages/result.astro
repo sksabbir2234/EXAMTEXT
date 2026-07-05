@@ -3,7 +3,8 @@ import Layout from '../layouts/Layout.astro';
 
 const examId = Astro.url.searchParams.get('examId') || '';
 const attemptId = Astro.url.searchParams.get('id') || '';
-const scoreParam = Astro.url.searchParams.get('score') || '0';
+const score = parseInt(Astro.url.searchParams.get('score') ?? '0', 10) || 0;
+const total = parseInt(Astro.url.searchParams.get('total') ?? '0', 10) || 0;
 ---
 <Layout title="Result - ExamText" navBack={true} navTitle="Exam Result">
   <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
@@ -44,16 +45,15 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
     )}
   </div>
 
-  <script is:inline define:vars={{ examId, scoreParam }}>
+  <script is:inline define:vars={{ examId, score, total }}>
     const labels = ['A','B','C','D'];
-    const score = parseInt(scoreParam);
 
     async function init() {
       try {
         const exRes = await fetch(`/api/exam/${examId}`);
         const exam = await exRes.json();
-        const total = exam.totalQuestions;
-        const pct = Math.round(score/total*100);
+        const examTotal = total || exam.totalQuestions;
+        const pct = examTotal > 0 ? Math.round(score / examTotal * 100) : 0;
         const grade = pct >= 80 ? 'Excellent' : pct >= 60 ? 'Good' : pct >= 40 ? 'Fair' : 'Needs Work';
         const gradeColor = pct >= 80 ? 'text-emerald-500' : pct >= 60 ? 'text-brand-500' : pct >= 40 ? 'text-amber-500' : 'text-red-500';
 
@@ -67,11 +67,11 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
               <div class="text-xs text-surface-400 mt-1 font-medium">Correct</div>
             </div>
             <div class="text-center">
-              <div class="text-3xl font-bold text-red-500">${total - score}</div>
+              <div class="text-3xl font-bold text-red-500">${examTotal - score}</div>
               <div class="text-xs text-surface-400 mt-1 font-medium">Wrong</div>
             </div>
             <div class="text-center">
-              <div class="text-3xl font-bold text-brand-500">${total}</div>
+              <div class="text-3xl font-bold text-brand-500">${examTotal}</div>
               <div class="text-xs text-surface-400 mt-1 font-medium">Total</div>
             </div>
           </div>
@@ -89,7 +89,7 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
             attempted: true,
             bestScore,
             lastAttempt: new Date().toISOString(),
-            totalQuestions: total,
+            totalQuestions: examTotal,
           }));
         } catch {}
 
