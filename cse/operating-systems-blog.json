@@ -1,0 +1,423 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Operating Systems — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Operating Systems-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Operating System (OS) কী?",
+      "answer": "Operating System হলো কম্পিউটারের হার্ডওয়্যার এবং ব্যবহারকারীর মধ্যে মধ্যস্বত্বভোগী সফটওয়্যার। এটি হার্ডওয়্যার রিসোর্স পরিচালনা করে এবং অ্যাপ্লিকেশন প্রোগ্রামকে হার্ডওয়্যারের সাথে যুক্ত করে। OS ছাড়া কোনো প্রোগ্রাম সরাসরি হার্ডওয়্যার ব্যবহার করতে পারে না।",
+      "tags": ["os", "definition", "basics"]
+    },
+    {
+      "question": "Operating System-এর প্রধান কাজ কী কী?",
+      "answer": "OS-এর প্রধান কাজগুলো হলো: (1) প্রসেস ম্যানেজমেন্ট — প্রসেস তৈরি, ধ্বংস, শিডিউলিং। (2) মেমরি ম্যানেজমেন্ট — মেমরি বরাদ্দ ও মুক্তি। (3) ফাইল সিস্টেম ম্যানেজমেন্ট — ফাইল সংরক্ষণ ও সংগঠন। (4) ডিভাইস ম্যানেজমেন্ট — I/O ডিভাইস নিয়ন্ত্রণ। (5) নিরাপত্তা — অননুমোদিত অ্যাক্সেস প্রতিরোধ।",
+      "tags": ["os", "functions", "basics"]
+    },
+    {
+      "question": "Operating System-এর প্রকারভেগ কী কী?",
+      "answer": "OS-এর প্রধান প্রকারভেগ: (1) Batch OS — জব ব্যাচ আকারে প্রক্রিয়াকরণ। (2) Time-Sharing OS — বহু ব্যবহারকারী একই সময়ে। (3) Real-Time OS — নির্দিষ্ট সময়ের মধ্যে প্রতিক্রিয়া। (4) Distributed OS — নেটওয়ার্কের মাধ্যমে সংযুক্ত কম্পিউটার। (5) Embedded OS — ছোট ডিভাইসে ব্যবহৃত।",
+      "tags": ["os", "types", "basics"]
+    },
+    {
+      "question": "User Mode ও Kernel Mode-এর পার্থক্য কী?",
+      "answer": "User Mode-এ ব্যবহারকারীর প্রোগ্রাম চলে, সীমিত অ্যাক্সেস থাকে। Kernel Mode-এ OS-এর কোর কোড চলে, সম্পূর্ণ হার্ডওয়্যার অ্যাক্সেস আছে। System Call করলে User Mode থেকে Kernel Mode-এ সুইচ হয়। Dual Mode Operation নিরাপত্তার জন্য প্রয়োজন।",
+      "tags": ["os", "modes", "kernel", "basics"]
+    },
+    {
+      "question": "System Call কী?",
+      "answer": "System Call হলো User Mode থেকে Kernel Mode-এ যাওয়ার ইন্টারফেস। যখন কোনো প্রোগ্রাম হার্ডওয়্যার বা OS রিসোর্স অ্যাক্সেস করতে চায়, তখন System Call ব্যবহার করে। যেমন: open(), read(), write(), fork(), exec()।",
+      "tags": ["system-call", "os", "kernel"]
+    },
+    {
+      "question": "Process কী?",
+      "answer": "Process হলো একটি কার্যকর প্রোগ্রাম। যখন একটি প্রোগ্রাম মেমরিতে লোড হয়ে এক্সিকিউট হতে শুরু করে, তখন তাকে Process বলে। প্রতিটি Process-এর একটি আলাদা Process Control Block (PCB), Program Counter, এবং রিসোর্স থাকে।",
+      "tags": ["process", "basics", "definition"]
+    },
+    {
+      "question": "Thread কী?",
+      "answer": "Thread হলো একটি Process-এর মধ্যে একটি স্বাধীন এক্সিকিউশন ইউনিট। একটি Process-এ একাধিক Thread থাকতে পারে। সব Thread একই অ্যাড্রেস স্পেস ভাগ করে। হালকা ওয়েট থাকে এবং প্রসেস অপেক্ষা দ্রুত তৈরি হয়।",
+      "tags": ["thread", "basics", "definition"]
+    },
+    {
+      "question": "Process ও Thread-এর পার্থক্য কী?",
+      "answer": "Process-এ আলাদা অ্যাড্রেস স্পেস থাকে, Thread-এ একই অ্যাড্রেস স্পেস ভাগ করে। Process ভারী, Thread হালকা। Process তৈরি ও সুইচ করতে বেশি সময় লাগে, Thread-এ কম লাগে। Inter-Process Communication (IPC) প্রয়োজন, কিন্তু Thread-এ সরাসরি মেমরি শেয়ার করা যায়।",
+      "tags": ["process", "thread", "comparison"]
+    },
+    {
+      "question": "Process Control Block (PCB) কী?",
+      "answer": "PCB হলো একটি ডেটা স্ট্রাকচার যা প্রতিটি Process সম্পর্কে তথ্য ধারণ করে। এতে থাকে: Process ID, Process State, Program Counter, CPU Register, Memory Management Info (page table, segment table), I/O Status Info, Accounting Info। PCB OS-এর সবচেয়ে গুরুত্বপূর্ণ ডেটা স্ট্রাকচার।",
+      "tags": ["pcb", "process", "basics"]
+    },
+    {
+      "question": "Context Switching কী?",
+      "answer": "Context Switching হলো CPU একটি Process থেকে অন্য একটি Process-এ সুইচ হওয়ার প্রক্রিয়া। যখন একটি Process ব্লক হয় বা তার টাইম শেষ হয়, তখন OS বর্তমান Process-এর স্টেট PCB-তে সংরক্ষণ করে এবং পরবর্তী Process-এর স্টেট PCB থেকে লোড করে। Context Switching OS-এর ওভারহেড।",
+      "tags": ["context-switch", "process", "scheduling"]
+    },
+    {
+      "question": "Process States কী কী?",
+      "answer": "Process States হলো: (1) New — প্রসেস তৈরি হচ্ছে। (2) Ready — এক্সিকিউশনের জন্য অপেক্ষমাণ। (3) Running — CPU-তে এক্সিকিউট হচ্ছে। (4) Waiting/Blocked — I/O বা ইভেন্টের জন্য অপেক্ষমাণ। (5) Terminated — এক্সিকিউশন সম্পন্ন।",
+      "tags": ["process-states", "basics", "pcb"]
+    },
+    {
+      "question": "Process State Diagram কীভাবে কাজ করে?",
+      "answer": "New → Ready (admit)। Ready → Running (dispatch)। Running → Terminated (exit)। Running → Waiting (I/O request)। Waiting → Ready (I/O completion)। Running → Ready (preemption/time interrupt)। এই 5-state model OS-এর মৌলিক ধারণা।",
+      "tags": ["process-states", "diagram", "basics"]
+    },
+    {
+      "question": "FCFS (First Come First Served) Scheduling Algorithm কী?",
+      "answer": "FCFS হলো সবচেয়ে সহজ CPU Scheduling Algorithm। যে প্রসেস আগে আসে, সে আগে CPU পায়। এটি Non-Preemptive। Convey Effect দেখা দেয় — ছোট প্রসেস বড় প্রসেসের পরে আসলে অপেক্ষার সময় বেশি হয়।",
+      "tags": ["fcfs", "scheduling", "algorithm"]
+    },
+    {
+      "question": "FCFS Scheduling Algorithm-এর গণনা কীভাবে করে?",
+      "answer": "Gantt Chart আঁকো। Burst Time অনুযায়ী প্রসেস ধারাবাহিকভাবে CPU পায়। Waiting Time = Start Time - Arrival Time। Turnaround Time = Completion Time - Arrival Time। Average Waiting Time = সমস্ত Waiting Time-এর গড়।",
+      "tags": ["fcfs", "scheduling", "calculation"]
+    },
+    {
+      "question": "SJF (Shortest Job First) Scheduling Algorithm কী?",
+      "answer": "SJF-তে সবচেয়ে ছোট Burst Time থাকা প্রসেস আগে CPU পায়। এটি Non-Preemptive। SJF সবচেয়ে কম Average Waiting Time দেয়, তাই এটিকে Optimal বলে। তবে Burst Time আগে থেকে জানা না-ও হতে পারে, যা বাস্তবে সম্ভব নয়।",
+      "tags": ["sjf", "scheduling", "algorithm"]
+    },
+    {
+      "question": "SRTF (Shortest Remaining Time First) Algorithm কী?",
+      "answer": "SRTF হলো SJF-এর Preemptive Version। নতুন প্রসেস এলে বর্তমান প্রসেসের বাকি সময়ের সাথে তুলনা করা হয়। বাকি সময় কম থাকলে CPU সুইচ হয়। এটি সবচেয়ে কম Average Waiting Time দেয়, কিন্তু Context Switching বেশি হয়।",
+      "tags": ["srtf", "scheduling", "preemptive"]
+    },
+    {
+      "question": "Round Robin (RR) Scheduling Algorithm কী?",
+      "answer": "Round Robin-এ প্রতিটি প্রসেসকে একটি নির্দিষ্ট Time Quantum বা Time Slice দেওয়া হয়। সময় শেষ হলে প্রসেস প্রেরিত হয় এবং পরবর্তী প্রসেসকে CPU দেওয়া হয়। এটি Preemptive। Time Quantum বেশি হলে FCFS-এর মতো, কম হলে বেশি Context Switching হয়।",
+      "tags": ["round-robin", "scheduling", "time-quantum"]
+    },
+    {
+      "question": "Round Robin-এ Time Quantum-এর প্রভাব কী?",
+      "answer": "Time Quantum বেশি হলে — কম Context Switching, কিন্তু Response Time বেশি, FCFS-এর মতো আচরণ। Time Quantum কম হলে — বেশি Context Switching (Overhead), কিন্তু Response Time কম। আদর্শ Time Quantum 10ms থেকে 100ms।",
+      "tags": ["round-robin", "time-quantum", "scheduling"]
+    },
+    {
+      "question": "Priority Scheduling Algorithm কী?",
+      "answer": "Priority Scheduling-এ প্রতিটি প্রসেসের একটি Priority থাকে। সর্বোচ্চ Priority-এর প্রসেস আগে CPU পায়। Preemptive বা Non-Preemptive — দুই ভারেই থাকে। Starvation সমস্যা হতে পারে — কম Priority-এর প্রসেস অপেক্ষায় থাকতে পারে। Aging দিয়ে এই সমস্যা দূর করা হয়।",
+      "tags": ["priority", "scheduling", "starvation"]
+    },
+    {
+      "question": "Multilevel Queue Scheduling কী?",
+      "answer": "Multilevel Queue-তে প্রসেসগুলোকে বিভিন্ন গ্রুপে ভাগ করা হয় — System Process, Interactive Process, Batch Process ইত্যাদি। প্রতিটি কিউয়ের নিজস্ব Scheduling Algorithm থাকে। কিউয়ের মধ্যে Fixed Priority Preemptive Scheduling বা Time Slice ব্যবহার করা হয়।",
+      "tags": ["multilevel-queue", "scheduling"]
+    },
+    {
+      "question": "Multilevel Feedback Queue Scheduling কী?",
+      "answer": "Multilevel Feedback Queue-তে প্রসেসকে এক কিউ থেকে অন্য কিউয়ে সরানো যায়। ছোট জব উচ্চ প্রাধিকারের কিউয়ে যায়, দীর্ঘ জব নিম্ন প্রাধিকারের কিউয়ে যায়। এটি সবচেয়ে ফ্লেক্সিবল ও কার্যকর Scheduling Algorithm।",
+      "tags": ["multilevel-feedback", "scheduling", "flexible"]
+    },
+    {
+      "question": "Process Synchronization কী?",
+      "answer": "Process Synchronization হলো বহু প্রসেসের মধ্যে ডেটা শেয়ারিং ও সমন্বয়ের নিশ্চিতকরণ। যখন একাধিক প্রসেস একই রিসোর্স ব্যবহার করে, তখন Race Condition এড়াতে Synchronization প্রয়োজন। এতে Mutex, Semaphore ইত্যাদি ব্যবহার করা হয়।",
+      "tags": ["synchronization", "basics", "process"]
+    },
+    {
+      "question": "Race Condition কী?",
+      "answer": "Race Condition হলো এমন একটি পরিস্থিতি যেখানে একাধিক প্রসেস একই ডেটায় একই সময়ে অ্যাক্সেস করলে ফলাফল নির্ভর করে কোন প্রসেস আগে Execute হয়েছে। এটি Bug তৈরি করতে পারে। Critical Section Problem-এর মাধ্যমে এটি সমাধান করা হয়।",
+      "tags": ["race-condition", "synchronization", "problem"]
+    },
+    {
+      "question": "Critical Section Problem কী?",
+      "answer": "Critical Section হলো সেই কোডের অংশ যেখানে শেয়ারড রিসোর্সে অ্যাক্সেস করা হয়। সমস্যাটি হলো — একই সময়ে একাধিক প্রসেস Critical Section-এ প্রবেশ করতে পারবে না। সমাধানের শর্ত: (1) Mutual Exclusion, (2) Progress, (3) Bounded Waiting।",
+      "tags": ["critical-section", "synchronization", "conditions"]
+    },
+    {
+      "question": "Mutex কী?",
+      "answer": "Mutex (Mutual Exclusion) হলো একটি Locking Mechanism যা শুধুমাত্র একটি প্রসেসকে Critical Section-এ প্রবেশ করতে দেয়। lock() ও unlock() অপারেশন থাকে। এটি Binary Semaphore-এর মতো, কিন্তু এটি Owner-based — যে প্রসেস Lock করেছে সে-ই Unlock করতে পারবে।",
+      "tags": ["mutex", "synchronization", "lock"]
+    },
+    {
+      "question": "Semaphore কী?",
+      "answer": "Semaphore হলো Tony Hoche আবিষ্কৃত একটি Synchronization Tool। এটি একটি Integer Variable যা wait() (P operation) ও signal() (V operation) দিয়ে পরিচালিত হয়। Binary Semaphore (0 বা 1) এবং Counting Semaphore (0 থেকে n) — দুই প্রকার।",
+      "tags": ["semaphore", "synchronization", "basics"]
+    },
+    {
+      "question": "Binary Semaphore ও Counting Semaphore-এর পার্থক্য কী?",
+      "answer": "Binary Semaphore-এর মান শুধু 0 বা 1। Mutex-এর মতো কাজ করে। Counting Semaphore-এর মান 0 থেকে n পর্যন্ত হতে পারে। এটি নির্দিষ্ট সংখ্যক প্রসেসের অ্যাক্সেস নিয়ন্ত্রণ করে। উদাহরণ: Connection Pool-এ 10টি Connection থাকলে Counting Semaphore = 10।",
+      "tags": ["semaphore", "binary", "counting"]
+    },
+    {
+      "question": "Semaphore-এর wait() ও signal() অপারেশন কী?",
+      "answer": "wait(S): S > 0 হলে S-- করো। S = 0 হলে Process ব্লক হয়। signal(S): ব্লক করা প্রসেস থাকলে একটি Wake Up করো, নাহলে S++ করো। wait()-কে P (Proberen - পরীক্ষা) এবং signal()-কে V (Verhogen - বৃদ্ধি) বলা হয়।",
+      "tags": ["semaphore", "wait", "signal", "operations"]
+    },
+    {
+      "question": "Producer-Consumer Problem কী?",
+      "answer": "Producer-Consumer Problem হলো ক্লাসিক Synchronization Problem। Producer বাফারে ডেটা তৈরি করে, Consumer বাফার থেকে ডেটা খাওয়া করে। সমস্যা: বাফার Full হলে Producer থামবে, Empty হলে Consumer থামবে। Semaphore ব্যবহার করে সমাধান করা হয়।",
+      "tags": ["producer-consumer", "synchronization", "classic-problem"]
+    },
+    {
+      "question": "Producer-Consumer Problem Semaphore দিয়ে কীভাবে সমাধান করে?",
+      "answer": "তিনটি Semaphore ব্যবহার করা হয়: mutex (Binary, 1) — Critical Section রক্ষা। empty (Counting, n) — খালি স্থান নির্দেশ। full (Counting, 0) — ভরা স্থান নির্দেশ। Producer: wait(empty), wait(mutex), produce, signal(mutex), signal(full)। Consumer: wait(full), wait(mutex), consume, signal(mutex), signal(empty)।",
+      "tags": ["producer-consumer", "semaphore", "solution"]
+    },
+    {
+      "question": "Dining Philosophers Problem কী?",
+      "answer": "5 জন দার্শনিক একটি গোল টেবিলে বসে। প্রত্যেকের মাঝে 1টি করি চামচ আছে। খেতে হলে দুইটি চামচ লাগে। সমস্যা: Deadlock ও Starvation হতে পারে। প্রত্যেকে একসাথে ডান চামচ তুললে Deadlock হয়।",
+      "tags": ["dining-philosophers", "synchronization", "classic-problem"]
+    },
+    {
+      "question": "Dining Philosophers Problem-এর সমাধান কী?",
+      "answer": "সমাধান: (1) Resource Hierarchy — চামচকে Number দাও, সবসময় কম নম্বরের চামচ আগে তোলো। (2) Arbitrator — একজন Waiter বা Monitor দিয়ে নিয়ন্ত্রণ করো। (3) Chandy/Misra Solution — মেসেজ পাঠিয়ে চামচ টেনে নেওয়া।",
+      "tags": ["dining-philosophers", "solution", "deadlock"]
+    },
+    {
+      "question": "Readers-Writers Problem কী?",
+      "answer": "Readers-Writers Problem-এ একাধিক Reader একই সময়ে ডেটা পড়তে পারে, কিন্তু Writer লেখার সময় কেউ পড়তে বা লিখতে পারবে না। প্রকারভেদ: (1) Readers Preference — Reader-দের বেশি অগ্রাধিকার। (2) Writers Preference — Writer-দের বেশি অগ্রাধিকার (Starvation এড়াতে)।",
+      "tags": ["readers-writers", "synchronization", "classic-problem"]
+    },
+    {
+      "question": "Deadlock কী?",
+      "answer": "Deadlock হলো এমন একটি পরিস্থিতি যেখানে দুই বা ততোধিক প্রসেস একে অপরের রিসোর্স অপেক্ষা করে অনন্তকাল ব্লক থাকে। কোনো প্রসেস অগ্রগতি করতে পারে না। Deadlock হলে OS-কে Deadlock শনাক্ত বা প্রতিরোধ করতে হয়।",
+      "tags": ["deadlock", "basics", "definition"]
+    },
+    {
+      "question": "Deadlock-এর 4টি Coffman Condition কী কী?",
+      "answer": "Deadlock ঘটতে 4টি শর্ত একসাথে পূরণ হতে হয়: (1) Mutual Exclusion — রিসোর্স শেয়ারযোগ্য নয়। (2) Hold and Wait — ধারণকারী অপেক্ষা করে। (3) No Preemption — রিসোর্স জোর করে নেওয়া যায় না। (4) Circular Wait — প্রসেসের চক্রাকার অপেক্ষা।",
+      "tags": ["deadlock", "coffman", "conditions"]
+    },
+    {
+      "question": "Deadlock Prevention কী?",
+      "answer": "Deadlock Prevention হলো Coffman Condition-এর একটি বা একাধিক শর্ত ভাঙার মাধ্যমে Deadlock এড়ানো। (1) Mutual Exclusion — শেয়ারযোগ্য রিসোর্স ব্যবহার। (2) Hold and Wait — সব রিসোর্স একসাথে নাও। (3) No Preemption — রিসোর্স ফিরিয়ে নাও। (4) Circular Wait — রিসোর্সের সংখ্যা নির্ধারণ করো।",
+      "tags": ["deadlock", "prevention"]
+    },
+    {
+      "question": "Deadlock Avoidance কী?",
+      "answer": "Deadlock Avoidance হলো প্রতিটি রিসোর্স বরাদ্দের আগে নিরাপত্তা পরীক্ষা করা। OS নিশ্চিত করে যে রিসোর্স বরাদ্দ করলে System Safe State-এ থাকবে। Banker's Algorithm এবং Resource Request Graph Algorithm ব্যবহার করা হয়।",
+      "tags": ["deadlock", "avoidance", "safety"]
+    },
+    {
+      "question": "Banker's Algorithm কী?",
+      "answer": "Banker's Algorithm Deadlock Avoidance-এর জন্য ব্যবহৃত হয়। এটি প্রতিটি রিসোর্ক বরাদ্দের আগে চেক করে — কি এই বরাদ্দ System-কে Safe State-এ রাখবে? Available, Maximum, Allocation, Need Matrix ব্যবহার করে Safety Algorithm চালায়। GATE CSE-তে এটি খুব বেশি জিজ্ঞাসা করা হয়।",
+      "tags": ["bankers-algorithm", "deadlock", "avoidance", "gate"]
+    },
+    {
+      "question": "Banker's Algorithm-এ Safety Algorithm কীভাবে কাজ করে?",
+      "answer": "Safety Algorithm: (1) Work = Available, Finish[i] = false। (2) এমন i খুঁজো যেখানে Finish[i] = false এবং Need[i] ≤ Work। (3) পাওয়া গেলে Work = Work + Allocation[i], Finish[i] = true। (4) সব Finish[i] = true হলে Safe State। নাহলে Unsafe State।",
+      "tags": ["bankers-algorithm", "safety", "deadlock"]
+    },
+    {
+      "question": "Deadlock Detection কী?",
+      "answer": "Deadlock Detection-এ OS System-এ Deadlock আছে কিনা শনাক্ত করে। Resource Allocation Graph বা Wait-for Graph ব্যবহার করে চক্র খুঁজে বের করা হয়। শনাক্ত হলে — Process ধ্বংস করো বা রিসোর্স ফিরিয়ে নাও (Preemption)।",
+      "tags": ["deadlock", "detection", "wait-for-graph"]
+    },
+    {
+      "question": "Memory Management কী?",
+      "answer": "Memory Management হলো OS-এর একটি কাজ যেটি Main Memory-তে প্রসেস ও ডেটা কীভাবে সংরক্ষিত ও অ্যাক্সেস করা হয় তা পরিচালনা করে। এতে মেমরি বরাদ্দ, মুক্তি, ডেটা প্রোটেকশন, ও Memory Utilization অন্তর্ভুক্ত।",
+      "tags": ["memory-management", "basics"]
+    },
+    {
+      "question": "Contiguous Allocation কী?",
+      "answer": "Contiguous Allocation-এ প্রতিটি প্রসেসকে একটি ধারাবাহিক মেমরি ব্লক দেওয়া হয়। সহজ কিন্তু Internal ও External Fragmentation হয়। Fixed Partitioning-এ সাইজ ফিক্সড, Variable Partitioning-এ সাইজ ডাইনামিক।",
+      "tags": ["contiguous", "memory", "allocation"]
+    },
+    {
+      "question": "Internal Fragmentation ও External Fragmentation কী?",
+      "answer": "Internal Fragmentation: বরাদ্দ করা মেমরির অংশ অব্যবহৃত থাকে (ব্লকের ভিতরে)। যেমন 4KB ব্লকে 1KB ব্যবহার হলে 3KB নষ্ট। External Fragmentation: মেমরি খালি আছে কিন্তু ধারাবাহিক নয়, তাই বড় প্রসেস বরাদ্দ করা যায় না।",
+      "tags": ["fragmentation", "memory", "internal", "external"]
+    },
+    {
+      "question": "Paging কী?",
+      "answer": "Paging-এ প্রতিটি প্রসেসের অ্যাড্রেস স্পেসকে ছোট ছোট Pages-এ এবং Main Memory-কে Frames-এ ভাগ করা হয়। Page ও Frame-এর সাইজ সমান। Logical Address = (Page Number, Offset)। Page Table দিয়ে Page কে Frame-এ Map করা হয়। External Fragmentation থাকে না।",
+      "tags": ["paging", "memory", "page-table"]
+    },
+    {
+      "question": "Paging-এ Logical Address কীভাবে Physical Address-এ রূপান্তরিত হয়?",
+      "answer": "Logical Address = (Page Number p, Offset d)। Page Table-এ p দিয়ে Frame Number f খুঁজে বের করো। Physical Address = (Frame Number f, Offset d)। f × Frame Size + d = Physical Address। GATE CSE-তে এই গণনা বারবার আসে।",
+      "tags": ["paging", "address-translation", "gate"]
+    },
+    {
+      "question": "Page Table কী?",
+      "answer": "Page Table হলো একটি Data Structure যা প্রতিটি Page Number-কে Frame Number-এ Map করে। প্রতিটি Entry-তে Frame Number ও বিভিন্ন Bits থাকে — Valid/Invalid Bit, Dirty Bit, Reference Bit, Protection Bits। Page Table-এর Base Address Register (PTBR) দিয়ে অ্যাক্সেস করা হয়।",
+      "tags": ["page-table", "paging", "basics"]
+    },
+    {
+      "question": "TLB (Translation Lookaside Buffer) কী?",
+      "answer": "TLB হলো Page Table-এর Cache। Memory-তে Page Table খুঁজে সময় লাগে, TLB-তে Page Number ও Frame Number-এর Mapping সংরক্ষিত থাকে। TLB Hit হলে সরাসরি Frame পাওয়া যায়, Miss হলে Page Table-এ খোঁজা হয়। TLB না থাকলে 2টি Memory Access লাগে, TLB থাকলে 1টি।",
+      "tags": ["tlb", "paging", "cache", "performance"]
+    },
+    {
+      "question": "TLB Miss হলে কী হয়?",
+      "answer": "TLB Miss হলে Page Table-এ খুঁজে Frame Number বের করতে হয়। একটি Memory Access বেশি লাগে। TLB-তে Entry যোগ করা হয়। Hardware TLB Miss-এ স্বয়ংক্রিয়, Software TLB Miss-এ OS Handler কল হয়। GATE CSE-তে TLB Hit Ratio দিয়ে Effective Access Time গণনা করা হয়।",
+      "tags": ["tlb", "miss", "paging", "gate"]
+    },
+    {
+      "question": "Segmentation কী?",
+      "answer": "Segmentation-এ প্রসেসের অ্যাড্রেস স্পেসকে বিভিন্ন অর্থবহ অংশে ভাগ করা হয় — Code Segment, Data Segment, Stack Segment। Logical Address = (Segment Number, Offset)। Segment Table-এ Base ও Limit থাকে। Internal Fragmentation নেই, কিন্তু External Fragmentation আছে।",
+      "tags": ["segmentation", "memory", "basics"]
+    },
+    {
+      "question": "Paging ও Segmentation-এর পার্থক্য কী?",
+      "answer": "Paging: ফিক্সড সাইজের Block, অর্থহীন, External Fragmentation নেই। Segmentation: ভ্যারিয়েবল সাইজের Block, অর্থবহ, External Fragmentation আছে। Paging-এ User কে মেমরি বিভাজন সম্পর্কে জানার প্রয়োজন নেই। Segmentation-এ Logical View বেশি।",
+      "tags": ["paging", "segmentation", "comparison"]
+    },
+    {
+      "question": "Virtual Memory কী?",
+      "answer": "Virtual Memory হলো এমন একটি Technique যেটি Logical Address Space-কে Physical Memory-র চেয়ে বড় করে। প্রতিটি প্রসেসের সম্পূর্ণ প্রোগ্রাম Main Memory-তে থাকার দরকার নেই। শুধুমাত্র Active Pages Main Memory-তে থাকে, বাকিগুলো Disk-এ।",
+      "tags": ["virtual-memory", "basics", "paging"]
+    },
+    {
+      "question": "Demand Paging কী?",
+      "answer": "Demand Paging-এ প্রোগ্রাম একসাথে লোড করা হয় না। যখন কোনো Page Access করা হয় এবং সেটি Memory-তে নেই, তখন Page Fault ঘটে এবং OS সেই Page-কে Disk থেকে Memory-তে আনে। Lazy Swapping — প্রয়োজন না হওয়া পর্যন্ত Page লোড করা হয় না।",
+      "tags": ["demand-paging", "virtual-memory", "page-fault"]
+    },
+    {
+      "question": "Page Fault কী এবং কীভাবে সমাধান হয়?",
+      "answer": "Page Fault তখন ঘটে যখন কোনো Page Reference করা হয় এবং সেটি Memory-তে নেই (Valid Bit = 0)। সমাধান: (1) Trap OS-তে। (2) Invalid Reference হলে Process Terminate। (3) Page Disk-এ আছে কিনা চেক। (4) Free Frame খুঁজে পাও। (5) Disk I/O দিয়ে Page Load। (6) Page Table Update। (7) প্রসেস Restart।",
+      "tags": ["page-fault", "virtual-memory", "demand-paging"]
+    },
+    {
+      "question": "Page Replacement Algorithm কী কী কী?",
+      "answer": "Page Replacement Algorithm: (1) FIFO (First In First Out) — সবচেয়ে পুরানো Page Replace করো। (2) LRU (Least Recently Used) — সবচেয়ে কম ব্যবহৃত Page Replace করো। (3) Optimal — ভবিষ্যতে সবচেয়ে দেরিতে ব্যবহৃত Page Replace করো (বাস্তবে সম্ভব নয়)। (4) Clock (Second Chance) — LRU-এর Approximation।",
+      "tags": ["page-replacement", "virtual-memory", "algorithms"]
+    },
+    {
+      "question": "FIFO Page Replacement Algorithm কী?",
+      "answer": "FIFO-তে সবচেয়ে পুরানো Page-কে Replace করা হয়। সবচেয়ে সহজ Algorithm। কিন্তু Belady's Anomaly দেখা দিতে পারে — Frame বাড়ালেও Page Fault বাড়তে পারে। GATE CSE-তে FIFO দিয়ে Page Fault Count গণনা করা হয়।",
+      "tags": ["fifo", "page-replacement", "beladys-anomaly"]
+    },
+    {
+      "question": "LRU (Least Recently Used) Algorithm কী?",
+      "answer": "LRU-তে সবচেয়ে কম সময় আগে ব্যবহৃত Page-কে Replace করা হয়। Optimal-এর কাছাকাছি কার্যকরতা। Implementation: Stack বা Counter ব্যবহার করে। Belady's Anomaly হয় না। GATE CSE-তে LRU অনেক বেশি জিজ্ঞাসা করা হয়।",
+      "tags": ["lru", "page-replacement", "optimal"]
+    },
+    {
+      "question": "Optimal Page Replacement Algorithm কী?",
+      "answer": "Optimal-এ ভবিষ্যতে সবচেয়ে দেরিতে ব্যবহৃত Page-কে Replace করা হয়। এটি সবচেয়ে কম Page Fault দেয়। তবে বাস্তবে Implementation সম্ভব নয় কারণ ভবিষ্যৎ Reference আগে থেকে জানা যায় না। Benchmark হিসেবে ব্যবহৃত হয়।",
+      "tags": ["optimal", "page-replacement", "benchmark"]
+    },
+    {
+      "question": "Belady's Anomaly কী?",
+      "answer": "Belady's Anomaly হলো FIFO Page Replacement Algorithm-এর একটি সমস্যা। Frame সংখ্যা বাড়ালেও Page Fault সংখ্যা বাড়তে পারে। এটি FIFO-তে ঘটে। LRU ও Optimal Algorithm-এ এই Anomaly হয় না। Stack Algorithm-এ Belady's Anomaly হয় না।",
+      "tags": ["beladys-anomaly", "fifo", "page-replacement"]
+    },
+    {
+      "question": "Effective Access Time (EAT) কী?",
+      "answer": "EAT = (1 - p) × Memory Access Time + p × Page Fault Service Time। যেখানে p = Page Fault Rate। Memory Access Time = 100ns, Page Fault Service Time = 8ms, p = 0.001 হলে EAT = 8.1μs। TLB থাকলে EAT = (1 - p) × (TLB Access + Memory Access) + p × Page Fault Time।",
+      "tags": ["eat", "virtual-memory", "performance", "calculation"]
+    },
+    {
+      "question": "Disk Scheduling Algorithm কী কী?",
+      "answer": "Disk Scheduling Algorithm: (1) FCFS — কোনো অপ্টিমাইজেশন নেই। (2) SSTF (Shortest Seek Time First) — কাছের Cylinder-এ যাওয়া। (3) SCAN (Elevator) — একদিকে যাওয়া, পরে উল্টোদিকে। (4) C-SCAN — একদিকে যাওয়া, শেষে শুরুতে ফেরা। (5) LOOK — SCAN-এর মতো কিন্তু সীমাতে না গিয়ে উল্টো করে।",
+      "tags": ["disk-scheduling", "algorithms", "basics"]
+    },
+    {
+      "question": "SCAN Disk Scheduling Algorithm কী?",
+      "answer": "SCAN Algorithm-এ Head একটি দিকে চলে পুরো Track পর্যন্ত, তারপর উল্টো দিকে চলে। Elevator Algorithmও বলা হয়। Starvation হয় না। কিন্তু দুইদিকে যাওয়ার সময় সমান নয়। C-SCAN-এ শুধু একদিকে সার্ভিস দেয়।",
+      "tags": ["scan", "disk-scheduling", "elevator"]
+    },
+    {
+      "question": "Disk Scheduling-এ Seek Time, Rotational Latency, Transfer Time কী?",
+      "answer": "Seek Time: Head সঠিক Track-এ যাওয়ার সময় (সবচেয়ে বেশি সময় লাগে)। Rotational Latency: সঠিক Sector-এ Head পৌঁছানোর জন্য Disk ঘোরার সময়। Transfer Time: ডেটা পড়া বা লেখার সময়। Total Disk Access Time = Seek Time + Rotational Latency + Transfer Time।",
+      "tags": ["disk", "seek-time", "rotational-latency", "performance"]
+    },
+    {
+      "question": "File System কী?",
+      "answer": "File System হলো OS-এর একটি অংশ যা ফাইলকে সংগঠিত, সংরক্ষণ ও অ্যাক্সেসযোগ্য করে। এটি FCB (File Control Block) ব্যবহার করে ফাইল মেটাডেটা পরিচালনা করে। File Allocation Methods: Contiguous, Linked, Indexed। উদাহরণ: NTFS, FAT32, ext4।",
+      "tags": ["file-system", "basics", "storage"]
+    },
+    {
+      "question": "IPC (Inter-Process Communication) কী?",
+      "answer": "IPC হলো এমন কৌশল যার মাধ্যমে দুই বা ততোধিক প্রসেস পরস্পরের সাথে তথ্য বিনিময় করে। প্রকারভেদ: (1) Shared Memory — সরাসরি মেমরি শেয়ার। (2) Message Passing — মেসেজ পাঠানো। (3) Pipes — একদিকে Data Flow। (4) Sockets — নেটওয়ার্কের মাধ্যমে। (5) Signals — সিগনাল পাঠানো।",
+      "tags": ["ipc", "process", "communication"]
+    },
+    {
+      "question": "Shared Memory ও Message Passing-এর পার্থক্য কী?",
+      "answer": "Shared Memory-তে প্রসেসগুলো একটি Common Memory Area-তে সরাসরি অ্যাক্সেস করে। দ্রুত কিন্তু Synchronization নিজেই করতে হয়। Message Passing-তে Kernel-এর মাধ্যমে মেসেজ পাঠানো হয়। ধীর কিন্তু Synchronization সমস্যা কম। Network Communication-এ Message Passing বেশি ব্যবহৃত।",
+      "tags": ["ipc", "shared-memory", "message-passing"]
+    },
+    {
+      "question": "Thread Synchronization-এর প্রকারভেগ কী কী?",
+      "answer": "Thread Synchronization: (1) Mutex — একটি Thread-কে Lock দেয়। (2) Semaphore — একাধিক Thread-কে নিয়ন্ত্রণ করে। (3) Condition Variable — নির্দিষ্ট শর্ত পূরণ হওয়া পর্যন্ত অপেক্ষা। (4) Spinlock — Busy Waiting করে Lock অপেক্ষা করে। (5) Barrier — সব Thread একই Point-এ পৌঁছানো পর্যন্ত অপেক্ষা।",
+      "tags": ["thread-synchronization", "mutex", "semaphore"]
+    },
+    {
+      "question": "Starvation ও Deadlock-এর পার্থক্য কী?",
+      "answer": "Deadlock-এ সব প্রসেস পরস্পর অপেক্ষা করে অনন্তকাল ব্লক থাকে, কেউ অগ্রগতি করতে পারে না। Starvation-এ একটি প্রসেস অনির্দিষ্টকাল অপেক্ষা করে কারণ অন্য প্রসেসগুলো সবসময় অগ্রাধিকার পাচ্ছে। Deadlock হলে সব ব্লক, Starvation-এ একটি বাদ পড়ে।",
+      "tags": ["starvation", "deadlock", "comparison"]
+    },
+    {
+      "question": "Aging কী?",
+      "answer": "Aging হলো Starvation সমস্যা সমাধানের একটি কৌশল। সময়ের সাথে প্রসেসের Priority ধীরে ধীরে বাড়ানো হয়। যত বেশি সময় অপেক্ষা করবে, Priority তত বাড়বে। Priority Scheduling Algorithm-এ Starvation এড়াতে Aging ব্যবহার করা হয়।",
+      "tags": ["aging", "priority", "starvation"]
+    },
+    {
+      "question": "Thrashing কী?",
+      "answer": "Thrashing হলো এমন পরিস্থিতি যেখানে Process নিজের Page-গুলো ধারাবাহিকভাবে Swap করে। CPU Utilization হঠাৎ কমে যায়। কারণ: প্রতিটি Process-এর জন্য পর্যাপ্ত Frame নেই। Working Set Model বা Page Fault Frequency (PFF) দিয়ে Thrashing নিয়ন্ত্রণ করা হয়।",
+      "tags": ["thrashing", "virtual-memory", "performance"]
+    },
+    {
+      "question": "Spooling কী?",
+      "answer": "Spooling (Simultaneous Peripheral Operations Online) হলো একটি Technique যেটি I/O Device ও CPU-এর মধ্যে Buffering প্রদান করে। যেমন Printer Spooling — একাধিক User একই সময়ে Print করতে পারে। Disk-এ Buffer তৈরি হয়, Device ধীরে ধীরে Print করে।",
+      "tags": ["spooling", "io", "buffering"]
+    },
+    {
+      "question": "Buffering ও Caching-এর পার্থক্য কী?",
+      "answer": "Buffering: Data সাময়িকভাবে সংরক্ষণ করা হয় দুইটি ডিভাইসের গতি মিলিয়ে। উদাহরণ: Printer Buffer। Caching: Frequently Used Data-কে দ্রুত অ্যাক্সেসযোগ্য জায়গায় রাখা হয়। উদাহরণ: TLB, CPU Cache। Buffering Data সরাসরি ব্যবহার করে, Caching Copy রাখে।",
+      "tags": ["buffering", "caching", "io", "comparison"]
+    },
+    {
+      "question": "Boot Process কীভাবে কাজ করে?",
+      "answer": "Computer চালু হলে: (1) BIOS/UEFI POST (Power-On Self Test) চালায়। (2) Bootloader (GRUB/MBR) খুঁজে বের করে। (3) Bootloader OS Kernel-কে Memory-তে লোড করে। (4) Kernel Initialize হয়। (5) Init Process (PID 1) শুরু হয়। (6) Login Prompt দেখায়।",
+      "tags": ["boot", "kernel", "bios", "basics"]
+    },
+    {
+      "question": "System Call-এর প্রকারভেগ কী কী?",
+      "answer": "System Call-এর প্রকারভেগ: (1) Process Control — fork(), exec(), exit(), wait()। (2) File Management — open(), read(), write(), close()। (3) Device Management — ioctl(), read(), write()। (4) Information Maintenance — getpid(), time()। (5) Communication — pipe(), shmget(), mmap()। (6) Protection — chmod(), chown()।",
+      "tags": ["system-call", "types", "os"]
+    },
+    {
+      "question": "fork() System Call কী?",
+      "answer": "fork() একটি নতুন Child Process তৈরি করে যেটি Parent Process-এর সম্পূর্ণ Copy। Parent-এ fork() Child-এর PID return করে, Child-এ 0 return করে। fork() একবার কল করলে দুটি Process হয়। exec() System Call দিয়ে Child Process-এ নতুন প্রোগ্রাম লোড করা যায়।",
+      "tags": ["fork", "system-call", "process"]
+    },
+    {
+      "question": "Process Communication এর IPC Mechanism কী কী?",
+      "answer": "IPC Mechanism: (1) Pipes — Unidirectional, Parent-Child Process-এর মধ্যে। (2) Named Pipes (FIFO) — ভিন্ন Process-এর মধ্যেও কাজ করে। (3) Message Queues — Structured Message Exchange। (4) Shared Memory — সবচেয়ে দ্রুত। (5) Sockets — Network Communication। (6) Signals — Asynchronous Notification।",
+      "tags": ["ipc", "mechanisms", "process"]
+    },
+    {
+      "question": "Operating System-এ Memory Protection কী?",
+      "answer": "Memory Protection নিশ্চিত করে যে কোনো প্রসেস অন্য প্রসেসের মেমরিতে অ্যাক্সেস করতে পারবে না। Base Register ও Limit Register ব্যবহার করে। Base = সূচনা অ্যাড্রেস, Limit = রেঞ্জ। Logical Address ≥ Base এবং Logical Address < Base + Limit হলে Valid। নাহলে Trap (Segmentation Fault)।",
+      "tags": ["memory-protection", "basics", "security"]
+    },
+    {
+      "question": "Real-Time Operating System (RTOS) কী?",
+      "answer": "RTOS হলো এমন OS যেটি নির্দিষ্ট সময়ের মধ্যে Response প্রদান করে। Hard Real-Time: সময় শেষ হলে Catastrophic Failure (যেমন Airbag System)। Soft Real-Time: সময় শেষ হলে Quality কমে (যেমন Video Streaming)। উদাহরণ: VxWorks, FreeRTOS, RTLinux।",
+      "tags": ["rtos", "real-time", "types"]
+    },
+    {
+      "question": "Multitasking ও Multiprocessing-এর পার্থক্য কী?",
+      "answer": "Multitasking: একটি CPU-তে একাধিক Process সময়ভিত্তিকভাবে চলে (Time-Sharing)। Multiprocessing: একাধিক CPU/Processor একসাথে কাজ করে। Multithreading: একটি Process-এ একাধিক Thread সমান্তরালভাবে চলে। Multicore Processor-এ সবই সম্ভব।",
+      "tags": ["multitasking", "multiprocessing", "comparison"]
+    },
+    {
+      "question": "Context Switch-এর ওভারহেড কী?",
+      "answer": "Context Switching-এ: (1) বর্তমান Process-এর State Save করতে হয়। (2) PCB Update করতে হয়। (3) নতুন Process-এর State Load করতে হয়। (4) TLB Flush হতে পারে (TLB Miss বাড়ে)। (5) Cache Pollution হতে পারে। সাধারণত 1-1000 μs সময় লাগে। বেশি Context Switch = কম Performance।",
+      "tags": ["context-switch", "overhead", "performance"]
+    },
+    {
+      "question": "Paging-এ Multiple Level Page Table কী এবং কেন প্রয়োজন?",
+      "answer": "সরল Page Table খুব বড় হতে পারে (যেমন 32-bit Addressing-এ 4MB)। Multiple Level Page Table-এ প্রধান Page Table-এ Entry তৈরি করা হয় শুধুমাত্র ব্যবহৃত অংশের জন্য। 2-Level Page Table-এ Outer Page Table → Inner Page Table → Frame। Memory সাশ্রয় হয়।",
+      "tags": ["page-table", "multi-level", "paging"]
+    },
+    {
+      "question": "Inverted Page Table কী?",
+      "answer": "Inverted Page Table-এ প্রতিটি Frame-এর জন্য একটি Entry থাকে (প্রসেসের জন্য নয়)। Page Number দিয়ে Search করতে হয়। Hash Table ব্যবহার করে Quick Lookup করা হয়। Memory কম লাগে কিন্তু Search Time বেশি। GATE CSE-তে এটি জিজ্ঞাসা করা হয়।",
+      "tags": ["inverted-page-table", "paging", "memory"]
+    },
+    {
+      "question": "Dirty Bit কী?",
+      "answer": "Dirty Bit Page Table-এর একটি Entry-তে থাকে। যখন কোনো Page-এ Write করা হয়, তখন Dirty Bit = 1 হয়। Page Replacement-এ Dirty Page-কে Disk-এ Swap Out করতে হয় (Write Back)। Clean Page-কে সরাসরি Replace করা যায়। Dirty Bit লেখার I/O কমাতে সাহায্য করে।",
+      "tags": ["dirty-bit", "paging", "page-replacement"]
+    },
+    {
+      "question": "Memory-Mapped I/O কী?",
+      "answer": "Memory-Mapped I/O-তে I/O Device-কে Main Memory-র অ্যাড্রেস স্পেসে Map করা হয়। CPU একই অপারেশন দিয়ে Memory ও I/O Device-তে অ্যাক্সেস করে। Port-Mapped I/O-তে আলাদা I/O Instructions থাকে। Memory-Mapped I/O বেশি ফ্লেক্সিবল।",
+      "tags": ["memory-mapped-io", "io", "hardware"]
+    }
+  ]
+}

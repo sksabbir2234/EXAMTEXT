@@ -1,0 +1,493 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Digital Logic — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Digital Logic-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Number System কী?",
+      "answer": "Number System হলো সংখ্যা প্রকাশের একটি পদ্ধতি। প্রধান প্রকারভেদ: (1) Decimal (10), (2) Binary (2), (3) Octal (8), (4) Hexadecimal (16)। কম্পিউটার Binary number system ব্যবহার করে।",
+      "tags": ["number-system", "basics"]
+    },
+    {
+      "question": "Binary to Decimal conversion কীভাবে করে?",
+      "answer": "প্রতিটি bit-র মান × 2^position (ডান থেকে বামে, position 0 থেকে শুরু) সমষ্টি করে। উদাহরণ: (1101)₂ = 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8+4+0+1 = (13)₁₀।",
+      "tags": ["number-system", "binary", "conversion"]
+    },
+    {
+      "question": "Decimal to Binary conversion কীভাবে করে?",
+      "answer": "সংখ্যাকে 2 দিয়ে ভাগ করো, remainder নেও, ভাগফলকে আবার 2 দিয়ে ভাগ করো। নিচ থেকে উপরে remainder পড়লেই binary পাওয়া যায়। উদাহরণ: 13 ÷ 2 = 6 r 1, 6 ÷ 2 = 3 r 0, 3 ÷ 2 = 1 r 1, 1 ÷ 2 = 0 r 1 → (1101)₂।",
+      "tags": ["number-system", "binary", "conversion"]
+    },
+    {
+      "question": "Binary to Hexadecimal conversion কীভাবে করে?",
+      "answer": "ডান থেকে বামে 4 bit করে ভাগ করো এবং প্রতিটি group-কে hexadecimal digit-এ রূপান্তর করো। 1010 = A, 1011 = B, 1100 = C, 1101 = D, 1110 = E, 1111 = F। উদাহরণ: (11010111)₂ = D7₁₆।",
+      "tags": ["number-system", "hexadecimal", "conversion"]
+    },
+    {
+      "question": "Binary to Octal conversion কীভাবে করে?",
+      "answer": "ডান থেকে বামে 3 bit করে ভাগ করো এবং প্রতিটি group-কে octal digit-এ রূপান্তর করো। উদাহরণ: (11010111)₂ = 327₈। (110)₂ = 6₈, (101)₂ = 5₈, (111)₂ = 7₈।",
+      "tags": ["number-system", "octal", "conversion"]
+    },
+    {
+      "question": "1's Complement ও 2's Complement কী?",
+      "answer": "1's Complement: প্রতিটি bit উল্টে দাও (0→1, 1→0)। 2's Complement: 1's Complement + 1। 2's Complement negative number representation-এ ব্যবহৃত হয়। এটি সবচেয়ে জনপ্রিয় signed integer representation।",
+      "tags": ["complement", "binary", "representation"]
+    },
+    {
+      "question": "2's Complement-এ 8-bit signed number-এর range কত?",
+      "answer": "n-bit 2's Complement-এ range: -2^(n-1) to 2^(n-1)-1। 8-bit হলে: -128 to +127। 00000000 = 0, 01111111 = +127, 10000000 = -128, 11111111 = -1।",
+      "tags": ["complement", "signed-number", "range"]
+    },
+    {
+      "question": "2's Complement arithmetic-এ 5 + (-3) = ?",
+      "answer": "5 = 00000101, -3 = 11111101 (2's comp)। যোগ: 00000101 + 11111101 = 100000010 (9 bit)। শেষের carry বাদ দিলে: 00000010 = 2। সুতরাং 5 + (-3) = 2।",
+      "tags": ["complement", "arithmetic"]
+    },
+    {
+      "question": "IEEE 754 floating point representation কী?",
+      "answer": "IEEE 754 হলো floating point number representation standard। Single Precision (32-bit): 1 bit sign + 8 bit exponent + 23 bit mantissa। Double Precision (64-bit): 1 bit sign + 11 bit exponent + 52 bit mantissa।",
+      "tags": ["ieee-754", "floating-point"]
+    },
+    {
+      "question": "IEEE 754 Single Precision-এ exponent bias কেন ব্যবহৃত হয়?",
+      "answer": "Exponent bias ব্যবহৃত হয় negative exponent-কে unsigned হিসেবে সংরক্ষণ করতে। Single Precision-এ bias = 127। Actual exponent = stored exponent - 127। এতে exponent comparison সহজ হয়।",
+      "tags": ["ieee-754", "exponent", "bias"]
+    },
+    {
+      "question": "IEEE 754-তে -6.625 কীভাবে প্রকাশ করে?",
+      "answer": "6.625 = 110.101₂ = 1.10101 × 2²। Sign = 1 (negative)। Exponent = 2 + 127 = 129 = 10000001₂। Mantissa = 10101000000000000000000₂। Binary: 1 10000001 10101000000000000000000।",
+      "tags": ["ieee-754", "representation"]
+    },
+    {
+      "question": "Boolean Algebra কী?",
+      "answer": "Boolean Algebra হলো binary variables ও logical operations-এর গণিত। George Boole প্রতিষ্ঠিত। মূল অপারেশন: AND, OR, NOT। Digital circuit design-এর ভিত্তি। Variable দুই মান নিতে পারে: 0 বা 1।",
+      "tags": ["boolean-algebra", "basics"]
+    },
+    {
+      "question": "AND Gate কী?",
+      "answer": "AND Gate হলো এমন logic gate যেখানে সব input 1 হলেই output 1 হয়। Truth Table: 0 AND 0 = 0, 0 AND 1 = 0, 1 AND 0 = 0, 1 AND 1 = 1। Boolean expression: Y = A · B।",
+      "tags": ["logic-gate", "and-gate"]
+    },
+    {
+      "question": "OR Gate কী?",
+      "answer": "OR Gate হলো এমন logic gate যেখানে যেকোনো একটি input 1 হলেই output 1 হয়। Truth Table: 0 OR 0 = 0, 0 OR 1 = 1, 1 OR 0 = 1, 1 OR 1 = 1। Boolean expression: Y = A + B।",
+      "tags": ["logic-gate", "or-gate"]
+    },
+    {
+      "question": "NOT Gate কী?",
+      "answer": "NOT Gate (Inverter) হলো এমন logic gate যেটি input-কে উল্টে দেয়। 0 → 1, 1 → 0। Boolean expression: Y = A' বা Y = Ā। এটি single-input gate।",
+      "tags": ["logic-gate", "not-gate"]
+    },
+    {
+      "question": "NAND Gate কী এবং এর গুরুত্ব কী?",
+      "answer": "NAND Gate = NOT + AND। Output = (A · B)'। Universal Gate — দিয়ে সব ধরনের gate তৈরি করা যায় (AND, OR, NOT, XOR, XNOR)। Practical-তে NAND gate সবচেয়ে বেশি ব্যবহৃত হয়।",
+      "tags": ["logic-gate", "nand-gate", "universal"]
+    },
+    {
+      "question": "NOR Gate কী এবং এর গুরুত্ব কী?",
+      "answer": "NOR Gate = NOT + OR। Output = (A + B)'। এটিও Universal Gate। NOR gate দিয়েও সব gate তৈরি করা যায়। SR Latch NOR gate দিয়ে তৈরি করা হয়।",
+      "tags": ["logic-gate", "nor-gate", "universal"]
+    },
+    {
+      "question": "XOR Gate কী?",
+      "answer": "XOR (Exclusive OR) Gate: দুটি input ভিন্ন হলে output 1, একই হলে output 0। Truth Table: 0 XOR 0 = 0, 0 XOR 1 = 1, 1 XOR 0 = 1, 1 XOR 1 = 0। Expression: Y = A ⊕ B = A'B + AB'। Parity checking, adder-এ ব্যবহৃত হয়।",
+      "tags": ["logic-gate", "xor-gate"]
+    },
+    {
+      "question": "XNOR Gate কী?",
+      "answer": "XNOR Gate = XOR + NOT। দুটি input একই হলে output 1, ভিন্ন হলে 0। Expression: Y = A ⊙ B = AB + A'B'। XNOR gate comparator হিসেবে কাজ করে।",
+      "tags": ["logic-gate", "xnor-gate"]
+    },
+    {
+      "question": "NAND gate দিয়ে NOT gate কীভাবে তৈরি করে?",
+      "answer": "NAND gate-এর দুটি input একই সিগনালে যুক্ত করো (A ও A)। Y = (A · A)' = A'। এটিই NOT operation। প্রতিটি NAND gate-কে inverter হিসেবে ব্যবহার করা যায়।",
+      "tags": ["logic-gate", "nand-gate", "universal"]
+    },
+    {
+      "question": "De Morgan's Theorem কী?",
+      "answer": "De Morgan's Theorem: (1) (A · B)' = A' + B' (NAND = bubbled OR)। (2) (A + B)' = A' · B' (NOR = bubbled AND)। Logic circuit simplification-এ এই সূত্র অত্যন্ত গুরুত্বপূর্ণ।",
+      "tags": ["boolean-algebra", "de-morgan"]
+    },
+    {
+      "question": "Boolean Algebra-র মূল সূত্রগুলো কী কী?",
+      "answer": "মূল সূত্র: (1) Commutative: A+B = B+A, A·B = B·A। (2) Associative: (A+B)+C = A+(B+C)। (3) Distributive: A+(B·C) = (A+B)·(A+C)। (4) Identity: A+0 = A, A·1 = A। (5) Complement: A+A' = 1, A·A' = 0।",
+      "tags": ["boolean-algebra", "theorems"]
+    },
+    {
+      "question": "Sum of Products (SOP) কী?",
+      "answer": "SOP হলো product terms (minterms)-এর sum। প্রতিটি minterm সব variable-কে AND করে তৈরি হয়। উদাহরণ: F(A,B) = A'B + AB'। Truth Table-তে output 1 যে row-তে আছে সেগুলো থেকে minterms নেওয়া হয়।",
+      "tags": ["sop", "boolean-algebra"]
+    },
+    {
+      "question": "Product of Sums (POS) কী?",
+      "answer": "POS হলো sum terms (maxterms)-এর product। প্রতিটি maxterm সব variable-কে OR করে তৈরি হয়। উদাহরণ: F(A,B) = (A+B)·(A'+B')। Truth Table-তে output 0 যে row-তে আছে সেগুলো থেকে maxterms নেওয়া হয়।",
+      "tags": ["pos", "boolean-algebra"]
+    },
+    {
+      "question": "Minterm ও Maxterm-এর পার্থক্য কী?",
+      "answer": "Minterm: সব variable AND-এ যুক্ত (sum term)। Maxterm: সব variable OR-এ যুক্ত (product term)। n variables-তে 2^n টি minterm ও 2^n টি maxterm থাকে। Minterm output 1, Maxterm output 0-কে represent করে।",
+      "tags": ["minterm", "maxterm"]
+    },
+    {
+      "question": "Karnaugh Map (K-Map) কী?",
+      "answer": "K-Map হলো boolean expression simplify করার graphical method। 2D grid যেখানে cell-গুলো adjacent (Gray code order)। Grouping 1's (SOP) বা 0's (POS) করে simplified expression পাওয়া যায়।",
+      "tags": ["k-map", "simplification"]
+    },
+    {
+      "question": "3-variable K-Map কীভাবে কাজ করে?",
+      "answer": "3-variable K-Map: 8 cell (2×4 বা 4×2)। Variables A, B ও C। Adjacent cells 1 bit পার্থক্য রাখে। 2^n cells group করা যায় (2, 4, 8)। যত বড় group, তত simplified expression।",
+      "tags": ["k-map", "3-variable"]
+    },
+    {
+      "question": "4-variable K-Map কীভাবে কাজ করে?",
+      "answer": "4-variable K-Map: 16 cells (4×4)। Variables A, B, C, D। Row-এ AB, Column-এ CD (Gray code)। Adjacent row/column-ও wrap-around (toroidal)। 2^n cells group করে minimal SOP/POS পাওয়া যায়।",
+      "tags": ["k-map", "4-variable"]
+    },
+    {
+      "question": "K-Map-এ Don't Care Condition কী?",
+      "answer": "Don't Care (X) condition হলো সেসব input combination যেগুলো কখনো occur করে না বা output-এ কোনো প্রভাব ফেলে না। K-Map-এ X-কে 1 বা 0 হিসেবে ব্যবহার করে group বড় করা যায় যাতে expression আরো simplify হয়।",
+      "tags": ["k-map", "dont-care"]
+    },
+    {
+      "question": "K-Map-এ group-এর নিয়ম কী কী?",
+      "answer": "নিয়ম: (1) Group 2^n cells (1, 2, 4, 8...) হতে হবে। (2) Group rectangular হতে হবে। (3) Adjacent cells-ই group করা যায় (wrap-around allowed)। (4) সব 1's cover করতে হবে। (5) যত বড় group, তত ভালো।",
+      "tags": ["k-map", "grouping"]
+    },
+    {
+      "question": "Half Adder কী?",
+      "answer": "Half Adder হলো এমন circuit যা দুটি single bit যোগ করে। দুটি output: Sum (S = A ⊕ B) ও Carry (C = A · B)। এতে carry-in থাকে না, তাই carry propagation-এ ব্যবহার করা যায় না।",
+      "tags": ["half-adder", "combinational"]
+    },
+    {
+      "question": "Full Adder কী?",
+      "answer": "Full Adder হলো তিনটি bit (A, B, Carry-in) যোগ করার circuit। Sum = A ⊕ B ⊕ Cin। Carry-out = AB + BCin + ACin। দুটি Half Adder ও একটি OR gate দিয়ে তৈরি করা যায়। Multi-bit addition-এ ব্যবহৃত হয়।",
+      "tags": ["full-adder", "combinational"]
+    },
+    {
+      "question": "Half Adder ও Full Adder-এর পার্থক্য কী?",
+      "answer": "Half Adder: 2 input (A, B), 1 carry output, কোনো carry input নেই। Full Adder: 3 input (A, B, Cin), 1 carry output, carry input আছে। Half Adder শুধুমাত্র LSB position-এ ব্যবহৃত হয়। Full Adder carry propagation support করে।",
+      "tags": ["half-adder", "full-adder", "comparison"]
+    },
+    {
+      "question": "Multiplexer (MUX) কী?",
+      "answer": "Multiplexer হলো data selector — একাধিক input-এর মধ্যে একটিকে select করে output-এ পাঠায়। 2^n inputs থাকলে n select lines লাগে। উদাহরণ: 4:1 MUX — 4 inputs, 2 select lines, 1 output। Communication, memory addressing-এ ব্যবহৃত হয়।",
+      "tags": ["multiplexer", "combinational"]
+    },
+    {
+      "question": "Demultiplexer (DEMUX) কী?",
+      "answer": "Demultiplexer হলো MUX-র বিপরীত। একটি input-কে একাধিক output-এর মধ্যে একটিতে পাঠায়। n select lines দিয়ে 2^n outputs নির্বাচিত হয়। Data distribution, serial-to-parallel conversion-এ ব্যবহৃত হয়।",
+      "tags": ["demultiplexer", "combinational"]
+    },
+    {
+      "question": "Encoder কী?",
+      "answer": "Encoder হলো এমন circuit যেটি n input-কে log₂(n) output-এ রূপান্তর করে। উদাহরণ: 8:3 Encoder — 8 inputs, 3 outputs (binary code)। Priority Encoder-এ সবচেয়ে উচ্চ priority input-এর code output হয়।",
+      "tags": ["encoder", "combinational"]
+    },
+    {
+      "question": "Decoder কী?",
+      "answer": "Decoder হলো Encoder-র বিপরীত। n input-কে 2^n output-এ রূপান্তর করে। উদাহরণ: 3:8 Decoder — 3 inputs, 8 outputs (একটিমাত্র active)। Memory chip select, instruction decoding-এ ব্যবহৃত হয়।",
+      "tags": ["decoder", "combinational"]
+    },
+    {
+      "question": "Flip-Flop কী?",
+      "answer": "Flip-Flop হলো sequential circuit-এর মৌলিক building block। এটি একটি bit-র state সংরক্ষণ করে (bistable multivibrator)। Clock signal-এর উপর নির্ভর করে state পরিবর্তন করে। SR, JK, D, T — প্রধান প্রকার।",
+      "tags": ["flip-flop", "sequential"]
+    },
+    {
+      "question": "SR Flip-Flop কী?",
+      "answer": "SR (Set-Reset) Flip-Flop: S=1 → Set (Q=1), R=1 → Reset (Q=0), S=R=0 → No Change, S=R=1 → Invalid/Forbidden state। NOR gate দিয়ে SR Latch তৈরি করা যায়। এটি clock-independent।",
+      "tags": ["sr-flip-flop", "sequential"]
+    },
+    {
+      "question": "JK Flip-Flop কী এবং SR Flip-Flop-র থেকে ভালো কেন?",
+      "answer": "JK Flip-Flop: J=K=1 → Toggle (Q' = Q)। SR Flip-Flop-এর forbidden state (S=R=1) এড়িয়ে JK Flip-Flop toggle functionality যোগ করে। সবচেয়ে বেশি ব্যবহৃত flip-flop। Counters-এ ব্যবহৃত হয়।",
+      "tags": ["jk-flip-flop", "sequential"]
+    },
+    {
+      "question": "D Flip-Flop কী?",
+      "answer": "D (Data/Delay) Flip-Flop: Output Q, input D-কে follow করে clock edge-তে। Q(t+1) = D। এতে invalid state নেই। Data storage, shift registers-এ ব্যবহৃত হয়। সবচেয়ে সাধারণ flip-flop।",
+      "tags": ["d-flip-flop", "sequential"]
+    },
+    {
+      "question": "T Flip-Flop কী?",
+      "answer": "T (Toggle) Flip-Flop: T=1 হলে output toggle হয়, T=0 হলে no change। Q(t+1) = T ⊕ Q(t)। Counter design-এ ব্যবহৃত হয়। JK Flip-Flop-এর J=K=1 connection-এ T Flip-Flop পাওয়া যায়।",
+      "tags": ["t-flip-flop", "sequential"]
+    },
+    {
+      "question": "Register কী?",
+      "answer": "Register হলো flip-flops-এর group যা multiple bits-র data সংরক্ষণ করে। n-bit register-এ nটি D flip-flop লাগে। Shift Register, Parallel Load Register, Buffer Register — প্রকারভেদ। CPU-তে registers ব্যবহৃত হয়।",
+      "tags": ["register", "sequential"]
+    },
+    {
+      "question": "Shift Register কী?",
+      "answer": "Shift Register হলো register যেখানে data একটি flip-flop থেকে অন্যটিতে shift হয়। প্রকার: (1) SISO (Serial In Serial Out), (2) SIPO, (3) PISO, (4) PIPO। Serial-to-parallel conversion-এ ব্যবহৃত হয়।",
+      "tags": ["shift-register", "sequential"]
+    },
+    {
+      "question": "Counter কী?",
+      "answer": "Counter হলো flip-flops-এর group যা predetermined sequence-তে state change করে। n-bit counter 2^n states ঘুরে। Up counter, Down counter, Up-Down counter — প্রকারভেদ। Frequency division, counting-এ ব্যবহৃত হয়।",
+      "tags": ["counter", "sequential"]
+    },
+    {
+      "question": "Synchronous Counter ও Asynchronous Counter-এর পার্থক্য কী?",
+      "answer": "Synchronous: সব flip-flop একই clock-এ কাজ করে, দ্রুত, propagation delay কম। Asynchronous (Ripple): প্রতিটি flip-flop পূর্ববর্তীর output থেকে clock পায়, ধীর, ripple effect। GATE CSE-তে counter design নিয়ে প্রশ্ন আসে।",
+      "tags": ["synchronous", "asynchronous", "counter"]
+    },
+    {
+      "question": "3-bit Synchronous Up Counter কীভাবে কাজ করে?",
+      "answer": "3-bit Synchronous Up Counter: 3টি JK flip-flop (J=K=1)। সব flip-flop একই clock-এ যুক্ত। Q0 toggle হয় প্রতিটি clock-তে। Q1 toggle হয় যখন Q0=1। Q2 toggle হয় যখন Q0=Q1=1। 000→001→010→...→111→000।",
+      "tags": ["synchronous-counter", "3-bit"]
+    },
+    {
+      "question": "Ripple Counter কী এবং এর সমস্যা কী?",
+      "answer": "Ripple Counter (Asynchronous) — প্রতিটি flip-flop পূর্ববর্তীর output থেকে clock পায়। সমস্যা: Propagation delay accumulate হয়, glitch তৈরি হতে পারে, high frequency-তে error। GATE CSE-তে ripple counter-এর timing diagram নিয়ে প্রশ্ন আসে।",
+      "tags": ["ripple-counter", "asynchronous"]
+    },
+    {
+      "question": "Memory কী?",
+      "answer": "Memory হলো data সংরক্ষণের জায়গা। প্রকার: (1) Volatile — RAM (পাওয়ার গেলে data মিলিয়ে যায়)। (2) Non-Volatile — ROM, PROM, EPROM, EEPROM, Flash (data থাকে)। Memory cell-এর capacity = address lines × data lines।",
+      "tags": ["memory", "basics"]
+    },
+    {
+      "question": "RAM ও ROM-এর পার্থক্য কী?",
+      "answer": "RAM (Random Access Memory): Volatile, পড়াও লেখাও দুটোই সম্ভব, দ্রুত। ROM (Read Only Memory): Non-Volatile, শুধু পড়া সম্ভব, firmware storage। RAM-এ dynamic (DRAM) ও static (SRAM) আছে।",
+      "tags": ["ram", "rom", "memory"]
+    },
+    {
+      "question": "SRAM ও DRAM-এর পার্থক্য কী?",
+      "answer": "SRAM: Flip-flop based, দ্রুত, বেশি মেমরি লাগে, বেশি খরচ, Cache memory-তে ব্যবহৃত। DRAM: Capacitor based, ধীর, কম মেমরি, কম খরচ, Main memory-তে ব্যবহৃত। DRAM-কে refresh করতে হয়।",
+      "tags": ["sram", "dram", "memory"]
+    },
+    {
+      "question": "PROM, EPROM, EEPROM কী?",
+      "answer": "PROM: একবার প্রোগ্রাম করা যায়। EPROM: UV light দিয়ে erase করা যায় (বাইরে থেকে)। EEPROM: Electrical দিয়ে erase ও rewrite করা যায় (in-circuit)। EEPROM Flash memory-র ভিত্তি।",
+      "tags": ["eprom", "eeprom", "memory"]
+    },
+    {
+      "question": "ALU কী?",
+      "answer": "ALU (Arithmetic Logic Unit) হলো CPU-র গণিত ও যুক্তি অপারেশন সম্পন্নকারী unit। এটি addition, subtraction, AND, OR, NOT, shift — সব operation করে। এটি combinational circuit। Status flags (Zero, Carry, Overflow, Sign) output দেয়।",
+      "tags": ["alu", "processor"]
+    },
+    {
+      "question": "Control Unit কী?",
+      "answer": "Control Unit হলো CPU-র মস্তিষ্ক যেটি instruction sequence-কে decode করে এবং ALU, registers, memory-কে control signal পাঠায়। দুই প্রকার: (1) Hardwired — logic gates দিয়ে। (2) Microprogrammed — microcode ROM ব্যবহার করে।",
+      "tags": ["control-unit", "processor"]
+    },
+    {
+      "question": "Instruction Cycle কী?",
+      "answer": "Instruction Cycle হলো processor-এর instruction execute করার cycle। প্রধান ধাপ: (1) Fetch — instruction memory থেকে আনা। (2) Decode — instruction বোঝা। (3) Execute — instruction কার্যকর করা। (4) Store — result সংরক্ষণ।",
+      "tags": ["instruction-cycle", "processor"]
+    },
+    {
+      "question": "Fetch Cycle কীভাবে কাজ করে?",
+      "answer": "Fetch: (1) PC (Program Counter) থেকে instruction address memory-তে পাঠাও। (2) Memory থেকে instruction IR (Instruction Register)-এ আনো। (3) PC কে 1/4 (instruction size অনুযায়ী) বাড়াও।",
+      "tags": ["fetch-cycle", "instruction-cycle"]
+    },
+    {
+      "question": "Registers কী কী এবং তাদের ভূমিকা কী?",
+      "answer": "প্রধান Registers: (1) PC — next instruction address। (2) IR — current instruction। (3) MAR — memory address। (4) MDR — memory data। (5) AC (Accumulator) — operation result। (6) GPR — general purpose। Registers সবচেয়ে দ্রুত memory।",
+      "tags": ["registers", "processor"]
+    },
+    {
+      "question": "2's Complement-এ subtraction কীভাবে করে?",
+      "answer": "A - B = A + (2's complement of B)। B-কে 1's complement করে +1 করো। তারপর A-র সাথে যোগ করো। Carry out হলে (unsigned) সঠিক, carry না আসলে negative। 8-bit: 5-3 = 00000101 + 11111101 = 100000010 → 00000010 = 2।",
+      "tags": ["complement", "subtraction"]
+    },
+    {
+      "question": "Overflow detection কীভাবে করে?",
+      "answer": "2's Complement-এ overflow ঘটে যখন দুটি positive number যোগ করলে negative result আসে বা দুটি negative number যোগ করলে positive result আসে। Overflow = Carry-in to MSB ≠ Carry-out from MSB।",
+      "tags": ["overflow", "arithmetic"]
+    },
+    {
+      "question": "Carry Look-Ahead Adder কী?",
+      "answer": "Carry Look-Ahead Adder (CLA) ripple carry adder-র তুলনায় দ্রুত। এটি generate (G = A·B) ও propagate (P = A⊕B) signals ব্যবহার করে carry-কে directly compute করে। Ripple effect এড়িয়ে carry parallel-এ calculate হয়।",
+      "tags": ["carry-look-ahead", "adder"]
+    },
+    {
+      "question": "Ripple Carry Adder কী এবং এর সমস্যা কী?",
+      "answer": "Ripple Carry Adder: Full adders-এর chain। প্রতিটি FA-র carry-out পরবর্তী FA-র carry-in। সমস্যা: n-bit addition-এ carry ripple করে n-1 gate delays, ধীর। CLA এই সমস্যা সমাধান করে।",
+      "tags": ["ripple-carry", "adder"]
+    },
+    {
+      "question": "Half Subtractor কী?",
+      "answer": "Half Subtractor হলো দুটি single bit থেকে বিয়োগ করার circuit। Difference = A ⊕ B। Borrow = A'B। এতে borrow-in থাকে না। Full Subtractor-এ borrow-in support আছে।",
+      "tags": ["half-subtractor", "combinational"]
+    },
+    {
+      "question": "Full Subtractor কী?",
+      "answer": "Full Subtractor তিনটি bit (A, B, Bin) থেকে বিয়োগ করে। Difference = A ⊕ B ⊕ Bin। Bout = A'B + A'Bin + BBin। দুইটি Half Subtractor ও একটি OR gate দিয়ে তৈরি করা যায়।",
+      "tags": ["full-subtractor", "combinational"]
+    },
+    {
+      "question": "Priority Encoder-এর সুবিধা কী?",
+      "answer": "Priority Encoder: সবচেয়ে উচ্চ priority (সবচেয়ে নিচের index) active input-এর binary code output দেয়। 4:2 Priority Encoder-এ যদি input 2 ও 3 উভয়ই active হয়, output 11 (3) হবে। সাধারণ Encoder-এর মতো multiple active input-এ undefined output হয় না।",
+      "tags": ["priority-encoder", "combinational"]
+    },
+    {
+      "question": "4:1 Multiplexer-এর boolean expression কী?",
+      "answer": "4:1 MUX: 4 inputs (I0, I1, I2, I3), 2 select lines (S1, S0), 1 output (Y)। Y = S1'S0'I0 + S1'S0I1 + S1S0'I2 + S1S0I3। প্রতিটি select combination-এ একটি input output-এ যায়।",
+      "tags": ["multiplexer", "boolean-expression"]
+    },
+    {
+      "question": "Flip-flop-এ Setup Time ও Hold Time কী?",
+      "answer": "Setup Time: Clock edge-র আগে input stable থাকতে হবে সেই সময়। Hold Time: Clock edge-র পরেও input stable থাকতে হবে সেই সময়। এই শর্ত পূরণ না হলে metastability ঘটে। GATE CSE-তে timing analysis নিয়ে প্রশ্ন আসে।",
+      "tags": ["flip-flop", "setup-time", "hold-time"]
+    },
+    {
+      "question": "Metastability কী?",
+      "answer": "Metastability হলো flip-flop-এর অনির্ধারিত state (neither 0 nor 1)। Setup/Hold time violation হলে ঘটে। Flip-flop metastable state-তে কিছুক্ষণ থাকে তারপর stable 0 বা 1 হয়। এটি asynchronous input-এ সমস্যা।",
+      "tags": ["metastability", "flip-flop"]
+    },
+    {
+      "question": "State Diagram কী?",
+      "answer": "State Diagram হলো sequential circuit-এর state transition-এর graphical representation। Circles = states, Arrows = transitions, Labels = input/output। Mealy ও Moore machine-এর state diagram আলাদাভাবে থাকে।",
+      "tags": ["state-diagram", "sequential"]
+    },
+    {
+      "question": "Mealy ও Moore Machine-এর পার্থক্য কী?",
+      "answer": "Mealy: Output input ও current state উভয়ের উপর নির্ভর করে। Moore: Output শুধু current state-এর উপর নির্ভর করে। Mealy faster response, Moore stable output। GATE CSE-তে state machine design নিয়ে প্রশ্ন আসে।",
+      "tags": ["mealy", "moore", "state-machine"]
+    },
+    {
+      "question": "Asynchronous sequential circuit কী?",
+      "answer": "Asynchronous sequential circuit: Clock নেই, input পরিবর্তনের সাথে সাথে state change হয়। Hazard ও Race condition সমস্যা বেশি। Pulse-triggered circuits, fundamental mode assumption। GATE CSE-তে hazard detection নিয়ে প্রশ্ন আসে।",
+      "tags": ["asynchronous", "sequential"]
+    },
+    {
+      "question": "Hazard in Digital Circuit কী?",
+      "answer": "Hazard হলো combinational circuit-তে temporary unwanted glitch। দুই প্রকার: (1) Static Hazard — output 0→1→0 বা 1→0→1 (আসলে stable থাকা উচিত)। (2) Dynamic Hazard — 0→1→0→1 বা উল্টো। Consensus theorem ব্যবহার করে hazard remove করা যায়।",
+      "tags": ["hazard", "combinational"]
+    },
+    {
+      "question": "Race Condition in Sequential Circuit কী?",
+      "answer": "Race Condition হলো দুই বা ততোধিক state variables একই সাথে পরিবর্তন হওয়ার ফলে non-deterministic behavior। Critical Race: final state input-এর উপর নির্ভর করে। Essential Race: clock cycle-এর মধ্যে resolve হয়।",
+      "tags": ["race-condition", "sequential"]
+    },
+    {
+      "question": "Flash Memory কী?",
+      "answer": "Flash Memory হলো non-volatile, reprogrammable memory। EEPROM-এর evolution। দুই প্রকার: (1) NOR Flash — random access, code execution। (2) NAND Flash — page access, data storage (SSD, USB drive)। Wear leveling algorithm ব্যবহৃত হয়।",
+      "tags": ["flash-memory", "memory"]
+    },
+    {
+      "question": "PLA, PAL, ROM-এর পার্থক্য কী?",
+      "answer": "PLA (Programmable Logic Array): Programmable AND ও OR planes। PAL (Programmable Array Logic): Fixed OR, Programmable AND। ROM: Fixed AND (decoder), Programmable OR। PLA সবচেয়ে flexible, ROM-এর implementation সবচেয়ে সহজ।",
+      "tags": ["pla", "pal", "rom"]
+    },
+    {
+      "question": "Boolean Algebra-তе Absorption Law কী?",
+      "answer": "Absorption Law: (1) A + AB = A। (2) A(A+B) = A। এই সূত্র K-Map simplification-এ ও manual simplification-এ খুব কাজে লাগে। উদাহরণ: AB + ABC = AB(1+C) = AB।",
+      "tags": ["boolean-algebra", "absorption"]
+    },
+    {
+      "question": "K-Map-এ Static Hazard-কে কীভাবে remove করে?",
+      "answer": "K-Map-এ adjacent 1's groups-এর মধ্যে একটি redundant group add করলে static hazard remove হয়। এটি Consensus Theorem-এর graphical representation। উদাহরণ: F = AB + A'C — AB ও A'C-এর মধ্যে B'C যোগ করলে hazard消除।",
+      "tags": ["k-map", "hazard"]
+    },
+    {
+      "question": "Counter modulus কী?",
+      "answer": "Counter modulus হলো counter-এর total distinct states সংখ্যা। 3-bit binary counter modulus = 8 (0-7)। Modulo-5 counter 5টি state ঘুরে (0-4)। n flip-flop দিয়ে maximum modulus = 2^n।",
+      "tags": ["counter", "modulus"]
+    },
+    {
+      "question": "Ring Counter কী?",
+      "answer": "Ring Counter হলো shift register-এর output-কে input-এ feedback দেওয়া। n-bit Ring Counter-তে একটিমাত্র 1 rotate হয়। Modulus = n। Johnson Counter Ring Counter-র modified version যেখানে inverted feedback।",
+      "tags": ["ring-counter", "counter"]
+    },
+    {
+      "question": "Johnson Counter কী?",
+      "answer": "Johnson Counter (Twisted Ring): Shift register-এর last output-কে inverted করে first input-এ দেওয়া হয়। n-bit Johnson Counter 2n states ঘুরে। Ring Counter-র তুলনায় বেশি states, glitch-free output sequence।",
+      "tags": ["johnson-counter", "counter"]
+    },
+    {
+      "question": "Encoder-এর drawback কী?",
+      "answer": "সাধারণ Encoder-এর drawback: একাধিক input simultaneously active হলে output undefined। সমাধান: Priority Encoder ব্যবহার করো যেটি সবচেয়ে উচ্চ priority input-কে prioritize করে।",
+      "tags": ["encoder", "drawback"]
+    },
+    {
+      "question": "Demultiplexer দিয়ে Multiplexer তৈরি করা যায় কী?",
+      "answer": "হ্যাঁ, 1-to-4 Demultiplexer-এর input-কে data line হিসেবে ব্যবহার করে 4-to-1 Multiplexer তৈরি করা যায়। তবে বাস্তবে MUX আলাদাভাবে implement করা বেশি efficient।",
+      "tags": ["demultiplexer", "multiplexer"]
+    },
+    {
+      "question": "Sequential circuit design-এর ধাপ কী কী?",
+      "answer": "ধাপ: (1) State Diagram/State Table তৈরি। (2) State Minimization (equivalent states merge)। (3) State Assignment (binary encoding)। (4) Flip-flop selection (JK/D/T)। (5) K-Map-এ excitation table থেকে boolean expression বের করা। (6) Circuit diagram আঁকা।",
+      "tags": ["sequential", "design"]
+    },
+    {
+      "question": "D Flip-flop দিয়ে JK Flip-flop কীভাবে তৈরি করে?",
+      "answer": "D Flip-flop-এ D = JQ' + K'Q connection দিলে JK Flip-flop পাওয়া যায়। J=1, K=1 হলে D = Q' (toggle), J=0, K=0 হলে D = Q (no change)।",
+      "tags": ["d-flip-flop", "jk-flip-flop"]
+    },
+    {
+      "question": "JK Flip-flop দিয়ে T Flip-flop কীভাবে তৈরি করে?",
+      "answer": "JK Flip-flop-এ J = K = T connection দিলে T Flip-flop পাওয়া যায়। T=1 হলে toggle, T=0 হলে no change। এটি সবচেয়ে সহজ conversion।",
+      "tags": ["jk-flip-flop", "t-flip-flop"]
+    },
+    {
+      "question": "Binary multiplier কীভাবে কাজ করে?",
+      "answer": "2-bit × 2-bit Binary Multiplier: Partial products AND gates দিয়ে তৈরি হয়। তারপর adder দিয়ে partial products যোগ করা হয়। 4-bit × 4-bit multiplier-এ 16 AND gates ও adders লাগে। ALU-তে multiplication circuit থাকে।",
+      "tags": ["binary-multiplier", "combinational"]
+    },
+    {
+      "question": "Digital logic-তে Fan-in ও Fan-out কী?",
+      "answer": "Fan-in: একটি gate-তে সর্বোচ্চ কতগুলি input যুক্ত করা যায়। Fan-out: একটি gate-র output কতগুলি gate-কে drive করতে পারে। TTL gate fan-out ≈ 10। Fan-out exceed করলে signal degrade হয়।",
+      "tags": ["fan-in", "fan-out"]
+    },
+    {
+      "question": "Boolean function minimization-এর সুবিধা কী?",
+      "answer": "Minimization-এর সুবিধা: (1) কম gate লাগে — hardware cost কমে। (2) কম gate delay — circuit দ্রুত হয়। (3) কম power consumption। (4) Circuit reliability বাড়ে। K-Map, Quine-McCluskey, ESPRESSO — minimization tools।",
+      "tags": ["minimization", "boolean-algebra"]
+    },
+    {
+      "question": "Quine-McCluskey Algorithm কী?",
+      "answer": "Quine-McCluskey Algorithm হলো boolean function minimization-এর tabular method। K-Map-এর মতো systematic কিন্তু computer implementation-এ উপযোগী। বড় number of variables-এ K-Map অসম্ভব, Quine-McCluskey কাজ করে। Essential prime implicants identify করে।",
+      "tags": ["quine-mccluskey", "minimization"]
+    },
+    {
+      "question": "Logic Family কী?",
+      "answer": "Logic Family হলো digital circuit-এর implementation technology। প্রধান: (1) TTL (Transistor-Transistor Logic) — দ্রুত, বেশি power। (2) CMOS — কম power, ধীর (তবে modern CMOS দ্রুত)। (3) ECL — সবচেয়ে দ্রুত, সবচেয়ে বেশি power।",
+      "tags": ["logic-family", "technology"]
+    },
+    {
+      "question": "CMOS Logic কী এবং এর সুবিধা কী?",
+      "answer": "CMOS (Complementary MOS): PMOS ও NMOS transistor pair ব্যবহার করে। সুবিধা: (1) প্রায় zero static power consumption। (2) High noise margin। (3) High input impedance। (4) Scalable। Modern processors CMOS technology-তে তৈরি।",
+      "tags": ["cmos", "logic-family"]
+    },
+    {
+      "question": "Tri-state Buffer কী?",
+      "answer": "Tri-state Buffer: তিনটি state — 0, 1, High Impedance (Z)। Enable signal active না হলে output floating (Z)। Bus system-এ multiple devices একই bus-এ connected থাকে কিন্তু একসাথে drive করে না। GATE CSE-তে bus contention নিয়ে প্রশ্ন আসে।",
+      "tags": ["tri-state", "buffer"]
+    },
+    {
+      "question": "Digital Logic-তে Propagation Delay কী?",
+      "answer": "Propagation Delay: Input change হওয়ার পর output change হতে যে সময় লাগে। tPLH (0→1) ও tPHL (1→0)। Circuit speed propagation delay-এর উপর নির্ভর করে। Clock frequency ≤ 1 / (tpd × stages)।",
+      "tags": ["propagation-delay", "timing"]
+    },
+    {
+      "question": "Power Dissipation in Digital Circuit কী?",
+      "answer": "দুই প্রকার: (1) Static Power — circuit active না হলেও current flow (leakage)। (2) Dynamic Power — switching-এ শক্তি ব্যয় (P = CV²f)। Modern processor-এ dynamic power বেশি। Low power design গুরুত্বপূর্ণ।",
+      "tags": ["power-dissipation", "circuit"]
+    },
+    {
+      "question": "Memory Hierarchy কী?",
+      "answer": "Memory Hierarchy: Register → Cache (SRAM) → Main Memory (DRAM) → Secondary Storage (SSD/HDD)। উপরে দ্রুত ও কম capacity, নিচে ধীর ও বেশি capacity। Locality principle (temporal ও spatial) এই hierarchy-কে effective করে।",
+      "tags": ["memory-hierarchy", "memory"]
+    },
+    {
+      "question": "Cache Memory কী?",
+      "answer": "Cache Memory: CPU-র কাছে SRAM-based fast memory। Main Memory-র ছোট copy রাখে। Cache Hit: data cache-তে পাওয়া যায় (দ্রুত)। Cache Miss: cache-তে নেই, memory থেকে আনতে হয় (ধীর)। Direct-mapped, Set-associative, Fully-associative — mapping strategies।",
+      "tags": ["cache-memory", "memory"]
+    },
+    {
+      "question": "Cache Mapping Strategies কী কী?",
+      "answer": "তিনটি: (1) Direct-mapped — প্রতিটি block একটিমাত্র cache line-এ যায়। (2) Fully-associative — যেকোনো line-এ যেতে পারে। (3) Set-associative — n-way set-এ যেকোনো line-এ যায়। Direct-mapped সবচেয়ে সহজ, Fully-associative সবচেয়ে flexible।",
+      "tags": ["cache-mapping", "memory"]
+    },
+    {
+      "question": "Pipeline Register কী?",
+      "answer": "Pipeline Register হলো pipeline stages-এর মধ্যে থাকে যা intermediate results store করে। এতে প্রতিটি stage স্বাধীনভাবে কাজ করতে পারে। Pipeline CPI ≈ 1 (ideal), তবে hazards (structural, data, control) performance degrade করে।",
+      "tags": ["pipeline-register", "processor"]
+    }
+  ]
+}

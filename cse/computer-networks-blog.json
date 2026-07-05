@@ -1,0 +1,398 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Computer Networks — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Computer Networks-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Computer Network কী?",
+      "answer": "Computer Network হলো দুটি বা ততোধিক কম্পিউটার বা ডিভাইসের একটি সমন্বিত সিস্টেম যেগুলো পারস্পরিক যোগাযোগ ও ডেটা শেয়ারিংয়ের জন্য সংযুক্ত থাকে। LAN, MAN, WAN — এগুলো network-এর প্রকারভেদ।",
+      "tags": ["basics", "definition"]
+    },
+    {
+      "question": "OSI Model কী?",
+      "answer": "OSI (Open Systems Interconnection) Model হলো যোগাযোগের 7টি স্তরে বিভক্ত একটি তাত্ত্বিক ফ্রেমওয়ার্ক। এটি নেটওয়ার্ক যোগাযোগকে স্তর অনুযায়ী বিভক্ত করে যাতে প্রতিটি স্তর নির্দিষ্ট কাজ করে। ISO দ্বারা 1984 সালে প্রকাশিত।",
+      "tags": ["osi-model", "basics"]
+    },
+    {
+      "question": "OSI Model-এর 7টি স্তর কী কী?",
+      "answer": "OSI Model-এর 7টি স্তর: (1) Physical Layer, (2) Data Link Layer, (3) Network Layer, (4) Transport Layer, (5) Session Layer, (6) Presentation Layer, (7) Application Layer। নিচ থেকে উপরে স্তরগুলো ক্রমিক।",
+      "tags": ["osi-model", "layers"]
+    },
+    {
+      "question": "TCP/IP Model কী?",
+      "answer": "TCP/IP Model হলো প্রয়োগ-নির্ভর একটি নেটওয়ার্ক মডেল যা 4টি স্তরে বিভক্ত: (1) Network Access Layer, (2) Internet Layer, (3) Transport Layer, (4) Application Layer। এটি ইন্টারনেটের ভিত্তি।",
+      "tags": ["tcp-ip-model", "basics"]
+    },
+    {
+      "question": "OSI Model ও TCP/IP Model-এর পার্থক্য কী?",
+      "answer": "OSI-তে 7 স্তর, TCP/IP-তে 4 স্তর। OSI তাত্ত্বিক, TCP/IP প্রয়োগ-নির্ভর। OSI-তে Session ও Presentation Layer আলাদা, TCP/IP-তে এগুলো Application Layer-এ একত্রিত। OSI প্রথমে data link layer তৈরি করে, TCP/IP প্রথমে প্রোটোকল তৈরি করে।",
+      "tags": ["osi-model", "tcp-ip-model", "comparison"]
+    },
+    {
+      "question": "Physical Layer কী কাজ করে?",
+      "answer": "Physical Layer হলো OSI Model-এর নিম্নতম স্তর যা bits-কে electrical/optical signals-এ রূপান্তরিত করে। এটি cables, connectors, voltage levels, data rate, modulation — সব নিয়ন্ত্রণ করে। Hub, Repeater — এই স্তরের ডিভাইস।",
+      "tags": ["physical-layer", "basics"]
+    },
+    {
+      "question": "Bandwidth কী?",
+      "answer": "Bandwidth হলো একটি network connection-এ সর্বোচ্চ ডেটা প্রবাহের হার, সাধারণত bits per second (bps)-এ প্রকাশ করা হয়। উদাহরণ: 100 Mbps bandwidth মানে সেকেন্ডে 100 মেগাবিট ডেটা প্রেরণ সম্ভব।",
+      "tags": ["physical-layer", "bandwidth"]
+    },
+    {
+      "question": "Signal কী এবং এর প্রকারভেদ কী কী?",
+      "answer": "Signal হলো ডেটা প্রেরণের মাধ্যম। প্রকারভেদ: (1) Analog Signal — continuous waveform (যেমন voice)। (2) Digital Signal — discrete voltage pulses (0 ও 1)। ডিজিটাল সিগন্যাল computer networks-এ বেশি ব্যবহৃত হয়।",
+      "tags": ["physical-layer", "signal"]
+    },
+    {
+      "question": "Encoding কী?",
+      "answer": "Encoding হলো bits-কে signals-এ রূপান্তর করার পদ্ধতি। প্রধান পদ্ধতি: (1) NRZ (Non-Return to Zero), (2) Manchester Encoding, (3) MLT-3, (4) 4B/5B। Manchester Encoding-এ clock signal data signal-এর সাথে মিলিত থাকে।",
+      "tags": ["physical-layer", "encoding"]
+    },
+    {
+      "question": "Data Link Layer কী কাজ করে?",
+      "answer": "Data Link Layer OSI-র 2য় স্তর। এটি nodes-এর মধ্যে reliable data transfer নিশ্চিত করে। প্রধান কাজ: Framing, Error Detection/Correction, Flow Control, MAC Addressing। Switch ও Bridge এই স্তরে কাজ করে।",
+      "tags": ["data-link-layer", "basics"]
+    },
+    {
+      "question": "Framing কী?",
+      "answer": "Framing হলো network layer- থেকে প্রাপ্ত packets-কে Data Link Layer-এর frames-এ পরিণত করার প্রক্রিয়া। প্রতিটি frame-এ header, data (payload), ও trailer থাকে। Header-এ source/destination MAC address থাকে।",
+      "tags": ["data-link-layer", "framing"]
+    },
+    {
+      "question": "Error Detection-এ CRC কী?",
+      "answer": "CRC (Cyclic Redundancy Check) হলো error detection-এর একটি শক্তিশালী পদ্ধতি। Sender generator polynomial দিয়ে data-র সাথে divide করে remainder frame-এ যোগ করে। Receiver আবার divide করে, remainder 0 হলে data valid।",
+      "tags": ["data-link-layer", "crc", "error-detection"]
+    },
+    {
+      "question": "Checksum কী এবং কীভাবে কাজ করে?",
+      "answer": "Checksum হলো error detection-এর সহজ পদ্ধতি। Data-কে segments-এ ভাগ করে সব segments-এর sum বের করা হয়। Sum-র 1's complement sender frame-এ যোগ করা হয়। Receiver-ও একইভাবে যোগ করলে result all 1s হলে data valid।",
+      "tags": ["data-link-layer", "checksum", "error-detection"]
+    },
+    {
+      "question": "Flow Control কী?",
+      "answer": "Flow Control হলো sender-এর data transmission speed receiver-এর গ্রহণযোগ্যতার সাথে সামঞ্জস্য রাখার পদ্ধতি। যদি sender দ্রুত পাঠায় এবং receiver ধীরে গ্রহণ করে, data loss হতে পারে। Stop-and-Wait ও Sliding Window — দুটি প্রধান পদ্ধতি।",
+      "tags": ["data-link-layer", "flow-control"]
+    },
+    {
+      "question": "Stop-and-Wait Protocol কী?",
+      "answer": "Stop-and-Wait Protocol-এ sender একটি frame পাঠিয়ে acknowledgment (ACK) অপেক্ষা করে। ACK পেয়ে পরবর্তী frame পাঠায়। সরল কিন্তু inefficient — sender অপেক্ষায় সময় নষ্ট করে। Utilization কম।",
+      "tags": ["data-link-layer", "stop-and-wait", "flow-control"]
+    },
+    {
+      "question": "Sliding Window Protocol কী?",
+      "answer": "Sliding Window Protocol-এ sender একাধিক frames একসাথে পাঠাতে পারে window size-এর মধ্যে। Receiver window-এর frames গ্রহণ করে ACK পাঠায়। এতে bandwidth utilization বেশি হয়। Go-Back-N ও Selective Repeat — দুটি প্রকার।",
+      "tags": ["data-link-layer", "sliding-window", "flow-control"]
+    },
+    {
+      "question": "MAC Protocol কী?",
+      "answer": "MAC (Media Access Control) Protocol হলো multiple devices যখন একই shared medium-এ যোগাযোগ করে তখন কে কখন transmit করবে তা নিয়ন্ত্রণ করার প্রোটোকল। Contention-based (CSMA/CD) ও Contention-free (Token Passing) — দুটি প্রকার।",
+      "tags": ["data-link-layer", "mac"]
+    },
+    {
+      "question": "Ethernet কী?",
+      "answer": "Ethernet হলো সবচেয়ে জনপ্রিয় LAN technology। এটি CSMA/CD MAC protocol ব্যবহার করে। প্রধান বৈশিষ্ট্য: 48-bit MAC address, frame format, star/bus topology। 10BASE-T (10 Mbps) থেকে 100Gbps Ethernet পর্যন্ত বিদ্যমান।",
+      "tags": ["data-link-layer", "ethernet", "lan"]
+    },
+    {
+      "question": "CSMA/CD কী এবং কীভাবে কাজ করে?",
+      "answer": "CSMA/CD (Carrier Sense Multiple Access with Collision Detection) হলো Ethernet-এর MAC protocol। (1) Carrier Sense — লাইন খালি আছে কি না শুনো। (2) খালি হলে transmit করো। (3) Collision হলে বন্ধ করো, jam signal পাঠাও, random time অপেক্ষা করে আবার চেষ্টা করো।",
+      "tags": ["data-link-layer", "csma-cd"]
+    },
+    {
+      "question": "Network Layer কী কাজ করে?",
+      "answer": "Network Layer OSI-র 3য় স্তর। এটি source থেকে destination পর্যন্ত packet routing নিশ্চিত করে। IP Addressing, Routing, Packet Forwarding — প্রধান কাজ। Router এই স্তরে কাজ করে। Logical address (IP) এই স্তরে ব্যবহৃত হয়।",
+      "tags": ["network-layer", "basics"]
+    },
+    {
+      "question": "IP Address কী?",
+      "answer": "IP Address হলো প্রতিটি network device-এর একটি অদ্বিতীয় logical address যা network-এ সঠিক device-তে ডেটা পৌঁছাতে সাহায্য করে। IPv4: 32-bit (যেমন 192.168.1.1)। IPv6: 128-bit। দুটি অংশ: Network ID ও Host ID।",
+      "tags": ["network-layer", "ip-address"]
+    },
+    {
+      "question": "IPv4 ও IPv6-এর পার্থক্য কী?",
+      "answer": "IPv4: 32-bit address, ~4.3 billion addresses, dot notation (192.168.1.1), header 20 bytes, checksum আছে। IPv6: 128-bit address, virtually unlimited, colon notation (2001:0db8::1), header 40 bytes fixed, no checksum। IPv6 NAT-এর প্রয়োজন নেই।",
+      "tags": ["network-layer", "ipv4", "ipv6"]
+    },
+    {
+      "question": "Subnetting কী?",
+      "answer": "Subnetting হলো একটি বড় network-কে ছোট ছোট subnetworks-এ ভাগ করার প্রক্রিয়া। এতে network performance ও security বাড়ে। Subnet Mask ব্যবহার করে Network ID ও Host ID আলাদা করা হয়। উদাহরণ: /24 subnet mask 255.255.255.0।",
+      "tags": ["network-layer", "subnetting"]
+    },
+    {
+      "question": "CIDR কী?",
+      "answer": "CIDR (Classless Inter-Domain Routing) হলো IP addressing-এর একটি flexible পদ্ধতি যা classful addressing-এর সীমাবদ্ধতা দূর করে। CIDR notation: IP/prefix length (যেমন 192.168.1.0/24)। এতে variable-length subnetting সম্ভব এবং address space efficiently ব্যবহৃত হয়।",
+      "tags": ["network-layer", "cidr"]
+    },
+    {
+      "question": "IP Address Classes কী কী?",
+      "answer": "Classful IP Addressing: Class A (1.0.0.0 — 126.255.255.255, /8), Class B (128.0.0.0 — 191.255.255.255, /16), Class C (192.0.0.0 — 223.255.255.255, /24), Class D (Multicast), Class E (Reserved)। 127.x.x.x loopback।",
+      "tags": ["network-layer", "ip-classes"]
+    },
+    {
+      "question": "ARP কী?",
+      "answer": "ARP (Address Resolution Protocol) হলো IP address থেকে MAC address বের করার প্রোটোকল। Sender broadcast ARP request পাঠায় — \"IP address X-র MAC address কে?\" সংশ্লিষ্ট device unicast ARP reply দেয়। ARP cache-তে mapping সংরক্ষিত হয়।",
+      "tags": ["network-layer", "arp"]
+    },
+    {
+      "question": "Routing Algorithm কী?",
+      "answer": "Routing Algorithm হলো network-এর routers-দের সেরা path নির্বাচন করার algorithm। দুটি প্রধান প্রকার: (1) Distance Vector — Bellman-Ford based (RIP), (2) Link State — Dijkstra based (OSPF)।",
+      "tags": ["network-layer", "routing"]
+    },
+    {
+      "question": "Distance Vector Routing Algorithm কী?",
+      "answer": "Distance Vector Routing-এ প্রতিটি router তার প্রতিবেশীদের কাছে তার routing table broadcast করে। Bellman-Ford equation ব্যবহার করে shortest path calculate করে। Count-to-infinity problem ও Routing loop — সমস্যা। RIP protocol এটি ব্যবহার করে।",
+      "tags": ["network-layer", "distance-vector", "routing"]
+    },
+    {
+      "question": "Link State Routing Algorithm কী?",
+      "answer": "Link State Routing-এ প্রতিটি router সব routers-কে তার সংযোগের অবস্থা (link state) broadcast করে। প্রতিটি router Dijkstra's algorithm দিয়ে shortest path tree তৈরি করে। OSPF protocol এটি ব্যবহার করে। Count-to-infinity problem নেই।",
+      "tags": ["network-layer", "link-state", "routing"]
+    },
+    {
+      "question": "RIP ও OSPF-এর পার্থক্য কী?",
+      "answer": "RIP: Distance Vector, hop count metric (max 15), 30 sec update, simple, small networks-এ ভালো। OSPF: Link State, cost metric, triggered update, scalable, large networks-এ ভালো, faster convergence। RIP-এ maximum 15 hops, OSPF-তে hop limit নেই।",
+      "tags": ["network-layer", "rip", "ospf"]
+    },
+    {
+      "question": "ICMP কী?",
+      "answer": "ICMP (Internet Control Message Protocol) হলো Network Layer-এর একটি helper protocol যা error reporting ও diagnostics-এ ব্যবহৃত হয়। Ping (echo request/reply) ও Traceroute — এগুলো ICMP ব্যবহার করে। \"Destination Unreachable\" — ICMP error message।",
+      "tags": ["network-layer", "icmp"]
+    },
+    {
+      "question": "Transport Layer কী কাজ করে?",
+      "answer": "Transport Layer OSI-র 4র্থ স্তর। এটি end-to-end data transfer নিশ্চিত করে। Port numbers ব্যবহার করে different applications-কে আলাদা করে। TCP ও UDP — দুটি প্রধান protocol। Flow control, error control, segmentation — প্রধান কাজ।",
+      "tags": ["transport-layer", "basics"]
+    },
+    {
+      "question": "TCP ও UDP-এর পার্থক্য কী?",
+      "answer": "TCP: Connection-oriented, reliable, ordered delivery, flow control, congestion control, heavier header (20 bytes), slower। UDP: Connectionless, unreliable, no ordering guarantee, no flow/congestion control, lighter header (8 bytes), faster। TCP: web, email। UDP: video streaming, gaming, DNS।",
+      "tags": ["transport-layer", "tcp", "udp"]
+    },
+    {
+      "question": "TCP 3-Way Handshake কী?",
+      "answer": "TCP connection establish করতে 3-Way Handshake ব্যবহৃত হয়: (1) Client SYN পাঠায় (SYN=1, seq=x), (2) Server SYN+ACK পাঠায় (SYN=1, ACK=1, seq=y, ack=x+1), (3) Client ACK পাঠায় (ACK=1, seq=x+1, ack=y+1)। এরপর data transfer শুরু হয়।",
+      "tags": ["transport-layer", "tcp", "handshake"]
+    },
+    {
+      "question": "TCP Congestion Control কী?",
+      "answer": "TCP Congestion Control হলো network congestion এড়ানোর পদ্ধতি। প্রধান কৌশল: (1) Slow Start — exponentially window বাড়ায়। (2) AIMD — Additive Increase Multiplicative Decrease। (3) Fast Retransmit। (4) Fast Recovery। Congestion window (cwnd) network capacity নির্ধারণ করে।",
+      "tags": ["transport-layer", "tcp", "congestion"]
+    },
+    {
+      "question": "TCP Slow Start কীভাবে কাজ করে?",
+      "answer": "Slow Start-এ cwnd (congestion window) প্রাথমিকভাবে 1 MSS (Maximum Segment Size) দিয়ে শুরু হয়। প্রতিটি ACK-এ cwnd দ্বিগুণ হয় (exponential growth)। Threshold (ssthresh) পৌঁছালে Congestion Avoidance-এ যায়। Timeout হলে ssthresh = cwnd/2, cwnd = 1 MSS।",
+      "tags": ["transport-layer", "tcp", "slow-start"]
+    },
+    {
+      "question": "AIMD (Additive Increase Multiplicative Decrease) কী?",
+      "answer": "AIMD হলো TCP Congestion Control-এর কৌশল। Additive Increase: cwnd প্রতিটি RTT-তে 1 MSS করে বাড়ে (linear growth)। Multiplicative Decrease: congestion হলে cwnd অর্ধে কমায় (exponential decrease)। এতে network stability বজায় থাকে।",
+      "tags": ["transport-layer", "tcp", "aimd"]
+    },
+    {
+      "question": "TCP Flow Control ও Congestion Control-এর পার্থক্য কী?",
+      "answer": "Flow Control: receiver-এর capacity অনুযায়ী sender-এর speed নিয়ন্ত্রণ করে (receiver window rwnd)। Congestion Control: network-এর capacity অনুযায়ী sender-এর speed নিয়ন্ত্রণ করে (congestion window cwnd)। Flow Control point-to-point, Congestion Control end-to-end।",
+      "tags": ["transport-layer", "tcp", "flow-control", "congestion"]
+    },
+    {
+      "question": "Port Number কী?",
+      "answer": "Port Number হলো 16-bit number যা Transport Layer-এ বিভিন্ন application-কে চিহ্নিত করে। Well-known ports: HTTP (80), HTTPS (443), FTP (21), SSH (22), DNS (53), SMTP (25), POP3 (110), IMAP (143)। Ephemeral ports: 49152-65535।",
+      "tags": ["transport-layer", "ports"]
+    },
+    {
+      "question": "TCP Reliable Data Transfer কীভাবে কাজ করে?",
+      "answer": "TCP reliable data transfer নিশ্চিত করে: (1) Sequence numbers — ordered delivery। (2) ACK — acknowledged receipt। (3) Retransmission — timeout-এ আবার পাঠায়। (4) Checksum — error detection। (5) Flow Control — receiver overwhelmed এড়ায়।",
+      "tags": ["transport-layer", "tcp", "reliable"]
+    },
+    {
+      "question": "Application Layer কী কাজ করে?",
+      "answer": "Application Layer OSI-র সর্বোচ্চ স্তর। এটি user applications-কে network services-এর সাথে সংযুক্ত করে। HTTP, HTTPS, FTP, SMTP, DNS, DHCP, POP3, IMAP — এগুলো Application Layer-এর protocols। End-user directly এই স্তরের সাথে যোগাযোগ করে।",
+      "tags": ["application-layer", "basics"]
+    },
+    {
+      "question": "HTTP কী?",
+      "answer": "HTTP (HyperText Transfer Protocol) হলো web-এর মূল protocol যা client (browser) ও server-এর মধ্যে data transfer নিয়ন্ত্রণ করে। Port 80। Request-Response model। Methods: GET, POST, PUT, DELETE, PATCH। Stateless protocol।",
+      "tags": ["application-layer", "http"]
+    },
+    {
+      "question": "HTTP ও HTTPS-এর পার্থক্য কী?",
+      "answer": "HTTP: Port 80, unencrypted data, insecure। HTTPS: Port 443, SSL/TLS encryption দিয়ে secure, data encrypted। HTTPS-এ certificates প্রয়োজন। Search engines HTTPS-কে priority দেয়। Modern web-এ প্রায় সব HTTPS।",
+      "tags": ["application-layer", "http", "https"]
+    },
+    {
+      "question": "DNS কী?",
+      "answer": "DNS (Domain Name System) হলো domain name-কে IP address-তে রূপান্তর করার system। উদাহরণ: www.google.com → 142.250.190.46। Port 53 (UDP/TCP)। Hierarchical structure: Root → TLD → Authoritative → Resolver। DNS cache browser/OS-তে থাকে।",
+      "tags": ["application-layer", "dns"]
+    },
+    {
+      "question": "FTP কী?",
+      "answer": "FTP (File Transfer Protocol) হলো files transfer করার protocol। Port 21 (control) ও Port 20 (data)। Two connections: Control connection (persistent) ও Data connection (on-demand)। Active mode ও Passive mode — দুটি প্রকার। Username/password প্রয়োজন।",
+      "tags": ["application-layer", "ftp"]
+    },
+    {
+      "question": "SMTP কী?",
+      "answer": "SMTP (Simple Mail Transfer Protocol) হলো email send করার protocol। Port 25/587। Push protocol — client থেকে server-এ email পাঠায়। MIME encoding দিয়ে attachments support করে। Authentication (SMTP AUTH) ব্যবহৃত হয়।",
+      "tags": ["application-layer", "smtp"]
+    },
+    {
+      "question": "POP3 ও IMAP-এর পার্থক্য কী?",
+      "answer": "POP3 (Post Office Protocol): Port 110, emails download করে client-তে, server থেকে delete করে (default), offline access। IMAP (Internet Message Access Protocol): Port 143, emails server-তে থাকে, sync multiple devices, server-side management। IMAP আধুনিক ও বেশি ব্যবহৃত।",
+      "tags": ["application-layer", "pop3", "imap"]
+    },
+    {
+      "question": "DHCP কী?",
+      "answer": "DHCP (Dynamic Host Configuration Protocol) হলো automatic IP address assignment-এর protocol। Port 67/68। DORA process: Discover (broadcast), Offer (server offers IP), Request (client requests), Acknowledge (server confirms)। Subnet mask, gateway, DNS — সব auto-assign হয়।",
+      "tags": ["application-layer", "dhcp"]
+    },
+    {
+      "question": "Network Security কী?",
+      "answer": "Network Security হলো unauthorized access, misuse, modification থেকে network-কে রক্ষা করার পদ্ধতি। প্রধান উপাদান: Encryption, Authentication, Firewalls, Intrusion Detection System (IDS), VPN, SSL/TLS। CIA Triad: Confidentiality, Integrity, Availability।",
+      "tags": ["security", "basics"]
+    },
+    {
+      "question": "Encryption কী এবং এর প্রকারভেদ কী?",
+      "answer": "Encryption হলো plaintext-কে ciphertext-তে রূপান্তর করার প্রক্রিয়া যাতে অননুমোদিত ব্যক্তি পড়তে না পারে। দুটি প্রকার: (1) Symmetric — একটি key (AES, DES, 3DES)। (2) Asymmetric — দুটি key, public ও private (RSA, ECC)।",
+      "tags": ["security", "encryption"]
+    },
+    {
+      "question": "SSL/TLS কী?",
+      "answer": "SSL (Secure Sockets Layer) ও TLS (Transport Layer Security) হলো web communication-কে encrypted করার protocol। HTTPS TLS ব্যবহার করে। Handshake process: client-server key exchange, certificate verification, session key establishment। Data confidentiality ও integrity নিশ্চিত করে।",
+      "tags": ["security", "ssl", "tls"]
+    },
+    {
+      "question": "Firewall কী?",
+      "answer": "Firewall হলো network traffic নিয়ন্ত্রণ করার security system। Incoming ও outgoing traffic filter করে। প্রকার: (1) Packet Filtering — headers check করে। (2) Stateful — connection state track করে। (3) Application Level — deep inspection করে। Hardware ও Software দুটোই হতে পারে।",
+      "tags": ["security", "firewall"]
+    },
+    {
+      "question": "Wireless Network কী?",
+      "answer": "Wireless Network হলো cables ছাড়াই radio waves, microwaves বা infrared দিয়ে data transmit করার network। Types: WiFi (WLAN), Bluetooth (WPAN), Cellular (4G/5G), Satellite। CSMA/CA (Collision Avoidance) — wireless-এর MAC protocol (CSMA/CD নয়)।",
+      "tags": ["wireless", "basics"]
+    },
+    {
+      "question": "Wireless-এ CSMA/CA কেন ব্যবহৃত হয় CSMA/CD-র বদলে?",
+      "answer": "Wireless networks-এ collision detect করা কঠিন — hidden terminal problem ও signal attenuation এর কারণে। তাই CSMA/CA (Collision Avoidance) ব্যবহৃত হয় যা collision এড়ানোর চেষ্টা করে। RTS/CTS mechanism ব্যবহার করে hidden terminal problem সমাধান করা হয়।",
+      "tags": ["wireless", "csma-ca"]
+    },
+    {
+      "question": "Socket Programming কী?",
+      "answer": "Socket Programming হলো network communication-এর জন্য API যা different machines-এর process-গুলোকে communicate করতে দেয়। Socket = IP Address + Port Number। Types: (1) Stream Socket (TCP), (2) Datagram Socket (UDP)। create → bind → listen → accept/connect → send/recv।",
+      "tags": ["socket", "programming"]
+    },
+    {
+      "question": "TCP Socket-এর lifecycle কী কী?",
+      "answer": "TCP Socket lifecycle: (1) Socket create করো। (2) Server: Bind (port assign করো)। (3) Server: Listen (connection request অপেক্ষা করো)। (4) Server: Accept (connection গ্রহণ করো)। (5) Client: Connect (server-কে connect হও)। (6) Data transfer (send/recv)। (7) Close।",
+      "tags": ["socket", "tcp", "lifecycle"]
+    },
+    {
+      "question": "Network Topology কী কী?",
+      "answer": "Network Topology হলো network devices-গুলোর শারীরিক বা যুক্তিগত সাজানোর পদ্ধতি। প্রধান প্রকার: (1) Bus — সব একই line-এ। (2) Star — central hub-এর সাথে। (3) Ring — circular। (4) Mesh — সবার সাথে সংযুক্ত। (5) Tree — hierarchical।",
+      "tags": ["networking", "topology"]
+    },
+    {
+      "question": "LAN, MAN, WAN-এর পার্থক্য কী?",
+      "answer": "LAN (Local Area Network): ছোট এলাকা (building/campus), high speed, low cost। MAN (Metropolitan Area Network): মাঝারি এলাকা (শহর), 5-50 km। WAN (Wide Area Network): বড় এলাকা (দেশ/বিশ্ব), internet WAN-এর উদাহরণ। LAN-এর speed WAN-অপেক্ষা বেশি।",
+      "tags": ["networking", "lan", "man", "wan"]
+    },
+    {
+      "question": "Switch ও Hub-এর পার্থক্য কী?",
+      "answer": "Hub: Layer 1 (Physical), broadcast করে সব port-এ, collision domain বাড়ায়, কম efficient। Switch: Layer 2 (Data Link), MAC address table ব্যবহার করে destination-কে চিহ্নিত করে, collision domain ছোট করে, বেশি efficient। Switch Hub-এর উন্নত version।",
+      "tags": ["networking", "switch", "hub"]
+    },
+    {
+      "question": "Router কী এবং কী কাজ করে?",
+      "answer": "Router হলো Layer 3 (Network Layer) device যা different networks-এর মধ্যে data packet forward করে। IP address ব্যবহার করে routing table-এর ভিত্তিতে best path নির্বাচন করে। NAT, Firewall, DHCP — সব router-তে থাকতে পারে।",
+      "tags": ["networking", "router"]
+    },
+    {
+      "question": "NAT (Network Address Translation) কী?",
+      "answer": "NAT হলো private IP address-কে public IP address-তে রূপান্তর করার প্রক্রিয়া। এতে একাধিক devices একটি public IP share করতে পারে। Port Address Translation (PAT) — সবচেয়ে common। IPv4 address shortage সমাধানে NAT গুরুত্বপূর্ণ।",
+      "tags": ["networking", "nat"]
+    },
+    {
+      "question": "VPN কী?",
+      "answer": "VPN (Virtual Private Network) হলো public network (internet) দিয়ে private network-এর মতো secure connection establish করার পদ্ধতি। Tunneling protocol (IPSec, OpenVPN, L2TP) ব্যবহার করে encrypted tunnel তৈরি করে। Remote work, privacy — এর জন্য ব্যবহৃত হয়।",
+      "tags": ["security", "vpn"]
+    },
+    {
+      "question": "Error Detection ও Error Correction-এর পার্থক্য কী?",
+      "answer": "Error Detection: error আছে কি না শুধু check করে (Checksum, CRC)। Error Correction: error detect করার পাশাপাশি correct করে (Hamming Code, Reed-Solomon)। Detection সহজ, Correction জটিল কিন্তু retransmission এড়ায়।",
+      "tags": ["data-link-layer", "error-detection", "error-correction"]
+    },
+    {
+      "question": "Hamming Code কী?",
+      "answer": "Hamming Code হলো single-bit error correction code। Parity bits ব্যবহার করে error position detect করে। r parity bits দিয়ে 2^r - r - 1 bits data protect করা যায়। Hamming Distance 3 — 1-bit error correct, 2-bit error detect।",
+      "tags": ["data-link-layer", "hamming-code", "error-correction"]
+    },
+    {
+      "question": "Go-Back-N ও Selective Repeat-এর পার্থক্য কী?",
+      "answer": "Go-Back-N: receiver window = 1, error হলে corrupt frame সহ পরবর্তী সব frames আবার পাঠাতে হয়। Selective Repeat: receiver window > 1, শুধু corrupt frames আবার পাঠায়। Selective Repeat efficient কিন্তু receiver-তে buffer লাগে।",
+      "tags": ["data-link-layer", "go-back-n", "selective-repeat"]
+    },
+    {
+      "question": "TCP-তে Retransmission Timeout (RTO) কী?",
+      "answer": "RTO হলো sender-এর দ্বারা packet retransmit করার অপেক্ষার সময়। RTT (Round Trip Time) অনুযায়ী RTO calculate করা হয়। Karn's algorithm ও Jacobson's algorithm RTO estimate করে। Timeout হলে packet retransmit হয়।",
+      "tags": ["transport-layer", "tcp", "rto"]
+    },
+    {
+      "question": "ARP Spoofing কী?",
+      "answer": "ARP Spoofing হলো attacker false ARP messages পাঠিয়ে own MAC address-কে victim-এর IP-র সাথে associate করার পদ্ধতি। Man-in-the-middle attack, data interception — এর জন্য ব্যবহৃত হয়। Prevention: Dynamic ARP Inspection (DAI), static ARP entries।",
+      "tags": ["security", "arp-spoofing"]
+    },
+    {
+      "question": "TCP SYN Flood Attack কী?",
+      "answer": "SYN Flood হলো DoS (Denial of Service) attack যেখানে attacker অনেকগুলো SYN packet পাঠায় কিন্তু final ACK পাঠায় না। Server half-open connections-এ আটকে যায়। Prevention: SYN Cookies, rate limiting, firewall rules।",
+      "tags": ["security", "syn-flood", "dos"]
+    },
+    {
+      "question": "Classless Routing ও Classful Routing-এর পার্থক্য কী?",
+      "answer": "Classful Routing: IP address-কে নির্দিষ্ট class (A/B/C) অনুযায়ী ভাগ করে, subnet mask broadcast করে না। Classless Routing (CIDR): variable subnet mask ব্যবহার করে, subnet mask routing update-এ পাঠায়, address space efficient। VLSM শুধু classless-এ সম্ভব।",
+      "tags": ["network-layer", "classful", "classless"]
+    },
+    {
+      "question": "Socket Address কী?",
+      "answer": "Socket Address হলো IP Address ও Port Number-র combination যা একটি specific network endpoint-কে চিহ্নিত করে। Structure: (IP Address, Port Number)। উদাহরণ: (192.168.1.1, 80)। TCP socket tuple: (source IP, source port, dest IP, dest port)।",
+      "tags": ["socket", "address"]
+    },
+    {
+      "question": "Proxy Server কী?",
+      "answer": "Proxy Server হলো intermediate server যা client ও internet-এর মধ্যে কাজ করে। client request proxy-র কাছে যায়, proxy server request forward করে। Types: (1) Forward Proxy — client-side। (2) Reverse Proxy — server-side। Caching, anonymity, security — এর জন্য ব্যবহৃত হয়।",
+      "tags": ["networking", "proxy"]
+    },
+    {
+      "question": "Quality of Service (QoS) কী?",
+      "answer": "QoS হলো network traffic-কে priority অনুযায়ী manage করার পদ্ধতি। ভিডিও স্ট্রিমিং, VoIP — এদের জন্য low latency ও jitter guarantee প্রয়োজন। Traffic shaping, packet prioritization, bandwidth allocation — QoS-এর কৌশল।",
+      "tags": ["networking", "qos"]
+    },
+    {
+      "question": "Subnet Mask /24 ও /25 এর পার্থক্য কী?",
+      "answer": "/24 = 255.255.255.0 → 256 hosts (2^8 - 2 = 254 usable)। /25 = 255.255.255.128 → 128 hosts (2^7 - 2 = 126 usable)। /25 subnetting করলে একটি /24 network 2টি subnet-এ ভাগ হয়।",
+      "tags": ["network-layer", "subnetting"]
+    },
+    {
+      "question": "Traceroute কীভাবে কাজ করে?",
+      "answer": "Traceroute source থেকে destination পর্যন্ত প্রতিটি router-কে trace করে। TTL (Time to Live) field ব্যবহার করে। TTL=1 দিয়ে শুরু, প্রতিটি router TTL decrement করে, TTL=0 হলে ICMP Time Exceeded message পাঠায়। ক্রমিকভাবে TTL বাড়িয়ে সব router খুঁজে বের করা হয়।",
+      "tags": ["network-layer", "traceroute", "icmp"]
+    },
+    {
+      "question": "Spanning Tree Protocol (STP) কী?",
+      "answer": "STP হলো Layer 2 protocol যা switched networks-এ loop এড়াতে ব্যবহৃত হয়। Bridge ID ও port cost ব্যবহার করে tree structure তৈরি করে। Redundant links block করে। RSTP (Rapid STP) — faster convergence। Network redundancy রাখতে loop prevention প্রয়োজন।",
+      "tags": ["data-link-layer", "stp"]
+    },
+    {
+      "question": "Virtual LAN (VLAN) কী?",
+      "answer": "VLAN হলো একটি physical network-কে logical subnetworks-এ ভাগ করার পদ্ধতি। একই switch-তে থাকা devices-কে different VLAN-এ ভাগ করা যায়। Broadcast domain ছোট হয়, security বাড়ে। Inter-VLAN routing-এর জন্য router/l3 switch প্রয়োজন।",
+      "tags": ["networking", "vlan"]
+    },
+    {
+      "question": "Congestion কী এবং এর সমাধান কী?",
+      "answer": "Congestion হলো network-তে অতিরিক্ত traffic-এর কারণে performance হ্রাস। সমাধান: (1) Provisioning — bandwidth বাড়ানো। (2) Traffic shaping — packet scheduling। (3) Congestion control — TCP-তে AIMD। (4) Admission control — new connections limit করা।",
+      "tags": ["transport-layer", "congestion"]
+    },
+    {
+      "question": "Load Balancing কী?",
+      "answer": "Load Balancing হলো incoming traffic-কে multiple servers-এর মধ্যে distribute করার প্রক্রিয়া। এতে কোনো একটি server overload হয় না। Types: (1) Hardware Load Balancer। (2) Software Load Balancer (Nginx, HAProxy)। Round Robin, Least Connections — algorithms।",
+      "tags": ["networking", "load-balancing"]
+    }
+  ]
+}

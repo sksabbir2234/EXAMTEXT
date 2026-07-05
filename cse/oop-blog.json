@@ -1,0 +1,428 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Object Oriented Programming — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে OOP-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Object Oriented Programming (OOP) কী?",
+      "answer": "OOP হলো একটি programming paradigm যেখানে software-কে objects-এর সমন্বয়ে তৈরি করা হয়। objects data (attribute) ও behavior (method) ধারণ করে। মূল ধারণা হলো real-world entity-কে code-এ model করা। C++, Java, Python, C# — সব OOP language।",
+      "tags": ["oop", "basics", "definition"]
+    },
+    {
+      "question": "Procedural Programming ও OOP-এর পার্থক্য কী?",
+      "answer": "Procedural Programming: function-based, data ও function আলাদা, code reusability কম। OOP: object-based, data ও method একসাথে, encapsulation দিয়ে data security বেশি, inheritance দিয়ে reusability বেশি। Procedural-এ global data shared, OOP-তে data hiding possible।",
+      "tags": ["oop", "procedural", "comparison"]
+    },
+    {
+      "question": "Class কী?",
+      "answer": "Class হলো object-এর blueprint বা template। এটি define করে object-কে কী ধরনের data ও methods থাকবে। নিজে object নয়, তবে object তৈরি করার জন্য ব্যবহৃত হয়। যেমন: class Car { String color; void start() { } }",
+      "tags": ["class", "basics"]
+    },
+    {
+      "question": "Object কী?",
+      "answer": "Object হলো class-এর instance। class থেকে তৈরি হয়। প্রতিটি object-এর নিজস্ব state (data) ও behavior (method) থাকে। যেমন: Car myCar = new Car(); — myCar হলো object। memory-তে সংরক্ষিত হয়।",
+      "tags": ["object", "basics"]
+    },
+    {
+      "question": "Class ও Object-এর পার্থক্য কী?",
+      "answer": "Class = Blueprint, Object = Real instance। Class define করে structure, Object সেটি বাস্তবায়ন করে। Class memory-তে তৈরি হয় না (except class object), Object memory-তে তৈরি হয়। একটি class থেকে অনেক object তৈরি করা যায়।",
+      "tags": ["class", "object", "comparison"]
+    },
+    {
+      "question": "Encapsulation কী?",
+      "answer": "Encapsulation হলো data ও methods-কে একত্রিত করা এবং বাইরের access সীমাবদ্ধ করা। private data member ব্যবহার করে direct access বন্ধ করা হয়। getter/setter methods দিয়ে access control করা হয়। এটি data hiding-এর মূল পদ্ধতি।",
+      "tags": ["encapsulation", "data-hiding"]
+    },
+    {
+      "question": "Abstraction কী?",
+      "answer": "Abstraction হলো শুধুমাত্র essential features দেখানো এবং background details লুকানো। abstract class ও interface দিয়ে abstraction implement করা হয়। যেমন Car চালাতে গিয়ে engine-র internal mechanics জানার প্রয়োজন নেই — এটিই abstraction।",
+      "tags": ["abstraction", "basics"]
+    },
+    {
+      "question": "Inheritance কী?",
+      "answer": "Inheritance হলো একটি class (child/subclass) অন্য একটি class (parent/superclass)-র properties ও methods inherit করার প্রক্রিয়া। code reusability বাড়ে। parent class থেকে child class-তে members pass হয়। extends keyword ব্যবহৃত হয়।",
+      "tags": ["inheritance", "basics"]
+    },
+    {
+      "question": "Polymorphism কী?",
+      "answer": "Polymorphism হলো একই interface দিয়ে ভিন্ন ভিন্ন behavior execute করার ক্ষমতা। দুই প্রকার: (1) Compile-time (Method Overloading) — একই নামের method, ভিন্ন parameter। (2) Runtime (Method Overriding) — parent method child-তে override।",
+      "tags": ["polymorphism", "basics"]
+    },
+    {
+      "question": "OOP-এর চারটি মূল স্তম্ভ কী কী?",
+      "answer": "OOP-এর চারটি মূল স্তম্ভ: (1) Encapsulation — data hiding। (2) Abstraction — essential feature দেখানো। (3) Inheritance — code reuse। (4) Polymorphism — একই interface, ভিন্ন behavior। এগুলো OOP-এর ভিত্তি।",
+      "tags": ["oop", "pillars", "basics"]
+    },
+    {
+      "question": "Single Inheritance কী?",
+      "answer": "Single Inheritance-এ একটি child class শুধুমাত্র একটি parent class থেকে inherit করে। সবচেয়ে সাধারণ ধরনের inheritance। যেমন: class Animal { } — class Dog extends Animal { }। Dog, Animal-র properties পায়।",
+      "tags": ["inheritance", "single"]
+    },
+    {
+      "question": "Multiple Inheritance কী?",
+      "answer": "Multiple Inheritance-এ একটি child class একাধিক parent class থেকে inherit করে। Java-তে class দিয়ে multiple inheritance সম্ভব নয় (Diamond Problem-এর কারণে), তবে interface দিয়ে সম্ভব। C++ Python-তে multiple inheritance supported।",
+      "tags": ["inheritance", "multiple"]
+    },
+    {
+      "question": "Multilevel Inheritance কী?",
+      "answer": "Multilevel Inheritance-এ inheritance chain তৈরি হয় — grandparent → parent → child। প্রতিটি class তার parent থেকে inherit করে। যেমন: class A { } — class B extends A { } — class C extends B { }। C, A ও B উভয়ের properties পায়।",
+      "tags": ["inheritance", "multilevel"]
+    },
+    {
+      "question": "Hierarchical Inheritance কী?",
+      "answer": "Hierarchical Inheritance-এ একাধিক child class একই parent class থেকে inherit করে। যেমন: class Animal { } — class Dog extends Animal { } — class Cat extends Animal { }। Dog ও Cat উভয়ই Animal-র properties পায়।",
+      "tags": ["inheritance", "hierarchical"]
+    },
+    {
+      "question": "Hybrid Inheritance কী?",
+      "answer": "Hybrid Inheritance হলো দুই বা ততোধিক inheritance type-র সমন্বয়। যেমন single + multiple, বা hierarchical + multilevel। Diamond Problem এড়াতে Java-তে interface ব্যবহার করা হয়। virtual inheritance C++-তে diamond problem সমাধান করে।",
+      "tags": ["inheritance", "hybrid"]
+    },
+    {
+      "question": "Diamond Problem কী?",
+      "answer": "Diamond Problem হলো multiple inheritance-এ সমস্যা যখন দুটি parent class একই grandparent থেকে inherit করে এবং child উভয় থেকে inherit করে। ambiguity তৈরি হয় — কোন grandparent method call হবে? Java interface দিয়ে, C++ virtual inheritance দিয়ে সমাধান করে।",
+      "tags": ["inheritance", "diamond-problem"]
+    },
+    {
+      "question": "Method Overloading কী?",
+      "answer": "Method Overloading হলো compile-time polymorphism। একই class-এ একই নামের method ভিন্ন parameter list দিয়ে define করা হয়। parameter সংখ্যা, type, order ভিন্ন হতে হবে। return type ভিন্ন হলে alone method overloading হয় না।",
+      "tags": ["method-overloading", "compile-time"]
+    },
+    {
+      "question": "Method Overriding কী?",
+      "answer": "Method Overriding হলো runtime polymorphism। child class parent class-র method-কে নতুনভাবে implement করে। method signature same থাকতে হয়। @Override annotation ব্যবহৃত হয়। runtime-তে actual object-র method call হয় (dynamic dispatch)।",
+      "tags": ["method-overriding", "runtime"]
+    },
+    {
+      "question": "Method Overloading ও Method Overriding-এর পার্থক্য কী?",
+      "answer": "Overloading: compile-time, same class, different parameters, static binding। Overriding: runtime, parent-child class, same signature, dynamic binding। Overloading-তে method name same, parameter different। Overriding-তে signature same, implementation different।",
+      "tags": ["method-overloading", "method-overriding", "comparison"]
+    },
+    {
+      "question": "Compile-time Polymorphism কী?",
+      "answer": "Compile-time Polymorphism (Static Binding) হলো method overloading এবং operator overloading। compiler compile time-তে decide করে কোন method call হবে। fast execution কারণ runtime-তে lookup লাগে না। C++-তে operator overloading, Java-তে method overloading।",
+      "tags": ["compile-time", "polymorphism"]
+    },
+    {
+      "question": "Runtime Polymorphism কী?",
+      "answer": "Runtime Polymorphism (Dynamic Binding) হলো method overriding। JVM/JIT compiler runtime-তে decide করে কোন method call হবে। virtual function table (vtable) ব্যবহৃত হয়। parent reference child object point করলে child-র method call হয়।",
+      "tags": ["runtime", "polymorphism"]
+    },
+    {
+      "question": "Abstract Class কী?",
+      "answer": "Abstract class হলো এমন class যার object তৈরি করা যায় না। abstract methods থাকতে পারে (implementation নেই) এবং concrete methods ও থাকতে পারে। abstract method কেবল abstract class-এ define করা যায়। subclass গুলোকে abstract methods implement করতে হয়।",
+      "tags": ["abstract-class", "abstraction"]
+    },
+    {
+      "question": "Interface কী?",
+      "answer": "Interface হলো abstract type যেখানে শুধু method signature থাকে, implementation নেই। class interface implement করলে সব methods implement করতে হয়। Java-তে interface দিয়ে multiple inheritance possible। interface constants সবসময় public static final।",
+      "tags": ["interface", "abstraction"]
+    },
+    {
+      "question": "Abstract Class ও Interface-এর পার্থক্য কী?",
+      "answer": "Abstract Class: concrete methods থাকতে পারে, single inheritance, variables যেকোনো type, constructor থাকতে পারে। Interface: শুধু abstract methods (Java 8+ তে default), multiple inheritance, variables সব static final, constructor নেই। 'is-a' relationship abstract class, 'can-do' relationship interface।",
+      "tags": ["abstract-class", "interface", "comparison"]
+    },
+    {
+      "question": "Constructor কী?",
+      "answer": "Constructor হলো এমন special method যা object instantiation-এর সময় automatically call হয়। class-র নামেই constructor হয়। return type থাকে না। object initialize করতে ব্যবহৃত হয়। যেমন: class Car { Car() { } } — এটিই constructor।",
+      "tags": ["constructor", "basics"]
+    },
+    {
+      "question": "Default Constructor কী?",
+      "answer": "Default constructor parameter ছাড়াই কাজ করে। যদি কোনো constructor define না করা থাকে, compiler automatically default constructor তৈরি করে। এটি instance variables-কে default value দেয় (0, null, false)।",
+      "tags": ["constructor", "default"]
+    },
+    {
+      "question": "Parameterized Constructor কী?",
+      "answer": "Parameterized constructor হলো যেটিতে parameters pass করা হয়। object creation-এর সময় specific values দিতে হয়। যেমন: Car(String c) { color = c; }। Car myCar = new Car(\"Red\"); — myCar-র color Red হবে।",
+      "tags": ["constructor", "parameterized"]
+    },
+    {
+      "question": "Copy Constructor কী?",
+      "answer": "Copy constructor হলো যেটি একটি object-র কপি তৈরি করে। একটি same class-র object parameter হিসেবে নেয়। যেমন: Car(Car other) { this.color = other.color; }। deep copy ও shallow copy — দুই ধরনের copy possible।",
+      "tags": ["constructor", "copy"]
+    },
+    {
+      "question": "Destructor কী?",
+      "answer": "Destructor হলো special method যা object destroy হওয়ার পর automatically call হয়। memory cleanup করে। C++-তে ~ClassName() syntax, Java-তে explicit destructor নেই (Garbage Collector কাজ করে)। Python-তে __del__() method।",
+      "tags": ["destructor", "basics"]
+    },
+    {
+      "question": "Constructor ও Destructor-এর পার্থক্য কী?",
+      "answer": "Constructor: object creation-এর সময় call হয়, initialize করে, class-র নাম। Destructor: object destruction-এর সময় call হয়, cleanup করে, ~ prefix (C++)। Constructor multiple থাকতে পারে, destructor সাধারণত একটি।",
+      "tags": ["constructor", "destructor", "comparison"]
+    },
+    {
+      "question": "`this` keyword কী?",
+      "answer": "`this` keyword current object-কে reference করে। instance variable ও local variable-র নাম same হলে `this` দিয়ে distinguish করা হয়। `this.name = name;` — এখানে `this.name` instance variable, `name` parameter। constructor-তে অন্য constructor call করতেও `this()` ব্যবহৃত হয়।",
+      "tags": ["this", "keyword"]
+    },
+    {
+      "question": "`super` keyword কী?",
+      "answer": "`super` keyword parent class-কে reference করে। parent class-র method override করা থাকলে `super.method()` দিয়ে parent-র method call করা যায়। child class constructor-তে `super()` দিয়ে parent constructor call করা হয়। parent variable access করতেও ব্যবহৃত হয়।",
+      "tags": ["super", "keyword"]
+    },
+    {
+      "question": "`static` keyword কী?",
+      "answer": "`static` keyword class level-এ belong করে, object level-এ না। static method ও variable class instantiation ছাড়াই access করা যায়। main method static কারণ JVM class load করার পরই call করে। static block class loading-এর সময় execute হয়।",
+      "tags": ["static", "keyword"]
+    },
+    {
+      "question": "`final` keyword কী?",
+      "answer": "`final` keyword তিন ধরনে ব্যবহৃত হয়: (1) final variable — constant, value change করা যায় না। (2) final method — override করা যায় না। (3) final class — inherit করা যায় না (যেমন String class)। immutable objects তৈরিতে ব্যবহৃত হয়।",
+      "tags": ["final", "keyword"]
+    },
+    {
+      "question": "`static` ও `final` keyword-এর পার্থক্য কী?",
+      "answer": "static: class-level, object-independent, single copy। final: unchangeable, constant। static final = class constant (যেমন Math.PI)। static method-তে instance variable access যায় না। final variable-র value assign একবারই করতে হয়।",
+      "tags": ["static", "final", "comparison"]
+    },
+    {
+      "question": "Virtual Function কী (C++)?",
+      "answer": "Virtual function হলো base class-র method যাকে derived class-এ override করা যায়। `virtual` keyword দিয়ে declare করা হয়। base class pointer দিয়ে derived object access করলে runtime-তে derived class-র method call হয়। vtable ব্যবহার করে dynamic dispatch হয়।",
+      "tags": ["virtual-function", "cpp", "runtime"]
+    },
+    {
+      "question": "Virtual Function Table (vtable) কী?",
+      "answer": "vtable হলো virtual functions-এর dispatch table। প্রতিটি class যার virtual function আছে সেটির একটি vtable থাকে। object-তে vptr (vtable pointer) থাকে। runtime-তে vptr দিয়ে vtable access করে correct method call হয়। GATE CSE-তে vtable structure নিয়ে প্রশ্ন আসে।",
+      "tags": ["vtable", "cpp", "dynamic-dispatch"]
+    },
+    {
+      "question": "Dynamic Dispatch কী?",
+      "answer": "Dynamic Dispatch হলো runtime-তে method call determine করার প্রক্রিয়া। virtual function বা method overriding-এ ব্যবহৃত হয়। compile time-তে জানা যায় না কোন method call হবে — object-র actual type দেখে runtime-তে decide হয়। vtable/vptr ব্যবহৃত হয়।",
+      "tags": ["dynamic-dispatch", "runtime", "polymorphism"]
+    },
+    {
+      "question": "SOLID Principles কী কী?",
+      "answer": "SOLID হলো 5টি OOP design principle: (1) S — Single Responsibility Principle। (2) O — Open/Closed Principle। (3) L — Liskov Substitution Principle। (4) I — Interface Segregation Principle। (5) D — Dependency Inversion Principle। এগুলো maintainable code লিখতে সাহায্য করে।",
+      "tags": ["solid", "design-principles"]
+    },
+    {
+      "question": "Single Responsibility Principle কী?",
+      "answer": "Single Responsibility Principle (SRP) অনুযায়ী প্রতিটি class-এর শুধুমাত্র একটি responsibility থাকতে হবে। একটি class একাধিক কাজ করলে পরিবর্তন করা কঠিন হয়। class cohesion বাড়ে, coupling কমে।",
+      "tags": ["solid", "single-responsibility"]
+    },
+    {
+      "question": "Open/Closed Principle কী?",
+      "answer": "Open/Closed Principle (OCP) অনুযায়ী software entities open for extension কিন্তু closed for modification। নতুন feature যোগ করতে existing code modify না করে extension/addition দিয়ে করতে হয়। polymorphism, abstraction দিয়ে achieve করা হয়।",
+      "tags": ["solid", "open-closed"]
+    },
+    {
+      "question": "Liskov Substitution Principle কী?",
+      "answer": "Liskov Substitution Principle (LSP) অনুযায়ী parent class-র objectকে child class-র object দিয়ে replace করা যায় এমনভাবে যে program-এর behavior change না হয়। subclass parent class-র contract ভাঙতে পারে না।",
+      "tags": ["solid", "liskov-substitution"]
+    },
+    {
+      "question": "Interface Segregation Principle কী?",
+      "answer": "Interface Segregation Principle (ISP) অনুযায়ী client-দের তাদের ব্যবহার না করা methods implement করতে হবে না। বড় interface-এর বদলে ছোট ছোট specific interface তৈরি করতে হয়। fat interface avoid করতে হয়।",
+      "tags": ["solid", "interface-segregation"]
+    },
+    {
+      "question": "Dependency Inversion Principle কী?",
+      "answer": "Dependency Inversion Principle (DIP) অনুযায়ী high-level modules low-level modules-র উপর depend করবে না, দুটোই abstraction-র উপর depend করবে। abstraction details-র উপর depend করবে না। loose coupling তৈরি হয়।",
+      "tags": ["solid", "dependency-inversion"]
+    },
+    {
+      "question": "Factory Pattern কী?",
+      "answer": "Factory Pattern হলো creational design pattern যেখানে object creation logic একটি factory method-তে encapsulate করা হয়। client code কে জানতে হয় না কোন specific class instantiate হচ্ছে। runtime-তে determine হয় কোন object তৈরি হবে। যেমন: ShapeFactory.createShape(\"circle\")।",
+      "tags": ["design-pattern", "factory", "creational"]
+    },
+    {
+      "question": "Singleton Pattern কী?",
+      "answer": "Singleton Pattern হলো creational design pattern যেখানে একটি class-এর একটি মাত্র instance তৈরি করা হয়। private constructor, static instance variable, public static method (getInstance) ব্যবহৃত হয়। Database connection, Logger-এ ব্যবহৃত হয়। thread-safe singleton তৈরি করতে double-checked locking ব্যবহার করা হয়।",
+      "tags": ["design-pattern", "singleton", "creational"]
+    },
+    {
+      "question": "Observer Pattern কী?",
+      "answer": "Observer Pattern হলো behavioral design pattern যেখানে একটি object (subject) state পরিবর্তন করলে সব observer-কে automatically notify করা হয়। publish-subscribe model। Event handling, GUI frameworks, notification systems-এ ব্যবহৃত হয়। loose coupling maintain করে।",
+      "tags": ["design-pattern", "observer", "behavioral"]
+    },
+    {
+      "question": "Strategy Pattern কী?",
+      "answer": "Strategy Pattern হলো behavioral design pattern যেখানে algorithm-কে একটি family-তে আলাদা করে define করা হয় এবং runtime-তে select করা যায়। Context object একটি strategy reference ধারণ করে। Sorting algorithms, payment methods-এ ব্যবহৃত হয়।",
+      "tags": ["design-pattern", "strategy", "behavioral"]
+    },
+    {
+      "question": "Composition ও Inheritance-এর পার্থক্য কী?",
+      "answer": "Inheritance: 'is-a' relationship (Dog is Animal), parent-child, compile-time binding। Composition: 'has-a' relationship (Car has Engine), object contain করে, runtime-তে পরিবর্তন সম্ভব। Composition বেশি flexible, tight coupling avoid করে। 'Favor composition over inheritance' — SOLID principle।",
+      "tags": ["composition", "inheritance", "comparison"]
+    },
+    {
+      "question": "Garbage Collection কী?",
+      "answer": "Garbage Collection হলো automatic memory management-এর প্রক্রিয়া। যে objects আর reference ধারণ করে না সেগুলোকে memory থেকে মুক্ত করে। Java, Python, C#-তে GC আছে। C++-তে manual memory management (delete)। GC stops-the-world, mark-sweep, generational GC — বিভিন্ন algorithm।",
+      "tags": ["garbage-collection", "memory-management"]
+    },
+    {
+      "question": "Shallow Copy ও Deep Copy-এর পার্থক্য কী?",
+      "answer": "Shallow Copy: object-র reference copy হয়, nested object shared থাকে। যেমন: Object.clone() shallow copy। Deep Copy: nested objects-ও copy হয়, independent। Deep copy তৈরি করতে custom copy constructor বা serialization ব্যবহার করতে হয়।",
+      "tags": ["shallow-copy", "deep-copy"]
+    },
+    {
+      "question": "Covariant Return Type কী?",
+      "answer": "Covariant Return Type হলো method overriding-এ child class method-র return type parent method-র return type-র subclass হওয়া। যেমন: parent returns Animal, child returns Dog। compile-time-তে return type check হয়, runtime-তে actual object-র type return হয়।",
+      "tags": ["covariant", "return-type", "overriding"]
+    },
+    {
+      "question": "Object Class কী?",
+      "answer": "Object class হলো Java-র সব class-র parent। সব classes Object class থেকে inherit হয়। methods: toString(), equals(), hashCode(), getClass(), clone(), finalize()। Object reference দিয়ে যেকোনো object-কে represent করা যায়।",
+      "tags": ["object-class", "java", "basics"]
+    },
+    {
+      "question": "equals() ও hashCode() contract কী?",
+      "answer": "Java-তে যদি দুটি object equals() দিয়ে same হয়, তাহলে hashCode() same হতে হবে। কিন্তু hashCode same হলে equals same নাও হতে পারে। HashMap, HashSet-এ এই contract মানতে হয়। equals override করলে hashCodeও override করতে হয়।",
+      "tags": ["equals", "hashcode", "contract"]
+    },
+    {
+      "question": "Immutable Class কীভাবে তৈরি করে?",
+      "answer": "Immutable Class তৈরি করতে: (1) class-কে final করো। (2) fields private final। (3) constructor দিয়ে initialize করো। (4) setter methods না থাকুক। (5) mutable object return না করো (defensive copy)। String, Integer — Java-র immutable classes।",
+      "tags": ["immutable", "class", "design"]
+    },
+    {
+      "question": "Composition-এর সুবিধা কী কী?",
+      "answer": "Composition-এর সুবিধা: (1) Loose coupling। (2) Runtime-তে behavior change সম্ভব। (3) Code reusability বেশি। (4) Testability ভালো (mock করা সহজ)। (5) Single Responsibility Principle মানা সহজ। Inheritance-এর তুলনায় বেশি flexible।",
+      "tags": ["composition", "advantages"]
+    },
+    {
+      "question": "Coupling ও Cohesion কী?",
+      "answer": "Coupling: modules-এর মধ্যে dependency। কম coupling = ভালো (loose coupling)। Cohesion: module-র internal elements-এর সম্পর্ক। বেশি cohesion = ভালো (single responsibility)। OOP-তে composition over inheritance, interface-based design দিয়ে low coupling, high cohesion achieve করা হয়।",
+      "tags": ["coupling", "cohesion", "design"]
+    },
+    {
+      "question": "Polymorphism-এর সুবিধা কী কী?",
+      "answer": "Polymorphism-এর সুবিধা: (1) Code flexibility বাড়ে। (2) New classes add করলে existing code change লাগে না। (3) Runtime behavior change সম্ভব। (4) Interface reuse। (5) Testability বাড়ে। (6) Design patterns implement করা সহজ হয়।",
+      "tags": ["polymorphism", "advantages"]
+    },
+    {
+      "question": "Abstract Class-কে interface-র বদলে কেন ব্যবহার করে?",
+      "answer": "Abstract class ব্যবহার করে যখন common behavior share করতে হয়। interface-এ method implementation থাকে না, abstract class-এ থাকে। 'is-a' relationship থাকলে abstract class। constructor, instance variables, non-abstract methods — এগুলো abstract class-তে possible, interface-তে নয়।",
+      "tags": ["abstract-class", "interface", "design"]
+    },
+    {
+      "question": "Aggregation ও Composition-এর পার্থক্য কী?",
+      "answer": "Aggregation: weak 'has-a' relationship, contained object independent (যেমন Department-তে Teacher — Teacher independent)। Composition: strong 'has-a' relationship, contained object dependent (যেমন House-তে Room — Room独立 নয়)। Aggregation-এ lifetime independent, Composition-এ dependent।",
+      "tags": ["aggregation", "composition", "relationship"]
+    },
+    {
+      "question": "Friend Function কী (C++)?",
+      "answer": "Friend function হলো বাইরের function যাকে class-র private/protected members access করার অনুমতি দেওয়া হয়। `friend` keyword ব্যবহার করে declare করা হয়। encapsulation break করে তাই সঠিকভাবে ব্যবহার করতে হয়। operator overloading-তে ব্যবহৃত হয়।",
+      "tags": ["friend-function", "cpp", "encapsulation"]
+    },
+    {
+      "question": "Operator Overloading কী?",
+      "answer": "Operator overloading হলো compile-time polymorphism যেখানে operators-কে custom classes-এর জন্য define করা হয়। C++-তে operator+() method দিয়ে overloading করা হয়। Python-তে __add__() dunder method। Java-তে string concatenation (+) ছাড়া operator overloading নেই।",
+      "tags": ["operator-overloading", "polymorphism"]
+    },
+    {
+      "question": "Covariance ও Contravariance কী?",
+      "answer": "Covariance: subtype return type allowed (child type return)। Contravariance: parent type parameter allowed (parent type accept)। Java-তে arrays covariant (String[] is Object[]), generics invariant (List<String> is NOT List<Object>)। wildcards (?, extends, super) variance handle করে।",
+      "tags": ["variance", "generics", "types"]
+    },
+    {
+      "question": "Marker Interface কী?",
+      "answer": "Marker interface হলো এমন interface যেটিতে কোনো method থাকে না — শুধু JVM-কে signal দেয়। যেমন: Serializable, Cloneable, Remote। class এই interface implement করলে JVM বুঝতে পারে যে objects-এর সাথে special operation করা যায়।",
+      "tags": ["marker-interface", "java"]
+    },
+    {
+      "question": "Enum কী?",
+      "answer": "Enum (Enumeration) হলো named constants-এর set। Java-তে enum class-এর মতো — methods, fields, constructor থাকতে পারে। type-safe, compile-time checked। switch statement-তে ব্যবহৃত হয়। ordinal(), values(), valueOf() — প্রধান methods।",
+      "tags": ["enum", "java", "constants"]
+    },
+    {
+      "question": "Exception Handling ও OOP-এর সম্পর্ক কী?",
+      "answer": "Exception handling OOP-এর part — Throwable class hierarchy। try-catch-finally block। checked (compile-time) ও unchecked (runtime) exceptions। custom exception তৈরি করা যায়। Exception handling-এ polymorphism ব্যবহৃত হয় — parent Exception catch করলে child exceptionও catch হয়।",
+      "tags": ["exception", "oop", "java"]
+    },
+    {
+      "question": "Generics কী?",
+      "answer": "Generics হলো type-safe code লেখার পদ্ধতি। compile time-তে type check হয়। type casting-এর প্রয়োজন কমে। List<String>, Map<Integer, String> — generics এর উদাহরণ। type erasure — runtime-তে generic type info থাকে না। wildcard (? extends, ? super) flexible generics দেয়।",
+      "tags": ["generics", "type-safety"]
+    },
+    {
+      "question": "Tight Coupling ও Loose Coupling কী?",
+      "answer": "Tight Coupling: classes পরস্পরের উপর বেশি depend — পরিবর্তন করলে অন্যটিও পরিবর্তন করতে হয়। Loose Coupling: classes independent — abstraction/interface দিয়ে depend, পরিবর্তন সহজ। OOP-তে loose coupling করতে composition, interface, dependency injection ব্যবহার করা হয়।",
+      "tags": ["coupling", "design"]
+    },
+    {
+      "question": "Cohesion-এর প্রকারভেদ কী কী?",
+      "answer": "Cohesion-এর ধাপে ধাপে types: (1) Coincidental — সবচেয়ে খারাপ। (2) Logical। (3) Temporal। (4) Procedural। (5) Communicational। (6) Sequential। (7) Functional — সবচেয়ে ভালো। high cohesion = single responsibility, কম classes-এ more functionality।",
+      "tags": ["cohesion", "types"]
+    },
+    {
+      "question": "Polymorphism-কে 'one interface, many forms' বলা হয় কেন?",
+      "answer": "Polymorphism-এ একটি interface method different classes-এ different behavior দেখায়। draw() method Animal-এ different, Dog-এ different, Cat-এ different behavior দেখাতে পারে। একই method signature, ভিন্ন implementation — 'many forms'। runtime-তে actual object-র method execute হয়।",
+      "tags": ["polymorphism", "concept"]
+    },
+    {
+      "question": "Constructor Chaining কী?",
+      "answer": "Constructor Chaining হলো একটি constructor থেকে অন্য constructor call করার প্রক্রিয়া। same class-এ this() call, parent class-এ super() call। এতে code duplication কমে। Java-তে super() call first-এ হতে হয়। inheritance chain-এ super chain follow করতে হয়।",
+      "tags": ["constructor", "chaining"]
+    },
+    {
+      "question": "Method hiding কী?",
+      "answer": "Method hiding হলো static methods-এর সাথে ঘটে। parent class-র static method child class-এ same name দিয়ে define করলে overriding হয় না — hiding হয়। polymorphism কাজ করে না। runtime-তে parent reference-এ parent method, child reference-এ child method call হয়।",
+      "tags": ["method-hiding", "static", "polymorphism"]
+    },
+    {
+      "question": "Finalize method কী?",
+      "answer": "finalize() method garbage collector object destroy করার আগে call করে। Object class-র method। resource cleanup করতে ব্যবহৃত হতো (বর্তমানে deprecated)। finalize() এর timing不确定। try-finally বা try-with-resources ব্যবহার করা উচিত।",
+      "tags": ["finalize", "garbage-collection"]
+    },
+    {
+      "question": "Abstract class-তে constructor থাকতে পারে কেন?",
+      "answer": "Abstract class-র object তৈরি হয় না, তবে constructor থাকতে পারে কারণ subclass instantiate হওয়ার সময় parent constructor call হয়। super() দিয়ে parent abstract class constructor call করা হয়। parent class-র fields initialize করতে constructor প্রয়োজন।",
+      "tags": ["abstract-class", "constructor"]
+    },
+    {
+      "question": "Interface-তে default method কী (Java 8+)?",
+      "answer": "Java 8+ তে interface-তে default method implement করা যায়। `default` keyword ব্যবহার করে method body দেওয়া যায়। এতে interface implement করা classes-কে সব method override করতে হয় না। backward compatibility রাখতে এটি যোগ করা হয়েছে।",
+      "tags": ["interface", "default-method", "java8"]
+    },
+    {
+      "question": "Interface-তে static method কী?",
+      "answer": "Java 8+ তে interface-তে static method থাকতে পারে। interface name দিয়ে call করতে হয় (InterfaceName.staticMethod())। implementation class-র object লাগে না। utility methods interface-তে define করতে ব্যবহৃত হয়।",
+      "tags": ["interface", "static-method", "java8"]
+    },
+    {
+      "question": "Composition over Inheritance কেন বলা হয়?",
+      "answer": "Composition over Inheritance বলা হয় কারণ composition বেশি flexible। inheritance-এ parent class পরিবর্তন হলে child class-ও affected। composition-এ object swap করে behavior change করা যায়। tight coupling avoid হয়। testability, maintainability — সব improve হয়।",
+      "tags": ["composition", "inheritance", "design-principle"]
+    },
+    {
+      "question": "Association, Aggregation, Composition — তিনটি কী?",
+      "answer": "Association: general relationship between classes (Teacher teaches Student)। Aggregation: weak has-a, independent lifetime (Department has Teachers)। Composition: strong has-a, dependent lifetime (House has Rooms)। Association > Aggregation > Composition — strength বাড়ে।",
+      "tags": ["association", "aggregation", "composition"]
+    },
+    {
+      "question": "Garbage Collection-এর algorithms কী কী?",
+      "answer": "GC algorithms: (1) Mark-Sweep — mark reachable objects, sweep unreachable। (2) Copying — copy live objects to new space। (3) Mark-Compact — mark and move objects। (4) Generational — young/old generation separate। (5) G1, ZGC, Shenandoah — modern JVM GC।",
+      "tags": ["garbage-collection", "algorithms"]
+    },
+    {
+      "question": "Garbage Collection-তে Memory Leak কীভাবে ঘটে?",
+      "answer": "GC automatically free করে, তবে memory leak ঘটতে পারে। যেমন: static collection-তে objects add করে remove না করলে, listener remove না করলে, circular reference (GC roots reachable হলে)। developer-দেরও memory management সচেতন থাকতে হয়।",
+      "tags": ["garbage-collection", "memory-leak"]
+    },
+    {
+      "question": "Design Pattern-এর তিনটি প্রধান category কী কী?",
+      "answer": "Design Pattern-এর তিনটি category: (1) Creational — object creation control (Singleton, Factory, Builder, Prototype)। (2) Structural — class/object composition (Adapter, Decorator, Proxy, Facade)। (3) Behavioral — object communication (Observer, Strategy, Command, Iterator)।",
+      "tags": ["design-pattern", "categories"]
+    },
+    {
+      "question": "Builder Pattern কী?",
+      "answer": "Builder Pattern হলো creational design pattern যা complex object-কে step-by-step তৈরি করে। telescoping constructor problem solve করে। fluent interface (method chaining) ব্যবহার করে। immutable objects তৈরিতে ব্যবহৃত হয়। StringBuilder, Document Builder — উদাহরণ।",
+      "tags": ["design-pattern", "builder", "creational"]
+    },
+    {
+      "question": "Adapter Pattern কী?",
+      "answer": "Adapter Pattern হলো structural design pattern যা incompatible interfaces-কে একসাথে কাজ করতে দেয়। পুরোনো codeকে নতুন interface-র সাথে compatible করে। Class Adapter (inheritance) ও Object Adapter (composition) — দুই প্রকার। যেমন: VoltageAdapter 220V-কে 5V-তে convert করে।",
+      "tags": ["design-pattern", "adapter", "structural"]
+    },
+    {
+      "question": "Decorator Pattern কী?",
+      "answer": "Decorator Pattern হলো structural design pattern যা runtime-তে object-র behavior dynamically add/modify করে। wrapper class ব্যবহার করে। inheritance-এর বদলে composition ব্যবহার করে। Java I/O streams (BufferedInputStream wraps InputStream) — classic example।",
+      "tags": ["design-pattern", "decorator", "structural"]
+    }
+  ]
+}

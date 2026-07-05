@@ -1,0 +1,468 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "DBMS — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে DBMS-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "DBMS কী?",
+      "answer": "DBMS (Database Management System) হলো এমন একটি সফটওয়্যার যা ডাটাবেজ তৈরি, পরিচালনা ও ব্যবহার করতে সাহায্য করে। এটি ডাটা সংগঠিত করে, নিরাপত্তা নিশ্চিত করে এবং concurrent access support করে। উদাহরণ: MySQL, Oracle, PostgreSQL।",
+      "tags": ["dbms", "definition", "basics"]
+    },
+    {
+      "question": "File System-এর তুলনায় DBMS-এর সুবিধা কী কী?",
+      "answer": "DBMS-এর সুবিধা: (1) Data Redundancy কম — একই ডাটা বারবার সংরক্ষণ হয় না। (2) Data Inconsistency দূর — একই ডাটা বিভিন্ন জায়গায় ভিন্ন হয় না। (3) Data Sharing — একাধিক ব্যবহারকারী একইসাথে ব্যবহার করতে পারে। (4) Security — access control থাকে। (5) ACID properties maintain করে।",
+      "tags": ["dbms", "file-system", "advantages"]
+    },
+    {
+      "question": "Relational Model কী?",
+      "answer": "Relational Model হলো ডাটা সংগঠনের একটি মডেল যেখানে ডাটাকে table (relation) আকারে সাজানো হয়। প্রতিটি table-তে rows (tuples) ও columns (attributes) থাকে। E.F. Codd ১৯৭০ সালে এই মডেল প্রস্তাব করেন।",
+      "tags": ["relational-model", "basics", "table"]
+    },
+    {
+      "question": "Relation, Tuple, Attribute কী?",
+      "answer": "Relation = Table — ডাটার সমষ্টি। Tuple = Row — প্রতিটি রেকর্ড। Attribute = Column — প্রতিটি ফিল্ড। যেমন Student টেবিলে (id, name, dept) attributes এবং প্রতিটি ছাত্রের তথ্য একটি tuple।",
+      "tags": ["relational-model", "tuple", "attribute"]
+    },
+    {
+      "question": "Schema ও Instance-এর পার্থক্য কী?",
+      "answer": "Schema হলো ডাটাবেজের গঠন — table-এর নাম, columns ও তাদের ধরন। Instance হলো নির্দিষ্ট সময়ে ডাটাবেজের তথ্য। Schema পরিবর্তন কঠিন, instance প্রতিনিয়ত বদলায়।",
+      "tags": ["schema", "instance", "basics"]
+    },
+    {
+      "question": "Primary Key কী?",
+      "answer": "Primary Key হলো এমন একটি বা একাধিক column যা প্রতিটি tuple-কে অনন্যভাবে চিহ্নিত করে। এটি NULL হতে পারে না এবং duplicate value থাকতে পারে না। যেমন Student টেবিলে id primary key।",
+      "tags": ["primary-key", "keys", "basics"]
+    },
+    {
+      "question": "Candidate Key কী?",
+      "answer": "Candidate Key হলো সেসব minimal set of attributes যা relation-কে uniquely identify করতে পারে। একটি relation-এ একাধিক candidate key থাকতে পারে। তন্মধ্যে একটিকে primary key বাছাই করা হয়।",
+      "tags": ["candidate-key", "keys"]
+    },
+    {
+      "question": "Super Key কী?",
+      "answer": "Super Key হলো এমন set of attributes যা uniquely identify করতে পারে — তবে minimal নাও হতে পারে। Candidate Key হলো minimal Super Key। উদাহরণ: (id), (id, name) — উভয়ই super key কিন্তু (id) candidate key।",
+      "tags": ["super-key", "keys"]
+    },
+    {
+      "question": "Foreign Key কী?",
+      "answer": "Foreign Key হলো এমন attribute বা set of attributes যা অন্য একটি relation-র primary key-কে reference করে। এটি referential integrity maintain করে। যেমন Enrollment টেবিলে student_id foreign key — Student টেবিলের id-কে নির্দেশ করে।",
+      "tags": ["foreign-key", "keys", "referential-integrity"]
+    },
+    {
+      "question": "Alternate Key কী?",
+      "answer": "Alternate Key হলো candidate keys-এর মধ্যে যেগুলো primary key নির্বাচিত হয়নি। অর্থাৎ, super key-র minimal set যা primary key নয়।",
+      "tags": ["alternate-key", "keys"]
+    },
+    {
+      "question": "Composite Key কী?",
+      "answer": "Composite Key হলো দুই বা ততোধিক attributes নিয়ে গঠিত key যা uniquely identify করে। যেমন (student_id, course_id) composite key — একজন ছাত্র একটি কোর্সে এনরোলমেন্ট unique করে।",
+      "tags": ["composite-key", "keys"]
+    },
+    {
+      "question": "SQL SELECT statement কীভাবে কাজ করে?",
+      "answer": "SELECT statement query result set ফেরত দেয়। Syntax: SELECT column1, column2 FROM table_name WHERE condition। '*' দিলে সব column return হয়। WHERE ছাড়া সব row return হয়। ORDER BY, GROUP BY, HAVING clause ব্যবহার করা যায়।",
+      "tags": ["sql", "select", "basics"]
+    },
+    {
+      "question": "WHERE ও HAVING clause-এর পার্থক্য কী?",
+      "answer": "WHERE clause group গঠনের আগে row filter করে। HAVING clause GROUP BY-র পরে group filter করে। WHERE aggregate function (SUM, COUNT) use করতে পারে না, HAVING use করে। যেমন: WHERE age > 20; HAVING COUNT(*) > 5।",
+      "tags": ["sql", "where", "having"]
+    },
+    {
+      "question": "SQL JOIN কী?",
+      "answer": "JOIN হলো দুই বা ততোধিক table-কে common column দিয়ে সংযুক্ত করার SQL operation। প্রকারভেদে: INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN, CROSS JOIN। এটি relational database-এর মূল কার্যকারিতা।",
+      "tags": ["sql", "join", "basics"]
+    },
+    {
+      "question": "INNER JOIN ও LEFT JOIN-এর পার্থক্য কী?",
+      "answer": "INNER JOIN শুধুমাত্র matched rows return করে — উভয় table-এ match না হলে row include হয় না। LEFT JOIN বাম পাশের সব row return করে এবং ডান পাশে match না থাকলে NULL দেয়।",
+      "tags": ["sql", "inner-join", "left-join"]
+    },
+    {
+      "question": "RIGHT JOIN ও FULL JOIN কী?",
+      "answer": "RIGHT JOIN ডান পাশের সব row return করে এবং বাম পাশে match না থাকলে NULL দেয়। FULL JOIN উভয় পাশের সব row return করে — match না থাকলে NULL। INNER JOIN শুধু common rows দেখায়।",
+      "tags": ["sql", "right-join", "full-join"]
+    },
+    {
+      "question": "GROUP BY clause কী করে?",
+      "answer": "GROUP BY clause একই মান বিশিষ্ট rows-কে একসাথে group করে। সাধারণত aggregate functions (COUNT, SUM, AVG, MAX, MIN)-এর সাথে ব্যবহৃত হয়। যেমন: SELECT dept, COUNT(*) FROM students GROUP BY dept;",
+      "tags": ["sql", "group-by", "aggregate"]
+    },
+    {
+      "question": "ORDER BY clause কী?",
+      "answer": "ORDER BY clause result set-কে এক বা একাধিক column-এর ভিত্তিতে sort করে। ASC (ascending, default) বা DESC (descending) order। যেমন: SELECT * FROM students ORDER BY name ASC, age DESC;",
+      "tags": ["sql", "order-by", "sorting"]
+    },
+    {
+      "question": "Normalization কী?",
+      "answer": "Normalization হলো ডাটাবেজের table-কে design করার পদ্ধতি যাতে data redundancy কমে এবং data integrity বজায় থাকে। ধাপে ধাপে (1NF, 2NF, 3NF, BCNF) tables ভাগ করা হয়।",
+      "tags": ["normalization", "basics", "design"]
+    },
+    {
+      "question": "1NF (First Normal Form) কী?",
+      "answer": "1NF নিশ্চিত করে যে প্রতিটি column-এর মান atomic (বিভাজ্য নয়)। অর্থাৎ, একটি cell-এ একাধিক মান থাকতে পারে না। প্রতিটি row-তে প্রতিটি column-এর একটিই মান থাকবে।",
+      "tags": ["normalization", "1nf", "atomic"]
+    },
+    {
+      "question": "2NF (Second Normal Form) কী?",
+      "answer": "2NF 1NF fulfill করতে হবে এবং কোনো partial dependency থাকতে পারবে না। অর্থাৎ, non-key attribute পুরো primary key-র উপর নির্ভরশীল হতে হবে — partial dependency থাকলে table ভাগ করতে হয়।",
+      "tags": ["normalization", "2nf", "partial-dependency"]
+    },
+    {
+      "question": "3NF (Third Normal Form) কী?",
+      "answer": "3NF 2NF fulfill করতে হবে এবং transitive dependency থাকতে পারবে না। অর্থাৎ, non-key attribute-এর মধ্যে dependency থাকতে পারবে না। যদি A → B এবং B → C হয়, তাহলে A → C transitive dependency — 3NF এটি allow করে না।",
+      "tags": ["normalization", "3nf", "transitive-dependency"]
+    },
+    {
+      "question": "BCNF (Boyce-Codd Normal Form) কী?",
+      "answer": "BCNF 3NF-র একটি stricter version। প্রতিটি determinant (X → Y এ X) candidate key হতে হবে। 3NF-তে determinant candidate key না হলেও allow হতে পারে, BCNF-তে হয় না।",
+      "tags": ["normalization", "bcnf", "candidate-key"]
+    },
+    {
+      "question": "Lossless Join Decomposition কী?",
+      "answer": "Lossless Join Decomposition হলো table ভাগ করার এমন পদ্ধতি যেখানে ভাগ করা tables JOIN করলে মূল table ফিরে পাওয়া যায়। অর্থাৎ, information lost হয় না। R分解为R1, R2 হলে R1 ∩ R2 → R1 বা R1 ∩ R2 → R2 শর্ত পূরণ হতে হবে।",
+      "tags": ["normalization", "lossless-join", "decomposition"]
+    },
+    {
+      "question": "Dependency Preservation Decomposition কী?",
+      "answer": "Dependency Preservation মানে decomposition-এর পরেও মূল functional dependencies-গুলো verify করা যায়। অর্থাৎ, ভাগ করা tables-এ JOIN না করেও FD check করা যায়। BCNF decomposition সবসময় dependency preserve নাও করতে পারে।",
+      "tags": ["normalization", "dependency-preservation"]
+    },
+    {
+      "question": "Functional Dependency কী?",
+      "answer": "Functional Dependency (FD) হলো relation-এর attributes-এর মধ্যে relationship। X → Y মানে X এর মান determine করলে Y এর মান নির্ধারিত হয়। যেমন: student_id → name — একটি id একটিই name determine করে।",
+      "tags": ["functional-dependency", "basics"]
+    },
+    {
+      "question": "Armstrong's Axioms কী কী?",
+      "answer": "Armstrong's Axioms: (1) Reflexivity — Y ⊆ X হলে X → Y। (2) Augmentation — X → Y হলে XZ → YZ। (3) Transitivity — X → Y এবং Y → Z হলে X → Z। এগুলো থেকে completeness ও soundness prove করা যায়।",
+      "tags": ["armstrongs-axioms", "functional-dependency"]
+    },
+    {
+      "question": "ACID Properties কী কী?",
+      "answer": "ACID: (1) Atomicity — transaction সম্পূর্ণ হবে বা একটিও হবে না। (2) Consistency — transaction-এর আগে ও পরে database consistent থাকবে। (3) Isolation — concurrent transactions একে অপরকে প্রভাবিত করবে না। (4) Durability — commit এর পর data persist থাকবে।",
+      "tags": ["acid", "transaction", "properties"]
+    },
+    {
+      "question": "Transaction কী?",
+      "answer": "Transaction হলো database operation-এর একটি logical unit — এক বা একাধিক SQL statement নিয়ে গঠিত। BEGIN, COMMIT, ROLLBACK দিয়ে control করা হয়। ACID properties maintain করে।",
+      "tags": ["transaction", "basics"]
+    },
+    {
+      "question": "Conflict Serializability কী?",
+      "answer": "Conflict Serializability হলো একটি concurrent schedule-কে ক্রমিক (serial) schedule-র সাথে equivalent করার পদ্ধতি। দুটি operation conflict হয় যদি ভিন্ন transactions-এ থাকে, same data item-এ হয় এবং একটি write operation থাকে।",
+      "tags": ["conflict-serializability", "concurrency"]
+    },
+    {
+      "question": "Precedence Graph কী এবং কীভাবে ব্যবহার করে?",
+      "answer": "Precedence Graph (Serialization Graph) হলো directed graph যেখানে vertices হলো transactions এবং edges হলো conflict order। যদি graph-এ cycle না থাকে, schedule conflict-serializable। GATE CSE-তে precedence graph দিয়ে serializability check করতে বলা হয়।",
+      "tags": ["precedence-graph", "conflict-serializability"]
+    },
+    {
+      "question": "Two-Phase Locking (2PL) কী?",
+      "answer": "2PL protocol যেখানে transaction দুই phase-তে কাজ করে: (1) Growing Phase — lock acquire করে, unlock করে না। (2) Shrinking Phase — lock release করে, নতুন acquire করে না। 2PL conflict-serializability guarantee দেয়।",
+      "tags": ["2pl", "locking", "concurrency"]
+    },
+    {
+      "question": "Deadlock কী এবং কীভাবে handle করে?",
+      "answer": "Deadlock হলো এমন অবস্থা যেখানে দুই বা ততোধিক transactions একে অপরের lock release অপেক্ষা করছে। Handle করার পদ্ধতি: (1) Prevention — পূর্বেই deadlocks prevent করা। (2) Detection & Recovery — cycle detect করে abort করা। (3) Avoidance — wait-die/wound-wait পদ্ধতি।",
+      "tags": ["deadlock", "concurrency", "handling"]
+    },
+    {
+      "question": "B+ Tree Indexing কী?",
+      "answer": "B+ Tree হলো self-balancing tree যা database indexing-এ ব্যবহৃত হয়। সব data leaf nodes-এ থাকে, internal nodes-এ শুধু keys। Leaf nodes linked list-এ সংযুক্ত থাকে, তাই range query efficient। Search, Insert, Delete: O(log n)।",
+      "tags": ["b-plus-tree", "indexing", "basics"]
+    },
+    {
+      "question": "B+ Tree-তে m order-এ একটি node-তে সর্বোচ্চ কতটি key থাকে?",
+      "answer": "m-order B+ Tree-তে internal node-তে সর্বোচ্চ (m-1)টি key ও mটি child pointer থাকে। Leaf node-তে সর্বোচ্চ (m-1)টি key-value pair থাকে। GATE CSE-তে B+ Tree order calculation নিয়ে প্রশ্ন আসে।",
+      "tags": ["b-plus-tree", "order", "keys"]
+    },
+    {
+      "question": "Relational Algebra কী?",
+      "answer": "Relational Algebra হলো relational database-এর formal query language। এটি procedural — কীভাবে query execute হবে তা দেখায়। মূল operations: Selection (σ), Projection (π), Cartesian Product (×), Rename (ρ)।",
+      "tags": ["relational-algebra", "basics", "query"]
+    },
+    {
+      "question": "Selection (σ) Operation কী?",
+      "answer": "Selection operation relation-এর rows filter করে। σ_condition(R) R টেবিল থেকে শুধু condition satisfy করে এমন rows return করে। এটি horizontal filtering। যেমন: σ_age>20(Students) — 20 বছরের বেশি বয়সী ছাত্রদের দেখায়।",
+      "tags": ["relational-algebra", "selection", "filter"]
+    },
+    {
+      "question": "Projection (π) Operation কী?",
+      "answer": "Projection operation relation-এর columns filter করে। π_columns(R) R টেবিল থেকে শুধু নির্দিষ্ট columns return করে। এটি vertical filtering। যেমন: π_name,dept(Students) — name ও dept columns দেখায়।",
+      "tags": ["relational-algebra", "projection", "column"]
+    },
+    {
+      "question": "Cartesian Product (×) কী?",
+      "answer": "Cartesian Product হলো দুটি relation-র সব সম্ভাব্য combination। R × S হলো R-র প্রতিটি tuple-এর সাথে S-র প্রতিটি tuple জুড়ে দেওয়া। এটি বড় result set তৈরি করে। Join operation-এর ভিত্তি।",
+      "tags": ["relational-algebra", "cartesian-product"]
+    },
+    {
+      "question": "Natural Join কী?",
+      "answer": "Natural Join হলো common attributes-এর উপর join যেখানে duplicate columns remove হয়। R ⨝ S হলো R ও S-র common attribute-এর মান match করে rows combine করে। Theta Join-এর একটি বিশেষ প্রকার।",
+      "tags": ["relational-algebra", "natural-join", "join"]
+    },
+    {
+      "question": "Division (÷) Operation কী?",
+      "answer": "Division operation R ÷ S R-র সেসব tuples return করে যারা S-র সব tuples-এর সাথে match করে। এটি 'for all' queries সমাধান করে। যেমন: সেসব students যারা সব courses-এ enroll করেছে।",
+      "tags": ["relational-algebra", "division"]
+    },
+    {
+      "question": "View কী?",
+      "answer": "View হলো virtual table যা query result-এর উপর ভিত্তি করে তৈরি হয়। Base table-র data পরিবর্তন হলে view-ও পরিবর্তন হয়। CREATE VIEW statement দিয়ে তৈরি করা হয়। Security ও abstraction-এ ব্যবহৃত হয়।",
+      "tags": ["view", "basics", "virtual-table"]
+    },
+    {
+      "question": "Integrity Constraints কী কী?",
+      "answer": "Integrity Constraints: (1) Entity Integrity — primary key NULL হতে পারে না। (2) Referential Integrity — foreign key valid value হতে হবে বা NULL। (3) Domain Integrity — column-এর মান নির্দিষ্ট domain-এর মধ্যে হতে হবে। (4) Key Constraint — uniqueness maintain করে।",
+      "tags": ["integrity-constraints", "basics"]
+    },
+    {
+      "question": "NoSQL কী?",
+      "answer": "NoSQL (Not Only SQL) হলো non-relational database-এর শ্রেণী যা unstructured/semi-structured data handle করে। প্রকারভেদে: Document (MongoDB), Key-Value (Redis), Column-Family (Cassandra), Graph (Neo4j)। Scalability ও flexibility-তে শক্তিশালী।",
+      "tags": ["nosql", "basics", "types"]
+    },
+    {
+      "question": "SQL ও NoSQL-এর পার্থক্য কী?",
+      "answer": "SQL: Structured data, schema-fixed, ACID, vertical scaling, JOIN support। NoSQL: Unstructured data, schema-flexible, BASE (Basically Available), horizontal scaling, JOIN limited। Big data ও real-time application-এ NoSQL বেশি efficient।",
+      "tags": ["sql", "nosql", "comparison"]
+    },
+    {
+      "question": "Database Transaction-এর states কী কী?",
+      "answer": "Transaction states: (1) Active — execute হচ্ছে। (2) Partially Committed — last statement execute হয়েছে। (3) Committed — successfully complete। (4) Failed — problem হয়েছে। (5) Aborted — rollback complete।",
+      "tags": ["transaction", "states"]
+    },
+    {
+      "question": "Schedule কী?",
+      "answer": "Schedule হলো transactions-এর operations-এর execution order। প্রকারভেদে: Serial Schedule — একে একে execute। Concurrent Schedule — interleaved execution। Serializable Schedule — concurrent কিন্তু serial equivalent।",
+      "tags": ["schedule", "concurrency"]
+    },
+    {
+      "question": "Recoverability কী?",
+      "answer": "Recoverability মানে একটি transaction T1 dependent থাকলে T1 commit-এর আগে T2 commit করতে পারবে না। যদি T1 abort করে, T2-ও abort করতে হবে। Cascading abort এড়াতে recoverable schedule প্রয়োজন।",
+      "tags": ["recoverability", "transaction"]
+    },
+    {
+      "question": "Cascading Rollback কী?",
+      "answer": "Cascading Rollback হলো যখন একটি transaction abort হয়, তখন তার উপর dependent অন্য transactions-ও abort হতে হয়। এটি wasteful। Cascadeless schedule-তে এই সমস্যা নেই — প্রতিটি transaction শুধু committed data read করে।",
+      "tags": ["cascading-rollback", "transaction"]
+    },
+    {
+      "question": "Checkpointing কী?",
+      "answer": "Checkpointing হলো database recovery-এ ব্যবহৃত technique। নির্দিষ্ট সময়ে dirty pages-কে disk-এ write করা হয়। Log-এ checkpoint record লেখা হয়। Crash-এর পর checkpoint থেকে log replay করে database recover করা হয়।",
+      "tags": ["checkpointing", "recovery"]
+    },
+    {
+      "question": "Log-based Recovery কী?",
+      "answer": "Log-based Recovery হলো WAL (Write-Ahead Logging) protocol — log record disk-এ write হওয়ার পর data page write হয়। Undo ও redo operations log দিয়ে perform করা হয়। ARIES algorithm log-based recovery-র একটি popular implementation।",
+      "tags": ["log-based-recovery", "recovery"]
+    },
+    {
+      "question": "Shadow Paging কী?",
+      "answer": "Shadow Paging হলো database recovery-এর একটি technique যেখানে page table-এর shadow copy maintain করা হয়। Update করলে নতুন page তৈরি হয়। Crash-এর পর purged page table-কে restore করা হয়। fragmentation-এর সমস্যা থাকে।",
+      "tags": ["shadow-paging", "recovery"]
+    },
+    {
+      "question": "Serializability কত প্রকার?",
+      "answer": "দুই প্রকার: (1) Conflict Serializability — conflict-এর equivalent। Precedence graph-এ cycle না থাকলে serializable। (2) View Serializability — view-এর equivalent। Conflict serializability শক্তিশালী — Conflict Serializable ⊂ View Serializable।",
+      "tags": ["serializability", "types"]
+    },
+    {
+      "question": "Deadlock Prevention কী কী পদ্ধতি?",
+      "answer": "Deadlock Prevention পদ্ধতি: (1) Wait-Die — বড় transaction wait করে, ছোট abort ও retry করে। (2) Wound-Wait — বড় transaction ছোটকে wound (abort) করে, ছোট wait করে। (3) Timeout — নির্দিষ্ট সময় অতিক্রম করলে abort।",
+      "tags": ["deadlock", "prevention"]
+    },
+    {
+      "question": "Deadlock Detection কীভাবে করে?",
+      "answer": "Deadlock Detection-এ Wait-For Graph (WFG) maintain করা হয়। যদি graph-এ cycle থাকে, deadlock আছে। Periodically cycle detect করা হয়। Cycle পেলে victim selection করে abort করা হয়।",
+      "tags": ["deadlock", "detection", "wait-for-graph"]
+    },
+    {
+      "question": "Indexing কী এবং কেন প্রয়োজন?",
+      "answer": "Indexing হলো database table-তে rows find করার দ্রুত পদ্ধতি। Index B+ Tree বা Hash Table দিয়ে তৈরি হয়। Full table scan এড়িয়ে O(log n) সময়ে search সম্ভব। Read performance improve করে কিন্তু write operation slow হয়।",
+      "tags": ["indexing", "basics", "performance"]
+    },
+    {
+      "question": "Clustered Index ও Non-Clustered Index-এর পার্থক্য কী?",
+      "answer": "Clustered Index table-র physical order মেনে row-কে arrange করে — একটি table-তে একটিই clustered index। Non-Clustered Index logical order-এ index maintain করে — একটি table-তে অনেকগুলো থাকতে পারে। Clustered faster।",
+      "tags": ["indexing", "clustered", "non-clustered"]
+    },
+    {
+      "question": "Hash Index কী?",
+      "answer": "Hash Index hash function ব্যবহার করে key-value pair index করে। Equal comparison (WHERE id=5)-তে O(1) search। Range comparison (WHERE age>20)-তে efficient নয়। In-memory database-তে ব্যবহৃত হয়।",
+      "tags": ["indexing", "hash-index"]
+    },
+    {
+      "question": "Storage Engine কী?",
+      "answer": "Storage Engine হলো database management system-এর component যা data store, retrieve ও manage করে। MySQL-তে InnoDB (ACID support) ও MyISAM (fast read)। PostgreSQL-তে default engine। প্রতিটি engine-র own indexing, locking mechanism।",
+      "tags": ["storage-engine", "basics"]
+    },
+    {
+      "question": "Buffer Management কী?",
+      "answer": "Buffer Management হলো disk I/O optimize করার technique। Database pages-কে memory-তে cache করা হয়। LRU (Least Recently Used) policy-তে page replace করা হয়। Dirty page-কে periodic flush করা হয়। I/O operations কমায়।",
+      "tags": ["buffer-management", "memory", "disk"]
+    },
+    {
+      "question": "ER Model কী?",
+      "answer": "ER (Entity-Relationship) Model হলো database design-এর conceptual model। Entities (objects), Attributes (properties), Relationships (connections) — এগুলো নিয়ে গঠিত। Chen notation, Crow's foot notation দিয়ে diagram তৈরি করা হয়।",
+      "tags": ["er-model", "database-design"]
+    },
+    {
+      "question": "Entity ও Relationship-এর পার্থক্য কী?",
+      "answer": "Entity হলো real-world object — যেমন Student, Course। Relationship হলো entities-এর মধ্যে connection — যেমন Student 'enrolls_in' Course। Cardinality: One-to-One, One-to-Many, Many-to-Many।",
+      "tags": ["er-model", "entity", "relationship"]
+    },
+    {
+      "question": "Relational Calculus কী?",
+      "answer": "Relational Calculus হলো non-procedural query language — কী চাই তা বলে, কীভাবে পাওয়া যায় তা নয়। দুই প্রকার: (1) Tuple Relational Calculus (TRC) — tuples নিয়ে। (2) Domain Relational Calculus (DRC) — domains নিয়ে।",
+      "tags": ["relational-calculus", "query", "non-procedural"]
+    },
+    {
+      "question": "Tuple Relational Calculus (TRC) কী?",
+      "answer": "TRC-তে query {t | P(t)} লেখা হয় — P(t) condition satisfy করে এমন tuples return করে। ∀ (forall), ∃ (exists) quantifier ব্যবহৃত হয়। SQL-এর theoretical basis।",
+      "tags": ["trc", "relational-calculus"]
+    },
+    {
+      "question": "Domain Relational Calculus (DRC) কী?",
+      "answer": "DRC-তে query {<x1,x2,...,xn> | P(x1,x2,...,xn)} লেখা হয়। Variables domain values-এ operate করে। TRC-র মতোই non-procedural। QBE (Query By Example) DRC-র উপর ভিত্তি করে।",
+      "tags": ["drc", "relational-calculus"]
+    },
+    {
+      "question": "Transaction Isolation Levels কী কী?",
+      "answer": "Isolation Levels: (1) Read Uncommitted — dirty read possible। (2) Read Committed — dirty read prevented। (3) Repeatable Read — non-repeatable read prevented। (4) Serializable — highest isolation, phantom read prevented। Trade-off: higher isolation = lower concurrency。",
+      "tags": ["isolation-levels", "transaction", "concurrency"]
+    },
+    {
+      "question": "Dirty Read কী?",
+      "answer": "Dirty Read হলো একটি transaction uncommitted data read করা এবং সেই data-র উপর ভিত্তি করে decision নেওয়া। যদি read করা transaction abort হয়, তাহলে decision invalid। Read Committed isolation level এটি prevent করে।",
+      "tags": ["dirty-read", "transaction", "concurrency"]
+    },
+    {
+      "question": "Phantom Read কী?",
+      "answer": "Phantom Read হলো একটি transaction একই query execute করলে ভিন্ন rows পাওয়া — কারণ অন্য transaction নতুন rows insert করেছে। Serializable isolation level phantom read prevent করে।",
+      "tags": ["phantom-read", "transaction", "concurrency"]
+    },
+    {
+      "question": "View Serializable Schedule কী?",
+      "answer": "View Serializable Schedule হলো এমন schedule যা একটি serial schedule-র view-equivalent। Initial read, write-read, final write operations same হতে হবে। Conflict serializable schedule-ও view serializable।",
+      "tags": ["view-serializable", "schedule"]
+    },
+    {
+      "question": "Recoverable Schedule কী?",
+      "answer": "Recoverable Schedule হলো এমন schedule যেখানে প্রতিটি transaction committed হওয়ার আগে তার dependent transactions commit করে নি। Cascading abort এড়াতে recoverable schedule প্রয়োজন।",
+      "tags": ["recoverable", "schedule"]
+    },
+    {
+      "question": "Cascadeless Schedule কী?",
+      "answer": "Cascadeless Schedule হলো এমন schedule যেখানে প্রতিটি transaction শুধু committed data read করে। অর্থাৎ, uncommitted data read করে না। Cascading rollback হয় না। Cascadeless ⊂ Recoverable।",
+      "tags": ["cascadeless", "schedule"]
+    },
+    {
+      "question": "Strict Schedule কী?",
+      "answer": "Strict Schedule হলো এমন schedule যেখাকে write operations-এর জন্য strict 2PL follow করে। অর্থাৎ, transaction T-র lock T commit/abort না হওয়া পর্যন্ত release হয় না। Cascading rollback prevent করে।",
+      "tags": ["strict", "schedule", "2pl"]
+    },
+    {
+      "question": "Multivalued Dependency কী?",
+      "answer": "Multivalued Dependency (MVD) X →→ Y মানে X determine করলে Y এর একাধিক independent values থাকতে পারে। 4NF-তে MVD handle করা হয়। যেমন: Student টেবিলে (id, hobby, language) — hobby ও language independent।",
+      "tags": ["multivalued-dependency", "normalization", "4nf"]
+    },
+    {
+      "question": "4NF (Fourth Normal Form) কী?",
+      "answer": "4NF BCNF fulfill করতে হবে এবং কোনো non-trivial multivalued dependency থাকতে পারবে না। MVD X →→ Y থাকলে X candidate key হতে হবে। 4NF multi-valued facts-কে separate tables-এ ভাগ করে।",
+      "tags": ["4nf", "normalization"]
+    },
+    {
+      "question": "5NF (Fifth Normal Form) কী?",
+      "answer": "5NF (Project-Join Normal Form) হলো decomposition-এর পর join dependency handle করে। প্রতিটি join dependency trivial হতে হবে। Practical-তে খুব কম ব্যবহৃত হয়।",
+      "tags": ["5nf", "normalization"]
+    },
+    {
+      "question": "Cursor কী?",
+      "answer": "Cursor হলো SQL query-র result set-কে একে একে process করার mechanism। DECLARE CURSOR, FETCH, CLOSE — এগুলো cursor operations। Procedural SQL-এ ব্যবহৃত হয়। SET-based operation-এর তুলনায় cursor slower।",
+      "tags": ["cursor", "sql", "procedural"]
+    },
+    {
+      "question": "Stored Procedure কী?",
+      "answer": "Stored Procedure হলো database-তে save করা pre-compiled SQL code। CALL statement দিয়ে execute করা হয়। Reusability, security, performance — এগুলো সুবিধা। Parameters pass করা যায়।",
+      "tags": ["stored-procedure", "sql"]
+    },
+    {
+      "question": "Trigger কী?",
+      "answer": "Trigger হলো database event (INSERT, UPDATE, DELETE)-এ automatic execute হওয়া SQL code। BEFORE বা AFTER trigger হতে পারে। Audit logging, data validation, cascading updates-এ ব্যবহৃত হয়।",
+      "tags": ["trigger", "sql", "event"]
+    },
+    {
+      "question": "Grant ও Revoke permission কী?",
+      "answer": "GRANT statement দিয়ে users-কে permission দেওয়া হয় — SELECT, INSERT, UPDATE, DELETE। REVOKE statement দিয়ে permission remove করা হয়। WITH GRANT OPTION দিয়ে অন্যকেও permission দিতে পারে।",
+      "tags": ["grant", "revoke", "security", "permission"]
+    },
+    {
+      "question": "Database Recovery কীভাবে কাজ করে?",
+      "answer": "Crash-এর পর log file-এ checkpoint থেকে শুরু করে redo (committed transactions) ও undo (uncommitted transactions) perform করা হয়। ARIES algorithm checkpointing, logging, recovery phase নিয়ে কাজ করে।",
+      "tags": ["recovery", "crash", "redo", "undo"]
+    },
+    {
+      "question": "Sharable Lock ও Exclusive Lock কী?",
+      "answer": "Sharable Lock (S-lock / Read Lock) — multiple transactions একই সাথে পড়তে পারে। Exclusive Lock (X-lock / Write Lock) — শুধুমাত্র একটি transaction write করতে পারে। S-lock compatible with S-lock, X-lock compatible with none।",
+      "tags": ["lock", "sharable", "exclusive"]
+    },
+    {
+      "question": "Strict 2PL কী?",
+      "answer": "Strict 2PL হলো 2PL-র stricter version — shrinking phase commit/abort-এর পর শুরু হয়। অর্থাৎ, transaction complete না হওয়া পর্যন্ত সব lock hold করে থাকে। Cascading rollback prevent করে এবং recoverable schedule ensure করে।",
+      "tags": ["strict-2pl", "locking"]
+    },
+    {
+      "question": "R-Tree Index কী?",
+      "answer": "R-Tree হলো spatial data indexing-এর জন্য tree data structure। Geographic data, multi-dimensional data query-তে ব্যবহৃত হয়। Bounding boxes দিয়ে nodes represent করা হয়। GIS, maps-এ ব্যবহৃত হয়।",
+      "tags": ["r-tree", "indexing", "spatial"]
+    },
+    {
+      "question": "Bitmap Index কী?",
+      "answer": "Bitmap Index হলো low-cardinality columns-এ efficient index। প্রতিটি distinct value-এর জন্য একটি bitmap থাকে। AND, OR operations fast। Data warehousing-এ ব্যবহৃত হয়। OLAP queries-তে efficient।",
+      "tags": ["bitmap-index", "indexing"]
+    },
+    {
+      "question": "OLTP ও OLAP-এর পার্থক্য কী?",
+      "answer": "OLTP (Online Transaction Processing): real-time transactions, normalized schema, row-oriented। OLAP (Online Analytical Processing): complex queries, denormalized schema, column-oriented। OLTP-তে দ্রুত reads/writes, OLAP-তে bulk analysis।",
+      "tags": ["oltp", "olap", "comparison"]
+    },
+    {
+      "question": "Data Warehouse কী?",
+      "answer": "Data Warehouse হলো integrated, subject-oriented, time-variant, non-volatile data collection — analytical queries-র জন্য designed। ETL (Extract, Transform, Load) process-এর মাধ্যমে data populate হয়। Star/Snowflake schema ব্যবহৃত হয়।",
+      "tags": ["data-warehouse", "olap"]
+    },
+    {
+      "question": "Star Schema কী?",
+      "answer": "Star Schema হলো Data Warehouse-এর সবচেয়ে সাধারণ schema — একটি fact table ও multiple dimension tables। Fact table-তে measures, dimension tables-তে descriptive attributes। Query performance ভালো।",
+      "tags": ["star-schema", "data-warehouse"]
+    },
+    {
+      "question": "ACID vs BASE Model কী?",
+      "answer": "ACID: Atomicity, Consistency, Isolation, Durability — strong consistency। BASE: Basically Available, Soft state, Eventually consistent — high availability। Traditional DBMS ACID follow করে, NoSQL সাধারণত BASE।",
+      "tags": ["acid", "base", "comparison"]
+    },
+    {
+      "question": "CAP Theorem কী?",
+      "answer": "CAP Theorem: Distributed system-এ একই সাথে Consistency, Availability, Partition Tolerance — তিনটির মধ্যে শুধু দুটো নিশ্চিত করা যায়। CP systems (HBase), AP systems (Cassandra), CA systems (traditional DBMS — single node)।",
+      "tags": ["cap-theorem", "distributed", "nosql"]
+    },
+    {
+      "question": "Sharding কী?",
+      "answer": "Sharding হলো horizontal partitioning — database-কে multiple servers-এ ভাগ করা। প্রতিটি shard একটি subset data ধারণ করে। Scalability improve করে কিন্তু cross-shard queries complex। MongoDB, Cassandra-তে ব্যবহৃত হয়।",
+      "tags": ["sharding", "partitioning", "scalability"]
+    },
+    {
+      "question": "Replication কী?",
+      "answer": "Replication হলো একই data multiple servers-এ copy করা। Read scalability, fault tolerance improve করে। Types: Master-Slave (one write, many reads), Master-Master (multiple writes), Synchronous vs Asynchronous replication।",
+      "tags": ["replication", "availability"]
+    },
+    {
+      "question": "Partitioning কী?",
+      "answer": "Partitioning হলো table-কে smaller, manageable parts-এ ভাগ করা। Types: (1) Horizontal — rows ভাগ করা। (2) Vertical — columns ভাগ করা। Query performance improve করে, maintenance easier হয়।",
+      "tags": ["partitioning", "database-design"]
+    }
+  ]
+}

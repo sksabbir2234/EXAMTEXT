@@ -1,0 +1,523 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Compiler Design — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Compiler Design-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Compiler কী?",
+      "answer": "Compiler হলো এমন একটি সফটওয়্যার যা উচ্চ-স্তরের প্রোগ্রামিং ভাষার সোর্স কোডকে লো-লেভেল বা মেশিন কোডে অনুবাদ করে। এটি সম্পূর্ণ প্রোগ্রাম একসাথে অনুবাদ করে এবং ত্রুটি রিপোর্ট করে।",
+      "tags": ["compiler", "definition", "basics"]
+    },
+    {
+      "question": "Compiler ও Interpreter-এর পার্থক্য কী?",
+      "answer": "Compiler সম্পূর্ণ কোড একসাথে অনুবাদ করে এবং আলাদা executable ফাইল তৈরি করে। Interpreter লাইন বা স্টেটমেন্ট অনুযায়ী কোড এক্সিকিউট করে, executable ফাইল তৈরি হয় না। Compiler-এ পরবর্তী বার রান করলে অনুবাদের প্রয়োজন নেই, কিন্তু Interpreter-এ প্রতিবার রান করলে নতুন করে ইন্টারপ্রেট করতে হয়।",
+      "tags": ["compiler", "interpreter", "comparison"]
+    },
+    {
+      "question": "Compiler-এর প্রধান পর্যায়গুলো কী কী?",
+      "answer": "Compiler-এর প্রধান পর্যায়গুলো হলো: (1) লেক্সিক্যাল অ্যানালাইসিস, (2) সিনট্যাক্স অ্যানালাইসিস, (3) সিমান্টিক অ্যানালাইসিস, (4) ইন্টারমিডিয়েট কোড জেনারেশন, (5) কোড অপটিমাইজেশন, (6) কোড জেনারেশন। প্রতিটি পর্যায় পরবর্তী পর্যায়ের জন্য ইনপুট প্রদান করে।",
+      "tags": ["phases", "compiler", "basics"]
+    },
+    {
+      "question": "Source Code থেকে Target Code পর্যন্ত কোন কোন রূপান্তর ঘটে?",
+      "answer": "Source Code → Lexical Analysis (tokens) → Syntax Analysis (parse tree) → Semantic Analysis (annotated tree) → Intermediate Code → Optimization → Target Code (machine code)। প্রতিটি ধাপে ডেটার প্রতিনিধিত্ব পরিবর্তিত হয়।",
+      "tags": ["phases", "translation", "overview"]
+    },
+    {
+      "question": "Lexical Analysis কী?",
+      "answer": "Lexical Analysis হলো compiler-এর প্রথম পর্যায় যেখানে সোর্স কোডের অক্ষরগুলোকে (characters) আরও অর্থবহ ইউনিট — tokens-এ রূপান্তর করা হয়। যেমন: identifier, keyword, operator, literal। এটি lexer বা scanner নামেও পরিচিত।",
+      "tags": ["lexical-analysis", "scanner", "tokens"]
+    },
+    {
+      "question": "Token কী?",
+      "answer": "Token হলো lexical analysis-এর আউটপুট এবং syntax analysis-এর ইনপুট। এটি কোনো প্রোগ্রামিং ভাষার ন্যূনতম অর্থবহ একক। যেমন: keyword (if, while), identifier (x, count), operator (+, =), literal (10, 'a'), delimiter (;, ())।",
+      "tags": ["token", "lexical-analysis", "basics"]
+    },
+    {
+      "question": "Regular Expression দিয়ে Lexical Analyzer কীভাবে কাজ করে?",
+      "answer": "প্রতিটি token-এর জন্য একটি regular expression লেখা হয়। উদাহরণ: identifier — [a-zA-Z][a-zA-Z0-9]*, number — [0-9]+। DFA বা NFA তৈরি করে সোর্স কোড scan করে এবং কোন token pattern-এর সাথে match করে তা নির্ধারণ করা হয়।",
+      "tags": ["regular-expression", "lexical-analysis", "dfa"]
+    },
+    {
+      "question": "Scanner ও Parser-এর পার্থক্য কী?",
+      "answer": "Scanner (Lexer) অক্ষর স্ট্রিমকে token স্ট্রিমে রূপান্তর করে — এটি সিনট্যাক্টিক ক্যাটাগরি নির্ধারণ করে। Parser (Syntax Analyzer) token স্ট্রিমকে গ্রামার অনুযায়ী parse tree তৈরি করে — এটি সিনট্যাক্টিক স্ট্রাকচার যাচাই করে।",
+      "tags": ["scanner", "parser", "difference"]
+    },
+    {
+      "question": "Syntax Analysis কী?",
+      "answer": "Syntax Analysis হলো compiler-এর দ্বিতীয় পর্যায় যেখানে token স্ট্রিমকে ভাষার গ্রামার অনুযায়ী একটি parse tree তৈরি করা হয়। এটি প্রোগ্রামের সিনট্যাক্টিক স্ট্রাকচার যাচাই করে। যদি সিনট্যাক্স ভুল হয়, তাহলে syntax error রিপোর্ট করা হয়।",
+      "tags": ["syntax-analysis", "parser", "parse-tree"]
+    },
+    {
+      "question": "Parse Tree কী?",
+      "answer": "Parse Tree হলো একটি ট্রি-ভিত্তিক ডেটা স্ট্রাকচার যা কোনো স্ট্রিং কীভাবে গ্রামার থেকে উৎপন্ন হয়েছে তা দেখায়। প্রতিটি অভ্যন্তরীণ নোড একটি non-terminal এবং প্রতিটি পাতা নোড একটি terminal। Root হলো স্টার্ট সিম্বল।",
+      "tags": ["parse-tree", "syntax-analysis", "grammar"]
+    },
+    {
+      "question": "Derivation কী? Leftmost ও Rightmost Derivation-এর পার্থক্য কী?",
+      "answer": "Derivation হলো গ্রামারের নিয়ম ব্যবহার করে স্টার্ট সিম্বল থেকে স্ট্রিং উৎপাদনের প্রক্রিয়া। Leftmost Derivation-এ সবসময় বামদিকের সবচেয়ে প্রথম non-terminal প্রতিস্থাপন করা হয়। Rightmost Derivation-এ ডানদিকের সবচেয়ে শেষ non-terminal প্রতিস্থাপন করা হয়।",
+      "tags": ["derivation", "leftmost", "rightmost"]
+    },
+    {
+      "question": "Ambiguous Grammar কী?",
+      "answer": "একটি গ্রামার ambiguous যদি কোনো স্ট্রিংর জন্য দুটি বা ততোধিক আলাদা parse tree বা leftmost derivation তৈরি হয়। যেমন: E → E + E | E * E | (E) | id — এই গ্রামার ambiguous কারণ E+E*E-এ দুটি আলাদা parse tree সম্ভব।",
+      "tags": ["ambiguity", "grammar", "parse-tree"]
+    },
+    {
+      "question": "Top-Down Parsing কী?",
+      "answer": "Top-Down Parsing-এ স্টার্ট সিম্বল থেকে শুরু করে প্রতিটি step-এ non-terminal-কে production-এর right side দিয়ে প্রতিস্থাপন করে শেষ পর্যন্ত input string উৎপাদন করার চেষ্টা করে। এটি root থেকে leaf পর্যন্ত কাজ করে।",
+      "tags": ["top-down", "parsing", "recursive-descent"]
+    },
+    {
+      "question": "LL(1) Parser কী?",
+      "answer": "LL(1) Parser হলো একটি Top-Down Parser যা বাম থেকে ডানে (Left-to-right) scan করে, Leftmost Derivation অনুসরণ করে এবং ১টি lookahead token ব্যবহার করে কোন production বাছাই করবে তা সিদ্ধান্ত নেয়। LL(1) গ্রামার ambiguous থাকে না এবং এটি predict করা যায়।",
+      "tags": ["ll1", "top-down", "parsing"]
+    },
+    {
+      "question": "Recursive Descent Parser কী?",
+      "answer": "Recursive Descent Parser হলো Top-Down Parser-এর একটি বাস্তবায়ন যেখানে প্রতিটি non-terminal-এর জন্য একটি recursive function থাকে। প্রতিটি function সংশ্লিষ্ট production-এর right side-কে match করার চেষ্টা করে। Backtracking ছাড়াই LL(1) grammar-এ কাজ করতে পারে।",
+      "tags": ["recursive-descent", "top-down", "parsing"]
+    },
+    {
+      "question": "LL(1) Grammar-এ First ও Follow সেট কী করে?",
+      "answer": "LL(1) Parser-এ প্রতিটি non-terminal A-এর জন্য First(A) সেটে থাকে সেসব terminal যা A থেকে শুরু হতে পারে। Follow(A) সেটে থাকে সেসব terminal যা A-এর পরে আসতে পারে। এগুলো দিয়ে predictive parsing table তৈরি করা হয়।",
+      "tags": ["first", "follow", "ll1"]
+    },
+    {
+      "question": "First সেট কীভাবে গণনা করে?",
+      "answer": "First(X) গণনার নিয়ম: (1) X terminal হলে First(X) = {X}। (2) X → ε থাকলে ε First(X)-এ যোগ হয়। (3) X → Y₁Y₂...Yₙ হলে First(Y₁)-এর সব অ-ε terminal First(X)-এ যোগ হয়। Y₁ থেকে ε উৎপন্ন হলে First(Y₂) দেখা হয়, এভাবে চলে।",
+      "tags": ["first", "computation", "grammar"]
+    },
+    {
+      "question": "Follow সেট কীভাবে গণনা করে?",
+      "answer": "Follow(A) গণনার নিয়ম: (1) Start Symbol-এর Follow-এ $ থাকে। (2) A → αBβ হলে First(β)-এর অ-ε terminal Follow(B)-এ যোগ হয়। (3) β থেকে ε উৎপন্ন হলে Follow(A) থেকেও Follow(B)-এ যোগ হয়। (4) A → αB হলে Follow(A) → Follow(B)।",
+      "tags": ["follow", "computation", "grammar"]
+    },
+    {
+      "question": "Bottom-Up Parsing কী?",
+      "answer": "Bottom-Up Parsing-এ input string থেকে শুরু করে ধীরে ধীরে reduce করে স্টার্ট সিম্বলে পৌঁছানোর চেষ্টা করা হয়। এটি leaf থেকে root পর্যন্ত কাজ করে। Shift অপারেশনে input থেকে একটি token stack-এ যোগ করা হয় এবং Reduce অপারেশনে stack-এর শীর্ষ থেকে handle সরিয়ে production-এর left side দিয়ে প্রতিস্থাপন করা হয়।",
+      "tags": ["bottom-up", "parsing", "shift-reduce"]
+    },
+    {
+      "question": "Shift-Reduce Parsing কী?",
+      "answer": "Shift-Reduce Parsing হলো Bottom-Up Parsing-এর একটি প্রকার। এখানে দুটি মূল অপারেশন থাকে: (1) Shift — input token কে stack-এ ধাক্কা দেওয়া। (2) Reduce — stack-এর শীর্ষের handle-কে গ্রামারের কোনো production-এর right side বলে বিবেচনা করে left side দিয়ে প্রতিস্থাপন করা।",
+      "tags": ["shift-reduce", "bottom-up", "parsing"]
+    },
+    {
+      "question": "Handle কী?",
+      "answer": "Handle হলো Bottom-Up Parsing-এ সেই substring যা stack-এর শীর্ষে থাকে এবং reduce করার জন্য প্রস্তুত। আনুষ্ঠানিকভাবে, যদি S ⟹* αAβ এবং A → α হয়, তাহলে α হলো Handle। Reduce করলে A-তে রূপান্তরিত হয়।",
+      "tags": ["handle", "bottom-up", "parsing"]
+    },
+    {
+      "question": "LR(0) Parser কী?",
+      "answer": "LR(0) Parser হলো Bottom-Up Parser যা বাম থেকে ডানে (Left-to-right) scan করে, Rightmost Derivation-এর উল্টো (reverse) অনুসরণ করে এবং ০টি lookahead token ব্যবহার করে। LR(0) Item Set তৈরি করে পার্সিং টেবিল গঠন করা হয়।",
+      "tags": ["lr0", "bottom-up", "parsing"]
+    },
+    {
+      "question": "LR(0) Item কী?",
+      "answer": "LR(0) Item হলো একটি production যার right side-এর কোনো স্থানে একটি dot (•) বসানো হয়েছে। যেমন: A → •BC বা A → B•C বা A → BC•। Dot নির্দেশ করে parsing কোন পর্যায়ে আছে। এগুলো item set-এ গ্রুপ করা হয়।",
+      "tags": ["lr0", "item", "bottom-up"]
+    },
+    {
+      "question": "SLR(1) Parser কী?",
+      "answer": "SLR(1) (Simple LR) Parser হলো LR(0)-এর উন্নত সংস্করণ যা ১টি lookahead token ব্যবহার করে কনফ্লিক্ট সমাধান করে। SLR(1) Parser LR(0) তৈরি করে এবং Follow set ব্যবহার করে reduce action সিদ্ধান্ত নেয়। এটি LR(0) অপেক্ষা বেশি grammar support করে।",
+      "tags": ["slr", "bottom-up", "parsing"]
+    },
+    {
+      "question": "CLR(1) Parser কী?",
+      "answer": "CLR(1) (Canonical LR) Parser হলো সবচেয়ে শক্তিশালী LR parser যা ১টি lookahead token ব্যবহার করে এবং canonical collection of LR(1) items তৈরি করে। এটি SLR(1) অপেক্ষা বেশি grammar handle করতে পারে কিন্তু পার্সিং টেবিল বড় হয়।",
+      "tags": ["clr", "canonical-lr", "bottom-up"]
+    },
+    {
+      "question": "LALR(1) Parser কী?",
+      "answer": "LALR(1) (Look-Ahead LR) Parser হলো CLR(1) ও SLR(1)-এর মধ্যবর্তী। এটি CLR(1)-এর item setগুলো merge করে টেবিলের আকার ছোট করে কিন্তু শক্তি CLR(1)-এর সমতুল্য রাখে। YACC/Bison parser generator LALR(1) ব্যবহার করে।",
+      "tags": ["lalr", "bottom-up", "parsing"]
+    },
+    {
+      "question": "LR Parser-এ Shift-Reduce কনফ্লিক্ট কী?",
+      "answer": "Shift-Reduce কনফ্লিক্ট ঘটে যখন একটি state-এ একই সাথে shift এবং reduce উভয় actionই সম্ভব। এটি দুই ধরনের: (1) একই token-এ shift ও reduce উভয়ই। (2) একই item set-এ দুটি reduce। এই কনফ্লিক্ট parser-কে ambiguous করে।",
+      "tags": ["conflict", "shift-reduce", "lr"]
+    },
+    {
+      "question": "Reduce-Reduce কনফ্লিক্ট কী?",
+      "answer": "Reduce-Reduce কনফ্লিক্ট ঘটে যখন একটি state-এ দুটি বা ততোধিক production reduce করার জন্য প্রস্তুত থাকে এবং lookahead token দুটি production-ই match করে। এটি parser-কে সিদ্ধান্ত নিতে বাধা দেয় কারণ কোনটি reduce করবে তা অস্পষ্ট থাকে।",
+      "tags": ["conflict", "reduce-reduce", "lr"]
+    },
+    {
+      "question": "Syntax Directed Definition (SDD) কী?",
+      "answer": "SDD হলো গ্রামার-এর প্রতিটি production এবং প্রতিটি grammar symbol-এর সাথে attributes ও semantic rules সংযুক্ত করার একটি formalism। এটি syntax-এর উপর ভিত্তি করে semantics নির্ধারণ করে। প্রতিটি উৎপাদনের সাথে একটি semantic action জড়িত থাকে।",
+      "tags": ["sdd", "semantic", "attributes"]
+    },
+    {
+      "question": "Syntax Directed Translation (SDT) কী?",
+      "answer": "SDT হলো SDD-এর একটি বাস্তবায়ন যেখানে semantic actions-কে parse tree-তে নির্দিষ্ট অবস্থানে বসানো হয়। SDT প্রকৃত অনুবাদের প্রক্রিয়া নির্দেশ করে। এটি parser-এর সাথে সম্পর্কিত — যেমন S-attributed (শুধু shift-reduce) বা L-attributed (left-to-right evaluation)।",
+      "tags": ["sdt", "semantic", "translation"]
+    },
+    {
+      "question": "S-attributed ও L-attributed SDT-এর পার্থক্য কী?",
+      "answer": "S-attributed SDT-তে সব attributes শুধুমাত্র inherited নয় — সব synthesized। এগুলো bottom-up parser-এ সহজেই বাস্তবায়িত হয়। L-attributed SDT-তে attributes বাম থেকে ডানে evaluate করা হয় — inherited attributes বামদিকের siblings বা parent থেকে মান নেয়। L-attributed বেশি শক্তিশালী।",
+      "tags": ["s-attributed", "l-attributed", "sdt"]
+    },
+    {
+      "question": "Intermediate Representation (IR) কী?",
+      "answer": "IR হলো source code ও target code-এর মধ্যবর্তী প্রতিনিধিত্ব। এটি compiler-এর বিভিন্ন পর্যায়ের মধ্যে bridge হিসেবে কাজ করে। IR বেশ সহজে optimize করা যায় এবং এটি target machine-নির্ভর নয়। উদাহরণ: Three-Address Code, SSA, AST।",
+      "tags": ["ir", "intermediate-representation", "compiler"]
+    },
+    {
+      "question": "Three-Address Code (TAC) কী?",
+      "answer": "TAC হলো একটি IR যেখানে প্রতিটি instruction-এ সর্বোচ্চ তিনটি operand থাকে। প্রতিটি statement সাধারণত x = y op z আকারে হয়। এটি সহজ এবং code optimization-এর জন্য উপযোগী। GATE CSE-তে TAC-এর বিভিন্ন form (quadruples, triples, indirect triples) জিজ্ঞাসা করা হয়।",
+      "tags": ["tac", "three-address-code", "ir"]
+    },
+    {
+      "question": "SSA (Static Single Assignment) Form কী?",
+      "answer": "SSA হলো IR-এর একটি রূপ যেখানে প্রতিটি variable ঠিক একবারই assign করা হয়। যদি একই variable-এর বিভিন্ন জায়গায় assign হয়, তাহলে different version তৈরি করা হয় (x₁, x₂, ...)। φ (phi) function ব্যবহার করে merge point-এ versions মিলিত হয়। SSA code optimize করা সহজ।",
+      "tags": ["ssa", "static-single-assignment", "ir"]
+    },
+    {
+      "question": "φ (Phi) Function কী?",
+      "answer": "φ function SSA-তে ব্যবহৃত একটি special construct যা merge point-এ variables-এর বিভিন্ন versions থেকে সঠিক version বাছাই করে। যেমন: x₃ = φ(x₁, x₂) মানে x₃ হলো x₁ বা x₂-এর একটি, control flow-এর উপর নির্ভর করে। এটি SSA-তে অপরিহার্য।",
+      "tags": ["phi-function", "ssa", "ir"]
+    },
+    {
+      "question": "Code Optimization কী?",
+      "answer": "Code Optimization হলো compiler-এর পর্যায় যেখানে intermediate code-কে আরও কার্যকর করার জন্য পরিবর্তন করা হয়। এটি execution time, memory usage বা power consumption কমানোর লক্ষ্যে করা হয়। Optimization compile-time বাড়াতে পারে কিন্তু runtime কমায়।",
+      "tags": ["optimization", "code-generation", "compiler"]
+    },
+    {
+      "question": "Peephole Optimization কী?",
+      "answer": "Peephole Optimization হলো target code-এর ছোট ছোট window (peephole) বিশ্লেষণ করে সরলতর বা দ্রুততর instruction sequence দিয়ে প্রতিস্থাপন করা। উদাহরণ: load x; store x কে remove করা। Dead code elimination, constant propagation, jump threading — এগুলো peephole optimization-এর উদাহরণ।",
+      "tags": ["peephole", "optimization", "local"]
+    },
+    {
+      "question": "Constant Folding কী?",
+      "answer": "Constant Folding হলো compile-time-এ constant expression-এর মান গণনা করে সরাসরি মান বসিয়ে দেওয়া। যেমন: x = 3 + 4 * 2 কে x = 11 বানানো। এতে runtime computation কমে যায়। এটি সবচেয়ে সাধারণ ও কার্যকর optimization-এর একটি।",
+      "tags": ["constant-folding", "optimization", "compile-time"]
+    },
+    {
+      "question": "Constant Propagation কী?",
+      "answer": "Constant Propagation হলো যেখানে একটি variable-কে constant value assign করা হয়েছে, সেই variable ব্যবহারকারী সব জায়গায় সরাসরি সেই constant value বসিয়ে দেওয়া। যেমন: x = 5; y = x + 3 কে y = 8 বানানো। এটিও compile-time optimization।",
+      "tags": ["constant-propagation", "optimization", "compile-time"]
+    },
+    {
+      "question": "Loop Optimization কী কী?",
+      "answer": "Loop Optimization-এর প্রধান প্রকারভেগ: (1) Loop Invariant Code Motion — loop-এর বাইরে সরানো। (2) Strength Reduction — ব্যয়বহুল operation কম ব্যয়বহুল দিয়ে প্রতিস্থাপন (যেমন multiplication → addition)। (3) Loop Unrolling — loop iteration কমানো। (4) Induction Variable Elimination।",
+      "tags": ["loop-optimization", "optimization", "invariant-code-motion"]
+    },
+    {
+      "question": "Dead Code Elimination কী?",
+      "answer": "Dead Code Elimination হলো সেসব code সরিয়ে দেওয়া যা প্রোগ্রামের output-কে প্রভাবিত করে না। যেমন: x = 5 (কিন্তু x আর কোথাও ব্যবহার হয়নি) এই লাইনটি remove করা হয়। এটি code size ও execution time কমায়।",
+      "tags": ["dead-code", "optimization", "elimination"]
+    },
+    {
+      "question": "Symbol Table কী?",
+      "answer": "Symbol Table হলো compiler-এর একটি data structure যেখানে প্রোগ্রামের সব variables, functions, এবং অন্যান্য identifiers-এর তথ্য সংরক্ষিত থাকে। প্রতিটি entry-তে name, type, scope, memory location, line number — এসব থাকে। Lexical, semantic, code generation — সব পর্যায়ে symbol table ব্যবহৃত হয়।",
+      "tags": ["symbol-table", "compiler", "management"]
+    },
+    {
+      "question": "Symbol Table-এ কোন কোন তথ্য সংরক্ষিত থাকে?",
+      "answer": "Symbol Table-এ সংরক্ষিত তথ্য: (1) Identifier name। (2) Data type। (3) Scope (local, global)। (4) Memory address/location। (5) Line number of declaration। (6) Array dimensions। (7) Function parameters। (8) Return type। প্রতিটি symbol-এর জন্য একটি entry থাকে।",
+      "tags": ["symbol-table", "entries", "compiler"]
+    },
+    {
+      "question": "Symbol Table-এ Lookup Operation-এর Time Complexity কত?",
+      "answer": "Symbol Table lookup-এর efficiency ব্যবহৃত data structure-এর উপর নির্ভর করে: (1) Unsorted list — O(n)। (2) Sorted list — O(log n)। (3) Hash Table — O(1) average, O(n) worst। (4) BST — O(log n) average। আধুনিক compiler-এ সাধারণত Hash Table ব্যবহৃত হয়।",
+      "tags": ["symbol-table", "lookup", "complexity"]
+    },
+    {
+      "question": "Storage Allocation কীভাবে কাজ করে?",
+      "answer": "Compiler দুই ধরনের মেমরি বরাদ্দ করে: (1) Stack Allocation — function call-এর সময় activation record stack-এ বরাদ্দ হয়। এটি automatic। (2) Heap Allocation — dynamically allocated memory (যেমন malloc) heap-এ বরাদ্দ হয়। এটি manual।",
+      "tags": ["storage-allocation", "stack", "heap"]
+    },
+    {
+      "question": "Activation Record কী?",
+      "answer": "Activation Record (Stack Frame) হলো একটি function call-এর সময় stack-এ বরাদ্দ করা মেমরি ব্লক। এতে থাকে: (1) Local variables। (2) Parameters। (3) Return address। (4) Saved registers। (5) Dynamic link (caller-এর frame pointer)। (6) Static link (nesting level)।",
+      "tags": ["activation-record", "stack-frame", "call"]
+    },
+    {
+      "question": "Stack Allocation ও Heap Allocation-এর পার্থক্য কী?",
+      "answer": "Stack Allocation: (1) Automatic। (2) LIFO order। (3) Function return-এ deallocate। (4) Fast। (5) Size limited। Heap Allocation: (1) Manual। (2) Flexible order। (3)程序员 must deallocate। (4) Slower। (5) Size large। গতিশীল ডেটার জন্য heap, স্থির ডেটার জন্য stack।",
+      "tags": ["stack", "heap", "allocation", "comparison"]
+    },
+    {
+      "question": "Scope ও Lifetime-এর পার্থক্য কী?",
+      "answer": "Scope হলো কোনো variable-এর সোর্স কোডে কোন কোন জায়গায় accessible। Lifetime হলো কোনো variable কতক্ষণ মেমরিতে থাকে। Scope compile-time concept, lifetime runtime concept। একটি variable local scope-এ থাকতে পারে কিন্তু heap-এ lifetime বড় হতে পারে।",
+      "tags": ["scope", "lifetime", "variables"]
+    },
+    {
+      "question": "Error Detection কীভাবে কাজ করে?",
+      "answer": "Compiler বিভিন্ন পর্যায়ে বিভিন্ন ধরনের error শনাক্ত করে: (1) Lexical — illegal characters। (2) Syntax — grammar violation। (3) Semantic — type mismatch, undeclared variable। (4) Logical — unreachable code (warning)। প্রতিটি পর্যায়ে error-কে report করে এবং recovery করার চেষ্টা করে।",
+      "tags": ["error-detection", "compiler", "phases"]
+    },
+    {
+      "question": "Error Recovery কীভাবে কাজ করে?",
+      "answer": "Error Recovery-এর প্রধান পদ্ধতি: (1) Panic Mode — error-এর পরের tokens skip করে sync token-এ (যেমন ;) পর্যন্ত যায়। (2) Phrase-level — error-কে মুছে minimal change করে valid phrase তৈরি করে। (3) Error Productions — grammar-এ error-কে handle করার নিয়ম যোগ করা। (4) Global Correction — minimal edit distance দিয়ে valid program তৈরি।",
+      "tags": ["error-recovery", "compiler", "parsing"]
+    },
+    {
+      "question": "Chomsky Hierarchy-র সাথে Compiler Design-এর সম্পর্ক কী?",
+      "answer": "Chomsky Hierarchy: (1) Type 0 — Unrestricted Grammar (Turing Machine)। (2) Type 1 — Context-Sensitive (Linear Bounded Automaton)। (3) Type 2 — Context-Free (Pushdown Automaton)। (4) Type 3 — Regular (Finite Automaton)। Programming languages-এর syntax Context-Free Grammar (Type 2) দিয়ে প্রকাশ করা হয়, যা Pushdown Automaton দিয়ে parse করা যায়।",
+      "tags": ["chomsky", "grammar", "hierarchy"]
+    },
+    {
+      "question": "Context-Free Grammar (CFG) কী?",
+      "answer": "CFG হলো Chomsky Hierarchy-র Type 2 grammar যা ৪টি components নিয়ে গঠিত: (1) Variables (non-terminals) — V। (2) Terminals — Σ। (3) Productions — P। (4) Start Symbol — S। CFG programming languages-এর syntax প্রকাশে ব্যবহৃত হয়। এটি Pushdown Automaton দ্বারা স্বীকৃত।",
+      "tags": ["cfg", "context-free", "grammar"]
+    },
+    {
+      "question": "Operator Precedence Parser কী?",
+      "answer": "Operator Precedence Parser হলো Bottom-Up Parser-এর একটি সরল প্রকার যা শুধু operator-এর মধ্যে precedence relation (< •, = •, • >) ব্যবহার করে। এটি operator grammar-এর জন্য কাজ করে। এটি simple কিন্তু limited — শুধু expression parsing-এ ভালো।",
+      "tags": ["operator-precedence", "parsing", "bottom-up"]
+    },
+    {
+      "question": "Precedence Climbing কী?",
+      "answer": "Precedence Climbing হলো expression parsing-এর একটি recursive descent technique যেখানে operator-এর precedence level অনুযায়ী recursive call করা হয়। এটি বিভিন্ন precedence level-এর operators handle করতে পারে। Pratt Parsing এর সাথে সম্পর্কিত।",
+      "tags": ["precedence-climbing", "expression", "parsing"]
+    },
+    {
+      "question": "Code Generation কীভাবে কাজ করে?",
+      "answer": "Code Generation compiler-এর শেষ পর্যায় যেখানে optimized IR-কে target machine code-তে রূপান্তর করা হয়। এতে: (1) Instruction Selection — কোন machine instructions ব্যবহার করবে। (2) Register Allocation — variables-কে registers-এ বরাদ্দ। (3) Instruction Scheduling — instructions-এর order নির্ধারণ।",
+      "tags": ["code-generation", "compiler", "target-code"]
+    },
+    {
+      "question": "Register Allocation কী?",
+      "answer": "Register Allocation হলো variables-কে CPU registers-এ বরাদ্দ করার প্রক্রিয়া। যদি variables-এর সংখ্যা registers-এর চেয়ে বেশি হয়, তাহলে spill করতে হয় (কিছু variables memory-তে পাঠাতে হয়)। Graph coloring একটি জনপ্রিয় technique। সঠিক register allocation program-এর performance উল্লেখযোগ্যভাবে বাড়ায়।",
+      "tags": ["register-allocation", "code-generation", "optimization"]
+    },
+    {
+      "question": "Instruction Selection কী?",
+      "answer": "Instruction Selection হলো IR-এর প্রতিটি statement-কে target machine-এর উপযুক্ত instruction-এ অনুবাদ করার প্রক্রিয়া। একটি IR statement একটি বা একাধিক machine instruction-এ রূপান্তরিত হতে পারে। Tree pattern matching, dynamic programming — এগুলো জনপ্রিয় পদ্ধতি।",
+      "tags": ["instruction-selection", "code-generation", "machine"]
+    },
+    {
+      "question": "Backpatching কী?",
+      "answer": "Backpatching হলো code generation-এ একটি technique যেখানে একটি jump instruction-এর target address পরে জানা গেলে সেটি fill করা হয়। যখন forward jump-এর destination নির্ধারিত হয় না, তখন jump instruction-এ একটি placeholder রাখা হয় এবং later backpatch করা হয়। এটি single-pass compilation-এ ব্যবহৃত হয়।",
+      "tags": ["backpatching", "code-generation", "jump"]
+    },
+    {
+      "question": "Macro Processor কী?",
+      "answer": "Macro Processor হলো একটি preprocessor যা macro definitions-কে handle করে। এটি macro name-কে সংশ্লিষ্ট code sequence দিয়ে প্রতিস্থাপন করে। দুই ধরনের: (1) Textual Substitution Macro — সরল পাঠ্য প্রতিস্থাপন। (2) Declarative Macro — scope ও syntax সহ।",
+      "tags": ["macro", "preprocessor", "substitution"]
+    },
+    {
+      "question": "Preprocessor কী?",
+      "answer": "Preprocessor হলো compiler-এর আগে চলা একটি tool যা source code-কে preprocessing করে। এটি #include, #define, #ifdef এর মতো directives handle করে। যেমন: #include <stdio.h> — ফাইলকে include করে। #define MAX 100 — macro define করে।",
+      "tags": ["preprocessor", "directives", "compiler"]
+    },
+    {
+      "question": "Type Checking কী?",
+      "answer": "Type Checking হলো semantic analysis-এর একটি অংশ যেখানে expression-এর operand-দের types-এর সাথে operator-এর expected types-এর মিল যাচাই করা হয়। দুই ধরনের: (1) Static Type Checking — compile-time-এ। (2) Dynamic Type Checking — runtime-এ। Strongly typed language-এ type checking কঠোর।",
+      "tags": ["type-checking", "semantic", "static"]
+    },
+    {
+      "question": "Type Inference কী?",
+      "answer": "Type Inference হলো compiler-এর সক্ষমতা যে প্রোগ্রামার সুনির্দিষ্টভাবে type না লিখেও compiler নিজেই variable-এর type নির্ধারণ করে। Hindley-Milner type system এই কাজে ব্যবহৃত হয়। Haskell, ML, Rust — এসব ভাষায় type inference আছে।",
+      "tags": ["type-inference", "semantic", "hindley-milner"]
+    },
+    {
+      "question": "Name Resolution কী?",
+      "answer": "Name Resolution হলো কোনো identifier-কে তার declaration-এর সাথে সংযুক্ত করার প্রক্রিয়া। যখন x ব্যবহার করা হয়, compiler খুঁজে বের করে x কোন scope-এ declare করা হয়েছে। Symbol table এই কাজে ব্যবহৃত হয়। Nested scope-এ inner scope outer scope-কে shadow করতে পারে।",
+      "tags": ["name-resolution", "scope", "symbol-table"]
+    },
+    {
+      "question": "Cross Compiler কী?",
+      "answer": "Cross Compiler হলো এমন compiler যা একটি platform-এ চলে কিন্তু অন্য একটি platform-এর জন্য code generate করে। যেমন: x86 machine-এ চলা compiler যা ARM processor-এর জন্য code generate করে। Embedded systems development-এ এটি ব্যবহৃত হয়।",
+      "tags": ["cross-compiler", "compiler", "embedded"]
+    },
+    {
+      "question": "Just-In-Time (JIT) Compiler কী?",
+      "answer": "JIT Compiler হলো এমন compiler যা runtime-এ code generate করে। এটি interpreted language-কে compiled language-র গতি দেয়। Java-র JVM, JavaScript-র V8 engine — এগুলো JIT compile করে। প্রথমে bytecode interpret করা হয়, পরে hot code JIT compile করে native code-তে।",
+      "tags": ["jit", "compiler", "runtime"]
+    },
+    {
+      "question": "Ahead-Of-Time (AOT) ও JIT Compiler-এর পার্থক্য কী?",
+      "answer": "AOT Compiler execution-এর আগেই সম্পূর্ণ code native code-তে compile করে — এটি দ্রুত start-up দেয়। JIT Compiler runtime-এ compile করে — এটি runtime information ব্যবহার করে optimize করতে পারে। AOT-তে compile time বেশি, JIT-তে runtime overhead থাকে।",
+      "tags": ["aot", "jit", "compiler", "comparison"]
+    },
+    {
+      "question": "Bytecode কী?",
+      "answer": "Bytecode হলো একটি intermediate representation যা interpreted language-এর compiler (যেমন javac) দ্বারা তৈরি হয়। এটি সরাসরি machine code নয় কিন্তু virtual machine-এ (যেমন JVM) execute করা যায়। Bytecode platform-independent। Java, Python — এদের bytecode আছে।",
+      "tags": ["bytecode", "intermediate", "virtual-machine"]
+    },
+    {
+      "question": "Garbage Collection কী?",
+      "answer": "Garbage Collection হলো automatic memory management-এর একটি technique যেখানে runtime-এ heap memory থেকে unused objects সরিয়ে দেওয়া হয়।程序员 কে manual deallocate করতে হয় না। Mark-and-Sweep, Copying Collector, Generational GC — এগুলো জনপ্রিয় algorithms।",
+      "tags": ["garbage-collection", "memory", "runtime"]
+    },
+    {
+      "question": "Mark-and-Sweep Garbage Collector কীভাবে কাজ করে?",
+      "answer": "Mark-and-Sweep: (1) Mark Phase — reachable objects-কে mark করা হয় root থেকে (globals, stack variables)। (2) Sweep Phase — unmarked objects-কে deallocate করা হয়। এটি simple কিন্তু fragmentation তৈরি করে। এটি stop-the-world pause তৈরি করতে পারে।",
+      "tags": ["mark-and-sweep", "garbage-collection", "memory"]
+    },
+    {
+      "question": "Optimization-এর কোন কোন স্তর আছে?",
+      "answer": "Optimization-এর স্তর: (1) Local Optimization — একটি basic block-এর মধ্যে। (2) Loop Optimization — loop structure-এর optimization। (3) Global Optimization — function-level। (4) Interprocedural Optimization — function call-এর মধ্যে। (5) Link-Time Optimization — linking stage-এ।",
+      "tags": ["optimization", "levels", "local", "global"]
+    },
+    {
+      "question": "Basic Block কী?",
+      "answer": "Basic Block হলো code-এর একটি sequence যার শুরুতে entry point আছে এবং শেষে exit/branch আছে। মাঝে কোনো branch নেই। প্রতিটি basic block-এর শুরুতে একটি label থাকে। Control Flow Graph (CFG) basic blocks-কে nodes হিসেবে এবং jumps-কে edges হিসেবে দেখায়।",
+      "tags": ["basic-block", "control-flow", "optimization"]
+    },
+    {
+      "question": "Control Flow Graph (CFG) কী?",
+      "answer": "CFG হলো একটি directed graph যেখানে nodes basic blocks এবং edges possible control flow paths। CFG code optimization-এ গুরুত্বপূর্ণ। এটি দেখায় execution কোন order-এ হতে পারে। Loop detection, dominator computation — এগুলো CFG থেকে করা হয়।",
+      "tags": ["cfg", "control-flow", "graph"]
+    },
+    {
+      "question": "Dominator কী?",
+      "answer": "Node A dominates node B যদি CFG-তে start node থেকে B-তে পৌঁছানোর সব path-ই A দিয়ে যায়। Immediate Dominator হলো সবচেয়ে কাছের dominator। Dominator tree code optimization-এ ব্যবহৃত হয়। Loop-এর natural loop detect করতে dominator দরকার।",
+      "tags": ["dominator", "cfg", "optimization"]
+    },
+    {
+      "question": "SSA-তে Partial Redundancy Elimination কী?",
+      "answer": "Partial Redundancy Elimination (PRE) হলো এমন computation-কে eliminate করার technique যা loop-এর কিছু path-এ redundant কিন্তু সব path-এ নয়। SSA form PRE-কে সহজ করে। এটি loop-invariant code motion ও code motion-কে generalize করে।",
+      "tags": ["pre", "ssa", "optimization"]
+    },
+    {
+      "question": "Tail Call Optimization কী?",
+      "answer": "Tail Call Optimization হলো এমন optimization যেখানে যদি একটি function-এর শেষ কাজ অন্য একটি function call হয় এবং return value সরাসরি return হয়, তাহলে নতুন call-এর জন্য নতুন stack frame তৈরি না করে বরং বিদ্যমান frame-ই reuse করা হয়। এতে stack overflow এড়ানো যায়।",
+      "tags": ["tail-call", "optimization", "recursion"]
+    },
+    {
+      "question": "Loop Unrolling কী?",
+      "answer": "Loop Unrolling হলো loop-এর body কয়েকবার copy করে loop iteration কমানোর technique। যেমন: for(i=0; i<4; i++) x[i]=0; কে সরাসরি x[0]=0; x[1]=0; x[2]=0; x[3]=0; বানানো। এতে loop overhead কমে, branch prediction ভালো হয় কিন্তু code size বাড়ে।",
+      "tags": ["loop-unrolling", "optimization", "loop"]
+    },
+    {
+      "question": "Strength Reduction কী?",
+      "answer": "Strength Reduction হলো ব্যয়বহুল operation-কে কম ব্যয়বহুল equivalent operation দিয়ে প্রতিস্থাপন। যেমন: (1) Multiplication by power of 2 → shift। (2) Loop induction variable multiplication → addition। GATE CSE-তে strength reduction-এর উদাহরণ জিজ্ঞাসা করা হয়।",
+      "tags": ["strength-reduction", "optimization", "loop"]
+    },
+    {
+      "question": "Common Subexpression Elimination কী?",
+      "answer": "Common Subexpression Elimination হলো একই expression বারবার compute করার পরিবর্তে একবার compute করে result reuse করার technique। যেমন: a = b + c; d = b + c; — দ্বিতীয় line-এ a-র value ব্যবহার করা যায়। GATE CSE-তে এটি optimization-এর জনপ্রিয় প্রশ্ন।",
+      "tags": ["cse", "common-subexpression", "optimization"]
+    },
+    {
+      "question": "Interprocedural Analysis কী?",
+      "answer": "Interprocedural Analysis হলো function call-এর মধ্যে data flow analyze করার technique। এটি function call-এর সময় parameter passing, side effects, alias analysis — এগুলো handle করে। যেমন: inline function, procedure cloning — এগুলো interprocedural optimization।",
+      "tags": ["interprocedural", "analysis", "optimization"]
+    },
+    {
+      "question": "Alias Analysis কী?",
+      "answer": "Alias Analysis হলো নির্ধারণ করার প্রক্রিয়া যে দুটি different pointers একই memory location-কে ইঙ্গিত করতে পারে কি না। যেমন: যদি p ও q alias হয়, তাহলে *p-এর মান পরিবর্তন করলে *q-ও পরিবর্তিত হবে। এটি optimization-এ গুরুত্বপূর্ণ।",
+      "tags": ["alias", "analysis", "pointer"]
+    },
+    {
+      "question": "Data Flow Analysis কী?",
+      "answer": "Data Flow Analysis হলো program-এ কোন তথ্য কোন point-এ অবস্থিত তা analyze করার framework। এটি CFG-তে data flow equations solve করে। উদাহরণ: live variable analysis, reaching definitions, available expressions। এগুলো optimization-এর ভিত্তি।",
+      "tags": ["data-flow", "analysis", "optimization"]
+    },
+    {
+      "question": "Live Variable Analysis কী?",
+      "answer": "Live Variable Analysis নির্ধারণ করে কোন program point-এ কোন variables future-এ আবার ব্যবহার হবে কি না। যদি একটি variable live না হয়, তাহলে সেটি dead — এবং dead code elimination করা যায়। এটি backward analysis।",
+      "tags": ["live-variable", "data-flow", "analysis"]
+    },
+    {
+      "question": "Reaching Definitions Analysis কী?",
+      "answer": "Reaching Definitions Analysis নির্ধারণ করে কোন program point-এ কোন definitions (assignments) পৌঁছেছে। যেমন: x=5; ...; y=x+1 — এখানে x=5 definition y=x+1-এ পৌঁছেছে। এটি forward analysis। Constant propagation, copy propagation-এ ব্যবহৃত হয়।",
+      "tags": ["reaching-definitions", "data-flow", "analysis"]
+    },
+    {
+      "question": "Available Expressions Analysis কী?",
+      "answer": "Available Expressions Analysis নির্ধারণ করে কোন program point-এ কোন expressions আগেই compute করা হয়েছে এবং operands change হয়নি। যেমন: a+b আগে compute হয়েছে এবং a, b পরিবর্তিত হয়নি। এটি Common Subexpression Elimination-এ ব্যবহৃত হয়।",
+      "tags": ["available-expressions", "data-flow", "analysis"]
+    },
+    {
+      "question": "Constant Propagation Analysis কীভাবে কাজ করে?",
+      "answer": "Constant Propagation Analysis forward data flow analysis যা নির্ধারণ করে কোন program point-ে কোন variable-এর value constant। প্রতিটি variable-এর জন্য: may-be-constant (সম্ভবত constant) বা must-be-constant (অবশ্যই constant)। এটি optimize করে constant expressions।",
+      "tags": ["constant-propagation", "data-flow", "analysis"]
+    },
+    {
+      "question": "Calling Convention কী?",
+      "answer": "Calling Convention হলো function call-এর সময় parameters কীভাবে pass করা হবে, return value কীভাবে return করা হবে, registers কীভাবে save করা হবে — এসব নিয়ম। উদাহরণ: cdecl (caller clean-up), stdcall (callee clean-up), System V AMD64। calling convention function call-এর overhead নির্ধারণ করে।",
+      "tags": ["calling-convention", "function-call", "abi"]
+    },
+    {
+      "question": "Inlining কী?",
+      "answer": "Inlining হলো একটি function call-কে সরাসরি function body দিয়ে প্রতিস্থাপন করার technique। এতে function call overhead কমে যায় এবং নতুন optimization-এর সুযোগ তৈরি হয়। কিন্তু code size বাড়ে। ছোট, frequently called functions inline করা হয়।",
+      "tags": ["inlining", "optimization", "function"]
+    },
+    {
+      "question": "Loop Invariant Code Motion কী?",
+      "answer": "Loop Invariant Code Motion হলো loop-এর ভেতরে এমন computation-কে loop-এর বাইরে সরিয়ে দেওয়া যার মান loop iteration-এ পরিবর্তিত হয় না। যেমন: loop-এর ভেতরে x = a + b; যদি a ও b loop-এর ভেতরে change না হয়, তাহলে এটি loop-এর আগে সরানো যায়।",
+      "tags": ["loop-invariant", "code-motion", "optimization"]
+    },
+    {
+      "question": "Instruction Scheduling কী?",
+      "answer": "Instruction Scheduling হলো code generation-এর পরে instructions-এর order পুনর্বিন্যাস করার প্রক্রিয়া যাতে pipeline hazards এড়ানো যায় এবং performance বাড়ে। যেমন: data dependency না থাকলে independent instructions swap করা যায়। Superscalar processor-এ এটি গুরুত্বপূর্ণ।",
+      "tags": ["instruction-scheduling", "pipeline", "optimization"]
+    },
+    {
+      "question": "Parallel Compilation কী?",
+      "answer": "Parallel Compilation হলো একই সাথে একাধিক files বা modules compile করার প্রক্রিয়া। এতে compilation time উল্লেখযোগ্যভাবে কমে যায়। make -j বা incremental compilation — এগুলো parallel compilation-এর উদাহরণ। কিন্তু dependencies handle করতে হয়।",
+      "tags": ["parallel", "compilation", "build"]
+    },
+    {
+      "question": "Incremental Compilation কী?",
+      "answer": "Incremental Compilation হলো শুধুমাত্র পরিবর্তিত files বা functions compile করার প্রক্রিয়া। পুরো প্রোগ্রাম পুনরায় compile করার পরিবর্তে শুধু changed parts compile করা হয়। IDE-তে incremental compilation ব্যবহৃত হয়। এতে developer feedback দ্রুত পাওয়া যায়।",
+      "tags": ["incremental", "compilation", "ide"]
+    },
+    {
+      "question": "Whole Program Optimization কী?",
+      "answer": "Whole Program Optimization (Link-Time Optimization) হলো linking stage-এ সব modules একসাথে analyze করে optimization করার প্রক্রিয়া। এতে interprocedural optimizations সম্ভব হয় যেমন: cross-module inlining, dead function elimination, global constant propagation।",
+      "tags": ["whole-program", "lto", "optimization"]
+    },
+    {
+      "question": "Compiler Compiler কী?",
+      "answer": "Compiler Compiler (Parser Generator) হলো এমন tool যা grammar specification থেকে parser code generate করে। যেমন: YACC (Yet Another Compiler Compiler), Bison, ANTLR, Lex/Flex। এগুলো LALR(1) বা LL(1) grammar handle করে এবং parser/lexer C বা Java code generate করে।",
+      "tags": ["compiler-compiler", "parser-generator", "yacc"]
+    },
+    {
+      "question": "YACC ও Bison-এর পার্থক্য কী?",
+      "answer": "YACC (Yet Another Compiler Compiler) AT&T-এর মূল tool। Bison GNU project-এর মুক্ত সংস্করণ যা YACC-কে supersede করে। Bison YACC-অপেক্ষা বেশি features support করে — যেমন:GLR parser, internationalization, better error recovery। ব্যবহারের ধরণ প্রায় একই।",
+      "tags": ["yacc", "bison", "parser-generator"]
+    },
+    {
+      "question": "Lex ও Flex-এর পার্থক্য কী?",
+      "answer": "Lex হলো Bell Labs-এর মূল lexical analyzer generator। Flex (Fast Lexical Analyzer Generator) GNU project-এর মুক্ত, দ্রুত সংস্করণ। Flex Lex-অপেক্ষা অনেক বেশি গতিশীল এবং আরও features support করে। উভয়ই regular expressions ব্যবহার করে scanner generate করে।",
+      "tags": ["lex", "flex", "scanner"]
+    },
+    {
+      "question": "Grammar Normal Form কী কী?",
+      "answer": "Grammar Normal Forms: (1) CNF (Chomsky Normal Form) — প্রতিটি production A → BC বা A → a আকারে। (2) GNF (Greibach Normal Form) — প্রতিটি production A → aα আকারে। এগুলো parsing algorithm-এর জন্য সুবিধাজনক। প্রতিটি CFG-কে CNF-এ রূপান্তর করা সম্ভব।",
+      "tags": ["cnf", "gnf", "normal-form"]
+    },
+    {
+      "question": "Pumping Lemma কী?",
+      "answer": "Pumping Lemma হলো formal language theory-র একটি theorem যা নির্ধারণ করে কোন language regular (Type 3) কি না। যদি একটি language regular হয়, তাহলে অবশ্যই pumping property satisfy করবে। যদি property violate হয়, তাহলে language regular নয়। Compiler design-এ grammar classification-এ ব্যবহৃত হয়।",
+      "tags": ["pumping-lemma", "formal-language", "regular"]
+    },
+    {
+      "question": "Ambiguous Grammar-কে Unambiguous কীভাবে বানানো যায়?",
+      "answer": "Ambiguous Grammar-কে Unambiguous বানানোর উপায়: (1) Operator precedence define করা। (2) Associativity define করা (left বা right)। (3) নতুন non-terminal যোগ করে grouping নির্ধারণ করা। যেমন: E → E + T | T এবং T → T * F | F — এটি + ও * এর precedence handle করে।",
+      "tags": ["ambiguity", "unambiguous", "grammar"]
+    },
+    {
+      "question": "Operator Precedence Grammar কী?",
+      "answer": "Operator Precedence Grammar হলো এমন grammar যেখানে প্রতিটি production-এ দুটি non-terminal-এর মাঝে শুধু একটি terminal থাকে। যেমন: E → E + E। এই grammar-এ three precedence relations define করা হয়: ⋖ (less than), ≐ (equal), ⋗ (greater than)।",
+      "tags": ["operator-precedence", "grammar", "expression"]
+    },
+    {
+      "question": "LR Parser-এ Action ও Goto Table কী?",
+      "answer": "LR Parser-এ দুটি table থাকে: (1) Action Table — state ও input token-এর সাপেক্ষে shift, reduce, accept, error action নির্ধারণ করে। (2) Goto Table — state ও non-terminal-এর সাপেক্ষে পরবর্তী state নির্ধারণ করে। এই দুটি table parser-কে drive করে।",
+      "tags": ["lr", "action", "goto"]
+    },
+    {
+      "question": "Error Productions কী?",
+      "answer": "Error Productions হলো grammar-এ এমন productions যোগ করা যা common error patterns handle করে। যেমন: E → E + E ছাড়াও E → E + (missing operand) যোগ করা। এতে parser specific error messages দিতে পারে এবং সঠিক error recovery করতে পারে।",
+      "tags": ["error-productions", "grammar", "recovery"]
+    },
+    {
+      "question": "GATE CSE-তে Compiler Design থেকে কোন কোন topic থেকে বেশি প্রশ্ন আসে?",
+      "answer": "GATE CSE-তে Compiler Design থেকে বেশি প্রশ্ন আসে: (1) Parsing — LL(1), LR(0), SLR, LALR। (2) Syntax Analysis — parse tree, derivation, ambiguity। (3) Code Optimization — loop optimization, constant folding। (4) Intermediate Code — TAC, SSA। (5) Lexical Analysis — tokens, regular expressions। (6) First/Follow computation।",
+      "tags": ["gate", "important-topics", "compiler-design"]
+    },
+    {
+      "question": "Compiler Design কেন গুরুত্বপূর্ণ?",
+      "answer": "Compiler Design গুরুত্বপূর্ণ কারণ: (1) এটি software engineering-এর fundamental concept। (2) Language design, tools, IDE — সব compiler theory-র উপর ভিত্তি করে। (3) Program analysis, optimization, security — সব area-তে apply হয়। (4) GATE CSE-তে 5-8 marks পর্যন্ত প্রশ্ন আসে। (5) Software industry-তে সরাসরি প্রয়োগ হয়।",
+      "tags": ["importance", "compiler-design", "career"]
+    }
+  ]
+}

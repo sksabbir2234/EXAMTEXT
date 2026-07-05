@@ -1,0 +1,408 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Software Engineering — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Software Engineering-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Software Engineering কী?",
+      "answer": "Software Engineering হলো সফটওয়্যার তৈরির একটি পদ্ধতিগত ও গাণিতিক দৃষ্টিভঙ্গি। এটি সিস্টেমেটিক, পরিমাপযোগ্য ও পুনরাবৃত্তিযোগ্য প্রক্রিয়ার মাধ্যমে উচ্চমানের সফটওয়্যার উন্নয়ন করার শিল্প ও বিজ্ঞান। IEEE সংজ্ঞা অনুযায়ী — 'সফটওয়্যারের জন্য প্রয়োগ করা একটি সিস্টেমেটিক, ডিসিপ্লিনড, কোয়ান্টিফায়েবল অ্যাপ্রোচ।'",
+      "tags": ["basics", "definition"]
+    },
+    {
+      "question": "Software Engineering-এর প্রধান লক্ষ্য কী কী?",
+      "answer": "প্রধান লক্ষ্যগুলো হলো: (1) সফটওয়্যারের মান উন্নয়ন করা। (2) সময় ও বাজেটের মধ্যে ডেভেলপমেন্ট সম্পন্ন করা। (3) ব্যবহারকারীর চাহিদা পূরণ করা। (4) সফটওয়্যারের রক্ষণাবেক্ষণ সহজ করা। (5) ব্যয় হ্রাস করা। (6) পুনর্ব্যবহারযোগ্যতা নিশ্চিত করা।",
+      "tags": ["basics", "goals"]
+    },
+    {
+      "question": "SDLC কী?",
+      "answer": "SDLC (Software Development Life Cycle) হলো সফটওয়্যার তৈরির একটি ধাপে ধাপে প্রক্রিয়া। এটিতে মূলত ধাপগুলো হলো: পরিকল্পনা (Planning), বিশ্লেষণ (Analysis), নকশা (Design), বিকাশ (Implementation), পরীক্ষা (Testing), স্থাপন (Deployment) ও রক্ষণাবেক্ষণ (Maintenance)।",
+      "tags": ["sdlc", "basics"]
+    },
+    {
+      "question": "Waterfall Model কী?",
+      "answer": "Waterfall Model হলো SDLC-এর সবচেয়ে পুরোনো মডেল। এতে প্রতিটি ধাপ একের পর একটি সম্পন্ন হয় — আর একবার একটি ধাপ শেষ হলে পেছনে ফিরে যাওয়া যায় না। ধাপগুলো: Requirements → Design → Implementation → Testing → Maintenance। এটি সরল ও সুশৃঙ্খল কিন্তু নমনীয় নয়।",
+      "tags": ["sdlc", "waterfall"]
+    },
+    {
+      "question": "Incremental Model কী?",
+      "answer": "Incremental Model-এ সফটওয়্যারটিকে ছোট ছোট অংশে (increment) ভাগ করে প্রতিটি অংশ আলাদাভাবে তৈরি ও ডেলিভারি করা হয়। প্রতিটি increment-এ নতুন ফিচার যোগ করা হয়। ব্যবহারকারী আগে থেকেই কিছু ফিচার পায়।",
+      "tags": ["sdlc", "incremental"]
+    },
+    {
+      "question": "Spiral Model কী?",
+      "answer": "Spiral Model-এ সফটওয়্যার উন্নয়ন একটি সর্পিলের মতো চক্রে ঘোরে। প্রতিটি চক্রে চারটি ধাপ থাকে: (1) পরিকল্পনা ও লক্ষ্য নির্ধারণ, (2) ঝুঁকি বিশ্লেষণ, (3) উন্নয়ন ও পরীক্ষা, (4) পরবর্তী পরিকল্পনা। এটি বড় ও ঝুঁকিপূর্ণ প্রকল্পে ব্যবহৃত হয়।",
+      "tags": ["sdlc", "spiral"]
+    },
+    {
+      "question": "V-Model কী?",
+      "answer": "V-Model হলো Waterfall Model-এর একটি সমমিতিক বিস্তার যেখানে প্রতিটি ধাপের সাথে সামঞ্জস্য পূরণকারী একটি পরীক্ষার ধাপ থাকে। বাম দিকে ডেভেলপমেন্ট ধাপ, ডান দিকে পরীক্ষার ধাপ। উদাহরণ: Requirements Analysis-এর সাথে Acceptance Testing, Design-এর সাথে Integration Testing।",
+      "tags": ["sdlc", "v-model"]
+    },
+    {
+      "question": "Prototype Model কী?",
+      "answer": "Prototype Model-এ প্রথমে একটি কার্যকর নমুনা (prototype) তৈরি করা হয় যাতে ব্যবহারকারী সিস্টেমটি দেখে মতামত দিতে পারেন। ব্যবহারকারীর চাহিদা স্পষ্ট না হলে এই মডেল বেশি কার্যকর। প্রোটোটাইপ বিভিন্ন প্রকার: Throwaway, Evolutionary, Incremental।",
+      "tags": ["sdlc", "prototype"]
+    },
+    {
+      "question": "RAD (Rapid Application Development) মডেল কী?",
+      "answer": "RAD মডেল দ্রুত উন্নয়ন ও ডেলিভারির উপর ফোকাস করে। এতে ব্যবহারকারী সরাসরি ডেভেলপমেন্ট প্রক্রিয়ায় অংশ নেন। সময়সীমা ৬০-৯০ দিনের মধ্যে। কিন্তু শর্ত হলো — ব্যবহারকারী দক্ষ হতে হবে এবং প্রকল্পের আকার বড় হওয়া উচিত নয়।",
+      "tags": ["sdlc", "rad"]
+    },
+    {
+      "question": "Agile Methodology কী?",
+      "answer": "Agile হলো একটি সহযোগী ও অভিযোজনযোগ্য সফটওয়্যার উন্নয়ন পদ্ধতি। Agile Manifesto-র চারটি মূল মূল্য: (1) মানুষ ও সম্পর্ক > প্রক্রিয়া ও সরঞ্জাম, (2) কার্যকর সফটওয়্যার > বিস্তারিত ডকুমেন্ট, (3) গ্রাহক সহযোগিতা > চুক্তি, (4) পরিবর্তনের প্রতিক্রিয়া > পরিকল্পনার অনুসরণ।",
+      "tags": ["agile", "basics"]
+    },
+    {
+      "question": "Scrum কী?",
+      "answer": "Scrum হলো Agile-এর সবচেয়ে জনপ্রিয় ফ্রেমওয়ার্ক। এতে দলকে ৩ টিমে ভাগ করা হয়: Product Owner, Scrum Master, Development Team। প্রধান উপাদান: Product Backlog, Sprint Backlog, Sprint, Daily Standup (Daily Scrum), Sprint Review, Sprint Retrospective।",
+      "tags": ["agile", "scrum"]
+    },
+    {
+      "question": "Sprint কী?",
+      "answer": "Sprint হলো Scrum-এর একটি নির্ধারিত সময়কাল (সাধারণত ১-৪ সপ্তাহ) যার মধ্যে একটি সম্পূর্ণ, পরীক্ষিত ও ডেলিভারেবল পণ্য তৈরি করা হয়। প্রতিটি Sprint-এর শেষে Sprint Review ও Sprint Retrospective অনুষ্ঠিত হয়।",
+      "tags": ["agile", "scrum", "sprint"]
+    },
+    {
+      "question": "Daily Standup (Daily Scrum) কী?",
+      "answer": "Daily Standup হলো Scrum-এর দৈনিক ১৫ মিনিটের মিটিং যেখানে প্রতিটি সদস্য তিনটি প্রশ্নের উত্তর দেয়: (1) গতকাল কী করেছি? (2) আজ কী করব? (3) কোনো বাধা আছে কি? এটি সমন্বয় বজায় রাখে।",
+      "tags": ["agile", "scrum", "daily-standup"]
+    },
+    {
+      "question": "Product Backlog কী?",
+      "answer": "Product Backlog হলো সকল ফিচার, বাগ ফিক্স ও উন্নয়ন কাজের একটি অগ্রাধিকারভিত্তিক তালিকা। Product Owner এটি তৈরি ও রক্ষণাবেক্ষণ করেন। সবচেয়ে বেশি গুরুত্বপূর্ণ আইটেমগুলো উপরে থাকে।",
+      "tags": ["agile", "scrum", "backlog"]
+    },
+    {
+      "question": "Kanban কী?",
+      "answer": "Kanban হলো Agile-এর একটি ভিজ্যুয়াল পদ্ধতি যেখানে কাজকে বোর্ডে কলামে সাজানো হয় — সাধারণত: To Do, In Progress, Done। WIP (Work In Progress) সীমা নির্ধারণ করা হয়। এতে Sprint থাকে না, ধারাবাহিকভাবে কাজ এগিয়ে যায়।",
+      "tags": ["agile", "kanban"]
+    },
+    {
+      "question": "XP (Extreme Programming) কী?",
+      "answer": "XP হলো Agile-এর একটি কার্যকর পদ্ধতি যেখানে উন্নত প্রকৌশল অনুশীলনের উপর ফোকাস করা হয়। মূল অনুশীলন: Pair Programming, Test-Driven Development (TDD), Continuous Integration, Refactoring, Collective Code Ownership, Small Releases।",
+      "tags": ["agile", "xp"]
+    },
+    {
+      "question": "Requirements Engineering কী?",
+      "answer": "Requirements Engineering হলো সফটওয়্যার সিস্টেমের চাহিদাগুলো সনাক্তকরণ, বিশ্লেষণ, নির্ধারণ ও যাচাই করার প্রক্রিয়া। এর চারটি মূল ধাপ: (1) Requirements Elicitation, (2) Requirements Analysis, (3) Requirements Specification, (4) Requirements Validation।",
+      "tags": ["requirements", "basics"]
+    },
+    {
+      "question": "Requirements Elicitation কী?",
+      "answer": "Requirements Elicitation হলো স্টেকহোল্ডারদের কাছ থেকে চাহিদা সংগ্রহ করার প্রক্রিয়া। পদ্ধতি: সাক্ষাৎকার (Interview), প্রশ্নমালা (Questionnaire), পর্যবেক্ষণ (Observation), ওয়ার্কশপ (Workshop), প্রোটোটাইপিং। চ্যালেঞ্জ: স্টেকহোল্ডাররা নিজেরাও চাহিদা জানেন না।",
+      "tags": ["requirements", "elicitation"]
+    },
+    {
+      "question": "Requirements Analysis কী?",
+      "answer": "Requirements Analysis হলো সংগৃহীত চাহিদাগুলোকে বিশ্লেষণ করে সংঘাত (conflict) দূর করা ও চাহিদাগুলোকে শ্রেণিবিভাগ করার প্রক্রিয়া। এতে চাহিদাগুলোকে Functional ও Non-functional ভাগে ভাগ করা হয়।",
+      "tags": ["requirements", "analysis"]
+    },
+    {
+      "question": "SRS (Software Requirements Specification) ডকুমেন্ট কী?",
+      "answer": "SRS হলো একটি আনুষ্ঠানিক ডকুমেন্ট যেখানে সফটওয়্যার সিস্টেমের সকল চাহিদা লেখা থাকে। এটি গ্রাহক ও ডেভেলপার উভয়ের মধ্যে চুক্তির কাজ করে। SRS-এ থাকে: Functional Requirements, Non-functional Requirements, Constraints, Assumptions। এটি IEEE 830 স্ট্যান্ডার্ড অনুসরণ করে।",
+      "tags": ["requirements", "srs"]
+    },
+    {
+      "question": "Functional Requirements ও Non-functional Requirements-এর পার্থক্য কী?",
+      "answer": "Functional Requirements: সিস্টেম কী করবে তা বর্ণনা করে — যেমন Login, Search, Pay। Non-functional Requirements: সিস্টেম কীভাবে করবে তা বর্ণনা করে — যেমন Performance, Security, Usability। Functional = 'কী', Non-functional = 'কেমন'।",
+      "tags": ["requirements", "functional", "non-functional"]
+    },
+    {
+      "question": "Modularity কী?",
+      "answer": "Modularity হলো সফটওয়্যারকে ছোট ছোট, স্বাধীন ও পরিচালনাযোগ্য মডিউলে ভাগ করার ধারণা। এর উদ্দেশ্য: (1) জটিলতা হ্রাস, (2) রক্ষণাবেক্ষণ সহজ, (3) পুনর্ব্যবহার, (4) একাধিক ডেভেলপারের কাজ। তবে অতিরিক্ত মডিউলারিটি দরপরিচালনা ও সংযোগ খরচ বাড়ায়।",
+      "tags": ["design", "modularity"]
+    },
+    {
+      "question": "Coupling কী এবং এর প্রকারভেগ?",
+      "answer": "Coupling হলো দুটি মডিউলের মধ্যে পারস্পরিক নির্ভরশীলতার মাত্রা। কম coupling মানে বেশি স্বাধীনতা — এটি ভালো। প্রকারভেগ (শ্রেষ্ঠ থেকে খারাপ): Data Coupling → Stamp Coupling → Control Coupling → Common Coupling → Content Coupling। ন্যূনতম Coupling লক্ষ্য করা উচিত।",
+      "tags": ["design", "coupling"]
+    },
+    {
+      "question": "Cohesion কী এবং এর প্রকারভেগ?",
+      "answer": "Cohesion হলো একটি মডিউলের ভেতরের উপাদানগুলোর মধ্যে সম্পর্কের মাত্রা। বেশি cohesion মানে ভালো — মডিউলটি একটি কাজ করে। প্রকারভেগ (খারাপ থেকে শ্রেষ্ঠ): Coincidental → Logical → Temporal → Procedural → Communicational → Sequential → Functional।",
+      "tags": ["design", "cohesion"]
+    },
+    {
+      "question": "Software Architecture-এর Layered Pattern কী?",
+      "answer": "Layered Pattern-এ সিস্টেমটিকে অনুভূমিক স্তরে ভাগ করা হয়। প্রতিটি স্তর তার নিচের স্তরের উপর নির্ভর করে। উদাহরণ: OSI Model — ৭টি স্তর। সাধারণত: Presentation Layer → Business Logic Layer → Data Access Layer → Database।",
+      "tags": ["architecture", "layered"]
+    },
+    {
+      "question": "Client-Server Architecture কী?",
+      "answer": "Client-Server Architecture-এ দুটি প্রধান উপাদাথ থাকে — ক্লায়েন্ট (অনুরোধকারী) ও সার্ভার (সেবা প্রদানকারী)। ক্লায়েন্ট অনুরোধ পাঠায়, সার্ভার সেই অনুরোধ প্রক্রিয়াকরণ করে ফিরিয়ে দেয়। উদাহরণ: Web Browser (Client) ও Web Server।",
+      "tags": ["architecture", "client-server"]
+    },
+    {
+      "question": "MVC (Model-View-Controller) Pattern কী?",
+      "answer": "MVC হলো একটি architectural pattern যেখানে সিস্টেমটিকে তিনটি অংশে ভাগ করা হয়: (1) Model — ডেটা ও ব্যবসায়িক লজিক, (2) View — ব্যবহারকারীর ইন্টারফেস, (3) Controller — Model ও View-এর মধ্যে মধ্যস্থতাকারী। এটি separation of concerns নিশ্চিত করে।",
+      "tags": ["architecture", "mvc"]
+    },
+    {
+      "question": "Microservices Architecture কী?",
+      "answer": "Microservices Architecture-এ একটি বড় সিস্টেমকে অনেকগুলো ছোট, স্বাধীন ও স্বতন্ত্র সেবায় (microservice) ভাগ করা হয়। প্রতিটি সেবা নিজের ডেটাবেস ও লজিক রাখে। সেবাগুলো REST API বা Message Queue দিয়ে যুক্ত থাকে। সুবিধা: Scalability, Flexibility।",
+      "tags": ["architecture", "microservices"]
+    },
+    {
+      "question": "Software Testing কী এবং এর গুরুত্ব কী?",
+      "answer": "Software Testing হলো সফটওয়্যারে ত্রুটি (bug) খুঁজে বের করার প্রক্রিয়া। এর গুরুত্ব: (1) ব্যবহারকারীর নিরাপত্তা নিশ্চিত করা, (2) সফটওয়্যারের মান যাচাই করা, (3) খরচ হ্রাস (এতে পরে বাগ পেলে বেশি খরচ লাগে), (4) গ্রাহক সন্তুষ্টি।",
+      "tags": ["testing", "basics"]
+    },
+    {
+      "question": "Unit Testing কী?",
+      "answer": "Unit Testing হলো সবচেয়ে ক্ষুদ্রতম সফটওয়্যার একককে (unit) আলাদাভাবে পরীক্ষা করা। সাধারণত একটি ফাংশন বা মেথড একটি unit। ডেভেলপার নিজেই এটি করেন। সাধারণত JUnit, NUnit ইত্যাদি টুল ব্যবহৃত হয়।",
+      "tags": ["testing", "unit"]
+    },
+    {
+      "question": "Integration Testing কী?",
+      "answer": "Integration Testing হলো একাধিক মডিউলকে একসাথে জোড়া দিয়ে পরীক্ষা করা যাতে তাদের মধ্যের সংযোগ ঠিকমতো কাজ করে। ধরন: Top-Down (শীর্ষ থেকে নিচে), Bottom-Up (নিচ থেকে শীর্ষে), Sandwich (দুই দিক থেকে)।",
+      "tags": ["testing", "integration"]
+    },
+    {
+      "question": "System Testing কী?",
+      "answer": "System Testing হলো সম্পূর্ণ সফটওয়্যার সিস্টেমকে একত্রিত করে পরীক্ষা করা। এতে সিস্টেমের মোট কার্যকারিতা, নিরাপত্তা, পারফরম্যান্স সহ সকল দিক যাচাই করা হয়। এটি Unit ও Integration Testing-এর পরে হয়।",
+      "tags": ["testing", "system"]
+    },
+    {
+      "question": "Acceptance Testing কী?",
+      "answer": "Acceptance Testing হলো সফটওয়্যার গ্রাহক বা ব্যবহারকারীর দ্বারা পরীক্ষা করা যাতে নিশ্চিত করা যায় সিস্টেমটি তাদের চাহিদা পূরণ করে। যদি Acceptance Test পাস না হয়, তাহলে সফটওয়্যার ডেলিভারি করা হয় না।",
+      "tags": ["testing", "acceptance"]
+    },
+    {
+      "question": "White-box Testing কী?",
+      "answer": "White-box Testing (Glass-box/Structural Testing) — পরীক্ষাকারী সফটওয়্যারের অভ্যন্তরীণ কোড জানে। এতে কোডের গঠন, শর্ত শাখা, লুপ কভারেজ ইত্যাদি যাচাই করা হয়। পদ্ধতি: Statement Coverage, Branch Coverage, Path Coverage।",
+      "tags": ["testing", "white-box"]
+    },
+    {
+      "question": "Black-box Testing কী?",
+      "answer": "Black-box Testing (Functional/External Testing) — পরীক্ষাকারী সফটওয়্যারের অভ্যন্তরীণ কোড জানে না। শুধুমাত্র ইনপুট ও আশাতীয় আউটপুট দেখে পরীক্ষা করা হয়। পদ্ধতি: Equivalence Partitioning, Boundary Value Analysis, Decision Table, State Transition।",
+      "tags": ["testing", "black-box"]
+    },
+    {
+      "question": "Boundary Value Analysis (BVA) কী?",
+      "answer": "Boundary Value Analysis হলো Black-box Testing-এর একটি পদ্ধতি যেখানে ইনপুটের সীমান্ত মানগুলোতে পরীক্ষা করা হয়। ধারণা: ত্রুটি সাধারণত সীমান্তে বেশি হয়। উদাহরণ: ইনপুট ১-১০০ হলে পরীক্ষা করবে: ০, ১, ২, ৯৯, ১০০, ১০১।",
+      "tags": ["testing", "black-box", "bva"]
+    },
+    {
+      "question": "Equivalence Partitioning কী?",
+      "answer": "Equivalence Partitioning হলো ইনপুটকে সমতুল্য শ্রেণিতে (equivalence class) ভাগ করে প্রতিটি শ্রেণি থেকে একটি মান দিয়ে পরীক্ষা করার পদ্ধতি। উদাহরণ: ইনপুট ১-১০০ হলে তিনটি শ্রেণি: < ১, ১-১০০, > ১০০। প্রতিটি শ্রেণি থেকে একটি মান নিলেই হবে।",
+      "tags": ["testing", "black-box", "equivalence-partitioning"]
+    },
+    {
+      "question": "Cyclomatic Complexity কী?",
+      "answer": "Cyclomatic Complexity হলো সফটওয়্যারের একটি কোডের জটিলতা পরিমাপের একটি পরিমাপ। এটি স্বাধীন পথের (independent path) সংখ্যা নির্ধারণ করে। সূত্র: V(G) = E - N + 2P (E = এজ, N = নোড, P = কম্পোনেন্ট)। বেশি cyclomatic complexity মানে বেশি পরীক্ষা প্রয়োজন।",
+      "tags": ["testing", "cyclomatic-complexity"]
+    },
+    {
+      "question": "Basis Path Testing কী?",
+      "answer": "Basis Path Testing হলো White-box Testing-এর একটি পদ্ধতি যেখানে প্রতিটি স্বাধীন পথ (independent path) একবার করে পরীক্ষা করা হয়। Cyclomatic Complexity থেকে স্বাধীন পথের সংখ্যা জানা যায়। এটি নিশ্চিত করে যে প্রতিটি এজ কমপক্ষে একবার পরীক্ষিত হবে।",
+      "tags": ["testing", "basis-path"]
+    },
+    {
+      "question": "Alpha Testing ও Beta Testing-এর পার্থক্য কী?",
+      "answer": "Alpha Testing: ডেভেলপমেন্ট টিমের অভ্যন্তরে সম্পন্ন হয়। ব্যবহারকারীরা ডেভেলপারদের পরিবেশে সফটওয়্যার ব্যবহার করেন। Beta Testing: ব্যবহারকারীরা নিজের পরিবেশে সফটওয়্যার ব্যবহার করেন এবং প্রতিবেদন দেন। Beta Testing বাস্তব পরিবেশের কাছাকাছি।",
+      "tags": ["testing", "alpha", "beta"]
+    },
+    {
+      "question": "Smoke Testing কী?",
+      "answer": "Smoke Testing হলো একটি দ্রুত, প্রাথমিক পরীক্ষা যার উদ্দেশ্য সিস্টেমের মৌলিক কার্যকারিতা যাচাই করা। যদি Smoke Test ব্যর্থ হয়, তাহলে বিস্তারিত পরীক্ষা করা হয় না। এটি Build Verification Test হিসেবেও পরিচিত।",
+      "tags": ["testing", "smoke"]
+    },
+    {
+      "question": "Regression Testing কী?",
+      "answer": "Regression Testing হলো কোনো পরিবর্তনের (বাগ ফিক্স, নতুন ফিচার) পরে আগের ফিচারগুলো ঠিকমতো কাজ করছে কিনা তা যাচাই করার পরীক্ষা। এটি নিশ্চিত করে যে নতুন কোড পুরোনো কোডকে ভাঙেনি।",
+      "tags": ["testing", "regression"]
+    },
+    {
+      "question": "COCOMO Model কী?",
+      "answer": "COCOMO (Constructive Cost Model) হলো সফটওয়্যারের ব্যয় ও সময় অনুমানের একটি গাণিতিক মডেল। ব্যবহার করে KLOC (Kilo Lines of Code)। তিনটি স্তর: Basic COCOMO, Intermediate COCOMO, Detailed COCOMO। Basic COCOMO: Effort = a × (KLOC)^b, Time = c × (Effort)^d।",
+      "tags": ["estimation", "cocomo"]
+    },
+    {
+      "question": "COCOMO Model-এ তিনটি মডেল কী কী?",
+      "answer": "(1) Basic COCOMO: সবচেয়ে সরল, শুধু KLOC ব্যবহার করে। (2) Intermediate COCOMO: Cost Drivers (যেমন দক্ষতা, জটিলতা) যোগ করে। (3) Detailed COCOMO: প্রতিটি ধাপের জন্য আলাদাভাবে অনুমান করে। মোট Effort = (KLOC)^b × Product Effort Multiplier।",
+      "tags": ["estimation", "cocomo"]
+    },
+    {
+      "question": "Software Maintenance কী?",
+      "answer": "Software Maintenance হলো সফটওয়্যার ডেলিভারির পরে তার রক্ষণাবেক্ষণ, আপডেট ও উন্নয়নের কাজ। সফটওয়্যার জীবনচক্রের সবচেয়ে বেশি সময় (৬০-৮০%) এই ধাপে ব্যয় হয়। চারটি ধরনের মেইনটেন্যান্স আছে।",
+      "tags": ["maintenance", "basics"]
+    },
+    {
+      "question": "Corrective Maintenance কী?",
+      "answer": "Corrective Maintenance হলো সফটওয়্যারের বিদ্যমান বাগ (bug) ফিক্স করার কাজ। যখন সফটওয়্যারে কোনো ত্রুটি ধরা পড়ে এবং সেটি সংশোধন করা হয়, তখন এটি Corrective Maintenance। উদাহরণ: Crash ফিক্স, Data Corruption ফিক্স।",
+      "tags": ["maintenance", "corrective"]
+    },
+    {
+      "question": "Adaptive Maintenance কী?",
+      "answer": "Adaptive Maintenance হলো সফটওয়্যারকে নতুন পরিবেশে খাপ খাওয়ানোর কাজ। যখন OS, Hardware, বা Library আপডেট হয় এবং সফটওয়্যারকে সেই সাথে আপডেট করতে হয়, তখন Adaptive Maintenance হয়। উদাহরণ: Windows এর নতুন সংস্করণে চালানো।",
+      "tags": ["maintenance", "adaptive"]
+    },
+    {
+      "question": "Perfective Maintenance কী?",
+      "answer": "Perfective Maintenance হলো সফটওয়্যারের কার্যকারিতা ও ব্যবহারযোগ্যতা উন্নয়নের কাজ। নতুন ফিচার যোগ করা, পারফরম্যান্স ভালো করা, ইন্টারফেস সুন্দর করা — এগুলো Perfective Maintenance। গ্রাহকের নতুন চাহিদা পূরণ করাও এই ধাপে হয়।",
+      "tags": ["maintenance", "perfective"]
+    },
+    {
+      "question": "Preventive Maintenance কী?",
+      "answer": "Preventive Maintenance হলো ভবিষ্যতে সমস্যা এড়ানোর জন্য সফটওয়্যারে পরিবর্তন আনা। এটি সক্রিয় (proactive) ধরনের মেইনটেন্যান্স। উদাহরণ: কোড রিফ্যাক্টরিং, নিরাপত্তা প্রোটোকল আপডেট, ডকুমেন্টেশন আপডেট।",
+      "tags": ["maintenance", "preventive"]
+    },
+    {
+      "question": "Risk Management কী?",
+      "answer": "Risk Management হলো সফটওয়্যার প্রকল্পে সম্ভাব্য ঝুঁকি সনাক্তকরণ, মূল্যায়ন ও প্রতিকারের প্রক্রিয়া। ধাপগুলো: (1) Risk Identification, (2) Risk Analysis (Probability × Impact), (3) Risk Mitigation, (4) Risk Monitoring। ঝুঁকি: Technical, Project, Business।",
+      "tags": ["risk-management", "basics"]
+    },
+    {
+      "question": "PERT কী?",
+      "answer": "PERT (Program Evaluation and Review Technique) হলো প্রকল্পের সময়কাল অনুমানের একটি পদ্ধতি। এতে তিনটি সময় অনুমান ব্যবহার করা হয়: Optimistic (O), Most Likely (M), Pessimistic (P)। প্রত্যাশিত সময় = (O + 4M + P) / 6।",
+      "tags": ["project-management", "pert"]
+    },
+    {
+      "question": "CPM (Critical Path Method) কী?",
+      "answer": "CPM হলো প্রকল্পের সবচেয়ে দীর্ঘ পথ (Critical Path) নির্ণয়ের পদ্ধতি। Critical Path-এর দৈর্ঘ্যই প্রকল্পের ন্যূনতম সময়। এই পথের কোনো টাস্ক বিলম্বিত হলে সমগ্র প্রকল্প বিলম্বিত হবে। CPM-তে সময় ও খরচ উভয় বিবেচনা করা হয়।",
+      "tags": ["project-management", "cpm"]
+    },
+    {
+      "question": "PERT ও CPM-এর পার্থক্য কী?",
+      "answer": "PERT: Probabilistic, সময়-নির্ভর, তিনটি সময় অনুমান ব্যবহার করে, R&D প্রকল্পে ব্যবহৃত। CPM: Deterministic, সময় ও খরচ উভয় বিবেচনা করে, Construction প্রকল্পে ব্যবহৃত। PERT-এ ঝুঁকি বেশি, CPM-এ ঝুঁকি কম।",
+      "tags": ["project-management", "pert", "cpm"]
+    },
+    {
+      "question": "Software Configuration Management (SCM) কী?",
+      "answer": "SCM হলো সফটওয়্যার উন্নয়নের বিভিন্ন উপাদান (কোড, ডকুমেন্ট, কনফিগারেশন) ট্র্যাক ও নিয়ন্ত্রণ করার প্রক্রিয়া। এতে Version Control, Change Control, Build Management অন্তর্ভুক্ত। টুল: Git, SVN।",
+      "tags": ["configuration-management", "basics"]
+    },
+    {
+      "question": "Version Control System (VCS) কী?",
+      "answer": "Version Control System হলো কোডের পরিবর্তনগুলো ট্র্যাক ও পরিচালনা করার সফটওয়্যার। প্রকার: Local VCS, Centralized VCS (SVN), Distributed VCS (Git)। সুবিধা: কোডের ইতিহাস সংরক্ষণ, একাধিক ডেভেলপারের সমন্বয়, Branch ও Merge।",
+      "tags": ["configuration-management", "vcs"]
+    },
+    {
+      "question": "Software Quality Assurance (SQA) কী?",
+      "answer": "SQA হলো সফটওয়্যার উন্নয়ন প্রক্রিয়ার মান নিশ্চিত করার পদ্ধতি। এটি Process-oriented — প্রক্রিয়া যাচাই করে। এতে Audits, Reviews, Testing, Standards অনুসরণ অন্তর্ভুক্ত। SQA প্রক্রিয়াকে উন্নত করে যাতে উৎপাদিত সফটওয়্যার নিজেই মানসম্মত হয়।",
+      "tags": ["quality", "sqa"]
+    },
+    {
+      "question": "CMMI (Capability Maturity Model Integration) কী?",
+      "answer": "CMMI হলো একটি প্রক্রিয়া-উন্নয়ন মডেল যা পাঁচটি মাত্রায় (Level) সংস্থার পক্ষতা মূল্যায়ন করে: Level 1 — Initial, Level 2 — Managed, Level 3 — Defined, Level 4 — Quantitatively Managed, Level 5 — Optimizing। উচ্চ মাত্রা মানে উন্নত প্রক্রিয়া।",
+      "tags": ["quality", "cmmi"]
+    },
+    {
+      "question": "Design Pattern কী?",
+      "answer": "Design Pattern হলো সফটওয়্যার নকশার জন্য একটি সুপরিচিত, পুনর্ব্যবহারযোগ্য সমাধান। প্রকার: (1) Creational — Factory, Singleton, Builder, (2) Structural — Adapter, Decorator, Facade, (3) Behavioral — Observer, Strategy, Command। GoF (Gang of Four) ২৩টি ডিজাইন প্যাটার্ন প্রস্তাব করেছেন।",
+      "tags": ["design", "design-pattern"]
+    },
+    {
+      "question": "Factory Pattern কী?",
+      "answer": "Factory Pattern হলো Creational Design Pattern যেখানে অবজেক্ট তৈরির জন্য একটি সুনির্দিষ্ট ইন্টারফেস ব্যবহার করা হয়। ক্লায়েন্ট জানে না কোন কনক্রিট ক্লাস ইনস্ট্যান্স তৈরি হচ্ছে। এটি loose coupling তৈরি করে।",
+      "tags": ["design", "design-pattern", "factory"]
+    },
+    {
+      "question": "Singleton Pattern কী?",
+      "answer": "Singleton Pattern হলো Creational Design Pattern যা নিশ্চিত করে যে একটি ক্লাসের মাত্র একটি ইনস্ট্যান্স তৈরি হবে এবং সারা অ্যাপ্লিকেশনে সেটিই ব্যবহৃত হবে। উদাহরণ: Database Connection Pool, Logger।",
+      "tags": ["design", "design-pattern", "singleton"]
+    },
+    {
+      "question": "Observer Pattern কী?",
+      "answer": "Observer Pattern হলো Behavioral Design Pattern যেখানে একটি অবজেক্ট (Subject) পরিবর্তন হলে সকল নির্ভরশীল অবজেক্টকে (Observer) স্বয়ংক্রিয়ভাবে অবহিত করা হয়। উদাহরণ: Event Listener, Pub-Sub System।",
+      "tags": ["design", "design-pattern", "observer"]
+    },
+    {
+      "question": "Coupling ও Cohesion-এর সম্পর্ক কী?",
+      "answer": "ভালো সফটওয়্যার ডিজাইনে লক্ষ্য করা হয় — ন্যূনতম Coupling (কম নির্ভরশীলতা) ও সর্বোচ্চ Cohesion (বেশি অভ্যন্তরীণ সম্পর্ক)। Coupling কমলে মডিউল স্বাধীন থাকে, Cohesion বেশিলে মডিউল ফোকাসড থাকে। এই দুটি গুণ পরস্পর বিপরীতভাবে কাজ করে।",
+      "tags": ["design", "coupling", "cohesion"]
+    },
+    {
+      "question": "Software Project Estimation কীভাবে করা হয়?",
+      "answer": "সফটওয়্যার প্রকল্পের খরচ ও সময় অনুমানের পদ্ধতি: (1) COCOMO — KLOC ভিত্তিক, (2) Function Point Analysis — ফাংশনের সংখ্যা ভিত্তিক, (3) Expert Judgment — বিশেষজ্ঞদের মতামত, (4) Analogy — পূর্ববর্তী প্রকল্পের সাথে তুলনা।",
+      "tags": ["estimation", "basics"]
+    },
+    {
+      "question": "Function Point Analysis কী?",
+      "answer": "Function Point Analysis হলো সফটওয়্যারের আকার পরিমাপের একটি পদ্ধতি যা কোডের পরিবর্তে ফাংশনের সংখ্যা ও জটিলতার উপর ভিত্তি করে। এতে External Inputs, External Outputs, External Inquiries, Internal Logical Files, External Interface Files — এই ৫টি উপাদান বিবেচনা করা হয়।",
+      "tags": ["estimation", "function-point"]
+    },
+    {
+      "question": "Coupling-এর প্রকারভেদে উদাহরণ দিন।",
+      "answer": "Data Coupling: মডিউল A, B-কে শুধু ডেটা পাঠায় (best)। Stamp Coupling: A, B-কে ডেটা স্ট্রাকচার পাঠায় যার কিছু অংশই ব্যবহৃত হয়। Control Coupling: A, B-কে কন্ট্রোল ফ্ল্যাগ পাঠায়। Common Coupling: A, B একই গ্লোবল ভ্যারিয়েবল ব্যবহার করে। Content Coupling: A, B-এর ভেতরের কোডে প্রবেশ করে (worst)।",
+      "tags": ["design", "coupling", "examples"]
+    },
+    {
+      "question": "Verification ও Validation-এর পার্থক্য কী?",
+      "answer": "Verification: 'আমরা কি সফটওয়্যারটি সঠিকভাবে তৈরি করছি?' — প্রক্রিয়া যাচাই। যেমন: Code Review, Inspection। Validation: 'আমরা কি সঠিক সফটওয়্যার তৈরি করছি?' — ফলাফল যাচাই। যেমন: Testing, Acceptance। Verification = প্রক্রিয়া, Validation = পণ্য।",
+      "tags": ["quality", "verification", "validation"]
+    },
+    {
+      "question": "White-box Testing-এর কোন কোন কভারেজ মানদণ্ড আছে?",
+      "answer": "প্রধান কভারেজ মানদণ্ড: (1) Statement Coverage — প্রতিটি স্টেটমেন্ট কমপক্ষে একবার চলে। (2) Branch Coverage — প্রতিটি শর্তের True ও False দুটোই পরীক্ষিত হয়। (3) Path Coverage — সম্ভাব্য সকল পথ পরীক্ষিত হয়। Statement < Branch < Path (কভারেজের দিক থেকে)।",
+      "tags": ["testing", "white-box", "coverage"]
+    },
+    {
+      "question": "Testing-এর জন্য Test Case কী?",
+      "answer": "Test Case হলো পরীক্ষার একটি নির্দিষ্ট পরিস্থিতি — এতে থাকে: Test Case ID, Description, Preconditions, Input Data, Expected Output, Actual Output, Status (Pass/Fail)। ভালো Test Case লেখার শর্ত: Clear, Concise, Consistent।",
+      "tags": ["testing", "test-case"]
+    },
+    {
+      "question": "Defect ও Bug-এর পার্থক্য কী?",
+      "answer": "Defect: সফটওয়্যারের কোডে থাকা ত্রুটি যা ডেভেলপমেন্ট সময়ে ধরা পড়ে। Bug: ডেভেলপারদের ভাষায় Defect-কেই Bug বলা হয়। Error: ডেভেলপারের ভুল যা Defect তৈরি করে। Failure: রান টাইমে সফটওয়্যার আশানুরূপ কাজ না করা।",
+      "tags": ["testing", "basics", "defect"]
+    },
+    {
+      "question": "Test Plan কী এবং এতে কী থাকে?",
+      "answer": "Test Plan হলো পরীক্ষার একটি পরিকল্পনা ডকুমেন্ট। এতে থাকে: (1) Scope — কী পরীক্ষা হবে, (2) Strategy — কীভাবে পরীক্ষা হবে, (3) Resources — কে করবে, (4) Schedule — কখন হবে, (5) Risk — কোনো সমস্যা হলে কী করবে। IEEE 829 স্ট্যান্ডার্ড অনুসরণ করা হয়।",
+      "tags": ["testing", "test-plan"]
+    },
+    {
+      "question": "Software Crisis কী?",
+      "answer": "Software Crisis হলো ১৯৬০-৭০ দশকের একটি অবস্থা যখন সফটওয়্যার প্রকল্পগুলো সময়মতো, বাজেটে ও মানসম্মতভাবে ডেলিভারি হতো না। সমস্যা: বিলম্ব, অতিরিক্ত খরচ, নিম্নমান, ব্যবহারকারীর চাহিদা অপূরণ। Software Engineering-এর জন্ম এই সংকট থেকেই।",
+      "tags": ["basics", "software-crisis"]
+    },
+    {
+      "question": "Software Engineering-এর ধাপগুলো কী কী?",
+      "answer": "মূল ধাপ: (1) Requirements Engineering — চাহিদা সংগ্রহ ও নির্ধারণ। (2) Design — নকশা তৈরি। (3) Implementation — কোড লেখা। (4) Testing — পরীক্ষা। (5) Deployment — স্থাপন। (6) Maintenance — রক্ষণাবেক্ষণ। এগুলো সাধারণত Iterative ভাবে ঘটে।",
+      "tags": ["basics", "phases"]
+    },
+    {
+      "question": "UML (Unified Modeling Language) কী?",
+      "answer": "UML হলো সফটওয়্যার সিস্টেমের নকশা তৈরির একটি মানক ভিজ্যুয়াল ভাষা। প্রকার: (1) Structural Diagrams — Class, Component, Package, (2) Behavioral Diagrams — Use Case, Sequence, Activity। UML দিয়ে সিস্টেমের বিভিন্ন দৃষ্টিকোণ থেকে নকশা করা যায়।",
+      "tags": ["design", "uml"]
+    },
+    {
+      "question": "Use Case Diagram কী?",
+      "answer": "Use Case Diagram হলো UML-এর একটি Behavioral Diagram যেখানে ব্যবহারকারী (Actor) ও সিস্টেমের মধ্যে মিথস্ক্রিয়া দেখানো হয়। এতে Actor, Use Case ও তাদের সম্পর্ক (Association, Include, Extend) থাকে। এটি চাহিদা নির্ধারণে ব্যবহৃত হয়।",
+      "tags": ["design", "uml", "use-case"]
+    },
+    {
+      "question": "Class Diagram কী?",
+      "answer": "Class Diagram হলো UML-এর Structural Diagram যেখানে সিস্টেমের ক্লাস, তাদের অ্যাট্রিবিউট, মেথড ও ক্লাসগুলোর মধ্যে সম্পর্ক দেখানো হয়। সম্পর্ক: Association, Aggregation, Composition, Inheritance, Dependency। এটি Object-Oriented Design-এর মূল ডায়াগ্রাম।",
+      "tags": ["design", "uml", "class"]
+    },
+    {
+      "question": "Software Prototyping কী এবং এর সুবিধা কী?",
+      "answer": "Prototyping হলো চূড়ান্ত সফটওয়্যার তৈরির আগে একটি কার্যকর নমুনা তৈরি করা। সুবিধা: (1) ব্যবহারকারীর চাহিদা বোঝা সহজ, (2) Early Feedback, (3) Design যাচাই, (4) Risk হ্রাস। ধরন: Throwaway (নষ্টযোগ্য), Evolutionary (বিকাশমূলক), Incremental।",
+      "tags": ["design", "prototyping"]
+    },
+    {
+      "question": "Software Estimation-এ COCOMO-র Basic Model-এর সূত্র কী?",
+      "answer": "Basic COCOMO-র সূত্র: Effort = a × (KLOC)^b, Development Time = c × (Effort)^d। মানগুলো: Organic: a=2.4, b=1.05, c=2.5, d=0.38। Semi-detached: a=3.0, b=1.12, c=2.5, d=0.35। Embedded: a=3.6, b=1.20, c=2.5, d=0.32।",
+      "tags": ["estimation", "cocomo", "formula"]
+    },
+    {
+      "question": "Software Testing-এ Regression ও Retesting-এর পার্থক্য কী?",
+      "answer": "Retesting: একটি নির্দিষ্ট বাগ ফিক্স হয়েছে কিনা যাচাই করার পরীক্ষা — নির্দিষ্ট কেসটি আবার চালানো হয়। Regression Testing: বাগ ফিক্সের পর অন্য ফিচারগুলো ভেঙে গেছে কিনা যাচাই — সকল সম্ভাব্য কেস চালানো হয়। Retesting = নির্দিষ্ট, Regression = ব্যাপক।",
+      "tags": ["testing", "regression", "retesting"]
+    },
+    {
+      "question": "Scope Creep কী?",
+      "answer": "Scope Creep হলো প্রকল্পের চাহিদা অনির্ধারিতভাবে বৃদ্ধি পাওয়া — বাজেট ও সময়সীমা না বাড়িয়ে। এটি প্রকল্পের বিলম্ব ও বাজেট অতিক্রমণের প্রধান কারণ। Preventive Measure: Clear SRS, Change Control Process, Stakeholder Agreement।",
+      "tags": ["project-management", "scope-creep"]
+    },
+    {
+      "question": "Software Engineering-এ Coupling ও Cohesion-এর সর্বোত্তম অবস্থা কী?",
+      "answer": "সর্বোত্তম অবস্থা: Lowest Coupling (Data Coupling) ও Highest Cohesion (Functional Cohesion)। এর মানে: মডিউলগুলো পরস্পরের উপর ন্যূনতম নির্ভরশীল এবং প্রতিটি মডিউল একটি নির্দিষ্ট, সুসংজ্ঞায়িত কাজ করে। এটি Maintainability, Testability ও Reusability বাড়ায়।",
+      "tags": ["design", "coupling", "cohesion", "best-practice"]
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Algorithms — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Algorithms-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Algorithm কী?",
+      "answer": "Algorithm হলো একটি সুনির্দিষ্ট নির্দেশনার সমষ্টি যা কোনো সমস্যা সমাধানের জন্য পর্যায়ক্রমে কাজ করে। একটি ভালো algorithm-এর বৈশিষ্ট্য: (1) Finiteness — শেষ হতে হবে। (2) Definiteness — প্রতিটি ধাপ সুনির্দিষ্ট। (3) Input — নির্দিষ্ট input নেবে। (4) Output — নির্দিষ্ট output দেবে। (5) Effectiveness — প্রতিটি ধাপ সম্পাদনযোগ্য।",
+      "tags": ["basics", "definition", "characteristics"]
+    },
+    {
+      "question": "Algorithm-এর Time Complexity ও Space Complexity কী?",
+      "answer": "Time Complexity হলো input size n-এর function হিসেবে algorithm-এর execution time-এর হিসাব। Space Complexity হলো algorithm-কে কতটুকু memory প্রয়োজন তার হিসাব। সাধারণত Big-O notation-এ প্রকাশ করা হয়।",
+      "tags": ["complexity", "time", "space"]
+    },
+    {
+      "question": "Asymptotic Notation কী কী?",
+      "answer": "তিন ধরনের Asymptotic Notation: (1) Big-O (O): Upper bound — সর্বোচ্চ কত সময় লাগবে। (2) Omega (Ω): Lower bound — সর্বনিম্ন কত সময় লাগবে। (3) Theta (Θ): Tight bound — ঠিক কত সময় লাগবে। GATE CSE-তে notation-এর মানে নিয়ে বারবার প্রশ্ন আসে।",
+      "tags": ["asymptotic", "big-o", "omega", "theta"]
+    },
+    {
+      "question": "Big-O, Big-Ω, Big-Θ এদের পার্থক্য কী?",
+      "answer": "Big-O (f(n) = O(g(n))): ∃ c, n₀ যেন ∀ n ≥ n₀, f(n) ≤ c·g(n)। Upper bound। Big-Ω (f(n) = Ω(g(n))): ∃ c, n₀ যেন ∀ n ≥ n₀, f(n) ≥ c·g(n)। Lower bound। Big-Θ (f(n) = Θ(g(n))): f(n) = O(g(n)) এবং f(n) = Ω(g(n))। Tight bound।",
+      "tags": ["asymptotic", "big-o", "omega", "theta", "definition"]
+    },
+    {
+      "question": "O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ), O(n!) — এদের order কী?",
+      "answer": "ক্রমবর্ধমান order: O(1) < O(log n) < O(√n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ) < O(n!) < O(nⁿ)। GATE CSE-তে এই ordering মুখস্থ থাকা অত্যন্ত গুরুত্বপূর্ণ।",
+      "tags": ["complexity", "ordering", "comparison"]
+    },
+    {
+      "question": "Recurrence Relation কী?",
+      "answer": "Recurrence Relation হলো এমন সমীকরণ যেখানে function নিজেকে ছোট input-এর উপর নির্ভর করে সংজ্ঞায়িত হয়। যেমন: T(n) = 2T(n/2) + n (Merge Sort)। Master Theorem, Recursion Tree, Substitution Method দিয়ে সমাধান করা হয়।",
+      "tags": ["recurrence", "master-theorem", "analysis"]
+    },
+    {
+      "question": "Master Theorem কী?",
+      "answer": "Master Theorem divide and conquer recurrence T(n) = aT(n/b) + O(nᵈ) সমাধানের সূত্র। তিনটি কেস: (1) যদি d > log_b(a), তাহলে T(n) = O(nᵈ)। (2) যদি d = log_b(a), তাহলে T(n) = O(nᵈ log n)। (3) যদি d < log_b(a), তাহলে T(n) = O(n^(log_b(a)))।",
+      "tags": ["master-theorem", "recurrence", "divide-and-conquer"]
+    },
+    {
+      "question": "Master Theorem-এর উদাহরণ দাও।",
+      "answer": "Merge Sort: T(n) = 2T(n/2) + O(n), a=2, b=2, d=1। log₂2 = 1 = d, তাই Case 2: O(n log n)। Binary Search: T(n) = T(n/2) + O(1), a=1, b=2, d=0। log₂1 = 0 = d, তাই Case 2: O(log n)। Strassen: T(n) = 7T(n/2) + O(n²), a=7, b=2, d=2। log₂7 ≈ 2.807 > 2, তাই Case 3: O(n^2.807)।",
+      "tags": ["master-theorem", "examples"]
+    },
+    {
+      "question": "Bubble Sort কী এবং এর Time Complexity কত?",
+      "answer": "Bubble Sort হলো একটি সরল sorting algorithm যেখানে প্রতিটি pass-এ পরপর দুটি element তুলনা করে এবং ভুল ক্রমে থাকলে swap করে। Best Case: O(n) (optimized, sorted input)। Worst/Avg Case: O(n²)। Space: O(1)। Stable sort।",
+      "tags": ["sorting", "bubble-sort", "complexity"]
+    },
+    {
+      "question": "Selection Sort কী এবং এর Time Complexity কত?",
+      "answer": "Selection Sort প্রতিটি pass-এ বাকি elements-এর মধ্যে সর্বনিম্ন element খুঁজে বর্তমান position-এ স্থাপন করে। সবক্ষেত্রে O(n²) — best, worst, avg। Space: O(1)। Unstable sort। সবচেয়ে বেশি swap করে — প্রতিটি pass-এ ১টি swap।",
+      "tags": ["sorting", "selection-sort", "complexity"]
+    },
+    {
+      "question": "Insertion Sort কী এবং এর ব্যবহার কোথায়?",
+      "answer": "Insertion Sort প্রতিটি element-কে তার সঠিক position-এ insert করে। Best Case: O(n) — sorted array। Worst/Avg: O(n²)। Space: O(1)। Stable sort। ছোট dataset ও nearly sorted array-তে efficient। GATE CSE-তে nearly sorted array-তে insertion sort efficient বলে উল্লেখ করা হয়।",
+      "tags": ["sorting", "insertion-sort", "complexity"]
+    },
+    {
+      "question": "Merge Sort কীভাবে কাজ করে?",
+      "answer": "Merge Sort Divide and Conquer paradigm অনুসরণ করে। (1) Divide: Array-কে দুই ভাগে ভাগ করো। (2) Conquer: প্রতিটি ভাগ recursive-ভাবে sort করো। (3) Merge: দুটি sorted array-কে একত্রিত করো। Time: O(n log n) সবসময়। Space: O(n)। Stable sort।",
+      "tags": ["sorting", "merge-sort", "divide-and-conquer"]
+    },
+    {
+      "question": "Quick Sort কীভাবে কাজ করে?",
+      "answer": "Quick Sort Divide and Conquer ব্যবহার করে। (1) Pivot select করো। (2) Partition: pivot ছোট element বামে, বড় element ডানে। (3) দুই ভাগকে recursively sort করো। Avg Case: O(n log n)। Worst Case: O(n²) — sorted input-এ। In-place sort, unstable।",
+      "tags": ["sorting", "quick-sort", "divide-and-conquer"]
+    },
+    {
+      "question": "Merge Sort ও Quick Sort-এর পার্থক্য কী?",
+      "answer": "Merge Sort: O(n log n) সবসময়, stable, O(n) extra space। Quick Sort: O(n log n) avg, O(n²) worst, unstable, in-place। Quick Sort cache-friendly ও practical-তে দ্রুত। Merge Sort guarantee দেয়। GATE CSE-তে stability নিয়ে প্রশ্ন আসে।",
+      "tags": ["sorting", "merge-sort", "quick-sort", "comparison"]
+    },
+    {
+      "question": "Heap Sort কীভাবে কাজ করে?",
+      "answer": "Heap Sort Max-Heap ব্যবহার করে। (1) Build Max-Heap: O(n)। (2) Root (max element) শেষে নিয়ে যাও। (3) Heapify: O(log n)। এই প্রক্রিয়া n-১ বার চলে। Total: O(n log n)। In-place, unstable। Space: O(1)।",
+      "tags": ["sorting", "heap-sort", "heap"]
+    },
+    {
+      "question": "Counting Sort কী এবং কখন ব্যবহার করে?",
+      "answer": "Counting Sort হলো non-comparison sort যা integer data-র জন্য O(n+k) সময়ে কাজ করে (k = max value)। Stable sort। Radix Sort-এর subroutine হিসেবে ব্যবহৃত হয়। যদি range (k) খুব বড় না হয়, efficient।",
+      "tags": ["sorting", "counting-sort", "non-comparison"]
+    },
+    {
+      "question": "Radix Sort কীভাবে কাজ করে?",
+      "answer": "Radix Sort digit by digit sort করে। LSB to MSB (LSD Radix Sort) বা MSB to LSB। প্রতিটি digit-এর জন্য stable sort (যেমন Counting Sort) ব্যবহার হয়। Time: O(d × (n+b)) — d = digit সংখ্যা, b = base।",
+      "tags": ["sorting", "radix-sort", "non-comparison"]
+    },
+    {
+      "question": "Sorting Algorithm-গুলোর মধ্যে কোনটি stable?",
+      "answer": "Stable Sorting: Bubble Sort, Insertion Sort, Merge Sort, Counting Sort, Radix Sort। Unstable Sorting: Selection Sort, Quick Sort, Heap Sort। GATE CSE-তে stability নিয়ে বারবার প্রশ্ন আসে।",
+      "tags": ["sorting", "stability", "comparison"]
+    },
+    {
+      "question": "Linear Search কী?",
+      "answer": "Linear Search হলো সবচেয়ে সরল search algorithm। Array-এর প্রথম থেকে শেষ পর্যন্ত প্রতিটি element-এর সাথে target তুলনা করে। Time: O(n)। Space: O(1)। Sorted বা unsorted array-তেই কাজ করে।",
+      "tags": ["searching", "linear-search"]
+    },
+    {
+      "question": "Binary Search কী এবং পূর্বশর্ত কী?",
+      "answer": "Binary Search O(log n) সময়ে খুঁজে বের করার পদ্ধতি। পূর্বশর্ত: Array-টি sorted হতে হবে। মধ্যবিন্দু নির্বাচন করে target-এর সাথে তুলনা করে। target ছোট হলে বাম half-এ, বড় হলে ডান half-এ খোঁজা হয়।",
+      "tags": ["searching", "binary-search", "logarithmic"]
+    },
+    {
+      "question": "Binary Search-এর Time Complexity কেন O(log n)?",
+      "answer": "প্রতিটি comparison-এ input size অর্ধে কমে যায়। n → n/2 → n/4 → ... → 1। কতগুলো step লাগবে? log₂n। তাই Time: O(log n)। 1024 element-এ সর্বোচ্চ 10টি comparison লাগে।",
+      "tags": ["binary-search", "complexity", "logarithmic"]
+    },
+    {
+      "question": "Divide and Conquer Paradigm কী?",
+      "answer": "Divide and Conquer হলো algorithmic paradigm যেখানে: (1) Divide: সমস্যাকে ছোট subproblem-এ ভাগ করো। (2) Conquer: recursively subproblem সমাধান করো। (3) Combine: subproblem-এর উত্তর একত্রিত করো। উদাহরণ: Merge Sort, Quick Sort, Binary Search, Strassen's Matrix Multiplication।",
+      "tags": ["divide-and-conquer", "paradigm"]
+    },
+    {
+      "question": "Divide and Conquer এর উদাহরণ দাও।",
+      "answer": "Merge Sort: array-কে ভাগ করে sort করে merge করে। Binary Search: sorted array-কে ভাগ করে search করে। Quick Sort: pivot দিয়ে partition করে recursively sort করে। Strassen's: matrix-কে 7 submatrix-এ ভাগ করে multiply করে।",
+      "tags": ["divide-and-conquer", "examples"]
+    },
+    {
+      "question": "Greedy Algorithm কী?",
+      "answer": "Greedy Algorithm হলো এমন algorithmic paradigm যেখানে প্রতিটি ধাপে সবচেয়ে ভালো (locally optimal) সিদ্ধান্ত নেওয়া হয়। Globally optimal solution নিশ্চিত নাও হতে পারে। উদাহরণ: Activity Selection, Huffman Coding, Kruskal's, Prim's, Fractional Knapsack।",
+      "tags": ["greedy", "paradigm"]
+    },
+    {
+      "question": "Activity Selection Problem কী?",
+      "answer": "n টি activity আছে, প্রতিটির start time ও finish time আছে। সর্বোচ্চ সংখ্যক non-overlapping activity select করতে হবে। Greedy approach: finish time অনুযায়ী sort করে সবসময় প্রথম available activity select করো। Time: O(n log n)।",
+      "tags": ["greedy", "activity-selection"]
+    },
+    {
+      "question": "Huffman Coding কী?",
+      "answer": "Huffman Coding হলো greedy prefix code generation algorithm। কম frequency বিশিষ্ট character-কে বেশি bits দেওয়া হয়, বেশি frequency বিশিষ্টকে কম bits। Min-heap ব্যবহার করে binary tree তৈরি করা হয়। Time: O(n log n)। Lossless data compression-এ ব্যবহৃত হয়।",
+      "tags": ["greedy", "huffman-coding", "compression"]
+    },
+    {
+      "question": "Fractional Knapsack কী?",
+      "answer": "Fractional Knapsack-এ item-এর fractional part নেওয়া সম্ভব। Greedy approach: profit-to-weight ratio অনুযায়ী sort করে সবচেয়ে বেশি ratio আগে নাও। Time: O(n log n)। 0/1 Knapsack-এর তুলনায় simpler।",
+      "tags": ["greedy", "knapsack"]
+    },
+    {
+      "question": "Dynamic Programming কী?",
+      "answer": "Dynamic Programming হলো সমস্যা সমাধানের একটি পদ্ধতি যেখানে জটিল সমস্যাকে ছোট overlapping subproblem-এ ভাগ করা হয়। দুটি মূল বৈশিষ্ট্য: (1) Optimal Substructure — সমস্যার optimal solution, subproblem-এর optimal solution দিয়ে তৈরি হয়। (2) Overlapping Subproblems — একই subproblem বারবার আসে। Memoization (Top-Down) বা Tabulation (Bottom-Up)।",
+      "tags": ["dynamic-programming", "paradigm"]
+    },
+    {
+      "question": "Memoization ও Tabulation-এর পার্থক্য কী?",
+      "answer": "Memoization (Top-Down): recursion ব্যবহার করে, ছোট subproblem আগে সমাধান করে cache-তে রাখে। Tabulation (Bottom-Up): iteration ব্যবহার করে, সবচেয়ে ছোট subproblem থেকে শুরু করে বড় problem সমাধান করে। Tabulation সাধারণত faster কারণ recursion overhead নেই।",
+      "tags": ["dynamic-programming", "memoization", "tabulation"]
+    },
+    {
+      "question": "Longest Common Subsequence (LCS) কী?",
+      "answer": "দুটি sequence-এর দীর্ঘতম common subsequence বের করার সমস্যা। DP approach: T[i][j] = LCS of first i ও j characters। যদি X[i] = Y[j], T[i][j] = 1 + T[i-1][j-1]। Else: T[i][j] = max(T[i-1][j], T[i][j-1])। Time: O(m×n)।",
+      "tags": ["dynamic-programming", "lcs"]
+    },
+    {
+      "question": "Longest Increasing Subsequence (LIS) কী?",
+      "answer": "একটি array-র দীর্ঘতম increasing subsequence বের করার সমস্যা। DP approach: LIS[i] = arr[i] শেষ করে দীর্ঘতম increasing subsequence-র length। O(n²) DP solution। O(n log n) Binary Search + Patience Sorting solution আছে।",
+      "tags": ["dynamic-programming", "lis"]
+    },
+    {
+      "question": "0/1 Knapsack Problem কী?",
+      "answer": "n টি item আছে, প্রতিটির weight ও value। নির্দিষ্ট capacity W এর bag-এ maximize value। 0/1 Knapsack-এ item pick করতে হবে বা ছাড়তে হবে (fraction নয়)। DP: T[i][w] = first i items ও capacity w এর max value। Time: O(n×W)। Greedy কাজ করে না।",
+      "tags": ["dynamic-programming", "knapsack"]
+    },
+    {
+      "question": "Matrix Chain Multiplication কী?",
+      "answer": "n টি matrix multiply করতে হবে। Matrix multiplication associative কিন্তু commutative নয়। Optimal parenthesization বের করতে হবে যেন minimum scalar multiplication হয়। DP: T[i][j] = min(T[i][k] + T[k+1][j] + dims[i]×dims[k]×dims[j])। Time: O(n³)।",
+      "tags": ["dynamic-programming", "matrix-chain"]
+    },
+    {
+      "question": "Floyd-Warshall Algorithm কী?",
+      "answer": "Floyd-Warshall হলো all-pairs shortest path algorithm। Dynamic Programming ব্যবহার করে। dp[k][i][j] = i থেকে j পর্যন্ত shortest path যেখানে intermediate vertex 1..k ব্যবহার করা হয়েছে। Time: O(V³)। Negative weight edge সহ graph-এ কাজ করে।",
+      "tags": ["dynamic-programming", "floyd-warshall", "shortest-path"]
+    },
+    {
+      "question": "Greedy ও Dynamic Programming-এর পার্থক্য কী?",
+      "answer": "Greedy: প্রতিটি ধাপে locally optimal choice নেয়, future দেখে না। DP: সব subproblem solve করে globally optimal choice নেয়। Greedy fast কিন্তু সবসময় correct নয়। DP slower কিন্তু always correct। Greedy-তে Optimal Substructure + Greedy-choice property প্রয়োজন।",
+      "tags": ["greedy", "dynamic-programming", "comparison"]
+    },
+    {
+      "question": "Graph কী?",
+      "answer": "Graph হলো V (Vertex) ও E (Edge) দিয়ে তৈরি একটি non-linear data structure। প্রকারভেদে: Directed/Undirected, Weighted/Unweighted, Cyclic/Acyclic। Adjacency Matrix বা Adjacency List দিয়ে represent করা হয়।",
+      "tags": ["graph", "basics"]
+    },
+    {
+      "question": "BFS (Breadth-First Search) কী?",
+      "answer": "BFS হলো graph traversal algorithm যেখানে level by level traverse করা হয়। Queue data structure ব্যবহার হয়। Unweighted graph-এ single-source shortest path দেয়। Time: O(V+E)। Space: O(V)।",
+      "tags": ["graph", "bfs", "traversal"]
+    },
+    {
+      "question": "DFS (Depth-First Search) কী?",
+      "answer": "DFS হলো graph traversal algorithm যেখানে একপাশে গভীরে যাওয়া হয়। Stack/Recursion ব্যবহার হয়। Topological sort, cycle detection, SCC detection-এ ব্যবহৃত হয়। Time: O(V+E)। Space: O(V)।",
+      "tags": ["graph", "dfs", "traversal"]
+    },
+    {
+      "question": "BFS ও DFS-এর পার্থক্য কী?",
+      "answer": "BFS: Queue ব্যবহার করে, level by level, shortest path (unweighted)। DFS: Stack/Recursion, গভীরে যায়, cycle detection, topological sort। BFS space O(V) (queue), DFS space O(V) (recursion stack)। GATE CSE-তে দুটির application নিয়ে প্রশ্ন আসে।",
+      "tags": ["graph", "bfs", "dfs", "comparison"]
+    },
+    {
+      "question": "Dijkstra's Algorithm কী?",
+      "answer": "Dijkstra's Algorithm হলো single-source shortest path algorithm যা non-negative weighted graph-এ কাজ করে। Greedy approach: সবচেয়ে কম distance vertex আগে process করে। Min-priority queue ব্যবহার করলে Time: O((V+E) log V)। Negative weight edge-তে কাজ করে না।",
+      "tags": ["graph", "dijkstra", "shortest-path", "greedy"]
+    },
+    {
+      "question": "Bellman-Ford Algorithm কী?",
+      "answer": "Bellman-Ford Algorithm single-source shortest path algorithm যা negative weight edge সহ graph-এও কাজ করে। V-1 বার relaxation করে। Negative cycle detect করতে পারে — V-তম iteration-ও update হলে negative cycle আছে। Time: O(VE)।",
+      "tags": ["graph", "bellman-ford", "shortest-path"]
+    },
+    {
+      "question": "Dijkstra ও Bellman-Ford-এর পার্থক্য কী?",
+      "answer": "Dijkstra: O((V+E) log V), non-negative weight, greedy, faster। Bellman-Ford: O(VE), negative weight সম্ভব, negative cycle detect করে, slower। GATE CSE-তে negative edge-এ Dijkstra fail করে বলে Bellman-Ford ব্যবহার করতে হয়।",
+      "tags": ["graph", "dijkstra", "bellman-ford", "comparison"]
+    },
+    {
+      "question": "Topological Sort কী?",
+      "answer": "Topological Sort হলো DAG (Directed Acyclic Graph)-এর vertices-এর একটি linear ordering যেখানে প্রতিটি edge u→v হলে u, v-র আগে আসে। DFS-based বা Kahn's algorithm (BFS-based, indegree) ব্যবহার করা হয়। Task scheduling, build systems-এ ব্যবহৃত হয়।",
+      "tags": ["graph", "topological-sort", "dag"]
+    },
+    {
+      "question": "Topological Sort-এর Time Complexity কত?",
+      "answer": "DFS-based: O(V+E)। Kahn's algorithm (BFS-based): O(V+E)। দুটোই linear time। Kahn's algorithm indegree array ব্যবহার করে। GATE CSE-তে Topological Sort-এর application নিয়ে প্রশ্ন আসে।",
+      "tags": ["graph", "topological-sort", "complexity"]
+    },
+    {
+      "question": "Minimum Spanning Tree (MST) কী?",
+      "answer": "MST হলো weighted undirected connected graph-এর এমন একটি subset tree যেখানে সব vertex সংযুক্ত এবং total edge weight ন্যূনতম। V vertices-এর graph-এ MST-তে V-১টি edge থাকে। Kruskal's ও Prim's Algorithm MST বের করতে ব্যবহৃত হয়।",
+      "tags": ["graph", "mst", "basics"]
+    },
+    {
+      "question": "Kruskal's Algorithm কী?",
+      "answer": "Kruskal's Algorithm MST বের করার edge-based greedy approach। (1) সব edge weight অনুযায়ী sort করো। (2) কম থেকে বেশি weight edge select করো যদি cycle না তৈরি করে। (3) V-১ টি edge নিলে থামো। Union-Find (DSU) cycle detection-এ ব্যবহৃত হয়। Time: O(E log E)।",
+      "tags": ["graph", "kruskal", "mst", "greedy"]
+    },
+    {
+      "question": "Prim's Algorithm কী?",
+      "answer": "Prim's Algorithm MST বের করার vertex-based greedy approach। (1) যেকোনো vertex থেকে শুরু করো। (2) সংযুক্ত vertices-এর মধ্যে সবচেয়ে কম weight edge select করো। (3) নতুন vertex add করো। Min-priority queue ব্যবহার করলে Time: O((V+E) log V)। Dense graph-এ efficient।",
+      "tags": ["graph", "prim", "mst", "greedy"]
+    },
+    {
+      "question": "Kruskal's ও Prim's-এর পার্থক্য কী?",
+      "answer": "Kruskal's: edge-based, sort edges O(E log E), sparse graph-এ efficient, Union-Find ব্যবহার করে। Prim's: vertex-based, min-priority queue, dense graph-এ efficient। দুটোই greedy, দুটোই MST দেয় কিন্তু approach ভিন্ন।",
+      "tags": ["graph", "kruskal", "prim", "comparison"]
+    },
+    {
+      "question": "Recursion কী?",
+      "answer": "Recursion হলো এমন প্রক্রিয়া যেখানে একটি function নিজেকে নিজেকে ডাকে। দুটি অংশ: (1) Base Case — যেখানে recursion থামে। (2) Recursive Case — যেখানে function নিজেকে ডাকে। Stack data structure recursion-এর পেছনে কাজ করে।",
+      "tags": ["recursion", "basics"]
+    },
+    {
+      "question": "Tower of Hanoi সমস্যা কী?",
+      "answer": "Tower of Hanoi হলো classic recursion সমস্যা। n টি disk ৩টি peg এর মধ্যে একটি থেকে অন্যটিতে স্থানান্তর করতে হয়। Recurrence: T(n) = 2T(n-1) + 1। Time: O(2ⁿ)। GATE CSE-তে n=64 হলে কত সময় লাগে নিয়ে প্রশ্ন আসে।",
+      "tags": ["recursion", "tower-of-hanoi", "recurrence"]
+    },
+    {
+      "question": "NP-Completeness কী?",
+      "answer": "NP-Complete হলো সেসব problems যা NP-তে আছে এবং NP-hard। Polynomial time-ে verify করা যায় কিন্তু polynomial time-ে solve করা যায় না (P ≠ NP ধরে)। Cook's Theorem: SAT problem NP-complete। Reduction দিয়ে অন্য problems-ও NP-complete প্রমাণিত হয়।",
+      "tags": ["np-complete", "complexity", "basics"]
+    },
+    {
+      "question": "P, NP, NP-Hard, NP-Complete — এদের সম্পর্ক কী?",
+      "answer": "P: polynomial time-ে solve করা যায়। NP: polynomial time-ে verify করা যায়। NP-Hard: NP থেকে polynomial time reduction সম্ভব (verify করা নাও যেতে পারে)। NP-Complete: NP ∩ NP-Hard। P ⊆ NP, NP-Complete ⊆ NP, NP-Complete ⊆ NP-Hard।",
+      "tags": ["np-complete", "p", "np", "np-hard"]
+    },
+    {
+      "question": "NP-Complete Problem-এর উদাহরণ দাও।",
+      "answer": "NP-Complete Problems: (1) SAT — Boolean satisfiability। (2) 3-SAT — clauses-এ 3টি literal। (3) Graph Coloring। (4) Hamiltonian Cycle। (5) Travelling Salesman (decision version)। (6) Clique Problem। (7) Vertex Cover। (8) Subset Sum।",
+      "tags": ["np-complete", "examples"]
+    },
+    {
+      "question": "Polynomial Reduction কী?",
+      "answer": "Polynomial Reduction হলো একটি problem A-কে polynomial time-ে অন্য problem B-তে রূপান্তর করা। যদি A ≤p B এবং B ∈ P, তাহলে A ∈ P। NP-completeness proof-এ ব্যবহৃত হয় — SAT-এর polynomial reduction দিয়ে অন্য problems-ও NP-complete প্রমাণ করা হয়।",
+      "tags": ["np-complete", "reduction"]
+    },
+    {
+      "question": "Travelling Salesman Problem (TSP) কী?",
+      "answer": "TSP: একটি salesman n টি city visit করবে, প্রতিটি city ঠিক একবার, minimum cost route বের করতে হবে। Decision version NP-complete। Optimization version NP-hard। Brute force O(n!)। DP approach O(2ⁿ × n²)। Approximation algorithm আছে।",
+      "tags": ["np-complete", "tsp", "dynamic-programming"]
+    },
+    {
+      "question": "Graph Coloring Problem কী?",
+      "answer": "Graph Coloring: প্রতিটি vertex-কে একটি color দিতে হবে যেন adjacent vertices একই color না হয়। Minimum colors = Chromatic Number। 2-colorable = Bipartite। Map coloring, register allocation, scheduling-এ ব্যবহৃত হয়। NP-hard problem।",
+      "tags": ["graph", "coloring", "np-hard"]
+    },
+    {
+      "question": "String Pattern Matching-এর algorithms কী কী?",
+      "answer": "প্রধান algorithms: (1) Naive String Matching: O(nm)। (2) KMP (Knuth-Morris-Pratt): O(n+m), prefix function। (3) Rabin-Karp: O(nm) worst, rolling hash। (4) Boyer-Moore: practical-তে fastest, bad character heuristic। (5) Z-Algorithm: O(n)।",
+      "tags": ["string", "pattern-matching"]
+    },
+    {
+      "question": "KMP Algorithm কীভাবে কাজ করে?",
+      "answer": "KMP Algorithm prefix function (failure function) তৈরি করে। Pattern-তে প্রতিটি position-এর জন্য longest proper prefix suffix বের করে। Text-তে match না হলে pattern-কে আবার শুরু থেকে শুরু না করে prefix function-এর মান অনুযায়ী shift করে। Time: O(n+m)।",
+      "tags": ["string", "kmp", "pattern-matching"]
+    },
+    {
+      "question": "Backtracking কী?",
+      "answer": "Backtracking হলো algorithmic paradigm যেখানে সমস্যা সমাধানের চেষ্টা করা হয় এবং ভুল পথে গেলে পেছনে ফিরে অন্য পথ খোঁজা হয়। Depth-first search strategy অনুসরণ করে। উদাহরণ: N-Queen, Sudoku Solver, Maze solving।",
+      "tags": ["backtracking", "paradigm"]
+    },
+    {
+      "question": "N-Queen Problem কী?",
+      "answer": "N-Queen: N×N chessboard-এ N টি Queen স্থাপন করতে হবে যেন কোনো Queen অন্যকে attack না করে। Backtracking approach: একে একে column-এ Queen place করো, valid কি না check করো, invalid হলে backtrack করো। Time: O(N!)।",
+      "tags": ["backtracking", "n-queen"]
+    },
+    {
+      "question": "Amortized Analysis কী?",
+      "answer": "Amortized Analysis হলো sequence of operations-এর গড় সময় নির্ণয়ের পদ্ধতি। একটি operation হয়তো বেশি সময় নেয় কিন্তু গড়ে কম সময় লাগে। উদাহরণ: Dynamic array-তে push O(1) amortized। Banker's method, Physicist's method, Aggregate method।",
+      "tags": ["complexity", "amortized"]
+    },
+    {
+      "question": "Amortized Analysis-এর উদাহরণ দাও।",
+      "answer": "Dynamic Array: n push operations-এ সর্বোচ্চ ⌈log n⌉ বার resize হয়, প্রতিবার O(n) copy। মোট cost: O(n)। গড়: O(1) per push। Binary Counter increment: প্রতিটি bit flip O(1), n increment-এ মোট O(n) flip। Amortized O(1) per increment।",
+      "tags": ["amortized", "examples"]
+    },
+    {
+      "question": "Graph-এ Cycle Detection কীভাবে করে?",
+      "answer": "Undirected Graph: DFS ব্যবহার করে parent node track করে। Back edge পেলে cycle আছে। Directed Graph: DFS recursion stack track করে। অথবা Kahn's algorithm (indegree) ব্যবহার করে — topological sort সম্ভব না হলে cycle আছে। Time: O(V+E)।",
+      "tags": ["graph", "cycle-detection"]
+    },
+    {
+      "question": "Strongly Connected Component (SCC) কী?",
+      "answer": "SCC হলো directed graph-এর এমন maximal subgraph যেখানে প্রতিটি vertex থেকে অন্য সব vertex-তে path আছে। Kosaraju's Algorithm (2 DFS): O(V+E)। Tarjan's Algorithm: O(V+E), single DFS। SCC condensation graph DAG তৈরি করে।",
+      "tags": ["graph", "scc", "tarjan", "kosaraju"]
+    },
+    {
+      "question": "Disjoint Set Union (DSU) কী?",
+      "answer": "DSU (Union-Find) হলো disjoint sets গোষ্ঠীকে efficiently manage করার data structure। Find (কোন set-এ আছে) ও Union (দুটি set একত্রিত) — দুটি মূল operation। Path compression ও union by rank optimize করলে amortized O(α(n)) ≈ O(1)। Kruskal's MST-তে ব্যবহৃত হয়।",
+      "tags": ["dsu", "union-find", "data-structure"]
+    },
+    {
+      "question": "Segment Tree কী?",
+      "answer": "Segment Tree হলো binary tree যা range query (sum, min, max) ও point update O(log n) সময়ে করে। Array-এর ranges-এর তথ্য সংরক্ষণ করে। Lazy Propagation দিয়ে range update O(log n) সম্ভব। Space: O(4n)। Competitive Programming-এ ব্যবহৃত হয়।",
+      "tags": ["segment-tree", "range-query"]
+    },
+    {
+      "question": "Fenwick Tree (Binary Indexed Tree) কী?",
+      "answer": "Fenwick Tree হলো binary indexed tree যা prefix sum query ও update O(log n) সময়ে করে। Segment Tree-র তুলনায় কম মেমরি ও সহজ implementation। LSB (Least Significant Bit) ব্যবহার করে query/update করে। Space: O(n)।",
+      "tags": ["fenwick-tree", "binary-indexed-tree"]
+    },
+    {
+      "question": "Bloom Filter কী?",
+      "answer": "Bloom Filter হলো probabilistic data structure যা element set-এ আছে কি না check করে। False positive সম্ভব কিন্তু false negative নেই। Space efficient। Multiple hash functions ব্যবহার করে। Database caching, network routers-এ ব্যবহৃত হয়।",
+      "tags": ["bloom-filter", "probabilistic"]
+    },
+    {
+      "question": "Graph-এ Shortest Path Algorithm-গুলো কোনগুলো?",
+      "answer": "(1) Dijkstra: single-source, non-negative, O((V+E) log V)। (2) Bellman-Ford: single-source, negative weight, O(VE)। (3) Floyd-Warshall: all-pairs, O(V³)। (4) A*: heuristic-based। (5) SPFA: Bellman-Ford optimization। GATE CSE-তে algorithm selection নিয়ে প্রশ্ন আসে।",
+      "tags": ["graph", "shortest-path", "comparison"]
+    },
+    {
+      "question": "Sorting Algorithm-গুলোর comparison table দাও।",
+      "answer": "Bubble: O(n²), O(1), stable। Selection: O(n²), O(1), unstable। Insertion: O(n²), O(1), stable। Merge: O(n log n), O(n), stable। Quick: O(n log n) avg, O(log n), unstable। Heap: O(n log n), O(1), unstable। Counting: O(n+k), O(k), stable। Radix: O(d(n+b)), O(n+b), stable।",
+      "tags": ["sorting", "comparison", "complexity"]
+    },
+    {
+      "question": "Greedy Algorithm-এর বৈশিষ্ট্য কী কী?",
+      "answer": "Greedy Algorithm-এর বৈশিষ্ট্য: (1) Locally optimal choice নেওয়া। (2) Greedy-choice property — globally optimal choice locally optimal choice দিয়ে তৈরি হয়। (3) Optimal substructure — সমস্যার optimal solution, subproblem-এর optimal solution দিয়ে তৈরি হয়।",
+      "tags": ["greedy", "properties"]
+    },
+    {
+      "question": "Dynamic Programming-এর বৈশিষ্ট্য কী কী?",
+      "answer": "DP-র বৈশিষ্ট্য: (1) Optimal Substructure — সমস্যার optimal solution, subproblem-এর optimal solution দিয়ে তৈরি হয়। (2) Overlapping Subproblems — একই subproblem বারবার আসে। Memoization বা Tabulation ব্যবহার করে solve করা হয়।",
+      "tags": ["dynamic-programming", "properties"]
+    },
+    {
+      "question": "Recurrence Relation-এর সমাধানের পদ্ধতি কী কী?",
+      "answer": "(1) Substitution Method: guess করে induction দিয়ে প্রমাণ। (2) Recursion Tree Method: tree draw করে cost যোগ। (3) Master Theorem: T(n) = aT(n/b) + O(nᵈ) সরাসরি solve। GATE CSE-তে Master Theorem সবচেয়ে বেশি ব্যবহৃত হয়।",
+      "tags": ["recurrence", "master-theorem", "methods"]
+    },
+    {
+      "question": "Graph-এ Adjacency Matrix ও Adjacency List-এর পার্থক্য কী?",
+      "answer": "Adjacency Matrix: V×V space O(V²), edge check O(1), add edge O(1)। Adjacency List: O(V+E) space, edge check O(degree), add edge O(1)। Dense graph-এ Matrix efficient, sparse graph-এ List efficient। GATE CSE-তে space comparison নিয়ে প্রশ্ন আসে।",
+      "tags": ["graph", "representation", "adjacency"]
+    }
+  ]
+}

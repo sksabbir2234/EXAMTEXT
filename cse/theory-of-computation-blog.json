@@ -1,0 +1,438 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Theory of Computation — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Theory of Computation-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Theory of Computation কী?",
+      "answer": "Theory of Computation হলো কম্পিউটার বিজ্ঞানের একটি তাত্ত্বিক শাখা যা তিনটি প্রধান বিষয় নিয়ে আলোচনা করে: (1) Automata Theory — কম্পিউটেশনাল সিস্টেমের গাণিতিক মডেল। (2) Computability Theory — কোন সমস্যা সমাধায়নযোগ্য (computable) এবং কোনটি নয়। (3) Complexity Theory — কোনো সমস্যা সমাধায়নে কত সময় ও স্মৃতি প্রয়োজন।",
+      "tags": ["basics", "definition", "overview"]
+    },
+    {
+      "question": "Automata Theory-এর গুরুত্ব কী?",
+      "answer": "Automata Theory-এর গুরুত্ব: (1) কম্পাইলার ডিজাইনে লেক্সিক্যাল অ্যানালাইসিস। (2) নেটওয়ার্ক প্রোটোকল যাচাই। (3) ন্যাচুরাল ল্যাঙ্গুয়েজ প্রসেসিং। (4) প্যাটার্ন ম্যাচিং। (5) বায়োইনফরমেটিক্স। (6) কৃত্রিম বুদ্ধিমত্তা। এটি formal languages ও কম্পিউটেশনের মধ্যে সম্পর্ক স্থাপন করে।",
+      "tags": ["automata", "significance", "applications"]
+    },
+    {
+      "question": "Alphabet (Σ) কী?",
+      "answer": "Alphabet হলো একটি সীমিত, অশূন্য ও ক্রমহীন বর্ণের সমষ্টি যা Σ (sigma) দিয়ে নির্দেশ করা হয়। উদাহরণ: Σ = {a, b}, Σ = {0, 1}, Σ = {a, b, c, ..., z}। Alphabet-এর সাইজকে |Σ| বা ধারণকারী ক্ষমতা (cardinality) বলে।",
+      "tags": ["alphabet", "basics", "definition"]
+    },
+    {
+      "question": "String কী?",
+      "answer": "String হলো একটি alphabet-এর বর্ণদের পরস্পর সংযোজন (concatenation)। শূন্য বর্ণের string-কে ε (epsilon) বা λ (lambda) বলে। |w| দিয়ে string w-র দৈর্ঘ্য নির্দেশ করা হয়। উদাহরণ: Σ={a,b} হলে abba একটি string এবং |abba|=4।",
+      "tags": ["string", "basics", "definition"]
+    },
+    {
+      "question": "Language কী?",
+      "answer": "Language হলো একটি নির্দিষ্ট alphabet Σ-এর সমস্ত সম্ভাব্য string-এর কোনো সাবসেট। যদি Σ={a,b} হয়, তাহলে L={ab, ba, aab} একটি Language। Formal Language Theory-তে বিভিন্ন ধরনের Language আলোচনা করা হয়।",
+      "tags": ["language", "basics", "definition"]
+    },
+    {
+      "question": "Language-এর প্রকারভেদ কী কী?",
+      "answer": "Language-এর প্রধান প্রকারভেদ: (1) Regular Language — Finite Automata দ্বারা স্বীকৃত। (2) Context-Free Language (CFL) — Pushdown Automata দ্বারা স্বীকৃত। (3) Context-Sensitive Language (CSL) — Linear Bounded Automata দ্বারা স্বীকৃত। (4) Recursive Enumerable (RE) — Turing Machine দ্বারা স্বীকৃত। এগুলো Chomsky Hierarchy অনুযায়ী সাজানো।",
+      "tags": ["language", "types", "chomsky-hierarchy"]
+    },
+    {
+      "question": "DFA (Deterministic Finite Automaton) কী?",
+      "answer": "DFA হলো একটি 5-tuple (Q, Σ, δ, q₀, F) যেখানে: Q = সীমিত অবস্থার সমষ্টি। Σ = input alphabet। δ = transition function (Q × Σ → Q)। q₀ = start state (Q-এর একটি সদস্য)। F = final/accepting states (F ⊆ Q)। প্রতিটি অবস্থা থেকে প্রতিটি input symbol-এর জন্য ঠিক একটি মাত্র transition থাকে।",
+      "tags": ["dfa", "definition", "automata"]
+    },
+    {
+      "question": "DFA-র Transition Diagram কী?",
+      "answer": "Transition Diagram হলো DFA-র একটি গ্রাফিক উপস্থাপনা। এতে: (1) Vertex/Node = অবস্থা (state)। (2) Directed Edge = transition। (3) Start state → ভেতরের তীর চিহ্ন। (4) Final state → ডাবল circle। (5) Label = input symbol। প্রতিটি অবস্থা থেকে প্রতিটি input symbol-এর জন্য ঠিক একটি edge যাওয়া উচিত।",
+      "tags": ["dfa", "transition-diagram", "representation"]
+    },
+    {
+      "question": "DFA-র Transition Table কী?",
+      "answer": "Transition Table হলো DFA-র transition function δ-র টেবিল আকারের উপস্থাপনা। সারি = অবস্থা, কলাম = input symbols। প্রতিটি কোষে transition-এর গন্তব্য অবস্থা লেখা থাকে। Start state তারার চিহ্ন (*) দিয়ে এবং Final state তারার চিহ্ন (★) দিয়ে নির্দেশ করা হয়।",
+      "tags": ["dfa", "transition-table", "representation"]
+    },
+    {
+      "question": "DFA-র Language স্বীকার করার পদ্ধতি কী?",
+      "answer": "DFA string w স্বীকার করে যদি start state থেকে w-র প্রতিটি বর্ণ প্রক্রিয়াকরণের পর end state final state (F) তে পৌঁছায়। যদি final state-এ না পৌঁছায়, string reject হয়। L(M) = {w ∈ Σ* : δ*(q₀, w) ∈ F} হলো DFA M-এর ভাষা।",
+      "tags": ["dfa", "acceptance", "basics"]
+    },
+    {
+      "question": "NFA (Non-deterministic Finite Automaton) কী?",
+      "answer": "NFA হলো DFA-র একটি সাধারণীকরণ যেখানে: (1) একটি অবস্থা থেকে একই input symbol-এ একাধিক transition থাকতে পারে। (2) ε-transition (epsilon transition) সম্ভব — input ছাড়াই অবস্থা পরিবর্তন। (3) খালি transition (∅) থাকতে পারে। NFA 5-tuple: (Q, Σ, δ, q₀, F) যেখানে δ: Q × (Σ ∪ {ε}) → P(Q)।",
+      "tags": ["nfa", "definition", "automata"]
+    },
+    {
+      "question": "DFA ও NFA-এর পার্থক্য কী?",
+      "answer": "DFA ও NFA-এর প্রধান পার্থক্য: (1) Transition: DFA-তে প্রতিটি অবস্থা-input জোড়ায় ঠিক একটি transition, NFA-তে একাধিক। (2) ε-transition: DFA-তে নেই, NFA-তে আছে। (3) সম্প্রসারণ: DFA-তে O(2ⁿ) অবস্থা পর্যন্ত হতে পারে, NFA-তে n অবস্থায়। (4) ক্ষমতা: দুটি সমান শক্তিশালী — একই ভাষা শ্রেণী (Regular Language) স্বীকার করে।",
+      "tags": ["dfa", "nfa", "comparison"]
+    },
+    {
+      "question": "NFA থেকে DFA রূপান্তর করার পদ্ধতি কী?",
+      "answer": "Subset Construction (Power Set Construction) পদ্ধতি ব্যবহার করে NFA থেকে DFA তৈরি করা হয়। ধাপ: (1) DFA-র start state = NFA-র start state-এর ε-closure। (2) প্রতিটি DFA অবস্থার জন্য প্রতিটি input symbol-এ transition বের করো (যেমন: move(T, a) = ε-closure(δ(t, a)) for all t ∈ T)। (3) নতুন অবস্থা পাওয়া গেলে পুনরাবৃত্তি করো। (4) DFA-র final state = সেই সব subset যাতে NFA-র কোনো final state আছে।",
+      "tags": ["nfa", "dfa", "subset-construction", "conversion"]
+    },
+    {
+      "question": "ε-closure কী?",
+      "answer": "ε-closure(q) হলো state q থেকে শুধুমাত্র ε-transitions অনুসরণ করে পৌঁছানো সম্ভাব্য সমস্ত অবস্থার সেট। সূত্র: ε-closure(q) = {q} ∪ ε-closure(r) যেখানে δ(q, ε) = r। subset construction-এ NFA থেকে DFA তৈরি করার সময় প্রতিটি অবস্থার ε-closure বের করতে হয়।",
+      "tags": ["nfa", "epsilon-closure", "subset-construction"]
+    },
+    {
+      "question": "DFA Minimization কীনা প্রয়োজন?",
+      "answer": "DFA Minimization প্রয়োজন কারণ: (1) Equivalent states বাদ দিয়ে minimal DFA তৈরি করা। (2) স্মৃতি ও গতি উন্নত করা। (3) Pattern recognition, lexical analysis-এ কার্যকর করা। (4) Equivalence checking সহজ করা। দুটি DFA সমান ভাষা স্বীকার করে কিনা তা পরীক্ষা করতে minimal DFA তুলনা করা হয়।",
+      "tags": ["dfa", "minimization", "significance"]
+    },
+    {
+      "question": "DFA Minimization Algorithm কী?",
+      "answer": "Table Filling (Myhill-Nerode) Algorithm: (1) 1-equivalence: Final ও Non-final অবস্থাকে আলাদা করো। (2) Mark করো: যদি দুটি অবস্থা ভিন্ন গ্রুপে থাকে এবং একটি input symbol-এ ভিন্ন গ্রুপে যায়, তাহলে জোড়াটিকে mark করো। (3) নতুন mark না হওয়া পর্যন্ত পুনরাবৃত্তি করো। (4) Unmarked জোড়াগুলোকে একত্রিত করে minimal DFA তৈরি করো।",
+      "tags": ["dfa", "minimization", "algorithm"]
+    },
+    {
+      "question": "Myhill-Nerode Theorem কী?",
+      "answer": "Myhill-Nerode Theorem: একটি Language L-এর জন্য DFA-র ন্যূনতম সংখ্যক অবস্থা = L-এর Myhill-Nerode equivalence relation-এর index। দুটি string x ও y equivalent যদি ∀z, xz ∈ L ⟺ yz ∈ L। Theorem: L regular ⟺ index finite। এটি DFA Minimization-এর তাত্ত্বিক ভিত্তি।",
+      "tags": ["dfa", "minimization", "theorem"]
+    },
+    {
+      "question": "Regular Expression কী?",
+      "answer": "Regular Expression (RE) হলো Regular Language-র একটি গাণিতিক নোটেশন। নিয়ম: (1) ∅ (empty set) একটি RE। (2) ε (empty string) একটি RE। (3) যেকোনো symbol a ∈ Σ একটি RE। (4) R₁|R₂ (union), R₁R₂ (concatenation), R₁* (Kleene star) — RE। উদাহরণ: (a|b)*ab মানে a বা b যেকোনো সংখ্যক হলে শেষে ab।",
+      "tags": ["regular-expression", "definition", "basics"]
+    },
+    {
+      "question": "Regular Expression-এর অপারেটর কী কী?",
+      "answer": "Regular Expression-এর তিনটি মূল অপারেটর: (1) Union (|): R₁|R₂ = R₁ অথবা R₂। (2) Concatenation (·): R₁R₂ = R₁ এর পরে R₂। (3) Kleene Star (*): R* = R শূন্য বা একাধিক বার। অতিরিক্ত: (+) Kleene Plus (এক বা একাধিক), (?) Optional (শূন্য বা একবার)। সম্প্রসারণ: Σ* = (a|b|c|...)*।",
+      "tags": ["regular-expression", "operators", "basics"]
+    },
+    {
+      "question": "Regular Expression থেকে FA (Finite Automaton) রূপান্তর কীভাবে করে?",
+      "answer": "Thompson's Construction পদ্ধতি: (1) প্রতিটি মৌলিক RE (a, ε, ∅) থেকে NFA তৈরি করো। (2) Union (R₁|R₂): parallel NFA তৈরি। (3) Concatenation (R₁R₂): R₁-র final state-কে R₂-র start state-এর সাথে যুক্ত করো। (4) Kleene Star (R*): loopback transitions যোগ করো। (5) চূড়ান্ত NFA-কে Subset Construction দিয়ে DFA-এ রূপান্তর করো।",
+      "tags": ["regular-expression", "nfa", "conversion", "thompson"]
+    },
+    {
+      "question": "FA থেকে Regular Expression রূপান্তর কীভাবে করে?",
+      "answer": "State Elimination Method: (1) একটি নতুন start state ও final state যোগ করো। (2) একে একে অবস্থা বাদ দাও (যেসব অবস্থায় in-degree ও out-degree আছে)। (3) প্রতিটি অবস্থা বাদ দেওয়ার সময় transition labels আপডেট করো (বীজগণিতের নিয়ম অনুযায়ী)। (4) শেষে দুটি অবস্থার মাঝে transition labelই হবে RE।",
+      "tags": ["regular-expression", "dfa", "conversion", "state-elimination"]
+    },
+    {
+      "question": "Regular Language-এর Closure Properties কী কী?",
+      "answer": "Regular Language-এর Closure Properties: (1) Union: L₁ ∪ L₂ regular। (2) Intersection: L₁ ∩ L₂ regular। (3) Complement: L̄ regular। (4) Difference: L₁ - L₂ regular। (5) Concatenation: L₁L₂ regular। (6) Kleene Star: L* regular। (7) Reversal: Lᴿ regular। (8) Homomorphism regular। (9) Inverse Homomorphism regular।",
+      "tags": ["regular-language", "closure-properties"]
+    },
+    {
+      "question": "Pumping Lemma for Regular Languages কী?",
+      "answer": "Pumping Lemma: যদি L একটি Regular Language হয়, তাহলে ∃p ≥ 1 (pumping length) যেন ∀w ∈ L, |w| ≥ p হলে w = xyz যেখানে: (1) |y| > 0 (শূন্য নয়)। (2) |xy| ≤ p। (3) ∀i ≥ 0, xyⁱz ∈ L। এটি Regular Language-র একটি গুণাগুণ (necessary condition), পর্যাপ্ত শর্ত নয়।",
+      "tags": ["pumping-lemma", "regular-language", "theorem"]
+    },
+    {
+      "question": "Pumping Lemma দিয়ে ভাষা Regular নয় তা প্রমাণ করার পদ্ধতি কী?",
+      "answer": "Pumping Lemma দিয়ে L Regular নয় প্রমাণের ধাপ: (1) L Regular ধরো। (2) Pumping length p বের করো। (3) একটি string w নাও যেন |w| ≥ p এবং w ∈ L। (4) w = xyz ভাগ করো (শর্ত অনুযায়ী)। (5) এমন একটি i বের করো যেন xyⁱz ∉ L। (6) এটি Pumping Lemma-র সাথে বিরোধিতা, তাই L Regular নয়।",
+      "tags": ["pumping-lemma", "regular-language", "proof"]
+    },
+    {
+      "question": "Context-Free Grammar (CFG) কী?",
+      "answer": "CFG হলো একটি 4-tuple G = (V, Σ, R, S) যেখানে: V = Non-terminal symbols (ভেরিয়েবল)। Σ = Terminal symbols। R = Production Rules (V → (V ∪ Σ)* )। S = Start symbol (S ∈ V)। প্রতিটি rule A → α মানে A-কে α দিয়ে প্রতিস্থাপন করা যায়।",
+      "tags": ["cfg", "definition", "grammar"]
+    },
+    {
+      "question": "CFG-র Derivation কী?",
+      "answer": "Derivation হলো start symbol থেকে string উৎপাদনের প্রক্রিয়া। দুই ধরন: (1) Leftmost Derivation: বামদিকের non-terminal প্রথমে প্রতিস্থাপন করা হয়। (2) Rightmost Derivation: ডানদিকের non-terminal প্রথমে প্রতিস্থাপন করা হয়। উদাহরণ: S → aSb → aabb (leftmost)।",
+      "tags": ["cfg", "derivation", "basics"]
+    },
+    {
+      "question": "CFG-র Parse Tree কী?",
+      "answer": "Parse Tree হলো CFG-র derivation-এর একটি গ্রাফিক উপস্থাপনা। এতে: (1) Root = Start symbol। (2) Internal nodes = Non-terminals। (3) Leaves = Terminals (বা ε)। (4) প্রতিটি edge = একটি production rule অনুসরণ করে। String = leaves-এর বাম থেকে ডানে reading।",
+      "tags": ["cfg", "parse-tree", "derivation"]
+    },
+    {
+      "question": "CFG-তে Ambiguity কী?",
+      "answer": "CFG Ambiguous যদি একটি string w-এর জন্য দুটি বা ততোধিক ভিন্ন Parse Tree বা Leftmost/Rightmost Derivation থাকে। উদাহরণ: E → E + E | E * E | (E) | id এ Ambiguous — id + id * id এর দুটি ভিন্ন parse tree সম্ভব। Ambiguous grammar-কে অনেক সময় unambiguous করতে হয়।",
+      "tags": ["cfg", "ambiguity", "definition"]
+    },
+    {
+      "question": "CFG-কে Unambiguous কীভাবে করে?",
+      "answer": "CFG-কে Unambiguous করার পদ্ধতি: (1) Operator Precedence: +, * এর মধ্যে precedence নির্ধারণ করো (যেমন, * আগে)। (2) Associativity: বাম বা ডান দিকে associativity নির্ধারণ করো। (3) New Non-terminals: আলাদা precedence লেভেলের জন্য আলাদা non-terminal তৈরি করো। (4) Factoring: সাধারণ prefix আলাদা করো।",
+      "tags": ["cfg", "ambiguity", "resolution"]
+    },
+    {
+      "question": "CNF (Chomsky Normal Form) কী?",
+      "answer": "CNF-তে প্রতিটি production rule হয়: (1) A → BC (দুটি non-terminal), অথবা (2) A → a (একটি terminal), অথবা (3) S → ε (শুধু start symbol)। যেকোনো CFG-কে CNF-এ রূপান্তর করা যায়। CNF-এর সুবিধা: Cyk Algorithm দিয়ে O(n³) সময়ে string membership পরীক্ষা করা যায়।",
+      "tags": ["cfg", "cnf", "normal-form"]
+    },
+    {
+      "question": "GNF (Greibach Normal Form) কী?",
+      "answer": "GNF-তে প্রতিটি production rule হয়: A → aα, যেখানে a ∈ Σ এবं α ∈ V* (শূন্য বা একাধিক non-terminal)। GNF-এর সুবিধা: (1) Derivation-এ প্রতিটি step-এ একটি terminal output হয়। (2) String-এর দৈর্ঘ্য = derivation steps। (3) PDA-তে ε-moves ছাড়াই বাস্তবায়ন সম্ভব। যেকোনো CFG-কে GNF-এ রূপান্তর করা যায়।",
+      "tags": ["cfg", "gnf", "normal-form"]
+    },
+    {
+      "question": "Pushdown Automata (PDA) কী?",
+      "answer": "PDA হলো Finite Automaton-এর সাথে একটি LIFO Stack যুক্ত করে তৈরি গণিতিক মডেল। 7-tuple: (Q, Σ, Γ, δ, q₀, Z₀, F)। যেখানে: Γ = stack alphabet, Z₀ = stack start symbol, δ: Q × (Σ ∪ {ε}) × Γ → P(Q × Γ*)। PDA Context-Free Language স্বীকার করে।",
+      "tags": ["pda", "definition", "automata"]
+    },
+    {
+      "question": "PDA-র Acceptance by Final State ও Acceptance by Empty Stack কী?",
+      "answer": "দুই ধরনের acceptance: (1) Final State: string w প্রক্রিয়াকরণের পর PDA final state-এ থাকলে w স্বীকৃত। (2) Empty Stack: string w প্রক্রিয়াকরণের পর stack খালি হলে w স্বীকৃত। দুটি সমান শক্তিশালী — একই ভাষা শ্রেণী (CFL) স্বীকার করে। তবে, empty stack PDA-তে stack start symbol সাধারণত Z₀।",
+      "tags": ["pda", "acceptance", "final-state", "empty-stack"]
+    },
+    {
+      "question": "CFG থেকে PDA রূপান্তর কীভাবে করে?",
+      "answer": "CFG-to-PDA Conversion: (1) PDA-র start state-এ stack-এ start symbol Z₀ রাখো। (2) Transition: δ(q, ε, A) = {(q, α)} যদি A → α একটি production। (3) Terminal match: δ(q, a, a) = {(q, ε)}। (4) Acceptance by empty stack। এই পদ্ধতিতে CFG-র প্রতিটি leftmost derivation PDA-র একটি computation-এর সাথে মিল।",
+      "tags": ["pda", "cfg", "conversion"]
+    },
+    {
+      "question": "Context-Free Language (CFL) কী?",
+      "answer": "CFL হলো সেই Language যা কোনো CFG দ্বারা উৎপাদিত হয় অথবা যেকোনো PDA দ্বারা স্বীকৃত হয়। উদাহরণ: {aⁿbⁿ | n ≥ 0}, {wwᴿ | w ∈ {a,b}*}, balanced parentheses। CFL Regular Language-র অতিরিক্ত।",
+      "tags": ["cfl", "definition", "context-free"]
+    },
+    {
+      "question": "CFL-এর Closure Properties কী কী?",
+      "answer": "CFL-এর Closure Properties: (1) Union: L₁ ∪ L₂ CFL। (2) Concatenation: L₁L₂ CFL। (3) Kleene Star: L* CFL। (4) Reversal: Lᴿ CFL। (5) Homomorphism CFL। (6) Inverse Homomorphism CFL। তবে CFL-এর Intersection Regular Language-এর সাথে CFL, কিন্তু CFL ∩ CFL CFL নাও হতে পারে। CFL Complement নয়।",
+      "tags": ["cfl", "closure-properties"]
+    },
+    {
+      "question": "CFL-র Pumping Lemma কী?",
+      "answer": "Pumping Lemma for CFL: যদি L CFL হয়, তাহলে ∃p ≥ 1 যেন ∀w ∈ L, |w| ≥ p হলে w = uvxyz যেখানে: (1) |vy| > 0 (শূন্য নয়)। (2) |vxy| ≤ p। (3) ∀i ≥ 0, uvⁱxyⁱz ∈ L। এটি CFL-র গুণাগুণ (necessary condition)। এটি Regular Language-র Pumping Lemma-র চেয়ে জটিল কারণ v ও y আলাদা অবস্থায় pump হয়।",
+      "tags": ["pumping-lemma", "cfl", "theorem"]
+    },
+    {
+      "question": "Pumping Lemma দিয়ে CFL নয় প্রমাণ করার পদ্ধতি কী?",
+      "answer": "Pumping Lemma দিয়ে L CFL নয় প্রমাণ: (1) L CFL ধরো। (2) Pumping length p বের করো। (3) এমন string w নাও যেন |w| ≥ p এবং w ∈ L। (4) w = uvxyz ভাগ করো (শর্ত অনুযায়ী)। (5) এমন i বের করো যেন uvⁱxyⁱz ∉ L। (6) Pumping Lemma-র সাথে বিরোধিতা, তাই L CFL নয়।",
+      "tags": ["pumping-lemma", "cfl", "proof"]
+    },
+    {
+      "question": "Turing Machine (TM) কী?",
+      "answer": "Turing Machine হলো একটি 7-tuple: M = (Q, Σ, Γ, δ, q₀, q_accept, q_reject)। যেখানে: Q = সীমিত অবস্থা। Σ = input alphabet। Γ = tape alphabet (Σ ⊂ Γ, □ ∈ Γ)। δ: Q × Γ → Q × Γ × {L, R} = transition function। q₀ = start, q_accept = accept, q_reject = reject। TM সর্বাধিক শক্তিশালী computational model।",
+      "tags": ["turing-machine", "definition", "automata"]
+    },
+    {
+      "question": "Turing Machine-এর Variants কী কী?",
+      "answer": "Turing Machine-এর প্রধান variants: (1) Multi-tape TM: একাধিক tape — standard TM-এর সমান শক্তিশালী। (2) Non-deterministic TM: একাধিক possible move — standard TM-এর সমান শক্তিশালী। (3) Enumerated TM: string-এর সমষ্টি তালিকাভুক্ত করে। (4) Post Machine। (5) Linear Bounded Automaton (LBA): tape input-এর দৈর্ঘ্যে সীমিত।",
+      "tags": ["turing-machine", "variants", "multi-tape"]
+    },
+    {
+      "question": "Halting Problem কী?",
+      "answer": "Halting Problem: কোনো Turing Machine M ও input w দেওয়া থাকলে, কি M, w-র উপর halt করবে তা সিদ্ধান্ত করা সম্ভব কিনা? Alan Turing প্রমাণ করেছেন যে Halting Problem undecidable। এটি একটি diagonalization argument ব্যবহার করে প্রমাণিত। কোনো universal algorithm নেই যা সব সময় সঠিকভাবে উত্তর দিতে পারবে।",
+      "tags": ["halting-problem", "undecidability", "turing-machine"]
+    },
+    {
+      "question": "Decidable ও Undecidable কী?",
+      "answer": "Decidable (Recursive): একটি problem decidable যদি একটি Turing Machine থাকে যা সব ইনপুটের জন্য halt করে এবং সঠিক উত্তর দেয়। Undecidable (RE but not Recursive): এমন problem যের জন্য কোনো TM সব সময় halt করে না। Halting Problem undecidable। Rice's Theorem অনুযায়ী RE-র সব non-trivial properties undecidable।",
+      "tags": ["decidability", "undecidability", "definitions"]
+    },
+    {
+      "question": "Rice's Theorem কী?",
+      "answer": "Rice's Theorem: RE-র (Recursively Enumerable) যেকোনো non-trivial property undecidable। Non-trivial মানে: (1) ∃M যেন L(M) এই property আছে। (2) ∃M যেন L(M) এই property নেই। উদাহরণ: (1) L(M) = ∅ কিনা — undecidable। (2) L(M) = Σ* কিনা — undecidable। (3) L(M) finite কিনা — undecidable।",
+      "tags": ["rices-theorem", "undecidability", "theorem"]
+    },
+    {
+      "question": "Chomsky Hierarchy কী?",
+      "answer": "Chomsky Hierarchy হলো Formal Languages-র চারটি শ্রেণী: (1) Type 0 (RE): Turing Machine দ্বারা স্বীকৃত। (2) Type 1 (CSL): Linear Bounded Automaton দ্বারা স্বীকৃত। (3) Type 2 (CFL): Pushdown Automata দ্বারা স্বীকৃত। (4) Type 3 (Regular): Finite Automata দ্বারা স্বীকৃত। সম্পর্ক: Type 3 ⊂ Type 2 ⊂ Type 1 ⊂ Type 0।",
+      "tags": ["chomsky-hierarchy", "classification", "formal-language"]
+    },
+    {
+      "question": "Chomsky Hierarchy-র প্রতিটি Type-এর Grammar কী?",
+      "answer": "Type 0 (Unrestricted): α → β, α ≠ ε। Type 1 (Context-Sensitive): αAβ → αγβ, γ ≠ ε। Type 2 (Context-Free): A → γ। Type 3 (Regular): A → aB বা A → a (Right Linear) অথবা A → Ba বা A → a (Left Linear)। প্রতিটি Type পূর্ববর্তী Type-এর সাবসেট।",
+      "tags": ["chomsky-hierarchy", "grammar-types"]
+    },
+    {
+      "question": "Regular Expression ও Regular Grammar-এর সম্পর্ক কী?",
+      "answer": "Regular Expression ও Regular Language (Type 3 Grammar) সমান শক্তিশালী। (1) যেকোনো Regular Expression থেকে NFA তৈরি করা যায়। (2) যেকোনো DFA থেকে Regular Expression তৈরি করা যায়। (3) Regular Grammar থেকে FA তৈরি করা যায়। (4) FA থেকে Regular Grammar তৈরি করা যায়। তাই, RE ↔ FA ↔ Regular Grammar — তিনটি সমান শক্তিশালী।",
+      "tags": ["regular-expression", "regular-grammar", "equivalence"]
+    },
+    {
+      "question": "CFL-এর Normalization কেন প্রয়োজন?",
+      "answer": "CFL-এর Normalization (CNF/GNF) প্রয়োজন কারণ: (1) String Membership: CNF-তে CYK Algorithm দিয়ে O(n³) সময়ে w ∈ L(G) পরীক্ষা করা যায়। (2) Parse Tree-র গভীরতা: CNF-তে string w-র জন্য parse tree-র গভীরতা 2|w|-1। (3) Theoretical Analysis: Normal form-এ গাণিতিক প্রমাণ সহজ হয়।",
+      "tags": ["cfg", "normal-form", "cnf", "cfl"]
+    },
+    {
+      "question": "Deterministic CFL ও Non-deterministic CFL-এর পার্থক্য কী?",
+      "answer": "Deterministic CFL (DCFL): যে CFL-গুলো DPDA (Deterministic PDA) দ্বারা স্বীকৃত। Non-deterministic CFL: যে CFL-গুলো NPDA দ্বারা স্বীকৃত কিন্তু DPDA দ্বারা নয়। উদাহরণ: {wwᴿ} DCFL, কিন্তু {ww} CFL কিন্তু DCFL নয়। DCFL ⊂ CFL। DCFL Complement-এর সাথে Closed।",
+      "tags": ["cfl", "dcfl", "nondeterminism", "pda"]
+    },
+    {
+      "question": "Undecidable Problems-এর কিছু উদাহরণ কী কী?",
+      "answer": "Undecidable Problems-এর উদাহরণ: (1) Halting Problem: TM M, input w দিয়ে M halt করবে কিনা। (2) PCP (Post Correspondence Problem)। (3) Ambiguity Problem: CFG G ambiguous কিনা। (4) Membership Problem: w ∈ L(G) কিনা (for arbitrary CFG)। (5) Emptiness Problem: L(M) = ∅ কিনা (for RE)। Rice's Theorem দিয়ে অনেক undecidable problem প্রমাণ করা যায়।",
+      "tags": ["undecidability", "examples", "problems"]
+    },
+    {
+      "question": "Computability Theory-র মূল ধারণা কী?",
+      "answer": "Computability Theory-র মূল ধারণা: (1) Computable Function: এমন ফাংশন যা TM দ্বারা গণনা করা সম্ভব। (2) Decidable Problem: সব ইনপুটে halt করে এমন TM-এর অস্তিত্ব। (3) Recursively Enumerable: TM দ্বারা recognize করা সম্ভব (halt না হলেও)। (4) Church-Turing Thesis: যেকোনো computable function TM দ্বারা গণনা করা সম্ভব।",
+      "tags": ["computability", "basics", "theory"]
+    },
+    {
+      "question": "Complexity Theory-র মূল ধারণা কী?",
+      "answer": "Complexity Theory-র মূল ধারণা: (1) Time Complexity: একটি TM কতটি ধাপে সমস্যা সমাধায়ন করে। (2) Space Complexity: TM কতটি tape cell ব্যবহার করে। (3) P Class: Polynomial time-এ decidable problems। (4) NP Class: Non-deterministic Polynomial time-এ decidable। (5) NP-Complete: NP-এর সবচেয়ে কঠিন problems। (6) NP-Hard: NP-এর চেয়ে কঠিন বা সমান।",
+      "tags": ["complexity", "p", "np", "basics"]
+    },
+    {
+      "question": "P ও NP Class-এর পার্থক্য কী?",
+      "answer": "P: সেই problems যা deterministic TM দ্বারা polynomial time-এ (O(nᵏ)) সমাধায়নযোগ্য। NP: সেই problems যা non-deterministic TM দ্বারা polynomial time-এ সমাধায়নযোগ্য, অথবা যার solution polynomial time-ে verify করা যায়। P ⊆ NP। প্রশ্ন: P = NP কি? এটি Millennium Prize Problems-এর একটি।",
+      "tags": ["p", "np", "complexity", "comparison"]
+    },
+    {
+      "question": "NP-Complete Problem কী?",
+      "answer": "NP-Complete: একটি problem L NP-এ আছে এবং প্রতিটি NP problem L-এ polynomial time-ে reduce করা যায়। Cook-Levin Theorem: SAT problem NP-Complete। অন্যান্য NP-Complete: 3-SAT, Vertex Cover, Hamiltonian Cycle, Traveling Salesman (decision), Clique, Subset Sum। এগুলো polynomial time-এ solve হলে P = NP হবে।",
+      "tags": ["np-complete", "complexity", "reduction"]
+    },
+    {
+      "question": "Polynomial Time Reduction কী?",
+      "answer": "Polynomial Time Reduction: problem A polynomial time-ে problem B-তে reduce করা হয় যদি A ≤ₚ B। অর্থাৎ, A-র solution B-র solution দিয়ে পাওয়া সম্ভব polynomial time-এ। যদি A ≤ₚ B এবং B ∈ P, তাহলে A ∈ P। যদি A ≤ₚ B এবং A undecidable, তাহলে B undecidable।",
+      "tags": ["reduction", "polynomial-time", "complexity"]
+    },
+    {
+      "question": "Linear Bounded Automaton (LBA) কী?",
+      "answer": "LBA হলো Turing Machine-এর একটি variant যেখানে tape input-এর দৈর্ঘ্যে সীমিত। অর্থাৎ, TM input string-এর চেয়ে বেশি স্মৃতি ব্যবহার করে না। LBA Context-Sensitive Language (Type 1) স্বীকার করে। Standard TM অপেক্ষা LBA কম শক্তিশালী।",
+      "tags": ["lba", "turing-machine", "context-sensitive"]
+    },
+    {
+      "question": "Recursively Enumerable (RE) ও Recursive Language-এর পার্থক্য কী?",
+      "answer": "RE (Recursively Enumerable): TM দ্বারা recognize করা সম্ভব — string ∈ L হলে TM halt করে accept করবে, কিন্তু string ∉ L হলে TM halt নাও করতে পারে। Recursive: TM দ্বারা decidable — string ∈ L হলে accept, string ∉ L হলে reject — দুই ক্ষেত্রেই halt করে। Recursive ⊂ RE।",
+      "tags": ["recursively-enumerable", "recursive", "turing-machine"]
+    },
+    {
+      "question": "Ambiguity Problem in CFG Undecidable কেন?",
+      "answer": "Ambiguity Problem Undecidable কারণ: যদি আমরা decide করতে পারতাম যে CFG G ambiguous কিনা, তাহলে we could decide whether L(G) = ∅ (emptiness problem) — যা RE-এর জন্য undecidable। Reduction: Given a TM M, construct G such that G is ambiguous ⟺ L(M) = ∅। এই reduction-এর কারণে Ambiguity Problem undecidable।",
+      "tags": ["cfg", "ambiguity", "undecidability"]
+    },
+    {
+      "question": "Pumping Lemma-র সীমাবদ্ধতা কী?",
+      "answer": "Pumping Lemma-র সীমাবদ্ধতা: (1) এটি necessary condition, sufficient condition নয় — ভাষা Pumping Lemma পাস করলেও regular নাও হতে পারে। (2) Non-regularity প্রমাণে কার্যকর, কিন্তু regularity প্রমাণে ব্যবহার করা যায় না। (3) CFL Pumping Lemma জটিল — v ও y আলাদা অবস্থায় pump হয়। (4) সঠিক string বাছাই করা কঠিন।",
+      "tags": ["pumping-lemma", "limitations", "theory"]
+    },
+    {
+      "question": "Finite Automaton-এর সীমাবদ্ধতা কী?",
+      "answer": "Finite Automaton-এর সীমাবদ্ধতা: (1) সীমিত স্মৃতি (memory) — state-এর সংখ্যা সীমিত। (2) {aⁿbⁿ | n ≥ 0} স্বীকার করতে পারে না (PDA প্রয়োজন)। (3) {ww | w ∈ {a,b}*} স্বীকার করতে পারে না। (4) {aⁿbⁿcⁿ | n ≥ 0} স্বীকার করতে পারে না (TM প্রয়োজন)। (5) Comparison, counting, nested structures-এ অক্ষম।",
+      "tags": ["finite-automata", "limitations", "regular-language"]
+    },
+    {
+      "question": "Turing Machine-এ Halting Problem-এর Implication কী?",
+      "answer": "Halting Problem-এর Implication: (1) কিছু problem মৌলিকভাবে unsolvable। (2) কোনো universal program checker নেই যা সব প্রোগ্রামের জন্য bug find করতে পারবে। (3) Program verification-এর সীমাবদ্ধতা। (4) Artificial Intelligence-এর তাত্ত্বিক সীমা। (5) Cryptography-তে undecidable problems-এর ব্যবহার।",
+      "tags": ["halting-problem", "implications", "theory"]
+    },
+    {
+      "question": "Deterministic PDA ও Non-deterministic PDA-এর পার্থক্য কী?",
+      "answer": "DPDA (Deterministic PDA): প্রতিটি অবস্থা-input-stack symbol জোড়ায় ঠিক একটি move থাকে। NPDA: একাধিক possible move থাকতে পারে। DPDA ⊂ NPDA। DPDA DCFL স্বীকার করে, NPDA সব CFL স্বীকার করে। {wwᴿ} DPDA দিয়ে সম্ভব, কিন্তু {aⁿbⁿcⁿ} NPDA-তেও সম্ভব নয়।",
+      "tags": ["pda", "deterministic", "nondeterministic"]
+    },
+    {
+      "question": "CFG-তে useless Productions কী?",
+      "answer": "Useless Productions: (1) Non-generating: A non-terminal যা থেকে terminal string উৎপাদন করা সম্ভব নয়। (2) Unreachable: Start symbol থেকে পৌঁছানো যায় না। (3) উভয়ই useless। CFG-কে simplify করতে useless productions বাদ দিতে হয়। এটি Normal Form (CNF/GNF) তৈরির প্রথম ধাপ।",
+      "tags": ["cfg", "useless-productions", "simplification"]
+    },
+    {
+      "question": "Chomsky Hierarchy-তে প্রতিটি Type-এর স্মৃতি সীমাবদ্ধতা কী?",
+      "answer": "Type 3 (Regular): Finite memory (states)। Type 2 (CFL): Infinite memory (stack) — LIFO access। Type 1 (CSL): Input tape-এর দৈর্ঘ্যে সীমিত memory (LBA)। Type 0 (RE): Infinite memory (unbounded tape)। স্মৃতি বাড়ালে শক্তি বাড়ে: FA ⊂ PDA ⊂ LBA ⊂ TM।",
+      "tags": ["chomsky-hierarchy", "memory", "complexity"]
+    },
+    {
+      "question": "Closure Properties-এর গুরুত্ব কী?",
+      "answer": "Closure Properties-এর গুরুত্ব: (1) Language শ্রেণীর সীমানা বোঝা। (2) Undecidability proof-এ ব্যবহার — যদি L undecidable এবং L' regular হয়, তাহলে L ∩ L' undecidable নাও হতে পারে। (3) Problem reduction-এ সাহায্য। (4) Compiler design-এ practical use। (5) Formal verification-এ গুরুত্বপূর্ণ।",
+      "tags": ["closure-properties", "significance", "theory"]
+    },
+    {
+      "question": "Mealy Machine ও Moore Machine-এর পার্থক্য কী?",
+      "answer": "Mealy Machine: Output transition function δ: Q × Σ → Q × Γ — output current state ও input-এর উপর নির্ভর করে। Moore Machine: Output function λ: Q → Γ — output শুধুমাত্র current state-এর উপর নির্ভর করে। Moore Machine-এ output-এর latency বেশি (এক step delay)। দুটির মধ্যে রূপান্তর সম্ভব।",
+      "tags": ["mealy", "moore", "finite-automata", "sequential"]
+    },
+    {
+      "question": "ε-NFA ও NFA-এর পার্থক্য কী?",
+      "answer": "ε-NFA: NFA-র একটি variant যেখানে ε-transitions (input ছাড়াই transition) অনুমত। NFA: শুধু input symbols-এ transition। তবে, সাধারণত NFA বলতে ε-NFA-ই বোঝানো হয়। Subset Construction পদ্ধতি ε-NFA থেকে DFA তৈরি করতে পারে।",
+      "tags": ["nfa", "epsilon", "finite-automata"]
+    },
+    {
+      "question": "Regular Language-র Myhill-Nerode Theorem কী বলে?",
+      "answer": "Myhill-Nerode Theorem: L ⊆ Σ* Regular ⟺ L-এর Myhill-Nerode equivalence relation-এর index finite। Equivalence: x ~ y ⟺ ∀z, xz ∈ L ⟺ yz ∈ L। Index = equivalence classes-এর সংখ্যা = minimal DFA-র state-এর সংখ্যা। এটি DFA Minimization-এর তাত্ত্বিক ভিত্তি।",
+      "tags": ["myhill-nerode", "regular-language", "theorem"]
+    },
+    {
+      "question": "Turing Machine-এ Universal Turing Machine (UTM) কী?",
+      "answer": "UTM হলো এমন একটি TM যা যেকোনো অন্য TM M-এর কোড ও input w পেয়ে M, w-র উপর simulation করে। অর্থাৎ, একটি TM অন্য একটি TM-কে simulate করতে পারে। UTM-এর অস্তিত্ব Church-Turing Thesis-এর সমর্থন। এটি programmability-র ভিত্তি।",
+      "tags": ["turing-machine", "utm", "universal"]
+    },
+    {
+      "question": "Post Correspondence Problem (PCP) কী?",
+      "answer": "PCP: দেওয়া আছে একটি domino set {(t₁, b₁), (t₂, b₂), ..., (tₖ, bₖ)}। প্রশ্ন: কি এমন একটি sequence i₁, i₂, ..., iₘ পাওয়া যায় যেন tᵢ₁tᵢ₂...tᵢₘ = bᵢ₁bᵢ₂...bᵢₘ? PCP undecidable। PCP ব্যবহার করে অনেক undecidable problem প্রমাণ করা হয়।",
+      "tags": ["pcp", "undecidability", "problem"]
+    },
+    {
+      "question": "Formal Language-র Practical Applications কী কী?",
+      "answer": "Practical Applications: (1) Compiler Design: Lexical analysis (RE/FA), Parsing (CFG/PDA)। (2) Protocol Verification: Network protocols যাচাই। (3) Natural Language Processing: Grammar, Parsing। (4) Pattern Recognition: Regular expressions। (5) DNA Sequence Analysis: Formal languages। (6) Security: Input validation, SQL injection prevention।",
+      "tags": ["formal-language", "applications", "practical"]
+    },
+    {
+      "question": "GATE CSE-তে Theory of Computation-এর Weightage কত?",
+      "answer": "GATE CSE-তে Theory of Computation সাধারণত 5-7 মার্কের (2-3 টি MCQ/MAS)। প্রধান বিষয়সমূহ: Regular Language & FA (DFA/NFA/RE), CFL & PDA, Undecidability (Halting, Rice's Theorem), Chomsky Hierarchy। GATE 2024 অনুযায়ী DFA Minimization, CFL Pumping Lemma, TM-এর Decidability জনপ্রিয়।",
+      "tags": ["gate", "weightage", "exam"]
+    },
+    {
+      "question": "GATE CSE-তে Regular Language & FA থেকে কী ধরনের প্রশ্ন আসে?",
+      "answer": "GATE-তে Regular Language & FA থেকে প্রশ্ন: (1) DFA/NFA-র minimum state বের করা। (2) RE থেকে DFA/NFA রূপান্তর। (3) Pumping Lemma দিয়ে regularity প্রমাণ/খণ্ডন। (4) Closure Properties-এর প্রয়োগ। (5) DFA/NFA-র equivalence। (6) Myhill-Nerode Theorem। (7) Regular Language-র complement/intersection।",
+      "tags": ["gate", "regular-language", "fa", "questions"]
+    },
+    {
+      "question": "GATE CSE-তে CFL ও PDA থেকে কী ধরনের প্রশ্ন আসে?",
+      "answer": "GATE-তে CFL ও PDA থেকে প্রশ্ন: (1) CFG-র derivation/parse tree। (2) CFL Pumping Lemma দিয়ে CFL/non-CFL প্রমাণ। (3) CNF/GNF রূপান্তর। (4) PDA-র acceptance। (5) CFL-এর Closure Properties। (6) DCFL vs CFL। (7) Ambiguity in CFG। (8) CFL-র complement — CFL নয়।",
+      "tags": ["gate", "cfl", "pda", "questions"]
+    },
+    {
+      "question": "GATE CSE-তে Undecidability থেকে কী ধরনের প্রশ্ন আসে?",
+      "answer": "GATE-তে Undecidability থেকে প্রশ্ন: (1) Halting Problem undecidable প্রমাণ। (2) Rice's Theorem-এর প্রয়োগ। (3) Decidable/Undecidable problem শনাক্ত। (4) PCP। (5) Ambiguity Problem। (6) Emptiness/Non-emptiness of RE। (7) Universality of RE। (8) Intersection emptiness।",
+      "tags": ["gate", "undecidability", "questions"]
+    },
+    {
+      "question": "DFA Minimization-এর জন্য GATE CSE-তে কী জানা প্রয়োজন?",
+      "answer": "GATE CSE-তে DFA Minimization জানা প্রয়োজন: (1) Table Filling Algorithm। (2) Equivalent & Distinguishable states। (3) Myhill-Nerode Theorem। (4) Minimal DFA-র uniqueness। (5) Equivalent DFA-র minimal DFA একই। (6) NFA → DFA → Minimal DFA pipeline। (7) Incomplete DFA minimize করা।",
+      "tags": ["gate", "dfa", "minimization"]
+    },
+    {
+      "question": "Turing Machine-এ Decidable ভাষার উদাহরণ কী কী?",
+      "answer": "Decidable Languages: (1) A_tm complement — TM M, input w দিয়ে M accept না করে। (2) EQ_tm — দুটি TM সমান ভাষা স্বীকার করে কিনা। (3) ALL_tm — TM-এর ভাষা Σ* কিনা। (4) Regular Languages — FA দিয়ে decidable। (5) CFL Membership — CYK Algorithm দিয়ে O(n³)। (6) LBA-র Emptiness — decidable।",
+      "tags": ["turing-machine", "decidable", "examples"]
+    },
+    {
+      "question": "Church-Turing Thesis কী?",
+      "answer": "Church-Turing Thesis: যেকোনো computable function (যা algorithm দিয়ে গণনা করা সম্ভব) Turing Machine দ্বারা গণনা করা সম্ভব। এটি একটি thesis (অনুমান), theorem নয় — কারণ 'computable' এর formal definition নেই। তবে, সমস্ত known models (λ-calculus, Post systems, Register machines) TM-এর সমান শক্তিশালী।",
+      "tags": ["church-turing", "thesis", "computability"]
+    },
+    {
+      "question": "Turing Machine-এ Tape Alphabet ও Input Alphabet-এর পার্থক্য কী?",
+      "answer": "Input Alphabet (Σ): শুধুমাত্র input string-এর বর্ণ। Tape Alphabet (Γ): সমস্ত symbol যা tape-এ লেখা যায়। Σ ⊂ Γ, অর্থাৎ tape alphabet input alphabet-এর superset। Γ-তে থাকে blank symbol (□) যা input string-এর পরের সব কোষে থাকে।",
+      "tags": ["turing-machine", "alphabet", "tape"]
+    },
+    {
+      "question": "CFG-তে Nullable Non-terminal কী?",
+      "answer": "Nullable Non-terminal: এমন non-terminal A যার থেকে ε (শূন্য string) উৎপাদন করা সম্ভব। উদাহরণ: A → ε, B → A, C → AB (যদি A nullable)। Nullable non-terminals বের করা CFG-কে CNF/GNF-এ রূপান্তরের অগ্রিম ধাপ।",
+      "tags": ["cfg", "nullable", "simplification"]
+    },
+    {
+      "question": "Deterministic Finite Automaton-এ trap/dead state কী?",
+      "answer": "Trap/Dead state: এমন state q_d যেখানে প্রবেশ করলে আর বের হওয়া সম্ভব নয়। সব input symbols-এ self-loop থাকে। Non-accepting state। Trap state যোগ করলে DFA complete হয় — প্রতিটি state ও input-এর জন্য transition থাকে।",
+      "tags": ["dfa", "trap-state", "dead-state"]
+    },
+    {
+      "question": "Regular Language-র Kleene Star (∗) ও Kleene Plus (+) এর পার্থক্য কী?",
+      "answer": "Kleene Star (L*): L-এর শূন্য বা একাধিক concatenation। L* = L⁰ ∪ L¹ ∪ L² ∪ ... যেখানে L⁰ = {ε}। Kleene Plus (L+): L-এর এক বা একাধিক concatenation। L+ = L¹ ∪ L² ∪ ... L+ = L*L - {ε} (যদি ε ∉ L)। L* = L+ ∪ {ε}।",
+      "tags": ["regular-expression", "kleene", "operators"]
+    },
+    {
+      "question": "Turing Machine-এ Configuration কী?",
+      "answer": "Configuration হলো TM-এর একটি snapshot: (1) Current state। (2) Tape content। (3) Head position। উদাহরণ: uqv মানে head v-এর প্রথম বর্ণে, state q, tape হলো uv। Configuration sequence: C₁ ⊢ C₂ ⊢ ... ⊢ Cₘ মানে computation।",
+      "tags": ["turing-machine", "configuration", "computation"]
+    },
+    {
+      "question": "Context-Free Language-র Closure under Intersection কেন নয়?",
+      "answer": "CFL intersection CFL CFL নাও হতে পারে। উদাহরণ: L₁ = {aⁿbⁿcᵐ} CFL, L₂ = {aᵐbⁿcⁿ} CFL। L₁ ∩ L₂ = {aⁿbⁿcⁿ} CFL নয় (Pumping Lemma দিয়ে প্রমাণযোগ্য)। তবে CFL ∩ Regular Language = CFL।",
+      "tags": ["cfl", "closure", "intersection"]
+    },
+    {
+      "question": "Regular Language-র DFA, NFA, RE, Regular Grammar - কোনটি সবচেয়ে শক্তিশালী?",
+      "answer": "চারটি সমান শক্তিশালী — একই ভাষা শ্রেণী (Regular Language) স্বীকার করে। RE ↔ NFA ↔ DFA ↔ Regular Grammar — প্রতিটির মধ্যে polynomial time-ে রূপান্তর সম্ভব। তবে, কাজের সুবিধায় আলাদা আলাদা context-এ ব্যবহৃত হয়।",
+      "tags": ["regular-language", "equivalence", "models"]
+    },
+    {
+      "question": "Turing Machine-এ Halting Configuration কী?",
+      "answer": "Halting Configuration: এমন configuration যেখানে TM-এর কোনো move নেই। দুই ধরন: (1) Accepting Configuration: state q_accept তে। (2) Rejecting Configuration: state q_reject তে। Halting problem-এর মূল প্রশ্ন: কি TM M, input w-র জন্য যেকোনো halting configuration-এ পৌঁছাবে?",
+      "tags": ["turing-machine", "halting", "configuration"]
+    },
+    {
+      "question": "GATE CSE-তে Chomsky Hierarchy থেকে কী ধরনের প্রশ্ন আসে?",
+      "answer": "GATE-তে Chomsky Hierarchy থেকে প্রশ্ন: (1) ভাষাকে সঠিক Type-তে শ্রেণীবদ্ধ করা। (2) প্রতিটি Type-এর automaton জানা। (3) Closure properties-এর তারতম্য। (4) Type 0 থেকে Type 3-এ reduce করা। (5) Undecidable problem শনাক্ত। (6) PDA, LBA, TM-এর সম্পর্ক।",
+      "tags": ["gate", "chomsky-hierarchy", "questions"]
+    }
+  ]
+}
