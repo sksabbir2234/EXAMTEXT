@@ -45,8 +45,11 @@ const total = parseInt(Astro.url.searchParams.get('total') ?? '0', 10) || 0;
     )}
   </div>
 
-  <script is:inline define:vars={{ examId, score, total }}>
+  <script is:inline define:vars={{ examId }}>
     const labels = ['A','B','C','D'];
+    const params = new URLSearchParams(window.location.search);
+    const score = parseInt(params.get('score') ?? '0', 10) || 0;
+    const total = parseInt(params.get('total') ?? '0', 10) || 0;
 
     async function init() {
       try {
