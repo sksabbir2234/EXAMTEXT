@@ -1,0 +1,828 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "Data Structures — সম্পূর্ণ Q&A গাইড (150+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Data Structures-এর 150+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Data Structure কী?",
+      "answer": "Data Structure হলো ডেটা সংগঠন ও সংরক্ষণের একটি পদ্ধতি যাতে ডেটা কার্যকরভাবে ব্যবহার ও প্রক্রিয়াকরণ করা যায়। এটি একটি নির্দিষ্ট ফরম্যাট যা মেমরিতে ডেটা সাজানোর জন্য ব্যবহৃত হয়।",
+      "tags": ["basics", "definition"]
+    },
+    {
+      "question": "Data Structure-এর প্রধান প্রকারভেগ কী কী?",
+      "answer": "Data Structure দুই প্রকার: (1) প্রাইমিটিভ — Array, Structure, Union, Pointer। (2) নন-প্রাইমিটিভ — Linked List, Stack, Queue, Tree, Graph, Hash Table। আবার সরল ও জটিল হিসেবেও ভাগ করা হয়।",
+      "tags": ["basics", "types"]
+    },
+    {
+      "question": "Array কী?",
+      "answer": "Array হলো একই ধরনের ডেটা এলিমেন্টের একটি সংগ্রহ যা ক্রমিক মেমরি লোকেশনে সংরক্ষিত থাকে। এটিতে র‍্যান্ডম অ্যাক্সেস সম্ভব — কোনো ইন্ডেক্স দিয়ে সরাসরি অ্যাক্সেস করা যায়। উদাহরণ: int arr[10];",
+      "tags": ["array", "basics"]
+    },
+    {
+      "question": "Array-এ Time Complexity কত?",
+      "answer": "Array-এ অ্যাক্সেস — O(1), সার্চ — O(n) (unsorted) বা O(log n) (sorted, binary search), ইনসার্ট — O(n), ডিলিট — O(n)। মেমরি কন্টিগাস হওয়ায় ক্যাশ-ফ্রেন্ডলি।",
+      "tags": ["array", "complexity"]
+    },
+    {
+      "question": "Stack কী?",
+      "answer": "Stack হলো LIFO (Last In First Out) নীতি অনুসরণকারী একটি লিনিয়ার ডেটা স্ট্রাকচার। যেটি শেষে ঢোকে সেটি প্রথমে বের হয়। মূল অপারেশন: push (ঢোকানো), pop (বের করা), peek (শীর্ষ দেখা)। উদাহরণ: থালার স্তূপ।",
+      "tags": ["stack", "basics", "lifo"]
+    },
+    {
+      "question": "Stack-এ push ও pop অপারেশনের Time Complexity কত?",
+      "answer": "Stack-এ push ও pop উভয়ই O(1) সময়ে সম্পন্ন হয়। কারণ শুধুমাত্র top পয়েন্টার পরিবর্তন করতে হয়। peek অপারেশনও O(1)।",
+      "tags": ["stack", "complexity"]
+    },
+    {
+      "question": "Stack দিয়ে Queue তৈরি করা যায় কীভাবে?",
+      "answer": "দুটি Stack ব্যবহার করে Queue তৈরি করা যায়। একটিতে enqueue করা হয়, অন্যটিতে dequeue করার জন্য ট্রান্সফার করা হয়। GATE CSE 2008 অনুযায়ী ন্যূনতম ২টি Stack প্রয়োজন। প্রতিটি enqueue O(1), dequeue গড়ে O(1) হয়।",
+      "tags": ["stack", "queue", "gate"]
+    },
+    {
+      "question": "Queue কী?",
+      "answer": "Queue হলো FIFO (First In First Out) নীতি অনুসরণকারী একটি লিনিয়ার ডেটা স্ট্রাকচার। যেটি প্রথমে ঢোকে সেটি প্রথমে বের হয়। অপারেশন: enqueue (পেছনে ঢোকানো), dequeue (সামনে থেকে বের করা)। উদাহরণ: লাইনে দাঁড়ানো মানুষ।",
+      "tags": ["queue", "basics", "fifo"]
+    },
+    {
+      "question": "Circular Queue কী এবং কেন প্রয়োজন?",
+      "answer": "Circular Queue-এ শেষ এলিমেন্ট প্রথম এলিমেন্টের সাথে সংযুক্ত থাকে, তাই মেমরি নষ্ট হয় না। সাধারণ Queue-এ dequeue করলে মেমরি খালি থাকে কিন্তু enqueue করা যায় না। Circular Queue-এই সমস্যা দূর করে। GATE CSE 2013 অনুযায়ী এটি array দিয়ে বাস্তবায়ন করা যায়।",
+      "tags": ["queue", "circular", "gate"]
+    },
+    {
+      "question": "Linked List কী?",
+      "answer": "Linked List হলো এমন একটি লিনিয়ার ডেটা স্ট্রাকচার যেখানে প্রতিটি নোডে ডেটা ও পরবর্তী নোডের পয়েন্টার থাকে। মেমরি কন্টিগাস নয়। প্রকারভেদে: Singly, Doubly, Circular।",
+      "tags": ["linked-list", "basics"]
+    },
+    {
+      "question": "Singly Linked List ও Doubly Linked List-এর পার্থক্য কী?",
+      "answer": "Singly Linked List-এ প্রতিটি নোডে শুধু পরবর্তী নোডের পয়েন্টার থাকে (next)। Doubly Linked List-এ পূর্ববর্তী ও পরবর্তী উভয় নোডেরই পয়েন্টার থাকে (prev ও next)। Doubly-তে পেছনে যাওয়া সম্ভব কিন্তু বেশি মেমরি লাগে।",
+      "tags": ["linked-list", "comparison"]
+    },
+    {
+      "question": "Array ও Linked List-এর পার্থক্য কী?",
+      "answer": "Array-তে মেমরি কন্টিগাস, O(1)-এ অ্যাক্সেস, কিন্তু সাইজ ফিক্সড। Linked List-তে মেমরি নন-কন্টিগাস, O(n)-এ অ্যাক্সেস, কিন্তু ডাইনামিক সাইজ। GATE CSE 1996 অনুযায়ী Linked List-তে LIST বাস্তবায়ন Array-অপেক্ষা বেশি কার্যকর।",
+      "tags": ["array", "linked-list", "comparison", "gate"]
+    },
+    {
+      "question": "Linked List-এ সর্বোচ্চ কতগুলি null পয়েন্টার থাকতে পারে?",
+      "answer": "Singly Linked List-এ সর্বোচ্চ ১টি null পয়েন্টার (শেষ নোডের next)। Doubly Linked List-এ সর্বোচ্চ ২টি null পয়েন্টার (প্রথম নোডের prev ও শেষ নোডের next)। Circular Linked List-এ ০টি null পয়েন্টার থাকে।",
+      "tags": ["linked-list", "concept"]
+    },
+    {
+      "question": "Stack-এর সাহায্যে balanced parentheses check কীভাবে করে?",
+      "answer": "প্রতিটি '(' পাওয়া গেলে push করো, ')' পাওয়া গেলে pop করো। শেষে stack খালি হলে parentheses balanced। GATE CSE 2004 অনুযায়ী এটি check করার সেরা data structure হলো Stack।",
+      "tags": ["stack", "application", "gate"]
+    },
+    {
+      "question": "Infix, Prefix ও Postfix নোটেশন কী?",
+      "answer": "Infix: অপারেটর দুই অপারেন্ডের মাঝে (A+B)। Prefix (Polish): অপারেটর আগে (+AB)। Postfix (Reverse Polish): অপারেটর পরে (AB+)। Stack ব্যবহার করে infix কে prefix/postfix-এ রূপান্তর করা হয়।",
+      "tags": ["stack", "expression", "notation"]
+    },
+    {
+      "question": "Postfix expression `10 5 + 60 6 / * 8 -` এর মান কত?",
+      "answer": "GATE CSE 2015 অনুযায়ী: 10+5=15, 60/6=10, 15*10=150, 150-8=142। উত্তর: 142। Stack ব্যবহার করে বাম থেকে ডানে প্রক্রিয়াকরণ করা হয়।",
+      "tags": ["stack", "expression", "gate"]
+    },
+    {
+      "question": "Queue-এ enqueue ও dequeue-র Time Complexity কত?",
+      "answer": "ভালোভাবে বাস্তবায়ন করলে enqueue ও dequeue উভয়ই O(1)। তবে GATE CSE 2016 অনুযায়ী, array-এ সাধারণ Queue-এ dequeue O(n) হতে পারে। Circular Array-এ দুটোই O(1)।",
+      "tags": ["queue", "complexity", "gate"]
+    },
+    {
+      "question": "Binary Tree কী?",
+      "answer": "Binary Tree হলো এমন একটি ট্রি যেখানে প্রতিটি নোডে সর্বোচ্চ ২টি সন্তান নোড থাকে (বাম ও ডাম)। Root, Leaf, Internal Node — এগুলো Binary Tree-র গুরুত্বপূর্ণ উপাদান।",
+      "tags": ["tree", "binary-tree", "basics"]
+    },
+    {
+      "question": "Full Binary Tree ও Complete Binary Tree-এর পার্থক্য কী?",
+      "answer": "Full Binary Tree-তে প্রতিটি নোডের ০ বা ২টি সন্তান থাকে। Complete Binary Tree-তে সব লেভেল পূরণ থাকে এবং শেষ লেভেল বাম থেকে ডানে পূরণ থাকে। GATE CSE 2015 অনুযায়ী n অভ্যন্তরীণ নোডের Full Binary Tree-তে n+1টি Leaf Node থাকে।",
+      "tags": ["tree", "full", "complete", "gate"]
+    },
+    {
+      "question": "Binary Search Tree (BST) কী?",
+      "answer": "BST হলো Binary Tree-র একটি বিশেষ প্রকার যেখানে বাম সন্তানের মান মূলের চেয়ে ছোট এবং ডান সন্তানের মান মূলের চেয়ে বড়। সার্চ, ইনসার্ট, ডিলিট — সব avg O(log n)।",
+      "tags": ["bst", "tree", "basics"]
+    },
+    {
+      "question": "BST-তে সর্বোচ্চ ও সর্বনিম্ন Time Complexity কত?",
+      "answer": "Avg Case: O(log n) — balanced BST। Worst Case: O(n) — skewed tree (যেমন sorted sequence insert করলে)। GATE CSE 2025 অনুযায়ী BST-তে 19 নোড থেকে root পর্যন্ত path length নির্ণয় করতে হয়।",
+      "tags": ["bst", "complexity", "gate"]
+    },
+    {
+      "question": "Heap কী?",
+      "answer": "Heap হলো এমন একটি Binary Tree যেখারে Max-Heap-এ মূল নোড সবচেয়ে বড় এবং Min-Heap-এ মূল নোড সবচেয়ে ছোট। Complete Binary Tree হতে হয়। Priority Queue বাস্তবায়নে ব্যবহৃত হয়।",
+      "tags": ["heap", "basics", "priority-queue"]
+    },
+    {
+      "question": "Max-Heap-এ সর্বোচ্চ উপাদান বের করতে কত সময় লাগে?",
+      "answer": "Max-Heap-এ সর্বোচ্চ উপাদান সবসময় root-এ থাকে। তাই extract-max O(1) সময়ে সম্পন্ন হয়। তবে heapify করতে O(log n) সময় লাগে। GATE CSE 2021 অনুযায়ী min-heap-এ max element খুঁজতে O(n) সময় লাগে।",
+      "tags": ["heap", "complexity", "gate"]
+    },
+    {
+      "question": "Graph কী?",
+      "answer": "Graph হলো V (Vertex/Node) ও E (Edge) দিয়ে তৈরি একটি non-linear data structure। প্রকারভেদে: Directed/Undirected, Weighted/Unweighted, Cyclic/Acyclic। উদাহরণ: সোশ্যাল নেটওয়ার্ক, ম্যাপ।",
+      "tags": ["graph", "basics"]
+    },
+    {
+      "question": "BFS ও DFS-এর পার্থক্য কী?",
+      "answer": "BFS (Breadth-First Search): প্রসথ অনুসন্ধান, Queue ব্যবহার করে, স্তর অনুযায়ী। DFS (Depth-First Search): গভীর অনুসন্ধান, Stack/Recursion ব্যবহার করে, একপাশে এগিয়ে যায়। GATE CSE 2025 অনুযায়ী BFS ও DFS-এর বিভিন্ন বৈশিষ্ট্য রয়েছে।",
+      "tags": ["graph", "bfs", "dfs", "gate"]
+    },
+    {
+      "question": "Hashing কী?",
+      "answer": "Hashing হলো একটি key-value pair-কে hash function দিয়ে index-এ রূপান্তর করে O(1) সময়ে অ্যাক্সেসের পদ্ধতি। Hash Table-এ সংরক্ষিত হয়। Collision handling: Chaining, Open Addressing।",
+      "tags": ["hashing", "basics"]
+    },
+    {
+      "question": "Hashing-এ Collision কী?",
+      "answer": "Collision হলো দুটি ভিন্ন key-র hash value একই হওয়ার ঘটনা। সমাধান: (1) Chaining — একই bucket-এ linked list ব্যবহার। (2) Open Addressing — Linear/Quadratic Probing বা Double Hashing।",
+      "tags": ["hashing", "collision"]
+    },
+    {
+      "question": "Sorting Algorithm-গুলো কী কী?",
+      "answer": "প্রধান Sorting Algorithm: Bubble Sort, Selection Sort, Insertion Sort (O(n²)), Merge Sort, Quick Sort, Heap Sort (O(n log n)), Counting Sort, Radix Sort (O(nk))। GATE CSE-তে বারবার জিজ্ঞাসা হয়।",
+      "tags": ["sorting", "basics"]
+    },
+    {
+      "question": "Merge Sort ও Quick Sort-এর পার্থক্য কী?",
+      "answer": "Merge Sort: Divide & Conquer, O(n log n) সবসময়, stable, বেশি মেমরি লাগে। Quick Sort: O(n log n) avg, O(n²) worst, in-place, unstable। GATE CSE-তে Merge Sort-কে stable sorting হিসেবে উল্লেখ করা হয়।",
+      "tags": ["sorting", "merge-sort", "quick-sort"]
+    },
+    {
+      "question": "Bubble Sort-এর Time Complexity কত?",
+      "answer": "Best Case: O(n) — যদি ইতিমধ্যে sorted থাকে (optimized version)। Worst/Avg Case: O(n²)। Space: O(1)। Stable sorting। GATE CSE-তে bubble sort-এর optimized version নিয়ে প্রশ্ন আসে।",
+      "tags": ["sorting", "bubble-sort", "complexity"]
+    },
+    {
+      "question": "Binary Search কী এবং এর পূর্বশর্ত কী?",
+      "answer": "Binary Search O(log n) সময়ে খুঁজে বের করার পদ্ধতি। পূর্বশর্ত: Array-টি sorted হতে হবে। প্রতিটি ধাপে অর্ধেক এলিমেন্ট বাদ যায়। মধ্যবিন্দু নির্বাচন করে মান তুলনা করা হয়।",
+      "tags": ["searching", "binary-search"]
+    },
+    {
+      "question": "Hash Table-এ average search time কত?",
+      "answer": "Hash Table-ে average case search time O(1)। Worst case O(n) — যদি সব key একই bucket-এ যায় (perfect hash function ব্যবহার করলে O(1) সম্ভব)। Load factor α < 1 রাখলে ভালো পারফরম্যান্স পাওয়া যায়।",
+      "tags": ["hashing", "complexity"]
+    },
+    {
+      "question": "AVL Tree কী?",
+      "answer": "AVL Tree হলো একটি সুষম (balanced) Binary Search Tree যেখানে প্রতিটি নোডের বাম ও ডান subtree-র height পার্থক্য ১-এর বেশি হতে পারে না। Rotation দিয়ে ভারসাম্য রক্ষা করা হয়। Search/Insert/Delete: O(log n)।",
+      "tags": ["avl-tree", "balanced", "bst"]
+    },
+    {
+      "question": "AVL Tree-তে Rotation কী কী?",
+      "answer": "চার প্রকার Rotation: (1) Left Rotation (LL), (2) Right Rotation (RR), (3) Left-Right Rotation (LR), (4) Right-Left Rotation (RL)। এগুলো balance factor ঠিক রাখতে ব্যবহৃত হয়।",
+      "tags": ["avl-tree", "rotation"]
+    },
+    {
+      "question": "Red-Black Tree কী?",
+      "answer": "Red-Black Tree হলো একটি সুষম BST যেখানে প্রতিটি নোডে একটি রঙ (Red/Black) থাকে। নিয়ম: Root সবসময় Black, সন্তান Red হলে পিতামাতাকে Black হতে হয়, প্রতিটি path-এ সমান সংখ্যক Black node। Java TreeMap এ Red-Black Tree ব্যবহার করে।",
+      "tags": ["red-black-tree", "balanced"]
+    },
+    {
+      "question": "B-Tree কী?",
+      "answer": "B-Tree হলো m-way সুষম tree যা database ও file system-এ ব্যবহৃত হয়। প্রতিটি node-তে সর্বোচ্চ m-১টি key ও mটি child থাকে। Leaf node-এ key ও data pointer থাকে। Search/Insert/Delete: O(log n)।",
+      "tags": ["b-tree", "database"]
+    },
+    {
+      "question": "B+ Tree ও B-Tree-এর পার্থক্য কী?",
+      "answer": "B+ Tree-তে data leaf node-এ থাকে, internal node-তে শুধু key। B-Tree-তে data সব node-এ থাকে। B+ Tree-তে leaf node-গুলো linked list-এ সংযুক্ত থাকে তাই range query সহজ। GATE CSE-তে B+ Tree order calculation নিয়ে প্রশ্ন আসে।",
+      "tags": ["b-tree", "b-plus-tree", "comparison"]
+    },
+    {
+      "question": "Trie Data Structure কী?",
+      "answer": "Trie (Prefix Tree) হলো একটি tree-based data structure যা string search-এ ব্যবহৃত হয়। প্রতিটি node একটি character ধারণ করে। Autocomplete, spell checker, IP routing-এ ব্যবহৃত হয়। Search time: O(m) — m = key length।",
+      "tags": ["trie", "string"]
+    },
+    {
+      "question": "Priority Queue কী?",
+      "answer": "Priority Queue হলো এমন একটি abstract data type যেখানে প্রতিটি element-এর একটি priority থাকে এবং সর্বোচ্চ priority বিশিষ্ট element প্রথমে বের হয়। Heap দিয়ে বাস্তবায়ন করা হয়। GATE CSE 1997 অনুযায়ী Heap ব্যবহৃত হয়।",
+      "tags": ["priority-queue", "heap", "gate"]
+    },
+    {
+      "question": "Deque (Double-Ended Queue) কী?",
+      "answer": "Deque হলো এমন একটি queue যেখানে উভয় প্রান্ত থেকে element add ও remove করা যায়। Input-restricted deque-তে শুধু এক প্রান্ত থেকে add করা যায়। Output-restricted deque-তে শুধু এক প্রান্ত থেকে remove করা যায়।",
+      "tags": ["deque", "queue"]
+    },
+    {
+      "question": "Stack-এর Real-life Applications কী কী?",
+      "answer": "Stack-এর ব্যবহার: (1) Function call management (Recursion), (2) Expression evaluation, (3) Parentheses matching, (4) Undo/Redo operation, (5) Backtracking, (6) Browser history, (7) Memory management।",
+      "tags": ["stack", "application"]
+    },
+    {
+      "question": "Queue-র Real-life Applications কী কী?",
+      "answer": "Queue-র ব্যবহার: (1) CPU scheduling, (2) Disk scheduling, (3) BFS traversal, (4) Print queue, (5) Call center phone system, (6) Buffers (IO), (7) Sliding window।",
+      "tags": ["queue", "application"]
+    },
+    {
+      "question": "Binary Tree-তে Inorder, Preorder, Postorder Traversal কী?",
+      "answer": "Inorder (Left-Root-Right): BST-তে sorted output দেয়। Preorder (Root-Left-Right): tree copy করতে ব্যবহৃত। Postorder (Left-Right-Root): tree delete করতে ব্যবহৃত। GATE CSE-তে traversal sequence থেকে tree নির্মাণ করতে বলা হয়।",
+      "tags": ["tree", "traversal"]
+    },
+    {
+      "question": "Binary Tree-তে Level Order Traversal কীভাবে করে?",
+      "answer": "Level Order Traversal BFS পদ্ধতিতে করা হয়। Queue ব্যবহার করে প্রতিটি লেভেলের নোড একে একে প্রক্রিয়াকরণ করা হয়। Root থেকে শুরু করে বাম থেকে ডানে।",
+      "tags": ["tree", "bfs", "traversal"]
+    },
+    {
+      "question": "Heapify প্রক্রিয়া কী?",
+      "answer": "Heapify হলো একটি binary tree-কে heap property মেনে চলতে রূপান্তর করার প্রক্রিয়া। Sift-down পদ্ধতিতে প্রতিটি নোডকে তার সন্তানদের সাথে তুলনা করে swap করা হয়। Time: O(n)।",
+      "tags": ["heap", "heapify"]
+    },
+    {
+      "question": "Heap Sort Algorithm কীভাবে কাজ করে?",
+      "answer": "প্রথমে array-কে max-heap-এ রূপান্তর করা হয় (Build Heap: O(n))। তারপর root (max element) শেষে নিয়ে গিয়ে heap size ছোট করে heapify করা হয়। এই প্রক্রিয়া n-১ বার চলে। Total: O(n log n)।",
+      "tags": ["heap", "heap-sort", "sorting"]
+    },
+    {
+      "question": "Recursion কী?",
+      "answer": "Recursion হলো এমন একটি প্রক্রিয়া যেখানে একটি function নিজেকে নিজেকে ডাকে। Base case ও Recursive case — দুটি অংশ থাকে। Stack data structure recursion-এর পেছনে কাজ করে।",
+      "tags": ["recursion", "basics"]
+    },
+    {
+      "question": "Tower of Hanoi সমস্যা কী?",
+      "answer": "Tower of Hanoi হলো একটি classic recursion সমস্যা। n টি disk ৩টি peg এর মধ্যে একটি থেকে অন্যটিতে স্থানান্তর করতে হয়। Time: O(2ⁿ)। Recursion-এর সেরা উদাহরণ।",
+      "tags": ["recursion", "tower-of-hanoi"]
+    },
+    {
+      "question": "Tail Recursion কী?",
+      "answer": "Tail Recursion হলো এমন recursion যেখানে recursive call হলো function-এর শেষ অপারেশন। Tail call optimization দিয়ে stack overflow এড়ানো যায়। C/C++-তে tail recursion loop-এ রূপান্তরিত হতে পারে।",
+      "tags": ["recursion", "tail-recursion"]
+    },
+    {
+      "question": "Graph-এ Adjacency Matrix ও Adjacency List-এর পার্থক্য কী?",
+      "answer": "Adjacency Matrix: V×V সাইজের 2D array, space O(V²), edge check O(1)। Adjacency List: প্রতিটি vertex-এর list, space O(V+E), edge check O(degree)। Sparse graph-এ Adjacency List efficient।",
+      "tags": ["graph", "representation"]
+    },
+    {
+      "question": "Dijkstra's Algorithm কী?",
+      "answer": "Dijkstra's Algorithm হলো single-source shortest path algorithm যা weighted graph-এ কাজ করে। Greedy approach ব্যবহার করে। Time: O((V+E) log V) min-priority queue সহ। Negative weight edge-তে কাজ করে না।",
+      "tags": ["graph", "dijkstra", "shortest-path"]
+    },
+    {
+      "question": "Minimum Spanning Tree (MST) কী?",
+      "answer": "MST হলো weighted undirected graph-এর এমন একটি subset tree যেখানে সব vertex সংযুক্ত এবং total edge weight ন্যূনতম। Prim's ও Kruskal's Algorithm MST বের করতে ব্যবহৃত হয়।",
+      "tags": ["graph", "mst", "prim", "kruskal"]
+    },
+    {
+      "question": "Topological Sort কী?",
+      "answer": "Topological Sort হলো Directed Acyclic Graph (DAG)-এর vertices-এর একটি linear ordering যেখানে প্রতিটি edge u→v হলে u, v-র আগে আসে। DFS বা BFS (Kahn's algorithm) দিয়ে করা যায়। Task scheduling-এ ব্যবহৃত হয়।",
+      "tags": ["graph", "topological-sort"]
+    },
+    {
+      "question": "Bellman-Ford Algorithm কী?",
+      "answer": "Bellman-Ford Algorithm single-source shortest path algorithm যা negative weight edge সহ graph-এও কাজ করে। Negative cycle detect করতে পারে। Time: O(VE)। Dijkstra-র তুলনায় ধীর।",
+      "tags": ["graph", "bellman-ford", "shortest-path"]
+    },
+    {
+      "question": "Floyd-Warshall Algorithm কী?",
+      "answer": "Floyd-Warshall Algorithm all-pairs shortest path algorithm। Dynamic Programming ব্যবহার করে। Time: O(V³)। Negative weight edge সহ graph-এ কাজ করে। সব জোড়ার মধ্যে সবচেয়ে ছোট path বের করে।",
+      "tags": ["graph", "floyd-warshall", "dynamic-programming"]
+    },
+    {
+      "question": "Dynamic Programming কী?",
+      "answer": "Dynamic Programming হলো সমস্যা সমাধানের একটি পদ্ধতি যেখানে জটিল সমস্যাকে ছোট subproblem-এ ভাগ করা হয় এবং পুনরাবৃত্তি এড়িয়ে memoization/tabulation ব্যবহার করা হয়। Optimal Substructure ও Overlapping Subproblem প্রয়োজন।",
+      "tags": ["dynamic-programming", "algorithm"]
+    },
+    {
+      "question": "Memoization ও Tabulation-এর পার্থক্য কী?",
+      "answer": "Memoization (Top-Down): recursion ব্যবহার করে, ছোট subproblem আগে সমাধান করে মনে রাখে। Tabulation (Bottom-Up): iteration ব্যবহার করে, সবচেয়ে ছোট subproblem থেকে শুরু করে বড় problem সমাধান করে। Tabulation সাধারণত faster।",
+      "tags": ["dynamic-programming", "memoization", "tabulation"]
+    },
+    {
+      "question": "Greedy Algorithm কী?",
+      "answer": "Greedy Algorithm হলো এমন একটি algorithmic paradigm যেখানে প্রতিটি ধাপে সবচেয়ে ভালো (locally optimal) সিদ্ধান্ত নেওয়া হয়। Fractional Knapsack, Huffman Coding, Prim's, Kruskal's — এগুলো Greedy approach।",
+      "tags": ["greedy", "algorithm"]
+    },
+    {
+      "question": "Backtracking কী?",
+      "answer": "Backtracking হলো একটি algorithmic paradigm যেখানে সমস্যা সমাধানের চেষ্টা করা হয় এবং ভুল পথে গেলে পেছনে ফিরে অন্য পথ খোঁজা হয়। N-Queen, Sudoku Solver, Maze solving — এগুলো Backtracking-এর উদাহরণ।",
+      "tags": ["backtracking", "algorithm"]
+    },
+    {
+      "question": "Time Complexity কী?",
+      "answer": "Time Complexity হলো input size-এর উপর নির্ভরশীল algorithm-এর execution time-এর হিসাব। Big-O notation-এ প্রকাশ করা হয়। O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)।",
+      "tags": ["complexity", "big-o"]
+    },
+    {
+      "question": "O(1), O(log n), O(n), O(n log n) — এদের বাস্তব অর্থ কী?",
+      "answer": "O(1): Constant time, input যতই বড় হোক সময় একই (যেমন array index access)। O(log n): Logarithmic, প্রতিটি ধাপে অর্ধেক বাদ (binary search)। O(n): Linear, প্রতিটি element একবার প্রক্রিয়াকরণ। O(n log n): Linearithmic, merge sort।",
+      "tags": ["complexity", "examples"]
+    },
+    {
+      "question": "Amortized Analysis কী?",
+      "answer": "Amortized Analysis হলো sequence of operations-এর গড় সময় নির্ণয়ের পদ্ধতি। একটি operation হয়তো বেশি সময় নেয় কিন্তু গড়ে কম সময় লাগে। যেমন dynamic array-তে push O(1) amortized।",
+      "tags": ["complexity", "amortized"]
+    },
+    {
+      "question": "Master Theorem কী?",
+      "answer": "Master Theorem divide and conquer recurrence relation T(n) = aT(n/b) + O(nᵈ) সমাধানের সূত্র। তিনটি কেস: (1) d > log_b(a) → O(nᵈ), (2) d = log_b(a) → O(nᵈ log n), (3) d < log_b(a) → O(n^log_b(a))।",
+      "tags": ["complexity", "master-theorem"]
+    },
+    {
+      "question": "Stack Overflow কী?",
+      "answer": "Stack Overflow হলো যখন recursion বা function call খুব বেশি গভীরে যায় এবং call stack-এর ধারণক্ষমতা অতিক্রম করে। এটি সাধারণত base case না থাকা বা খুব বড় input-এ ঘটে।",
+      "tags": ["stack", "overflow", "recursion"]
+    },
+    {
+      "question": "Tail-Recursive Function vs Normal Recursive Function — পার্থক্য কী?",
+      "answer": "Normal Recursive Function: recursive call এর পরেও কাজ করতে হয়, stack frame বেশি লাগে। Tail-Recursive Function: recursive call হলো শেষ অপারেশন, compiler optimization দ্বারা loop-এ রূপান্তরিত হতে পারে।",
+      "tags": ["recursion", "tail-recursion", "comparison"]
+    },
+    {
+      "question": "Circular Linked List কী?",
+      "answer": "Circular Linked List-এ শেষ নোডের next pointer প্রথম নোডকে নির্দেশ করে, তাই null থাকে না। Round-robin scheduling, music playlist, browser history-তে ব্যবহৃত হয়। প্রতিটি node থেকে সব node-তে পৌঁছানো যায়।",
+      "tags": ["linked-list", "circular"]
+    },
+    {
+      "question": "Doubly Linked List-এ insert operation কত সময় নেয়?",
+      "answer": "Doubly Linked List-এ নির্দিষ্ট position-এ insert O(n) — কারণ position-এ পৌঁছাতে O(n) সময় লাগে। তবে head/tail-এ insert O(1)। Insert নিজেই O(1) — শুধু pointers update করতে হয়।",
+      "tags": ["linked-list", "doubly", "complexity"]
+    },
+    {
+      "question": "Stack-এ peek() অপারেশন কী?",
+      "answer": "peek() অপারেশন stack-এর শীর্ষ element-কে বের না করেই দেখায়। Pop-এর মতো element সরায় না। Time: O(1)। এটি stack-এর সবচেয়ে নিরাপদ operation।",
+      "tags": ["stack", "peek"]
+    },
+    {
+      "question": "Queue-এ rear ও front pointer কী?",
+      "answer": "Front pointer queue-র প্রথম element-কে নির্দেশ করে (যেটি dequeue হবে)। Rear pointer queue-র শেষ element-কে নির্দেশ করে (নতুন element এখানে enqueue হবে)। Circular Queue-তে এগুলো wrap-around করতে পারে।",
+      "tags": ["queue", "pointers"]
+    },
+    {
+      "question": "Tree-র Height ও Depth-এর পার্থক্য কী?",
+      "answer": "Height: কোনো node থেকে সবচেয়ে নিচের leaf পর্যন্ত সবচেয়ে লম্বা path। Root-এর height = tree-র height। Depth: root থেকে কোনো node পর্যন্ত path-র লম্বাই। Root-এর depth = 0।",
+      "tags": ["tree", "height", "depth"]
+    },
+    {
+      "question": "Balanced Binary Tree কী?",
+      "answer": "Balanced Binary Tree-তে প্রতিটি node-এর বাম ও ডান subtree-র height পার্থক্য ১-এর বেশি হতে পারে না। AVL Tree, Red-Black Tree — এগুলো balanced BST। O(log n) search time নিশ্চিত করে।",
+      "tags": ["tree", "balanced"]
+    },
+    {
+      "question": "Expression Tree কী?",
+      "answer": "Expression Tree হলো binary tree যেখানে leaf nodes operand এবং internal nodes operator। Infix, Prefix, Postfix expression tree-তে প্রকাশ করা যায়। Expression evaluation-এ ব্যবহৃত হয়।",
+      "tags": ["tree", "expression"]
+    },
+    {
+      "question": "Threaded Binary Tree কী?",
+      "answer": "Threaded Binary Tree-তে null pointers ব্যবহার করে predecessor/successor-কে point করা হয়। এতে inorder traversal stack ছাড়াই সম্ভব হয়। মেমরি efficient।",
+      "tags": ["tree", "threaded"]
+    },
+    {
+      "question": "Segment Tree কী?",
+      "answer": "Segment Tree হলো binary tree যা range query (যেমন sum, min, max) ও point update O(log n) সময়ে করতে পারে। Array-এর ranges-এর তথ্য সংরক্ষণ করে। Competitive Programming-এ ব্যবহৃত হয়।",
+      "tags": ["segment-tree", "range-query"]
+    },
+    {
+      "question": "Fenwick Tree (Binary Indexed Tree) কী?",
+      "answer": "Fenwick Tree হলো binary indexed tree যা prefix sum query ও update O(log n) সময়ে করে। Segment Tree-র তুলনায় কম মেমরি ব্যবহার করে এবং implement করা সহজ। BIT নামেও পরিচিত।",
+      "tags": ["fenwick-tree", "binary-indexed-tree"]
+    },
+    {
+      "question": "Disjoint Set Union (DSU) কী?",
+      "answer": "DSU (Union-Find) হলো disjoint sets গোষ্ঠীকে efficiently manage করার data structure। Find ও Union — দুটি মূল অপারেশন। Path compression ও union by rank optimize করলে amortized O(α(n)) সময় লাগে। Kruskal's MST-তে ব্যবহৃত হয়।",
+      "tags": ["dsu", "union-find"]
+    },
+    {
+      "question": "Skip List কী?",
+      "answer": "Skip List হলো probabilistic data structure যা sorted linked list-কে O(log n) search time দেয়। Multiple layers of linked list ব্যবহার করে। Redis-এ sorted set implement করতে ব্যবহৃত হয়।",
+      "tags": ["skip-list", "probabilistic"]
+    },
+    {
+      "question": "Bloom Filter কী?",
+      "answer": "Bloom Filter হলো probabilistic data structure যা element set-এ আছে কি না তা check করে। False positive সম্ভব কিন্তু false negative নেই। Space efficient। Database caching, network routers-এ ব্যবহৃত হয়।",
+      "tags": ["bloom-filter", "probabilistic"]
+    },
+    {
+      "question": "Array-তে Dynamic Array কী?",
+      "answer": "Dynamic Array (যেমন C++ vector, Python list) হলো এমন array যার size চাহিদা অনুযায়ী বাড়ে। যখন array full হয়, একটি বড় array-তে copy করা হয়। Amortized O(1) push।",
+      "tags": ["array", "dynamic-array"]
+    },
+    {
+      "question": "Sparse Array কী?",
+      "answer": "Sparse Array হলো এমন array যেখানে বেশিরভাগ element zero/empty। একে CSR (Compressed Sparse Row) format-এ সংরক্ষণ করা হয় যাতে মেমরি বাঁচায়। Matrix-এও sparse matrix ব্যবহৃত হয়।",
+      "tags": ["array", "sparse"]
+    },
+    {
+      "question": "Linked List-এ Sentinel Node কী?",
+      "answer": "Sentinel Node (dummy node) হলো head বা tail-এ বসানো একটি fake node যা boundary conditions handle করে। এতে first/last node-এ special case handling লাগে না। Implementation simpler হয়।",
+      "tags": ["linked-list", "sentinel"]
+    },
+    {
+      "question": "Stack-এ infix to postfix conversion কীভাবে হয়?",
+      "answer": "Stack ব্যবহার করে: বাম থেকে ডানে scan করো। Operand পেলে output-এ লেখো। Operator পেলে stack-এর শীর্ষের operator-র priority তুলনা করো। '(' push করো, ')' পেলে '(' পর্যন্ত pop করো।",
+      "tags": ["stack", "expression", "conversion"]
+    },
+    {
+      "question": "Hash Function-এর বৈশিষ্ট্য কী কী?",
+      "answer": "ভালো Hash Function-এর বৈশিষ্ট্য: (1) Deterministic — একই key-র জন্য সবসময় একই hash। (2) Uniform distribution। (3) Fast computation। (4) Avalanche effect — ছোট পার্থক্যে hash বদলে যায়।",
+      "tags": ["hashing", "hash-function"]
+    },
+    {
+      "question": "Chaining ও Open Addressing-এর পার্থক্য কী?",
+      "answer": "Chaining: প্রতিটি bucket-এ linked list, collision হলে list-এ যোগ করো। Load factor > 1 সম্ভব। Open Addressing: সব element একই array-তে, collision হলে probing করো। Load factor ≤ 1 আবশ্যক। Chaining সহজ, Open Addressing cache-friendly।",
+      "tags": ["hashing", "chaining", "open-addressing"]
+    },
+    {
+      "question": "Linear Probing কী?",
+      "answer": "Linear Probing হলো Open Addressing-এর একটি পদ্ধতি। Collision হলে পরবর্তী slot-এ খোঁজা হয় (h+1, h+2, ...)। সমস্যা: Primary Clustering। Quadratic Probing বা Double Hashing-এ এই সমস্যা কমে।",
+      "tags": ["hashing", "linear-probing"]
+    },
+    {
+      "question": "Rehashing কী?",
+      "answer": "Rehashing হলো hash table-র size বাড়িয়ে সব element নতুন table-তে স্থানান্তর করার প্রক্রিয়া। সাধারণত load factor 0.75 অতিক্রম করলে rehash করা হয়। Time: O(n)।",
+      "tags": ["hashing", "rehashing"]
+    },
+    {
+      "question": "Graph-এ Cycle Detection কীভাবে করে?",
+      "answer": "Undirected Graph-এ: DFS ব্যবহার করে parent node track করে cycle detect করা হয়। Directed Graph-এ: DFS recursion stack track করে অথবা Kahn's algorithm (indegree) ব্যবহার করে।",
+      "tags": ["graph", "cycle-detection"]
+    },
+    {
+      "question": "Articulation Point কী?",
+      "answer": "Articulation Point (Cut Vertex) হলো এমন vertex যেটি remove করলে graph disconnected হয়ে যায়। DFS-এ discovery time ও low value ব্যবহার করে detect করা হয়। Time: O(V+E)।",
+      "tags": ["graph", "articulation-point"]
+    },
+    {
+      "question": "Strongly Connected Component (SCC) কী?",
+      "answer": "SCC হলো directed graph-এর এমন একটি maximal subgraph যেখানে প্রতিটি vertex থেকে অন্য সব vertex-তে path আছে। Kosaraju's, Tarjan's, Gabow's algorithm SCC বের করে।",
+      "tags": ["graph", "scc"]
+    },
+    {
+      "question": "Shortest Path Algorithm-গুলো কী কী?",
+      "answer": "প্রধান: (1) Dijkstra — single-source, non-negative weight, O((V+E) log V)। (2) Bellman-Ford — single-source, negative weight, O(VE)। (3) Floyd-Warshall — all-pairs, O(V³)। (4) A* — heuristic-based shortest path।",
+      "tags": ["graph", "shortest-path"]
+    },
+    {
+      "question": "Knapsack Problem কী?",
+      "answer": "0/1 Knapsack: নির্দিষ্ট capacity এর bag-এ কিছু item রাখতে হয়, প্রতিটি item-এর weight ও value আছে, maximize value। Greedy কাজ করে না, Dynamic Programming লাগে। Fractional Knapsack greedy-তে সমাধান হয়।",
+      "tags": ["dynamic-programming", "knapsack"]
+    },
+    {
+      "question": "Sorting-এর Stability কী?",
+      "answer": "Stable Sort হলো যে sorting algorithm equal elements-এর original relative order বজায় রাখে। Merge Sort, Bubble Sort, Insertion Sort stable। Quick Sort, Heap Sort unstable। GATE CSE-তে stability নিয়ে প্রশ্ন আসে।",
+      "tags": ["sorting", "stability"]
+    },
+    {
+      "question": "Insertion Sort কত সময় নেয়?",
+      "answer": "Best Case: O(n) — sorted array। Worst/Avg Case: O(n²) — reverse sorted বা random। Space: O(1)। Stable sort। ছোট dataset-এ efficient। GATE CSE-তে nearly sorted array-তে insertion sort efficient বলে উল্লেখ করা হয়।",
+      "tags": ["sorting", "insertion-sort", "complexity"]
+    },
+    {
+      "question": "Selection Sort-এর Time Complexity কত?",
+      "answer": "সবক্ষেত্রে O(n²) — best, worst, avg। কারণ প্রতিটি pass-এ minimum খুঁজে বের করতে হয়। Space: O(1)। Unstable sort। সবচেয়ে বেশি swap করে (O(n))।",
+      "tags": ["sorting", "selection-sort", "complexity"]
+    },
+    {
+      "question": "Counting Sort কী?",
+      "answer": "Counting Sort হলো non-comparison sort যা integer data-র জন্য O(n+k) সময়ে কাজ করে, যেখানে k = max value। Stable sort। যদি range খুব বড় না হয়, Radix Sort-এর সাথে ব্যবহৃত হয়।",
+      "tags": ["sorting", "counting-sort"]
+    },
+    {
+      "question": "Radix Sort কীভাবে কাজ করে?",
+      "answer": "Radix Sort digit by digit sort করে। LSB to MSB (Least Significant Digit first) বা MSB to LSB। প্রতিটি digit-এর জন্য stable sort (যেমন Counting Sort) ব্যবহৃত হয়। Time: O(d × (n+b)) — d = digits, b = base।",
+      "tags": ["sorting", "radix-sort"]
+    },
+    {
+      "question": "Quick Sort কেন popular?",
+      "answer": "Quick Sort popular কারণ: (1) In-place sort — O(log n) extra space। (2) Avg O(n log n)। (3) Cache-friendly — sequential memory access। (4) Small constant factor। তবে worst case O(n²) — যদি pivot ভালো নির্বাচিত না হয়।",
+      "tags": ["sorting", "quick-sort"]
+    },
+    {
+      "question": "Tournament Tree কী?",
+      "answer": "Tournament Tree হলো binary tree যেখানে parent node তার দুই সন্তানের মধ্যে বিজয়ীকে ধারণ করে। External selection algorithm-এ ব্যবহৃত হয়। Min-Tree-তে সর্বনিম্ন, Max-Tree-তে সর্বোচ্চ বের হয়।",
+      "tags": ["tree", "tournament"]
+    },
+    {
+      "question": "Sparse Matrix কীভাবে সংরক্ষণ করে?",
+      "answer": "Sparse Matrix-এ শুধু non-zero elements সংরক্ষণ করা হয়। প্রধান পদ্ধতি: (1) COO (Coordinate) — (row, col, value)। (2) CSR (Compressed Sparse Row)। (3) CSC (Compressed Sparse Column)। মেমরি efficient।",
+      "tags": ["matrix", "sparse"]
+    },
+    {
+      "question": "Pascal's Triangle কী?",
+      "answer": "Pascal's Triangle হলো binomial coefficients-এর triangle। প্রতিটি element উপরের দুই element-র সমষ্টি। Combinatorics, probability, algebra-তে ব্যবহৃত হয়। Dynamic Programming-এর উদাহরণ।",
+      "tags": ["array", "combinatorics"]
+    },
+    {
+      "question": "KMP Algorithm কী?",
+      "answer": "Knuth-Morris-Pratt (KMP) Algorithm হলো string pattern matching algorithm যা O(n+m) সময়ে কাজ করে। Prefix function ব্যবহার করে text-তে pattern খুঁজে বের করে। Naive string matching O(nm)।",
+      "tags": ["string", "kmp", "pattern-matching"]
+    },
+    {
+      "question": "Rabin-Karp Algorithm কী?",
+      "answer": "Rabin-Karp Algorithm হলো rolling hash ব্যবহার করে string pattern matching করার algorithm। Average case O(n+m), worst case O(nm)। Multiple pattern search-এ efficient।",
+      "tags": ["string", "rabin-karp"]
+    },
+    {
+      "question": "Z-Algorithm কী?",
+      "answer": "Z-Algorithm হলো string pattern matching algorithm যা Z-array তৈরি করে। Z[i] = substring S[i..n-1] এর সাথে prefix-এর দীর্ঘতম common substring-এর লম্বাই। Time: O(n)।",
+      "tags": ["string", "z-algorithm"]
+    },
+    {
+      "question": "Suffix Array কী?",
+      "answer": "Suffix Array হলো string-এর সব suffix-এর sorted array। String searching, longest common substring, pattern matching-এ ব্যবহৃত হয়। Space: O(n)। Suffix Tree-র lighter version।",
+      "tags": ["string", "suffix-array"]
+    },
+    {
+      "question": "Suffix Tree কী?",
+      "answer": "Suffix Tree হলো trie-এর মতো tree structure যেখানে একটি string-এর সব suffix সংরক্ষিত থাকে। Pattern matching O(m) — m = pattern length। তবে construction জটিল এবং বেশি মেমরি লাগে।",
+      "tags": ["string", "suffix-tree"]
+    },
+    {
+      "question": "Karp-Rabin, KMP, Boyer-Moore — কোনটি সেরা?",
+      "answer": "KMP: O(n+m) worst case, precompute prefix। Boyer-Moore: practical-তে সবচেয়ে দ্রুত, bad character heuristic। Rabin-Karp: multiple pattern-এ efficient, rolling hash। Single pattern-তে Boyer-Moore সাধারণত fastest।",
+      "tags": ["string", "comparison"]
+    },
+    {
+      "question": "Segment Tree-তে Lazy Propagation কী?",
+      "answer": "Lazy Propagation হলো Segment Tree-তে range update O(log n) সময়ে করার পদ্ধতি। একটি lazy flag রাখা হয় যা নির্দেশ করে যে update এখনো children-দের কাছে পৌঁছায়নি। Query সময়ে propagate করা হয়।",
+      "tags": ["segment-tree", "lazy-propagation"]
+    },
+    {
+      "question": "Fenwick Tree-তে LSB কী কাজ করে?",
+      "answer": "LSB (Least Significant Bit) ব্যবহার করে Fenwick Tree prefix sum query করে। tree[idx] = sum of elements from (idx - LSB(idx) + 1) to idx। Update: idx += LSB(idx)। Query: idx -= LSB(idx)।",
+      "tags": ["fenwick-tree", "lsb"]
+    },
+    {
+      "question": "Graph-এ Euler Path ও Hamilton Path-এর পার্থক্য কী?",
+      "answer": "Euler Path: সব edge ঠিক একবার traverse করে। Hamilton Path: সব vertex ঠিক একবার visit করে। Euler Path খুঁজে পাওয়া সহজ (degree check), Hamilton Path NP-complete।",
+      "tags": ["graph", "euler", "hamilton"]
+    },
+    {
+      "question": "NP-Complete Problem কী?",
+      "answer": "NP-Complete হলো সেসব problem যা NP-তে আছে এবং NP-hard। অর্থাৎ polynomial time-এ verify করা যায় কিন্তু polynomial time-এ solve করা যায় না (বর্তমান knowledge-তে)। Travelling Salesman, Graph Coloring — NP-Complete।",
+      "tags": ["complexity", "np-complete"]
+    },
+    {
+      "question": "Trie-তে Autocomplete কীভাবে কাজ করে?",
+      "answer": "Autocomplete-এ prefix trie-তে traverse করে এবং prefix-এর পরের সব possible strings collect করে। Trie-তে prefix search O(m) — m = prefix length। তারপর subtree-র সব leaf-এর string output করে।",
+      "tags": ["trie", "autocomplete"]
+    },
+    {
+      "question": "Min-Heap ও Max-Heap-এর পার্থক্য কী?",
+      "answer": "Min-Heap: মূল নোড সবচেয়ে ছোট। প্রতিটি parent ≤ children। Max-Heap: মূল নোড সবচেয়ে বড়। প্রতিটি parent ≥ children। Min-Heap priority queue-তে minimum element, Max-Heap-তে maximum element extract করতে ব্যবহৃত হয়।",
+      "tags": ["heap", "min-heap", "max-heap"]
+    },
+    {
+      "question": "Heap-তে decrease-key operation কী?",
+      "answer": "decrease-key হলো heap-তে একটি element-র key মান হ্রাস করার operation। Max-Heap-এ key হ্রাস করলে element উপরে উঠতে হয় (bubble up)। Time: O(log n)। Dijkstra's algorithm-এ ব্যবহৃত হয়।",
+      "tags": ["heap", "decrease-key"]
+    },
+    {
+      "question": "Meld Operation কী?",
+      "answer": "Meld operation হলো দুটি data structure-কে একটিতে মিলিয়ে ফেলা। Fibonacci Heap-এ meld O(1)। Binary Heap-এ O(n)। Leftist Heap, Binomial Heap-ও meld support করে। GATE CSE 2025 তে meld operation নিয়ে প্রশ্ন এসেছে।",
+      "tags": ["heap", "meld", "gate"]
+    },
+    {
+      "question": "Fibonacci Heap কী?",
+      "answer": "Fibonacci Heap হলো lazy binomial heap যা decrease-key O(1) amortized সময়ে করে। Dijkstra's algorithm-এ O(V log V + E) time achievable। তবে implement করা জটিল।",
+      "tags": ["heap", "fibonacci"]
+    },
+    {
+      "question": "Binary Heap কীভাবে array-তে সংরক্ষণ করে?",
+      "answer": "Root index 0 (বা 1)। i-তে parent = (i-1)/2, left child = 2i+1, right child = 2i+2। Complete Binary Tree হওয়ায় array representation efficient। No pointers needed।",
+      "tags": ["heap", "array-representation"]
+    },
+    {
+      "question": "Stack-এ infix to prefix conversion কীভাবে হয়?",
+      "answer": "Step 1: Expression-কে reverse করো। Step 2: ব্র্যাকেট উল্টাও। Step 3: Infix to postfix conversion করো (stack ব্যবহার করে)। Step 4: পুনরায় reverse করো। এটিই prefix expression।",
+      "tags": ["stack", "expression", "conversion"]
+    },
+    {
+      "question": "Queue-র Two Stack Implementation-এর Time Complexity কত?",
+      "answer": "enqueue: O(1) — stack1-তে push। dequeue: Amortized O(1) — stack2 খালি হলে stack1 থেকে stack2-তে transfer। প্রতিটি element মোট দুইবার move হয়। GATE CSE 2011 অনুযায়ী n operation-এ O(n) total।",
+      "tags": ["queue", "stack", "amortized", "gate"]
+    },
+    {
+      "question": "Graph-এ Shortest Path using BFS কীভাবে করে?",
+      "answer": "Unweighted graph-এ BFS shortest path দেয়। BFS level by level traverse করে, প্রথমবার কোনো vertex-তে পৌঁছালেই সেটিই সবচেয়ে ছোট path। Queue ব্যবহার করে parent pointer track করা হয়।",
+      "tags": ["graph", "bfs", "shortest-path"]
+    },
+    {
+      "question": "DFS-তে Back Edge কী?",
+      "answer": "Back Edge হলো এমন edge যা একটি vertex থেকে তার ancestor-কে নির্দেশ করে। Back edge থাকলে graph-এ cycle আছে। DFS-তে recursion stack ট্র্যাক করে back edge detect করা হয়।",
+      "tags": ["graph", "dfs", "back-edge"]
+    },
+    {
+      "question": "Graph-এ Topological Sort-এর পূর্বশর্ত কী?",
+      "answer": "Topological Sort শুধুমাত্র DAG (Directed Acyclic Graph)-তে সম্ভব। Directed graph হতে হবে এবং cycle থাকতে পারে না। Kahn's algorithm (BFS-based) বা DFS-based algorithm ব্যবহার করা যায়।",
+      "tags": ["graph", "topological-sort", "dag"]
+    },
+    {
+      "question": "Prim's ও Kruskal's Algorithm-এর পার্থক্য কী?",
+      "answer": "Prim's: vertex-based, O((V+E) log V) সহ priority queue, dense graph-এ efficient। Kruskal's: edge-based, O(E log E) sort, sparse graph-এ efficient। দুটোই MST তৈরি করে কিন্তু approach ভিন্ন।",
+      "tags": ["graph", "mst", "prim", "kruskal"]
+    },
+    {
+      "question": "Hashing-ে Load Factor কী?",
+      "answer": "Load Factor (α) = n/m — n = elements, m = bucket সংখ্যা। α < 1 হলে chaining efficient। Open Addressing-এ α < 0.7 রাখা উচিত। α > 1 হলে performance খারাপ হয় এবং rehashing প্রয়োজন।",
+      "tags": ["hashing", "load-factor"]
+    },
+    {
+      "question": "Perfect Hashing কী?",
+      "answer": "Perfect Hashing হলো এমন hash function যেখানে কোনো collision হয় না। প্রতিটি key-র unique index থাকে। Two-level hashing দিয়ে perfect hashing achieve করা যায়। O(1) worst case search।",
+      "tags": ["hashing", "perfect-hashing"]
+    },
+    {
+      "question": "B-Tree-তে একটি node-তে সর্বোচ্চ কতগুলি key থাকতে পারে?",
+      "answer": "m-order B-Tree-তে প্রতিটি node-তে সর্বোচ্চ (m-1)টি key ও mটি child pointer থাকতে পারে। সর্বনিম্ম ⌈m/2⌉ - 1টি key থাকতে হয় (root ব্যতীত)। GATE CSE-তে B-Tree order calculation নিয়ে প্রশ্ন আসে।",
+      "tags": ["b-tree", "order"]
+    },
+    {
+      "question": "Red-Black Tree-তে Insert operation-এর Time Complexity কত?",
+      "answer": "Red-Black Tree-তে insert O(log n)। Insert এর পর rebalancing করতে হয় — recoloring এবং rotation। Maximum ২টি rotation লাগতে পারে। Java TreeMap, C++ map — এগুলো Red-Black Tree ব্যবহার করে।",
+      "tags": ["red-black-tree", "insert", "complexity"]
+    },
+    {
+      "question": "Splay Tree কী?",
+      "answer": "Splay Tree হলো self-adjusting BST যেখানে access করার পর element root-এ সরিয়ে আনা হয় (splay operation)। Amortized O(log n)। Recently accessed element দ্রুত পাওয়া যায়।",
+      "tags": ["splay-tree", "self-adjusting"]
+    },
+    {
+      "question": "Tournament Method-এ maximum element বের করতে কত comparison লাগে?",
+      "answer": "n element-এর maximum বের করতে সর্বোচ্চ (n-1)টি comparison লাগে। Tournament method-এ tree-র leaf nodes থেকে root পর্যন্ত comparison হয়। GATE CSE-তে এই counting নিয়ে প্রশ্ন আসে।",
+      "tags": ["comparison", "tournament"]
+    },
+    {
+      "question": "Graph-এ Dijkstra's Algorithm negative edge-তে কাজ করে কেন না?",
+      "answer": "Dijkstra greedy approach ব্যবহার করে — একবার shortest path confirm করে আর update করে না। Negative edge-এ confirm করা path আবার ছোট হতে পারে। তাই negative cycle না থাকলেও negative edge-তে Bellman-Ford ব্যবহার করতে হয়।",
+      "tags": ["graph", "dijkstra", "negative-edge"]
+    },
+    {
+      "question": "AVL Tree-তে n নোডের height কত?",
+      "answer": "AVL Tree-তে n নোডের height O(log n)। নির্দিষ্টভাবে h < 1.44 log₂(n+2) - 0.328। AVL Tree strict balance রাখে তাই height minimum-এর কাছাকাছি থাকে।",
+      "tags": ["avl-tree", "height"]
+    },
+    {
+      "question": "Graph-এ BFS Queue-তে maximum element কত থাকতে পারে?",
+      "answer": "BFS-তে Queue-তে সর্বোচ্চ Vটি vertex থাকতে পারে। তবে প্রতিটি level-এ max width = V/2 (complete binary tree-তে)। সাধারণত queue size O(V)।",
+      "tags": ["graph", "bfs", "queue-size"]
+    },
+    {
+      "question": "Hash Table-তে Perfect Hash Function তৈরি সম্ভব কী?",
+      "answer": "সম্ভব, তবে key distribution-এর উপর নির্ভর করে। Universal Hashing family ব্যবহার করলে average case O(1) collision probability কমানো যায়। Practical-তে perfect hash function তৈরি করা কঠিন।",
+      "tags": ["hashing", "perfect-hash"]
+    },
+    {
+      "question": "Sorting Algorithm-এর Space Complexity তুলনা করো।",
+      "answer": "In-place (O(1) extra): Bubble, Selection, Insertion, Quick Sort (with tail recursion)। O(n) extra: Merge Sort, Counting Sort। O(log n) extra: Quick Sort (recursive stack)। Radix Sort: O(n+k)। Stable: Merge, Bubble, Insertion, Counting, Radix।",
+      "tags": ["sorting", "space-complexity"]
+    },
+    {
+      "question": "Binary Tree-তে Morris Traversal কী?",
+      "answer": "Morris Traversal O(1) space-তে inorder traversal করে। Threaded binary tree concept ব্যবহার করে। Temporary links তৈরি করে traversal। Inorder predecessor-কে current node-র right child-এ point করে।",
+      "tags": ["tree", "morris-traversal"]
+    },
+    {
+      "question": "Graph-এ DFS-তে Discovery Time ও Finish Time কী?",
+      "answer": "Discovery Time: vertex প্রথমবার visit করার সময়। Finish Time: vertex-র সব children traverse করার পর। এই সময়গুলো bracket notation-এ প্রকাশ করা হয়। Topological sort, SCC detection-এ ব্যবহৃত হয়।",
+      "tags": ["graph", "dfs", "time"]
+    },
+    {
+      "question": "Dynamic Array-তে Time Amortization কীভাবে হয়?",
+      "answer": "Dynamic Array full হলে 2x size-এ new array তৈরি করে copy করে। একটি insert O(n) লাগে কিন্তু পরবর্তী n/2 inserts O(1) প্রতিটি। তাই amortized O(1) push। GATE CSE-তে amortized analysis নিয়ে প্রশ্ন আসে।",
+      "tags": ["array", "dynamic-array", "amortized"]
+    },
+    {
+      "question": "Graph-এ Edge Classification DFS-তে কী কী?",
+      "answer": "Directed Graph-এ: (1) Tree Edge — DFS tree-তে যে edge আছে। (2) Back Edge — ancestor-কে ফিরে যায়। (3) Forward Edge — descendant-কে যায় (non-tree)। (4) Cross Edge — ভিন্ন subtree-তে যায়। Undirected Graph-তে শুধু Tree ও Back edge।",
+      "tags": ["graph", "dfs", "edge-classification"]
+    },
+    {
+      "question": "Segment Tree-তে Range Query ও Point Update কী?",
+      "answer": "Range Query: O(log n) — নির্দিষ্ট range-র (sum/min/max) মান বের করা। Point Update: O(log n) — একটি index-র মান পরিবর্তন করা। Segment Tree array-তে tree structure maintain করে।",
+      "tags": ["segment-tree", "range-query"]
+    },
+    {
+      "question": "Heap-তে Build Heap operation O(n) কেন?",
+      "answer": "Build Heap-এ সব node-কে heapify করতে হয়। তবে leaf nodes (n/2+1 থেকে n) ইতিমধ্যে heap property মেনে চলে। শুধু non-leaf nodes heapify করতে হয় এবং নিচ থেকে উপরে গেলে total O(n)।",
+      "tags": ["heap", "build-heap"]
+    },
+    {
+      "question": "Graph-এ Negative Cycle Detection কীভাবে করে?",
+      "answer": "Bellman-Ford Algorithm V-1 iteration করে। V-তম iteration-ও update হলে negative cycle আছে। Floyd-Warshall-ও negative cycle detect করতে পারে — diagonal element negative হলে cycle আছে।",
+      "tags": ["graph", "negative-cycle"]
+    },
+    {
+      "question": "Stack-এ balanced bracket problem GATE CSE 2004-এ এসেছে কী?",
+      "answer": "হ্যাঁ, GATE CSE 2004-এ জিজ্ঞাসা করা হয়েছে — balanced parentheses check করার সেরা data structure কোনটি। উত্তর: Stack। কারণ Stack LIFO নীতি অনুসরণ করে এবং matching bracket pair-কে efficiently pop করে।",
+      "tags": ["stack", "gate", "brackets"]
+    },
+    {
+      "question": "Priority Queue-তে Heap-এর ভূমিকা কী?",
+      "answer": "Heap priority queue-র সেরা বাস্তবায়ন। Min-Heap-তে minimum priority প্রথমে বের হয়। insert O(log n), extract-min O(log n), peek O(1)। Binary Heap, Fibonacci Heap — দুটোই ব্যবহৃত হয়।",
+      "tags": ["priority-queue", "heap"]
+    },
+    {
+      "question": "Graph-এ Bipartite Graph Check কীভাবে করে?",
+      "answer": "BFS বা DFS ব্যবহার করে 2-coloring করা হয়। শুরুতে একটি vertex-কে Red color করো। প্রতিটি neighbor-কে বিপরীত color দাও। যদি একই color-এর vertex জোড়া লাগে, তাহলে bipartite নয়।",
+      "tags": ["graph", "bipartite"]
+    },
+    {
+      "question": "Hashing-ে Universal Hashing কী?",
+      "answer": "Universal Hashing হলো hash function-এর একটি family যেখানে কোনো দুটি distinct key-র জন্য collision probability ≤ 1/m। প্রতিটি run-এ random function নির্বাচিত হয়। Expected O(1) search time।",
+      "tags": ["hashing", "universal"]
+    },
+    {
+      "question": "Linked List-ে Floyd's Cycle Detection Algorithm কী?",
+      "answer": "Floyd's Tortoise and Hare algorithm — দুটি pointer ব্যবহার করে cycle detect করে। একটি ধীরে (tortoise), অন্যটি দ্রুত (hare) চলে। যদি cycle থাকে, তাহলে দুটি pointer একই জায়গায় মিলিত হবে। Time: O(n), Space: O(1)।",
+      "tags": ["linked-list", "cycle-detection"]
+    },
+    {
+      "question": "Stack-এ Min Stack কী?",
+      "answer": "Min Stack হলো এমন stack যেখানে O(1) সময়ে minimum element বের করা যায়। প্রতিটি element-এর সাথে current minimum-ও সংরক্ষণ করা হয়। GATE CSE 2025-তে augmented stack নিয়ে প্রশ্ন এসেছে।",
+      "tags": ["stack", "min-stack", "gate"]
+    },
+    {
+      "question": "Graph-এ Adjacency Matrix-তে self-loop কীভাবে represent করে?",
+      "answer": "Adjacency Matrix-তে diagonal element (matrix[i][i]) self-loop represent করে। যদি i vertex-তে self-loop থাকে, matrix[i][i] = 1 (weighted হলে weight)। Directed graph-এ এটি asymmetric matrix।",
+      "tags": ["graph", "adjacency-matrix"]
+    },
+    {
+      "question": "Tree-র diameter কী?",
+      "answer": "Tree-র diameter হলো দুটি leaf node-র মধ্যে সবচেয়ে লম্বা path। O(n) সময়ে বের করা যায় — দুইবার BFS/DFS করে অথবা dynamic programming ব্যবহার করে। Network routing-এ ব্যবহৃত হয়।",
+      "tags": ["tree", "diameter"]
+    },
+    {
+      "question": "Heap-তে k-th smallest element কীভাবে বের করে?",
+      "answer": "Max-Heap ব্যবহার করে k elements রাখো। বাকিগুলোর সাথে তুলনা করো, বড় হলে replace করো। Time: O(n log k)। Min-Heap-এ n সব element insert করে k times extract-min করো — O(n + k log n)।",
+      "tags": ["heap", "selection"]
+    },
+    {
+      "question": "Graph-এ Strongly Connected Component-এর ব্যবহার কী?",
+      "answer": "SCC condensation graph তৈরি করে যা DAG। Component-আকারে problem simplify হয়। Web crawl-এ page grouping, compiler optimization, dependency analysis-এ ব্যবহৃত হয়।",
+      "tags": ["graph", "scc", "application"]
+    },
+    {
+      "question": "Hashing-ে Robin Hood Hashing কী?",
+      "answer": "Robin Hood Hashing হলো open addressing-এর একটি পদ্ধতি যেখানে দরিদ্র element (বেশি probe করা) ধনী element (কম probe করা) থেকে steal করে। এতে variance probe time-এর কমে। Search time-এর worst case improve হয়।",
+      "tags": ["hashing", "robin-hood"]
+    },
+    {
+      "question": "Binary Tree-তে Zigzag Level Order Traversal কী?",
+      "answer": "Zigzag Traversal হলো level order traversal যেখানে প্রতিটি level-এর direction alternating — এক level বাম থেকে ডানে, পরবর্তী ডান থেকে বামে। Deque ব্যবহার করে implement করা হয়।",
+      "tags": ["tree", "traversal", "zigzag"]
+    },
+    {
+      "question": "Graph-এ Path Cover কী?",
+      "answer": "Path Cover হলো সব vertex-কে cover করার ন্যূনতম সংখ্যক vertex-disjoint path-এর set। DAG-তে Dilworth's theorem ব্যবহার করে minimum path cover বের করা যায় — maximum matching দিয়ে।",
+      "tags": ["graph", "path-cover"]
+    },
+    {
+      "question": "Trie-তে Space Optimization কীভাবে করে?",
+      "answer": "Radix Tree (Patricia Trie) ব্যবহার করে single-child nodes merge করা হয়। Compressed Trie-তে edges-এ string substring থাকে। এতে space significantly কমে।",
+      "tags": ["trie", "space-optimization"]
+    },
+    {
+      "question": "Graph-এ Minimum Cost Spanning Tree ও Maximum Cost Spanning Tree-এর পার্থক্য কী?",
+      "answer": "Minimum Cost MST: Kruskal's/Prim's দিয়ে সবচেয়ে কম weight-এর spanning tree। Maximum Cost MST: edge weight negation করে Kruskal's/Prim's চালালে maximum spanning tree পাওয়া যায়।",
+      "tags": ["graph", "mst"]
+    },
+    {
+      "question": "Stack-এ Postfix Evaluation-এর algorithm কী?",
+      "answer": "বাম থেকে ডানে scan করো। Operand পেলে push করো। Operator পেলে দুটি pop করে operate করো এবং result push করো। শেষে stack-এ একটিই element থাকে — সেটিই উত্তর। GATE CSE 2015: 10 5+ 60 6/ * 8- = 142।",
+      "tags": ["stack", "postfix", "evaluation"]
+    },
+    {
+      "question": "Sorting-এ In-place Algorithm কী?",
+      "answer": "In-place Algorithm হলো যে algorithm অতিরিক্ত O(1) বাহ্যিক মেমরি ব্যবহার করে। Bubble, Selection, Insertion, Quick Sort in-place। Merge Sort O(n) extra space লাগে (in-place merge possible but complex)।",
+      "tags": ["sorting", "in-place"]
+    },
+    {
+      "question": "Graph-এ Euler Circuit কোন শর্তে থাকে?",
+      "answer": "Undirected Graph-এ: সব vertex-র degree even হতে হবে এবং graph connected হতে হবে। Directed Graph-এ: সব vertex-র in-degree = out-degree এবং strongly connected। Fleury's বা Hierholzer's Algorithm দিয়ে বের করা যায়।",
+      "tags": ["graph", "euler-circuit"]
+    },
+    {
+      "question": "Segment Tree-তে Persistent Segment Tree কী?",
+      "answer": "Persistent Segment Tree হলো এমন segment tree যেখানে পূর্ববর্তী version-ও access করা যায়। প্রতিটি update-তে নতুন root তৈরি হয়। Path Copying ব্যবহার করা হয়। Space: O(n log n)।",
+      "tags": ["segment-tree", "persistent"]
+    },
+    {
+      "question": "Graph-এ PageRank Algorithm কী?",
+      "answer": "PageRank Google-এর web page ranking algorithm। Graph-এর প্রতিটি vertex (page)-কে importance score দেয়। More incoming links = higher rank। Iterative algorithm — initially all pages-কে equal rank দেওয়া হয়।",
+      "tags": ["graph", "pagerank"]
+    },
+    {
+      "question": "Hashing-ে Consistent Hashing কী?",
+      "answer": "Consistent Hashing হলো distributed systems-এ hash ring ব্যবহার করে data distribution করার পদ্ধতি। এতে server add/remove করলে minimal data migration হয়। CDNs, databases-এ ব্যবহৃত হয়।",
+      "tags": ["hashing", "consistent"]
+    },
+    {
+      "question": "Graph-এ Graph Coloring Problem কী?",
+      "answer": "Graph Coloring হলো প্রতিটি vertex-কে একটি color দেওয়া যেন adjacent vertices একই color না হয়। Minimum colors = Chromatic Number। Map coloring, scheduling, register allocation-এ ব্যবহৃত হয়। NP-hard problem।",
+      "tags": ["graph", "coloring"]
+    },
+    {
+      "question": "Suffix Array Construction-এর Time Complexity কত?",
+      "answer": "Suffix Array O(n log n) সময়ে তৈরি করা যায় (SA-IS algorithm O(n))। Naive approach O(n² log n) — প্রতিটি suffix compare করে sorted। LCP array সহ suffix array string processing-এ powerful।",
+      "tags": ["suffix-array", "complexity"]
+    },
+    {
+      "question": "Heap-তে Merge Two Heaps কীভাবে করে?",
+      "answer": "Binary Heap-এ merge O(n) — সব element একত্রিত করে build heap। Binomial Heap-এ merge O(log n)। Fibonacci Heap-এ merge O(1)। GATE CSE 2025 অনুযায়ী worst case meld complexity জানা প্রয়োজন।",
+      "tags": ["heap", "merge", "gate"]
+    }
+  ]
+}

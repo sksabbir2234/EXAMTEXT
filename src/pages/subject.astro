@@ -24,16 +24,21 @@ try {
   exams.sort((a, b) => getChapterNum(a.title || '') - getChapterNum(b.title || ''));
   exams = exams.map((e, i) => ({ ...e, chapterNum: getChapterNum(e.title || '') || i + 1 }));
 
-  // Fetch published blogs for this subject
-  const blogsSnap = await db.collection('blogs')
-    .where('subjectId', '==', subjectId)
-    .where('published', '==', true)
-    .get();
+  // Fetch published blogs for this subject (no composite index needed)
   const blogsByExamId = new Map<string, { id: string; title: string }>();
-  blogsSnap.docs.forEach(doc => {
-    const data = doc.data();
-    if (data.examId) blogsByExamId.set(data.examId, { id: doc.id, title: data.title });
-  });
+  try {
+    const blogsSnap = await db.collection('blogs')
+      .where('published', '==', true)
+      .get();
+    blogsSnap.docs.forEach(doc => {
+      const data = doc.data();
+      if (data.subjectId === subjectId && data.examId) {
+        blogsByExamId.set(data.examId, { id: doc.id, title: data.title });
+      }
+    });
+  } catch {
+    // Blog collection may not exist yet — page still works
+  }
 } catch {}
 ---
 <Layout title={`${subjectName} - ExamText`} navBack={true} navTitle={subjectName}>
