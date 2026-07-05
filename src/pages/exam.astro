@@ -40,7 +40,9 @@ const examId = Astro.url.searchParams.get('id') || '';
     </button>
   </div>
 
-  <script is:inline define:vars={{ examId }}>
+  <script is:inline>
+    const urlParams = new URLSearchParams(window.location.search);
+    const examId = urlParams.get('id') || '';
     let questions = [], answers = {}, timerInterval, secondsElapsed = 0;
     const labels = ['A','B','C','D'];
 
