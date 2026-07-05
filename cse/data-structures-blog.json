@@ -823,6 +823,116 @@
       "question": "Heap-তে Merge Two Heaps কীভাবে করে?",
       "answer": "Binary Heap-এ merge O(n) — সব element একত্রিত করে build heap। Binomial Heap-এ merge O(log n)। Fibonacci Heap-এ merge O(1)। GATE CSE 2025 অনুযায়ী worst case meld complexity জানা প্রয়োজন।",
       "tags": ["heap", "merge", "gate"]
+    },
+    {
+      "question": "Array-কে বাম দিকে k পজিশনে rotate করার algorithm কী?",
+      "answer": "Reversal Algorithm: তিনটি reverse operation ব্যবহার করে O(n) সময়ে এবং O(1) স্পেসে rotate করা হয়। ধাপ ১: arr[0..k-1] reverse করো। ধাপ ২: arr[k..n-1] reverse করো। ধাপ ৩: পুরো array reverse করো। উদাহরণ: [1,2,3,4,5,6,7] k=3 হলে [4,5,6,7,1,2,3]।",
+      "tags": ["array", "rotation", "reversal-algorithm", "gate"]
+    },
+    {
+      "question": "Array-কে ডান দিকে k পজিশনে rotate করার algorithm কী?",
+      "answer": "Reversal Algorithm: ধাপ ১: arr[0..n-k-1] reverse করো। ধাপ ২: arr[n-k..n-1] reverse করো। ধাপ ৩: পুরো array reverse করো। Time: O(n), Space: O(1)। বাম rotate k পজিশন = ডান rotate (n-k) পজিশন। GATE CSE-তে rotate algorithm-এর space complexity জিজ্ঞাসা করা হয়।",
+      "tags": ["array", "rotation", "reversal-algorithm"]
+    },
+    {
+      "question": "Array-তে Majority Element কী এবং Boyer-Moore Voting Algorithm কীভাবে কাজ করে?",
+      "answer": "Majority Element হলো যে element n/2 বেশি বার আছে। Boyer-Moore Voting Algorithm: একটি candidate ও counter নাও। প্রতিটি element-এ counter 0 হলে candidate বদলাও, একই element হলে counter বাড়াও, না হলে কমাও। Time: O(n), Space: O(1)। এটি শুধু majority element খুঁজে পায়, verify করতে আবার scan করতে হয়।",
+      "tags": ["array", "majority-element", "boyer-moore", "interview"]
+    },
+    {
+      "question": "Sliding Window Maximum Problem কী এবং এটি কীভাবে সমাধান করে?",
+      "answer": "নির্দিষ্ট আকার k-র sliding window-এর সর্বোচ্চ element বের করতে Deque (Monotonic Queue) ব্যবহার করা হয়। Deque-তে সবসময় decreasing order-এ element রাখো। Window move করার সময় deque-র front থেকে সর্বোচ্চ element বের করো। Time: O(n), Space: O(k)। ISRO ও TCS interview-তে এই problem বারবার জিজ্ঞাসা হয়।",
+      "tags": ["array", "sliding-window", "deque", "monotonic-queue", "interview"]
+    },
+    {
+      "question": "Linked List-এ Floyd's Cycle Detection Algorithm দিয়ে cycle-এর শুরুবিন্দু (start point) কীভাবে খুঁজে পাওয়া যায়?",
+      "answer": "Floyd's algorithm-এ slow ও fast pointer দিয়ে cycle detect করার পর, একটি pointer head-এ বসাও এবং অন্যটি slow pointer-কে এক এক করে এগিয়ে দাও। যেই node-তে দুটি pointer মিলিত হবে সেটিই cycle-এর শুরুবিন্দু। Time: O(n), Space: O(1)। GATE CSE-তে এই problem বারবার আসে।",
+      "tags": ["linked-list", "floyd", "cycle-detection", "start-point", "gate"]
+    },
+    {
+      "question": "Linked List-কে in-place ভাবে reverse করার algorithm কী?",
+      "answer": "তিনটি pointer ব্যবহার করে — prev (NULL), current (head), next (head->next)। প্রতিটি step-ে current->next = prev করো, prev = current করো, current = next করো। শেষে prev নতুন head। Time: O(n), Space: O(1)। Iterative approach এবং recursive approach — দুটোই আছে। TCS interview-তে সবচেয়ে বেশি জিজ্ঞাসিত।",
+      "tags": ["linked-list", "reverse", "in-place", "interview"]
+    },
+    {
+      "question": "Binary Tree-তে Level Order Traversal কীভাবে implement করে?",
+      "answer": "Queue ব্যবহার করে BFS approach-তে করা হয়। Root-কে queue-তে enqueue করো। Queue খালি না হওয়া পর্যন্ত dequeue করো, dequeue করা node-র children-দের enqueue করো। প্রতিটি level-এর জন্য separate list maintain করা যায়। Time: O(n), Space: O(n)।",
+      "tags": ["tree", "level-order", "bfs", "queue"]
+    },
+    {
+      "question": "Binary Tree-তে Lowest Common Ancestor (LCA) কী এবং কীভাবে বের করে?",
+      "answer": "LCA হলো দুটি node p ও q-র সবচেয়ে গভীর ancestor যেখানে উভয়ই subtree-তে আছে। Recursive approach: root NULL বা p/q হলে root return করো। বাম subtree থেকে left, ডান subtree থেকে right পাও। left ও right উভয়ই non-NULL হলে root LCA। শুধু left থাকলে left, শুধু right থাকলে right return করো। Time: O(n)।",
+      "tags": ["tree", "lca", "lowest-common-ancestor", "recursion"]
+    },
+    {
+      "question": "Binary Search Tree (BST) validate করার algorithm কী?",
+      "answer": "BST property: প্রতিটি node-র value, তার left subtree-র সব node-র চেয়ে বড় এবং right subtree-র সব node-র চেয়ে ছোট। Recursive approach: root-কে min=-∞, max=+∞ দিয়ে শুরু করো। বামে যাওয়ার সময় max = current, ডানে যাওয়ার সময় min = current আপডেট করো। Time: O(n), Space: O(h)। GATE CSE-তে BST validation নিয়ে প্রশ্ন আসে।",
+      "tags": ["bst", "validate", "recursion", "gate"]
+    },
+    {
+      "question": "BST-তে k-th smallest element কীভাবে বের করে?",
+      "answer": "Inorder traversal BST-তে sorted sequence দেয়। তাই inorder traversal করে k-th element বের করা যায়। Optimized approach: প্রতিটি node-তে left subtree-র size maintain করো। k ≤ leftSize হলে বামে যাও, k = leftSize+1 হলে current node return করো, নাহলে ডানে যাও (k = k-leftSize-1)। Time: O(h + k)।",
+      "tags": ["bst", "kth-smallest", "inorder", "interview"]
+    },
+    {
+      "question": "k-sorted arrays কীভাবে merge করে?",
+      "answer": "Min-Heap ব্যবহার করে O(n log k) সময়ে merge করা যায়, যেখানে n = মোট element সংখ্যা। প্রথম k arrays-এর প্রথম element গুলো min-Heap-এ রাখো। Heap-র minimum element extract করে output-এ যোগ করো। সেই array-র next element যদি থাকে, heap-এ যোগ করো। পুরো প্রক্রিয়া O(n log k)।",
+      "tags": ["heap", "merge-k-sorted", "priority-queue", "interview"]
+    },
+    {
+      "question": "Graph bipartite কিনা তা কীভাবে detect করে?",
+      "answer": "BFS বা DFS ব্যবহার করে 2-coloring করা হয়। প্রতিটি vertex-কে Red বা Blue color দাও — adjacent vertices সবসময় বিপরীত color-এ হতে হবে। BFS-তে queue ব্যবহার করে প্রতিটি neighbor-কে বিপরীত color দাও। যদি একই color-এর vertex edge-দ্বারা সংযুক্ত হয়, তাহলে graph bipartite নয়। Odd-length cycle থাকলে bipartite হয় না। Time: O(V+E)।",
+      "tags": ["graph", "bipartite", "2-coloring", "bfs", "interview"]
+    },
+    {
+      "question": "Unweighted graph-এ shortest path কীভাবে বের করে?",
+      "answer": "BFS সবচেয়ে efficient পদ্ধতি। Source vertex থেকে BFS চালাও। প্রতিটি vertex-তে প্রথমবার পৌঁছালেই সেটিই সবচেয়ে ছোট path। Parent pointer maintain করে actual path reconstruct করা যায়। Time: O(V+E), Space: O(V)। Dijkstra ব্যবহার করাও সম্ভব কিন্তু unnecessary overhead।",
+      "tags": ["graph", "shortest-path", "bfs", "unweighted", "interview"]
+    },
+    {
+      "question": "Hash Table-এ collision handling-এ Chaining ও Open Addressing-এর বিস্তারিত পার্থক্য কী?",
+      "answer": "Chaining: প্রতিটি bucket-এ linked list থাকে। Collision হলে list-এর শেষে যোগ করো। Load factor α = n/m, α > 1 সম্ভব। Search: O(1 + α) avg। Open Addressing: সব element একই array-তে থাকে। Collision হলে probing (Linear/Quadratic/Double) করে খালি slot খুঁজো। α ≤ 1 আবশ্যক। Chaining简单, Open Addressing cache-friendly কিন্তু clustering সমস্যা থাকে।",
+      "tags": ["hashing", "chaining", "open-addressing", "collision", "comparison"]
+    },
+    {
+      "question": "Hash Table-এ Load Factor-এর গুরুত্ব কী?",
+      "answer": "Load Factor α = n/m — n = stored elements, m = buckets। Chaining-এ α > 1 হলেও কাজ করে কিন্তু performance খারাপ হয়। Open Addressing-এ α < 1 রাখতে হয়, α > 0.7 হলে rehashing প্রয়োজন। Java HashMap-এ default threshold 0.75। কম load factor = বেশি space, বেশি load factor = বেশি collision।",
+      "tags": ["hashing", "load-factor", "threshold", "interview"]
+    },
+    {
+      "question": "Stack-এ Next Greater Element (NGE) problem কী এবং সমাধান কী?",
+      "answer": "প্রতিটি element-এর ডানে থাকা প্রথম বড় element বের করতে হয়। Monotonic Stack ব্যবহার করে O(n) সময়ে সমাধান হয়। পেছন থেকে সামনে scan করো। Stack-তে যত ছোট element আছে সব pop করো, top element-ই NGE। খালি stack হলে -1। TCS interview-তে এই problem বারবার জিজ্ঞাসা হয়।",
+      "tags": ["stack", "next-greater-element", "monotonic-stack", "interview"]
+    },
+    {
+      "question": "Queue ব্যবহার করে Stack implement করা যায় কীভাবে?",
+      "answer": "দুটি Queue (q1, q2) ব্যবহার করে। Push: নতুন element q2-তে enqueue করো, তারপর q1-এর সব element q2-তে enqueue করো, তারপর q1 ও q2 সোয়াপ করো। Pop: q1 থেকে dequeue করো। Push O(n), Pop O(1)। একটি Queue-ও যথেষ্ট — push সময় enqueue + rotate। GATE CSE-তে minimum queue operation জিজ্ঞাসা করা হয়।",
+      "tags": ["queue", "stack", "implementation", "gate"]
+    },
+    {
+      "question": "Binary Tree-র Inorder Traversal iterative implementation কীভাবে করে?",
+      "answer": "Stack ব্যবহার করে। মূল node থেকে শুরু করে বামে যেতে যেতে push করো। বামে আর যেতে না গেলে pop করে output-এ লেখো এবং ডান subtree-তে যাও। Stack খালি না হওয়া পর্যন্ত এই প্রক্রিয়া চলে। Time: O(n), Space: O(h)। Recursive ছাড়া iterative approach GATE-তে জিজ্ঞাসা করা হয়।",
+      "tags": ["tree", "inorder", "iterative", "stack"]
+    },
+    {
+      "question": "Binary Tree-র Preorder ও Postorder Traversal iterative implementation কী?",
+      "answer": "Preorder iterative: Stack-তে push করো, pop করে output-এ লেখো, ডান child push করো তারপর বাম child (ডান আগে যেন বাম আগে pop হয়)। Postorder iterative: দুটি Stack বা একটি Stack-তে reverse postorder (root-right-left) করে output reverse করো। Time: O(n), Space: O(h)।",
+      "tags": ["tree", "preorder", "postorder", "iterative", "stack"]
+    },
+    {
+      "question": "Red-Black Tree-র মূল বৈশিষ্ট্যগুলো কী কী?",
+      "answer": "Red-Black Tree-র ৫টি property: (1) প্রতিটি node Red বা Black। (2) Root সবসময় Black। (3) প্রতিটি leaf (NIL) Black। (4) Red node-র সন্তানরা Black (কোনো ধারাবাহিক Red-Red নেই)। (5) যেকোনো node থেকে তার descendant leaf পর্যন্ত path-এ সমান সংখ্যক Black node থাকে। Insert: O(log n), Delete: O(log n)। Java TreeMap, C++ map-এ ব্যবহৃত।",
+      "tags": ["red-black-tree", "balanced-bst", "properties", "gate"]
+    },
+    {
+      "question": "Kosaraju's Algorithm দিয়ে Strongly Connected Component (SCC) কীভাবে বের করে?",
+      "answer": "দুইবার DFS ব্যবহার করে। ধাপ ১: মূল graph-এ DFS চালাও এবং finish time অনুযায়ী stack-তে রাখো। ধাপ ২: Graph-কে transpose করো (edge direction উল্টাও)। ধাপ ৩: Stack-র top থেকে DFS চালাও — প্রতিটি DFS tree একটি SCC। Time: O(V+E), Space: O(V)। Tarjan's Algorithm একবারেই SCC বের করে।",
+      "tags": ["graph", "scc", "kosaraju", "dfs", "interview"]
+    },
+    {
+      "question": "Disjoint Set Union (Union-Find) কী এবং Path Compression কীভাবে কাজ করে?",
+      "answer": "DSU (Union-Find) disjoint sets-কে efficiently manage করে। দুটি operation: Find (element-র set খুঁজে বের করা) ও Union (দুটি set মিলিয়ে ফেলা)। Path Compression: Find সময়ে প্রতিটি visited node-কে directly root-এর সাথে connect করে। Union by Rank: ছোট tree-কে বড় tree-র সাথে যোগ করে। দুটো optimization একসাথে ব্যবহার করলে amortized O(α(n)) — α = inverse Ackermann function, practically constant।",
+      "tags": ["dsu", "union-find", "path-compression", "interview"]
     }
   ]
 }

@@ -393,6 +393,146 @@
       "question": "Load Balancing কী?",
       "answer": "Load Balancing হলো incoming traffic-কে multiple servers-এর মধ্যে distribute করার প্রক্রিয়া। এতে কোনো একটি server overload হয় না। Types: (1) Hardware Load Balancer। (2) Software Load Balancer (Nginx, HAProxy)। Round Robin, Least Connections — algorithms।",
       "tags": ["networking", "load-balancing"]
+    },
+    {
+      "question": "Subnetting-এর CIDR /27 দিয়ে কতগুলো usable host IP পাওয়া যায়?",
+      "answer": "/27 মানে 32-5=27 bits network-এর জন্য, বাকি 5 bits host-এর জন্য। মোট hosts = 2^5 = 32। Usable hosts = 32 - 2 = 30 (network address ও broadcast address বাদ দিয়ে)। Subnet mask: 255.255.255.224।",
+      "tags": ["subnetting", "cidr", "gate"]
+    },
+    {
+      "question": "192.168.10.0/24 নেটওয়ার্ককে /27 দিয়ে subnetting করলে কতগুলো subnet হবে এবং প্রতিটি subnet-এর range কী?",
+      "answer": "/24 থেকে /27 হলো 3 bits borrow। তাই 2^3 = 8 subnets হবে। প্রতিটি subnet-এ 32 IPs (30 usable)। Subnets: 192.168.10.0/27, .32/27, .64/27, .96/27, .128/27, .160/27, .192/27, .224/27। উদাহরণ: 192.168.10.32/27 — usable range .33 থেকে .62।",
+      "tags": ["subnetting", "cidr", "gate", "calculation"]
+    },
+    {
+      "question": "172.16.0.0/12 নেটওয়ার্ককে /20 তে subnetting করলে কতগুলো subnet ও host পাওয়া যাবে?",
+      "answer": "/12 থেকে /20 হলো 8 bits borrow। Subnets = 2^8 = 256। প্রতিটি subnet-এ host bits = 32-20 = 12। Hosts per subnet = 2^12 - 2 = 4094 usable hosts। Subnet mask: 255.255.240.0।",
+      "tags": ["subnetting", "cidr", "gate", "calculation"]
+    },
+    {
+      "question": "TCP Window Size 64KB এবং RTT 50ms হলে সর্বোচ্চ throughput কত?",
+      "answer": "Throughput = Window Size / RTT = 64 KB / 50 ms = 64 × 1024 × 8 bits / 0.05 s = 5242880 / 0.05 = 104.857 Mbps। Bandwidth-Delay Product (BDP) = Bandwidth × RTT — এই ফর্মুলা দিয়েও বের করা যায়। Window Size = BDP + অতিরিক্ত buffer।",
+      "tags": ["tcp", "throughput", "calculation", "gate"]
+    },
+    {
+      "question": "TCP Window Size ও RTT দিলে throughput কীভাবে নির্ণয় করবেন? একটি উদাহরণ দিন।",
+      "answer": "Throughput = Window Size (bits) / RTT (seconds)। উদাহরণ: Window = 32KB, RTT = 100ms। Throughput = (32 × 1024 × 8) / 0.1 = 2621440 / 0.1 = 26.214 Mbps। Window size যত বড় হবে throughput তত বাড়বে। কিন্তু bandwidth limit-এর মধ্যে থাকতে হবে।",
+      "tags": ["tcp", "throughput", "calculation", "isro"]
+    },
+    {
+      "question": "CRC (Cyclic Redundancy Check) computation-এর ধাপগুলো কী কী?",
+      "answer": "ধাপ 1: Generator polynomial-এর degree n নির্ণয় করো। ধাপ 2: Data-র শেষে n zeros যোগ করো। ধাপ 3: যোগ করা data-কে generator polynomial দিয়ে XOR division (binary division) করো। ধাপ 4: Remainder বের করো। ধাপ 5: Remainder-কে original data-র শেষে যোগ করো — এটিই CRC codeword।",
+      "tags": ["crc", "error-detection", "data-link-layer", "gate"]
+    },
+    {
+      "question": "Data: 1101011, Generator Polynomial: 10011 দিলে CRC codeword কী হবে? ধাপে ধাপে দেখান।",
+      "answer": "Data + 4 zeros (degree=4): 11010110000। 10011 দিয়ে binary division: 11010110000 ÷ 10011। XOR division করে remainder পাওয়া যায়। Remainder = 1110। CRC Codeword = 11010111110। Receiver আবার division করলে remainder 0 আসবে — মানে data valid।",
+      "tags": ["crc", "error-detection", "calculation", "gate"]
+    },
+    {
+      "question": "CSMA/CD ও CSMA/CA-র মধ্যে মূল পার্থক্যগুলো কী কী?",
+      "answer": "CSMA/CD: Collision detect করে, wired Ethernet-এ ব্যবহৃত হয়, collision হলে jam signal পাঠায়, binary exponential backoff। CSMA/CA: Collision avoid করে, wireless networks-এ ব্যবহৃত হয়, RTS/CTS mechanism ব্যবহার করে, ACK mandatory। CSMA/CD detection-ভিত্তিক, CSMA/CA prevention-ভিত্তিক।",
+      "tags": ["csma-cd", "csma-ca", "comparison", "gate"]
+    },
+    {
+      "question": "CSMA/CD binary exponential backoff algorithm কীভাবে কাজ করে?",
+      "answer": "n তম collision-এর পর device random time [0, 2^n - 1] × slot time অপেক্ষা করে। 1st collision: 0 বা 1 slot time। 2nd: 0, 1, 2, 3 slot times। 10th collision পর্যন্ত বাড়ে, এরপর 1023 এ maximum। 16 collisions হলে frame drop। Slot time = 2 × max propagation delay।",
+      "tags": ["csma-cd", "backoff", "gate", "calculation"]
+    },
+    {
+      "question": "CSMA/CA-তে RTS/CTS mechanism কী এবং hidden terminal problem কী?",
+      "answer": "Hidden Terminal Problem: দুটি nodes A ও C একই AP-র সাথে communicate করে কিন্তু A ও C পরস্পরকে শুনতে পায় না — collision হতে পারে। RTS/CTS: A আগে RTS (Request to Send) পাঠায়, AP CTS (Clear to Send) পাঠায় — C জানে অপেক্ষা করতে হবে। এতে hidden terminal minimize হয়।",
+      "tags": ["csma-ca", "hidden-terminal", "wireless", "gate"]
+    },
+    {
+      "question": "NAT-এর প্রধান প্রকারভেদগুলো কী কী?",
+      "answer": "NAT-এর 3টি প্রধান প্রকার: (1) Static NAT: একটি private IP ↔ একটি public IP mapping, bi-directional। (2) Dynamic NAT: Private IP pool-এর জন্য available public IPs dynamically assign হয়। (3) PAT (Port Address Translation)/NAPT: অনেকগুলো private IP একটি public IP share করে port number দিয়ে — সবচেয়ে বেশি ব্যবহৃত।",
+      "tags": ["nat", "networking", "gate"]
+    },
+    {
+      "question": "PAT (Port Address Translation) কীভাবে কাজ করে?",
+      "answer": "PAT-তে private IP + source port → public IP + unique port mapping হয়। উদাহরণ: 192.168.1.10:5000 → 203.0.113.5:40001। Router NAT table-এ এই mapping রাখে। Reply আসলে port number দিয়ে সঠিক internal device-কে forward করে। Port range: 1-65535। একটি public IP দিয়ে ~65000 connections support করা সম্ভব।",
+      "tags": ["nat", "pat", "networking", "isro"]
+    },
+    {
+      "question": "ARP (Address Resolution Protocol) ও RARP (Reverse ARP)-এর পার্থক্য কী?",
+      "answer": "ARP: IP address → MAC address resolve করে। RARP: MAC address → IP address resolve করে। ARP request broadcast, reply unicast। RARP deprecated — DHCP এর বদলে এখন ব্যবহৃত হয় না। ARP cache-তে mapping সংরক্ষিত হয়, TTL timeout থাকে।",
+      "tags": ["arp", "rarp", "comparison", "gate"]
+    },
+    {
+      "question": "ARP request ও reply flow কীভাবে কাজ করে? ARP cache কী?",
+      "answer": "Sender ARP broadcast request পাঠায়: '192.168.1.1-র MAC address কে?' সব host request পায় কিন্তু শুধু 192.168.1.1 owner unicast reply দেয়: 'আমার MAC: AA:BB:CC:DD:EE:FF'। এই mapping ARP cache-তে TTL সহ সংরক্ষিত হয় (সাধারণত 15-20 min)। Cache miss হলে ARP request আবার broadcast হয়।",
+      "tags": ["arp", "cache", "networking", "gate"]
+    },
+    {
+      "question": "OSPF (Open Shortest Path First) routing protocol-এর বৈশিষ্ট্যগুলো কী কী?",
+      "answer": "OSPF: Link State protocol, Dijkstra's algorithm ব্যবহার করে, cost metric (bandwidth-based), hierarchical (areas: backbone area 0), triggered updates (30 min LSA refresh), multicast (224.0.0.5, 224.0.0.6), authentication support, VLSM support, fast convergence, scalable for large networks।",
+      "tags": ["ospf", "routing", "gate"]
+    },
+    {
+      "question": "RIP (Routing Information Protocol) ও OSPF-এর তুলনামূলক বিশ্লেষণ করুন।",
+      "answer": "RIP: Distance Vector, hop count (max 15), periodic update (30s), simple config, small networks, slower convergence, count-to-infinity problem। OSPF: Link State, cost metric, triggered update, complex config, large networks, faster convergence, loop-free, support for VLSM & CIDR। RIP hop limit=15, OSPF unlimited। RIP administrative distance=120, OSPF=110।",
+      "tags": ["rip", "ospf", "comparison", "gate", "tcs"]
+    },
+    {
+      "question": "HTTP/2 HTTP/1.1-র তুলনায় কী কী উন্নতি এনেছে?",
+      "answer": "HTTP/2-এর উন্নতিগুলো: (1) Multiplexing — একই connection-এ একাধিক streams একসাথে। (2) Header Compression (HPACK) — header overhead কমেছে। (3) Server Push — server client-কে অনুরোধ ছাড়াই data পাঠাতে পারে। (4) Binary framing — text নয়, binary protocol। (5) Stream prioritization। (6) Persistent connection — TCP single connection।",
+      "tags": ["http2", "application-layer", "gate"]
+    },
+    {
+      "question": "HTTP/3 QUIC protocol কী এবং HTTP/2 থেকে কী আলাদা?",
+      "answer": "HTTP/3 QUIC (Quick UDP Internet Connections) ব্যবহার করে TCP-র বদলে UDP। উন্নতিগুলো: (1) Head-of-line blocking elimination। (2) Faster connection establishment (0-RTT or 1-RTT)। (3) Built-in encryption (TLS 1.3 integrated)। (4) Connection migration (network change-এ seamless)। TCP-র 3-way handshake bypass করে।",
+      "tags": ["http3", "quic", "application-layer", "gate"]
+    },
+    {
+      "question": "SSL/TLS Handshake-এর ধাপগুলো কী কী?",
+      "answer": "TLS Handshake: (1) ClientHello — supported TLS versions, cipher suites, random number পাঠায়। (2) ServerHello — selected cipher suite, certificate, server random পাঠায়। (3) Client certificate verify করে। (4) Key exchange — pre-master secret encrypted করে পাঠায়। (5) Both sides session keys generate করে। (6) Finished messages exchange — handshake complete। Data transfer শুরু হয়।",
+      "tags": ["ssl", "tls", "handshake", "security", "gate"]
+    },
+    {
+      "question": "TLS 1.2 ও TLS 1.3-এর পার্থক্য কী?",
+      "answer": "TLS 1.2: 2-RTT handshake, RSA key exchange support, legacy cipher suites allowed, separate handshake/data phases। TLS 1.3: 1-RTT handshake (0-RTT possible), only forward-secret key exchange (DHE/ECDHE), removed legacy ciphers, handshake simplified, encrypted more of the handshake process, faster and more secure।",
+      "tags": ["ssl", "tls", "comparison", "security", "gate"]
+    },
+    {
+      "question": "ব্রাউজারে google.com টাইপ করলে কী কী হয়? সম্পূর্ণ flow বর্ণনা করুন।",
+      "answer": "ধাপ 1: DNS lookup — domain name IP address-তে convert। Root server → TLD (.com) → Authoritative → IP পাওয়া। ধাপ 2: TCP connection establish — 3-way handshake। ধাপ 3: TLS handshake (HTTPS)। ধাপ 4: HTTP GET request পাঠানো। ধাপ 5: Server HTTP response পাঠায়। ধাপ 6: Browser rendering — HTML parse, CSS, JS load, layout, paint। ধাপ 7: TCP connection close (FIN/ACK)।",
+      "tags": ["http", "dns", "browser-flow", "gate", "isro", "tcs"]
+    },
+    {
+      "question": "DNS resolution-এর step-by-step process কী?",
+      "answer": "1. Browser cache check। 2. OS cache check। 3. Router cache check। 4. ISP DNS resolver (recursive resolver) query। 5. Root nameserver — .com TLD server address দেয়। 6. TLD server — google.com authoritative nameserver address দেয়। 7. Authoritative server — actual IP address (142.250.190.46) দেয়। 8. IP client-কে return, TTL সহ cache-তে store। Total: 0-RTT (cached) থেকে 4+ round trips।",
+      "tags": ["dns", "resolution", "application-layer", "gate", "tcs"]
+    },
+    {
+      "question": "Socket programming-এ TCP client-server model কীভাবে কাজ করে? Code structure বর্ণনা করুন।",
+      "answer": "Server side: socket() → bind(IP, port) → listen() → accept() → recv() → process → send() → close()। Client side: socket() → connect(server_IP, port) → send() → recv() → close()। TCP reliable, ordered, connection-oriented। Server multiple clients handle করতে fork()/threading ব্যবহার করে। Blocking ও non-blocking socket দুটি প্রকার।",
+      "tags": ["socket", "tcp", "client-server", "programming", "gate"]
+    },
+    {
+      "question": "UDP client-server socket programming TCP-র থেকে কীভাবে আলাদা?",
+      "answer": "UDP: connectionless। Server: socket(SOCK_DGRAM) → bind() → recvfrom() → sendto() → close()। Client: socket(SOCK_DGRAM) → sendto(server_addr) → recvfrom() → close()। TCP-র তুলনায়: no listen(), no accept(), no connect() required। DataGramSocket (Java) / SOCK_DGRAM (C)। Reliable নয়, faster।",
+      "tags": ["socket", "udp", "client-server", "programming", "gate"]
+    },
+    {
+      "question": "Error detection-এ Parity, Checksum ও CRC-র তুলনা করুন।",
+      "answer": "Parity: সবচেয়ে সহজ, single-bit error detect করতে পারে, odd/even parity। Checksum: IP/TCP/UDP-তে ব্যবহৃত, 1's complement sum, burst error detect করতে পারে না। CRC: সবচেয়ে শক্তিশালী, burst error detect করে, polynomial division-based, ethernet/FDDI-তে ব্যবহৃত। Detection capability: Parity < Checksum < CRC।",
+      "tags": ["error-detection", "parity", "checksum", "crc", "comparison", "gate"]
+    },
+    {
+      "question": "Parity bit দিয়ে single-bit error কীভাবে detect করা হয়? 2D Parity কী?",
+      "answer": "Even Parity: total 1s সংখ্যা even রাখা হয়। Odd Parity: total 1s odd রাখা হয়। Receiver parity check করে mismatch হলে error। 2D Parity: data-কে matrix-এ সাজিয়ে row ও column-এ parity bits যোগ করা হয়। 2D Parity single-bit ও double-bit error detect করতে পারে, কিন্তু all-even error pattern miss করে।",
+      "tags": ["parity", "error-detection", "gate"]
+    },
+    {
+      "question": "TCP-তে Congestion Window (cwnd) ও Receiver Window (rwnd) কী ভূমিকা রাখে?",
+      "answer": "Effective Window = min(cwnd, rwnd)। cwnd: sender-এর estimate কতটুকু data network handle করতে পারে (congestion control)। rwnd: receiver কতটুকু data receive করতে পারে (flow control)। Slow Start-এ cwnd exponentially বাড়ে, Congestion Avoidance-এ linearly বাড়ে। Loss হলে cwnd half কমায়।",
+      "tags": ["tcp", "congestion-control", "flow-control", "gate"]
+    },
+    {
+      "question": "Bandwidth-Delay Product (BDP) কী এবং এটি TCP Window Size-কে কীভাবে প্রভাবিত করে?",
+      "answer": "BDP = Bandwidth × RTT। BDP হলো network pipe-এর সর্বোচ্চ data capacity। TCP Window Size ≥ BDP হলে full bandwidth utilize হয়। উদাহরণ: 100 Mbps link, 10ms RTT → BDP = 100 × 10^6 × 0.01 = 1 Mbit = 125 KB। Window 125KB কম হলে bandwidth waste হবে। High BDP links-এর জন্য larger window (Window Scaling) প্রয়োজন।",
+      "tags": ["bdp", "tcp", "bandwidth", "calculation", "gate"]
     }
   ]
 }

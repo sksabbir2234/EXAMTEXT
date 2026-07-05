@@ -403,6 +403,141 @@
       "question": "Software Engineering-এ Coupling ও Cohesion-এর সর্বোত্তম অবস্থা কী?",
       "answer": "সর্বোত্তম অবস্থা: Lowest Coupling (Data Coupling) ও Highest Cohesion (Functional Cohesion)। এর মানে: মডিউলগুলো পরস্পরের উপর ন্যূনতম নির্ভরশীল এবং প্রতিটি মডিউল একটি নির্দিষ্ট, সুসংজ্ঞায়িত কাজ করে। এটি Maintainability, Testability ও Reusability বাড়ায়।",
       "tags": ["design", "coupling", "cohesion", "best-practice"]
+    },
+    {
+      "question": "Waterfall, Agile ও Spiral Model-এর তুলনামূলক পার্থক্য কী?",
+      "answer": "Waterfall: সরলরেখীয়, এক ধাপ শেষে পরের ধাপ, কম ঝুঁকি, পরিবর্তন কঠিন, বড় প্রকল্পে উপযুক্ত। Agile: চক্রীয়, Iterative, ব্যবহারকারীর অংশগ্রহণ, পরিবর্তনের সুবিধা, ছোট ছোট Sprint-এ কাজ। Spiral: ঝুঁকি বিশ্লেষণ কেন্দ্রিক, চক্রীয়, বড় ও জটিল প্রকল্পে উপযুক্ত, প্রতিটি চক্রে মূল্যায়ন থাকে। Waterfall = সোজা কিন্তু নমনীয় নয়, Agile = নমনীয় কিন্তু শৃঙ্খলার চাহিদা, Spiral = ঝুঁকিমুখী প্রকল্পের জন্য আদর্শ।",
+      "tags": ["comparison", "waterfall", "agile", "spiral"]
+    },
+    {
+      "question": "Waterfall ও Agile-এর মধ্যে কোনটি কখন ব্যবহার করবেন?",
+      "answer": "Waterfall ব্যবহার করবেন যখন: চাহিদা স্থির ও সুস্পষ্ট, ডকুমেন্টেশন বাধ্যতামূলক, বড় সরকারি প্রকল্প, ঝুঁকি কম। Agile ব্যবহার করবেন যখন: চাহিদা অস্পষ্ট বা পরিবর্তনশীল, দ্রুত ডেলিভারি প্রয়োজন, স্টার্টআপ বা উদ্ভাবনী প্রকল্প, ব্যবহারকারীর প্রতিক্রিয়া গুরুত্বপূর্ণ।",
+      "tags": ["comparison", "waterfall", "agile", "when-to-use"]
+    },
+    {
+      "question": "Use Case Diagram-এর মূল উপাদানগুলো কী কী?",
+      "answer": "Use Case Diagram-এ মূল উপাদান: (1) Actor — সিস্টেমের সাথে মিথস্ক্রিয়াকারী ব্যবহারকারী বা বহিঃস্থ সিস্টেম। (2) Use Case — সিস্টেমের একটি নির্দিষ্ট কার্যকারিতা। (3) Association — Actor ও Use Case-এর মধ্যে সম্পর্ক। (4) Include — একটি Use Case অন্যটিকে অন্তর্ভুক্ত করে (বাধ্যতামূলক)। (5) Extend — একটি Use Case অন্যটিকে সম্প্রসারিত করে (ঐচ্ছিক)। (6) Generalization — বাবাস-সন্তান সম্পর্ক।",
+      "tags": ["uml", "use-case", "diagram"]
+    },
+    {
+      "question": "Use Case Diagram-এ include ও extend-এর পার্থক্য কী?",
+      "answer": "Include: একটি Use Case আরেকটি Use Case-কে অবশ্যই অন্তর্ভুক্ত করে। এটি বাধ্যতামূলক। উদাহরণ: 'Login' Use Case-এ 'Authenticate User' include করে। Extend: একটি Use Case ঐচ্ছিকভাবে অন্যটিকে সম্প্রসারিত করে। এটি শর্তসাপেক্ষ। উদাহরণ: 'Payment' Use Case-কে 'Apply Discount' extend করতে পারে। চিহ্ন: include = ---<<include>>-->, extend = ---<<extend>>--->।",
+      "tags": ["uml", "use-case", "include", "extend"]
+    },
+    {
+      "question": "Activity Diagram ও Flowchart-এর পার্থক্য কী?",
+      "answer": "Activity Diagram: UML-এর একটি Behavioral Diagram, মাল্টি-থ্রেডিং দেখাতে পারে, সমান্তরাল কাজ (fork/join) দেখায়, Object Flow দেখাতে পারে, সফটওয়্যার প্রক্রিয়া মডেলিংয়ে ব্যবহৃত। Flowchart: সাধারণ অ্যালগরিদম দেখায়, একটি থ্রেডে কাজ করে, শুধুমাত্র নিয়ন্ত্রণ প্রবাহ দেখায়, সাধারণ প্রক্রিয়া নকশায় ব্যবহৃত। Activity Diagram = UML, সমৃদ্ধ; Flowchart = সরল, সাধারণ।",
+      "tags": ["uml", "activity-diagram", "flowchart", "comparison"]
+    },
+    {
+      "question": "Activity Diagram-এ Decision Node ও Fork/Join Node কী?",
+      "answer": "Decision Node (◇): একটি শর্তের উপর নির্ভর করে দুটি বা ততোধিক পথে বিভক্ত হয়। উদাহরণ: 'বয়স ≥ 18?' — Yes/No ভাগে যায়। Fork Node (▬): একটি স্ট্রিমকে একাধিক সমান্তরাল থ্রেডে ভাগ করে। Join Node (▬): একাধিক সমান্তরাল থ্রেডকে একত্রিত করে। Fork = বিভাজন, Join = সমামেলন।",
+      "tags": ["uml", "activity-diagram", "fork", "join"]
+    },
+    {
+      "question": "COCOMO Model-এর Intermediate সংস্করণে Effort কীভাবে গণনা করা হয়?",
+      "answer": "Intermediate COCOMO: Effort = a × (KLOC)^b × EAF। EAF (Effort Adjustment Factor) = সকল Cost Driver (EAF_i) এর গুণফল। ১৫টি Cost Driver আছে — যেমন: RELY (বিশ্বাসযোগ্যতা), DATA (ডেটার পরিমাণ), CPLX (জটিলতা), TIME (সময় সীমা), STOR (মেমরি), VIRT (ভার্চুয়াল মেশিন), TURN (প্রতিক্রিয়া সময়), ACAP (বিশ্লেষক দক্ষতা), AEXP (অ্যাপ্লিকেশন অভিজ্ঞতা), PCAP (প্রোগ্রামার দক্ষতা), VEXP (ভার্চুয়াল মেশিন অভিজ্ঞতা), LEXP (ভাষা অভিজ্ঞতা), MODP (পদ্ধতি), TOOL (সরঞ্জাম), SCHED (সময়সীমা)।",
+      "tags": ["estimation", "cocomo", "intermediate", "effort"]
+    },
+    {
+      "question": "COCOMO Model-এ Organic, Semi-detached ও Embedded প্রকল্পের পার্থক্য কী?",
+      "answer": "Organic: ছোট দল, স্থির চাহিদা, কম জটিলতা। উদাহরণ: ছোট ব্যবসায়িক অ্যাপ। a=2.4, b=1.05। Semi-detached: মাঝারি আকার, মিশ্র দক্ষতা, মাঝারি জটিলতা। উদাহরণ: ব্যাংকিং সিস্টেম, OS। a=3.0, b=1.12। Embedded: বড় দল, কঠোর চাহিদা, উচ্চ জটিলতা। উদাহরণ: এভিয়েশন, মেডিকেল ডিভাইস। a=3.6, b=1.20। মান বাড়লে Effort ও Time বাড়ে।",
+      "tags": ["estimation", "cocomo", "project-types"]
+    },
+    {
+      "question": "Halstead's Software Metrics কী কী?",
+      "answer": "Halstead's Metrics হলো কোডের জটিলতা পরিমাপের চারটি মেট্রিক্স: (1) n1 = অপারেটরের সংখ্যা, (2) n2 = অপারান্ডের সংখ্যা, (3) N1 = অপারেটরের মোট উপস্থিতি, (4) N2 = অপারান্ডের মোট উপস্থিতি। থেকে গণনা করা হয়: Vocabulary = n1 + n2, Length = N1 + N2, Volume = Length × log₂(Vocabulary), Difficulty = (n1/2) × (N2/n2), Effort = Difficulty × Volume।",
+      "tags": ["metrics", "halstead"]
+    },
+    {
+      "question": "Halstead's Metrics-এ Volume, Difficulty ও Effort কী নির্দেশ করে?",
+      "answer": "Volume: সফটওয়্যারের আকারের একটি পরিমাপ — বেশি Volume মানে বেশি কোড। Difficulty: বোঝার কঠিনতার মাত্রা — বেশি Difficulty মানে বেশি জটিল। Effort: ডেভেলপারকে যতটুকু মানসিক চেষ্টা করতে হবে তার পরিমাপ — সেকেন্ডে মাপা হয়। সম্পর্ক: Effort = Difficulty × Volume। উদাহরণ: যদি Volume=1000, Difficulty=10 হয়, তাহলে Effort=10000 (মানসিক চেষ্টা)।",
+      "tags": ["metrics", "halstead", "volume", "difficulty"]
+    },
+    {
+      "question": "Function Point Analysis-এ কোন কোন উপাদান বিবেচনা করা হয়?",
+      "answer": "Function Point Analysis-এ ৫টি উপাদান বিবেচনা করা হয়: (1) External Inputs (EI) — বহিঃস্থ থেকে আগত ডেটা, (2) External Outputs (EO) — সিস্টেম থেকে বহিঃস্থে যাওয়া ডেটা, (3) External Inquiries (EQ) — অনুরোধ-উত্তর ধরনের ইন্টারঅ্যাকশন, (4) Internal Logical Files (ILF) — সিস্টেমের ভেতরের ডেটা স্টোর, (5) External Interface Files (EIF) — বহিঃস্থ সিস্টেমের ডেটা স্টোর। প্রতিটি উপাদানকে Low/Medium/High জটিলতায় শ্রেণিবিভাগ করা হয়।",
+      "tags": ["estimation", "function-point", "components"]
+    },
+    {
+      "question": "Function Point Analysis-এ Unadjusted Function Point (UFP) ও Adjusted Function Point (AFP) কী?",
+      "answer": "UFP (Unadjusted Function Point): পাঁচটি উপাদানের জটিলতা ভিত্তিক স্কোর যোগ করে পাওয়া মান। AFP = UFP × CAF। CAF (Complexity Adjustment Factor) = 0.65 + (0.01 × ΣFi)। Fi = ১৪টি General System Characteristic-এর মান (প্রতিটি 0-5 স্কেলে)। CAF-এর পরিসীমা 0.65 থেকে 1.35। AFP বেশি হলে সফটওয়্যার আরও জটিল।",
+      "tags": ["estimation", "function-point", "ufp", "afp"]
+    },
+    {
+      "question": "Software Configuration Management (SCM)-এর মূল প্রক্রিয়াগুলো কী কী?",
+      "answer": "SCM-এর চারটি মূল প্রক্রিয়া: (1) Configuration Identification — সকল কনফিগারেশন আইটেম (CI) চিহ্নিতকরণ ও সংজ্ঞায়ন। (2) Configuration Change Control — পরিবর্তনের অনুরোধ, মূল্যায়ন, অনুমোদন ও বাস্তবায়ন। (3) Configuration Status Accounting — প্রতিটি CI-এর বর্তমান ও পূর্ববর্তী অবস্থা ট্র্যাক করা। (4) Configuration Audit — নিশ্চিত করা যে কনফিগারেশন আইটেমগুলো চুক্তি অনুযায়ী আছে।",
+      "tags": ["scm", "configuration-management", "process"]
+    },
+    {
+      "question": "SCM-এ Baseline কী এবং এর গুরুত্ব কী?",
+      "answer": "Baseline হলো একটি স্থির, আনুষ্ঠানিকভাবে অনুমোদিত সেট অফ কনফিগারেশন আইটেম যার পরিবর্তনের জন্য আলাদাভাবে অনুমোদন প্রয়োজন। গুরুত্ব: (1) স্থিতিশীলতা নিশ্চিত করে, (2) পরিবর্তনের নিয়ন্ত্রণ রাখে, (3) রোলব্যাকের সুযোগ দেয়। উদাহরণ: SRS Baseline, Design Baseline, Code Baseline। Baseline ছাড়া সফটওয়্যার প্রকল্পে অব্যবস্থা তৈরি হয়।",
+      "tags": ["scm", "baseline", "configuration-management"]
+    },
+    {
+      "question": "Git-এ Branching Strategy কী কী আছে?",
+      "answer": "প্রধান Branching Strategies: (1) Git Flow — main, develop, feature, release, hotfix ব্রাঞ্চ; বড় প্রকল্পে উপযুক্ত। (2) GitHub Flow — শুধু main ও feature ব্রাঞ্চ; CI/CD-কেন্দ্রিক, দ্রুত ডেপ্লয়মেন্ট। (3) GitLab Flow — main, develop, environment (staging, production) ব্রাঞ্চ; CI/CD ইন্টিগ্রেটেড। (4) Trunk-Based — সবাই একটি main ব্রাঞ্চে কাজ করে; ছোট ছোট feature flag ব্যবহার করা হয়।",
+      "tags": ["git", "branching", "version-control"]
+    },
+    {
+      "question": "Git Flow ও GitHub Flow-এর পার্থক্য কী?",
+      "answer": "Git Flow: ৫টি ব্রাঞ্চ (main, develop, feature, release, hotfix); সুশৃঙ্খল, রিলিজ পরিকল্পনাসহ; বড় টিম ও জটিল প্রকল্পে উপযুক্ত। GitHub Flow: শুধু main ও feature ব্রাঞ্চ; Pull Request দিয়ে মার্জ; CI/CD দিয়ে স্বয়ংক্রিয় ডেপ্লয়মেন্ট; ছোট টিম ও দ্রুত রিলিজে উপযুক্ত। Git Flow = জটিল কিন্তু নিয়ন্ত্রিত; GitHub Flow = সরল কিন্তু CI/CD প্রয়োজন।",
+      "tags": ["git", "branching", "git-flow", "github-flow"]
+    },
+    {
+      "question": "CI/CD Pipeline কী এবং এর ধাপগুলো কী কী?",
+      "answer": "CI/CD (Continuous Integration / Continuous Delivery / Continuous Deployment) হলো সফটওয়্যার ডেলিভারির একটি স্বয়ংক্রিয় প্রক্রিয়া। ধাপগুলো: (1) Code Commit — ডেভেলপার কোড কমিট করে। (2) Build — কোড তৈরি (compile) হয়। (3) Unit Test — স্বয়ংক্রিয় ইউনিট পরীক্ষা। (4) Code Quality Check — Linting, Static Analysis। (5) Integration Test — মডিউল একত্রীকরণ পরীক্ষা। (6) Deploy to Staging — স্টেজিং পরিবেশে স্থাপন। (7) Acceptance Test — গ্রাহক যাচাই। (8) Deploy to Production — লাইভে স্থাপন।",
+      "tags": ["cicd", "pipeline", "devops"]
+    },
+    {
+      "question": "Continuous Integration (CI) কী?",
+      "answer": "Continuous Integration হলো একটি অনুশীলন যেখানে ডেভেলপাররা সারা দিনে বারবার কোড কমিট করে এবং প্রতিটি কমিটের পরেই স্বয়ংক্রিয়ভাবে Build ও Test চলে। উদ্দেশ্য: (1) বাগ দ্রুত ধরা, (2) ইন্টিগ্রেশন সমস্যা কমানো, (3) কোড মান বজায় রাখা। টুল: Jenkins, GitHub Actions, GitLab CI, CircleCI। নিয়ম: দৈনিক কমপক্ষে একবার main-এ মার্জ করা।",
+      "tags": ["cicd", "continuous-integration"]
+    },
+    {
+      "question": "Continuous Delivery ও Continuous Deployment-এর পার্থক্য কী?",
+      "answer": "Continuous Delivery: সফটওয়্যারকে যেকোনো সময় প্রোডাকশনে ডেপ্লয় করার জন্য প্রস্তুত রাখা — তবে ম্যানুয়াল অনুমোদন প্রয়োজন। Continuous Deployment: স্বয়ংক্রিয়ভাবে প্রতিটি সফল কমিটকে সরাসরি প্রোডাকশনে স্থাপন করা — কোনো ম্যানুয়াল ধাপ নেই। CD = Delivery + অটোমেশন। Delivery = প্রস্তুত কিন্তু ম্যানুয়াল; Deployment = সম্পূর্ণ স্বয়ংক্রিয়।",
+      "tags": ["cicd", "continuous-delivery", "continuous-deployment"]
+    },
+    {
+      "question": "DevOps কী এবং এর মূল অনুশীলনগুলো কী কী?",
+      "answer": "DevOps হলো ডেভেলপমেন্ট ও অপারেশনস দলের মধ্যে সহযোগিতা ও স্বয়ংক্রিয়তার একটি সংস্কৃতি ও অনুশীলন। মূল অনুশীলন: (1) CI/CD — স্বয়ংক্রিয় বিল্ড ও ডেপ্লয়মেন্ট। (2) Infrastructure as Code (IaC) — সার্ভার কনফিগারেশন কোড দিয়ে পরিচালনা। (3) Monitoring & Logging — সিস্টেমের অবস্থা পর্যবেক্ষণ। (4) Microservices — ছোট ছোট সেবায় ভাগ। (5) Containerization — Docker, Kubernetes। (6) Shift Left Security — নিরাপত্তা আগে থেকে।",
+      "tags": ["devops", "practices", "cicd"]
+    },
+    {
+      "question": "DevOps-এ Infrastructure as Code (IaC) কী?",
+      "answer": "Infrastructure as Code (IaC) হলো সার্ভার, নেটওয়ার্ক, ডেটাবেস ইত্যাদি অবকাঠামোকে কোড (স্ক্রিপ্ট বা কনফিগারেশন ফাইল) দিয়ে পরিচালনা করার পদ্ধতি। সুবিধা: (1) পুনর্ব্যবহারযোগ্য, (2) সংস্করণ নিয়ন্ত্রণযোগ্য, (3) দ্রুত স্কেল, (4) ম্যানুয়াল ভুল হ্রাস। টুল: Terraform, Ansible, Chef, Puppet, CloudFormation। উদাহরণ: Terraform-এর HCL ভাষায় AWS EC2 ইনস্ট্যান্স সংজ্ঞায়ন।",
+      "tags": ["devops", "iac", "infrastructure"]
+    },
+    {
+      "question": "Software Quality Assurance (SQA) ও Software Testing-এর পার্থক্য কী?",
+      "answer": "SQA: প্রক্রিয়া-কেন্দ্রিক, প্রকল্পের শুরু থেকেই শুরু হয়, নিরোধমূলক (preventive), সকল প্রক্রিয়া যাচাই করে। Testing: পণ্য-কেন্দ্রিক, কোড লেখার পরে হয়, সনাক্তকরণমূলক (detective), শুধুমাত্র সফটওয়্যার যাচাই করে। SQA = প্রক্রিয়া ভালো রাখলে উৎপাদিত পণ্য নিজেই ভালো হবে। Testing = শুধু উৎপাদিত পণ্য পরীক্ষা করে।",
+      "tags": ["quality", "sqa", "testing", "comparison"]
+    },
+    {
+      "question": "CMMI-এর পাঁচটি মাত্রা (Level) বিস্তারিত ব্যাখ্যা করুন।",
+      "answer": "Level 1 — Initial: প্রক্রিয়া অস্থির, সফলতা ব্যক্তির উপর নির্ভরশীল। Level 2 — Managed: প্রকল্প পরিচালনার প্রক্রিয়া আছে, বাজারে পণ্য ডেলিভারি হয়। Level 3 — Defined: সংস্থার জন্য মানক প্রক্রিয়া সংজ্ঞায়িত, সকল প্রকল্প সেটি অনুসরণ করে। Level 4 — Quantitatively Managed: প্রক্রিয়ার পরিমাপ ও পরিচালনা পরিসংখ্যানভিত্তিক, মান নিশ্চিত। Level 5 — Optimizing: ধারাবাহিক উন্নয়ন, উদ্ভাবন, প্রক্রিয়া অপ্টিমাইজেশন।",
+      "tags": ["quality", "cmmi", "levels"]
+    },
+    {
+      "question": "Regression Testing ও Retesting-এর পার্থক্য কী?",
+      "answer": "Retesting: একটি নির্দিষ্ট বাগ ফিক্স হয়েছে কিনা যাচাই করার জন্য সেই নির্দিষ্ট টেস্ট কেসটি আবার চালানো হয়। Regression Testing: বাগ ফিক্সের পরে সিস্টেমের অন্য ফিচারগুলো ভেঙে গেছে কিনা যাচাই করার জন্য সকল সম্পর্কিত টেস্ট কেস চালানো হয়। Retesting = নির্দিষ্ট কেস, ম্যানুয়াল বা অটোমেটেড। Regression = ব্যাপক কেস, সাধারণত অটোমেটেড।",
+      "tags": ["testing", "regression", "retesting", "comparison"]
+    },
+    {
+      "question": "Test Automation Framework কী এবং এর প্রকারভেদ কী কী?",
+      "answer": "Test Automation Framework হলো স্বয়ংক্রিয় পরীক্ষার জন্য একটি কাঠামো বা নিয়মাবলী। প্রকার: (1) Module Driven — প্রতিটি মডিউল আলাদাভাবে পরীক্ষিত। (2) Data Driven — ডেটা ও কোড আলাদা, CSV/Excel থেকে ডেটা নেওয়া হয়। (3) Keyword Driven — কীওয়ার্ড (যেমন: click, type) ব্যবহার করে স্ক্রিপ্ট লেখা হয়। (4) Hybrid — ডেটা ও কীওয়ার্ড ড্রিভেনের মিশ্রণ। (5) Behavior Driven (BDD) — Gherkin syntax ব্যবহার করে। টুল: Selenium, JUnit, TestNG, Cypress, Playwright।",
+      "tags": ["testing", "automation", "framework"]
+    },
+    {
+      "question": "Software Reengineering-এর ধাপগুলো কী কী?",
+      "answer": "Software Reengineering (Reverse Engineering ও Forward Engineering-এর সমন্বয়) — পুরোনো সফটওয়্যারকে আধুনিকীকরণের ধাপ: (1) Inventory Analysis — সকল পুরোনো সিস্টেমের তালিকা তৈরি। (2) Document Restructuring — অপ্রয়োজনীয় ডকুমেন্ট মুছে প্রয়োজনীয় ডকুমেন্ট তৈরি। (3) Reverse Engineering — কোড থেকে ডিজাইন ও চাহিদা ফিরে পাওয়া। (4) Code Restructuring — কোডকে পরিষ্কার ও আরও পাঠযোগ্য করা। (5) Data Restructuring — ডেটাবেস ডিজাইন আধুনিকীকরণ। (6) Forward Engineering — নতুন ডিজাইন থেকে কোড তৈরি।",
+      "tags": ["reengineering", "modernization"]
+    },
+    {
+      "question": "Software Reengineering ও Refactoring-এর পার্থক্য কী?",
+      "answer": "Refactoring: কোডের অভ্যন্তরীণ গঠন পরিবর্তন করা বাহ্যিক আচরণ না পরিবর্তন করে — ছোট ছোট ধাপে, একই ভাষায়। উদাহরণ: ডুপ্লিকেট কোড মুছে ফেলা। Reengineering: বড় আকারের পরিবর্তন — পুরোনো সিস্টেমকে নতুন প্রযুক্তি, ভাষা বা প্ল্যাটফর্মে স্থানান্তর। উদাহরণ: COBOL কোডকে Java-তে রূপান্তর। Refactoring = ছোট পরিমার্জন; Reengineering = বড় পুনর্গঠন।",
+      "tags": ["reengineering", "refactoring", "comparison"]
     }
   ]
 }

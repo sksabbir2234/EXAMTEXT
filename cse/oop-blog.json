@@ -423,6 +423,156 @@
       "question": "Decorator Pattern কী?",
       "answer": "Decorator Pattern হলো structural design pattern যা runtime-তে object-র behavior dynamically add/modify করে। wrapper class ব্যবহার করে। inheritance-এর বদলে composition ব্যবহার করে। Java I/O streams (BufferedInputStream wraps InputStream) — classic example।",
       "tags": ["design-pattern", "decorator", "structural"]
+    },
+    {
+      "question": "Covariant Return Type — একটি বিস্তারিত উদাহরণ দাও।",
+      "answer": "ধরো Animal class-এর clone() method Animal return করে। Dog subclass clone() method-কে override করে Dog return করে। এটাই Covariant Return Type। পুরোনো code-তে Animal a = dog.clone(); লেখা যায় — new type cast লাগে না। Java 5+ থেকে covariant return supported। C++-তেও same rule — derived class pointer return করা যায়।",
+      "tags": ["covariant-return", "overriding", "gate", "isro"]
+    },
+    {
+      "question": "Covariant Return Type-এর সীমাবদ্ধতা কী কী?",
+      "answer": "সীমাবদ্ধতা: (1) Primitive types covariant হয় না — int থেকে long override করা যায় না। (2) Return type-র class hierarchy থাকতে হয়। (3) Contravariant parameter allowed নয় — parameter type same থাকতে হয়। (4) Java-তে void return type covariant হয় না। (5) checked exception-ও covariant হতে পারে (narrower exception)।",
+      "tags": ["covariant-return", "limitations", "gate"]
+    },
+    {
+      "question": "Liskov Substitution Principle (LSP) — সংজ্ঞা ও উদাহরণ দাও।",
+      "answer": "LSP অনুযায়ী subclass object parent class object দিয়ে replace করা যায় যাতে program-র correctness নষ্ট না হয়। উদাহরণ: Rectangle class-এর area() method আছে। Square extends Rectangle — কিন্তু Square setWidth/setHeight দুটোই পরিবর্তন করে। যদি Rectangle r = new Square() ধরে setWidth(5) ও setHeight(4) call করি, area 20 নয় বরং 16 হবে — LSP ভঙ্গ।",
+      "tags": ["liskov-substitution", "solid", "gate", "tcs"]
+    },
+    {
+      "question": "LSP ভঙ্গ কীভাবে ঘটে এবং কীভাবে এড়ানো যায়?",
+      "answer": "LSP ভঙ্গ ঘটে যখন subclass parent class-র contract ভাঙে — যেমন override করে parent-র behavior change করে। এড়াতে: (1) Design by contract — precondition, postcondition, invariants maintain করো। (2) Composition use করো inheritance-এর বদলে। (3) Template Method Pattern ব্যবহার করো। (4) Abstract Base Class-এ non-overridable methods রাখো।",
+      "tags": ["liskov-substitution", "solid", "design"]
+    },
+    {
+      "question": "Interface বনাম Abstract Class — বাস্তব প্রকল্পে কখন কী ব্যবহার করবে?",
+      "answer": "Interface: 'can-do' relationship, multiple contracts implement, API contract define করতে। যেমন: Serializable, Comparable, Runnable। Abstract Class: 'is-a' relationship, common code share করতে, constructor/fields লাগলে। যেমন: AbstractAnimal with common eat() implementation। Database ORM layer-এ AbstractRepository extends abstract class, interfaces implement।",
+      "tags": ["interface", "abstract-class", "real-world", "tcs"]
+    },
+    {
+      "question": "বাস্তব প্রকল্পে Interface-এর ব্যবহার কোথায় হয়?",
+      "answer": "বাস্তব ব্যবহার: (1) DAO pattern — UserDAO interface, UserRepository implementation। (2) Strategy Pattern — PaymentProcessor interface, Stripe/PayPal implementation। (3) Dependency Injection — service interface, multiple implementations। (4) API design — third-party codeকে specific implementation না জানিয়ে contract define করা। (5) Microservices — contract-first development।",
+      "tags": ["interface", "use-cases", "real-world"]
+    },
+    {
+      "question": "Deep Copy ও Shallow Copy — C++-তে কীভাবে implement করে?",
+      "answer": "Shallow Copy: default copy constructor pointer-র value copy করে (shallow)। Deep Copy: custom copy constructor-তে new memory allocate করে data copy করে। উদাহরণ: String class-এ char* ptr থাকলে deep copy-তে new char[strlen+1] allocate করে strcpy করতে হয়। shallow copy-তে double free error হতে পারে।",
+      "tags": ["deep-copy", "shallow-copy", "cpp", "gate"]
+    },
+    {
+      "question": "Deep Copy ও Shallow Copy — কোনটি কখন ব্যবহার করবে?",
+      "answer": "Shallow Copy: যখন object copy-র পর original object আর ব্যবহার হবে না, বা reference counting ব্যবহার হয়। Deep Copy: যখন independent copy লাগে — যেমন: backup তৈরি, undo/redo, multi-threaded access। Java-তে clone() default shallow, Collections.copy() deep copy করে। Python-তে copy.deepcopy()।",
+      "tags": ["deep-copy", "shallow-copy", "use-cases"]
+    },
+    {
+      "question": "Object Slicing কী (C++)?",
+      "answer": "Object Slicing হলো derived class object কে base class-এ assign করার সময় derived-র extra members slice (বাদ) হয়ে যাওয়া। উদাহরণ: Derived d; Base b = d; — এখানে d-র derived-specific data slice হয়ে গেছে। base pointer/reference ব্যবহার করলে slicing হয় না। virtual functions থাকলেও slicing হয় — polymorphism কাজ করে না।",
+      "tags": ["object-slicing", "cpp", "gate", "isro"]
+    },
+    {
+      "question": "Object Slicing-এর সমস্যা কী কী এবং কীভাবে এড়ানো যায়?",
+      "answer": "সমস্যা: (1) polymorphism কাজ করে না — derived behavior lost হয়। (2) data loss হয়। (3) unexpected behavior। এড়াতে: (1) Base class pointer/reference use করো — Base* ptr = &derivedObj। (2) STL containers-তে pointers বা smart pointers ব্যবহার করো। (3) pass-by-reference ব্যবহার করো। (4) slicing detect করতে compiler warnings enable করো।",
+      "tags": ["object-slicing", "cpp", "prevention"]
+    },
+    {
+      "question": "Rule of Three কী (C++)?",
+      "answer": "Rule of Three অনুযায়ী যদি একটি class-এর নিম্নলিখিত ৩টির মধ্যে একটি define করতে হয়, তাহলে তিনটিই define করতে হয়: (1) Destructor। (2) Copy Constructor। (3) Copy Assignment Operator। কারণ custom destructor থাকলে compiler-generated versions shallow copy করে — memory corruption হতে পারে।",
+      "tags": ["rule-of-three", "cpp", "memory-management"]
+    },
+    {
+      "question": "Rule of Five কী (C++)?",
+      "answer": "Rule of Five হলো Rule of Three-র extension। যদি ৫টি special member functions-এর একটি define করতে হয়, তাহলে সব ৫টিই define করতে হয়: (1) Destructor। (2) Copy Constructor। (3) Copy Assignment Operator। (4) Move Constructor। (5) Move Assignment Operator। C++11-এ move semantics যোগ হওয়ায় rule of five প্রয়োজন।",
+      "tags": ["rule-of-five", "cpp", "move-semantics", "gate"]
+    },
+    {
+      "question": "RAII Pattern কী?",
+      "answer": "RAII (Resource Acquisition Is Initialization) হলো C++-র resource management idiom। resource constructor-এ acquire করা হয়, destructor-এ release করা হয়। stack unwinding automatically destructor call করে। smart pointers (unique_ptr, shared_ptr), lock_guard, fstream — সব RAII pattern অনুসরণ করে। memory leak, resource leak avoid হয়।",
+      "tags": ["raii", "cpp", "resource-management", "gate"]
+    },
+    {
+      "question": "RAII-র সুবিধা কী কী?",
+      "answer": "সুবিধা: (1) Exception safety — exception হলেও resource release হয়। (2) Automatic cleanup — manual delete/Release লাগে না। (3) Code simplification — scope-based management। (4) Memory leak prevention। (5) Thread safety — lock_guard automatically unlock করে। (6) Deterministic destruction — predictable resource release। GATE/ISRO-তে RAII নিয়ে প্রশ্ন আসে।",
+      "tags": ["raii", "cpp", "advantages"]
+    },
+    {
+      "question": "Composition over Inheritance — debate-র পক্ষে ও বিপক্ষে যুক্তি কী কী?",
+      "answer": "পক্ষে: (1) Loose coupling। (2) Runtime behavior change সম্ভব। (3) Testability ভালো। (4) SOLID principles maintain সহজ। বিপক্ষে: (1) Code duplication বাড়তে পারে। (2) Boilerplate code বাড়ে। (3) Deep delegation chains confusing। (4) Sometimes inheritance more natural — 'is-a' relationship genuine হলে। Practical-এ দুটোই ব্যবহার করতে হয়।",
+      "tags": ["composition-over-inheritance", "debate", "design", "tcs"]
+    },
+    {
+      "question": "SOLID — Single Responsibility Principle (SRP) একটি বাস্তব উদাহরণ দাও।",
+      "answer": "উদাহরণ: Employee class-তে calculateSalary(), saveToDatabase(), generateReport() — তিনটি responsibility। SRP ভঙ্গ। সমাধান: SalaryCalculator (calculation), EmployeeRepository (persistence), ReportGenerator (report) — আলাদা আলাদা class। প্রতিটি class-এর একটি reason to change। maintainability, testability improve হয়।",
+      "tags": ["solid", "single-responsibility", "real-example"]
+    },
+    {
+      "question": "SOLID — Open/Closed Principle (OCP) একটি বাস্তব উদাহরণ দাও।",
+      "answer": "উদাহরণ: Payment system-তে PaymentProcessor class-তে if-else দিয়ে CreditCard, PayPal, Crypto handle করা — OCP ভঙ্গ। সমাধান: Payment interface define করো, প্রতিটি payment type একটি class implement করো। নতুন payment method যোগ করতে existing code modify না করে new class লিখো। polymorphism দিয়ে achieve হয়।",
+      "tags": ["solid", "open-closed", "real-example"]
+    },
+    {
+      "question": "SOLID — Interface Segregation Principle (ISP) একটি বাস্তব উদাহরণ দাও।",
+      "answer": "উদাহরণ: Worker interface-তে work(), eat(), sleep() সব method আছে। Robot class-কে eat/sleep implement করতে হচ্ছে — ISP ভঙ্গ। সমাধান: Workable, Feedable, Sleepable — আলাদা interface। Robot implement করবে শুধু Workable। fat interface avoid হয়, client code unnecessary methods depend করে না।",
+      "tags": ["solid", "interface-segregation", "real-example"]
+    },
+    {
+      "question": "SOLID — Dependency Inversion Principle (DIP) একটি বাস্তব উদাহরণ দাও।",
+      "answer": "উদাহরণ: OrderProcessor class directly MySQLDatabase instantiate করছে — DIP ভঙ্গ। সমাধান: Database interface define করো। OrderProcessor constructor-তে Database parameter নাও (Dependency Injection)। MySQLDatabase বা PostgreSQLDatabase — যেকোনো implementation ব্যবহার করা যায়। high-level module abstraction-র উপর depend করে।",
+      "tags": ["solid", "dependency-inversion", "real-example"]
+    },
+    {
+      "question": "Singleton Pattern — thread-safe implementation কীভাবে করবে?",
+      "answer": "Double-Checked Locking: private static volatile Singleton instance। getInstance() method-তে if(instance==null) check করে synchronized block-এ initialize করে। volatile keyword ছাড়া instruction reordering-এর সমস্যা হয়। বিকল্প: Bill Pugh Singleton — static inner class যা JVM class loading-এ thread-safe। enum-based Singleton — serialization ও reflection attack immune।",
+      "tags": ["singleton", "thread-safe", "design-pattern", "gate", "tcs"]
+    },
+    {
+      "question": "Singleton Pattern-এর সমস্যা কী কী?",
+      "answer": "সমস্যা: (1) Global state — hidden dependencies। (2) Testing difficulty — mock করা কঠিন। (3) Tight coupling। (4) Memory — garbage collect হয় না। (5) Serialization — deserialization নতুন instance তৈরি করতে পারে। (6) Reflection attack। (7) Multithreading — lazy initialization-এ race condition। Java-তে enum Singleton best practice।",
+      "tags": ["singleton", "problems", "design-pattern"]
+    },
+    {
+      "question": "Observer Pattern — বাস্তব ব্যবহার কোথায় হয়?",
+      "answer": "বাস্তব ব্যবহার: (1) Event Listeners — button click-এ multiple handlers। (2) MVC architecture — Model data change করলে Views update হয়। (3) News Agency/Subscriber model। (4) Stock market ticker — price change notification। (5) Chat application — message broadcast। (6) Android LiveData — UI observe করে। loose coupling maintain করে subject ও observer-র মধ্যে।",
+      "tags": ["observer", "design-pattern", "use-cases", "tcs"]
+    },
+    {
+      "question": "Strategy Pattern — বাস্তব ব্যবহার কোথায় হয়?",
+      "answer": "বাস্তব ব্যবহার: (1) Sorting — BubbleSort, QuickSort, MergeSort interchangeable। (2) Payment — CreditCard, PayPal, Bitcoin একই interface-তে। (3) Compression — ZIP, RAR, GZIP। (4) Authentication — Google, Facebook, Email login। (5) Route calculation — fastest, cheapest, shortest route। runtime-তে algorithm swap করা যায়, OCP maintain হয়।",
+      "tags": ["strategy", "design-pattern", "use-cases"]
+    },
+    {
+      "question": "Diamond Problem — C++ virtual inheritance ও Java interface কীভাবে সমাধান করে?",
+      "answer": "C++: virtual inheritance ব্যবহার করে — class B: virtual public A, class C: virtual public A। D: B, C inherit করলে A-র একটি মাত্র copy থাকে। memory layout-তে virtual base pointer যোগ হয়। Java: diamond problem class-এ সম্ভব নয়। interface দিয়ে multiple inheritance possible — default method conflict হলে child class-কে override করতে হয়।",
+      "tags": ["diamond-problem", "virtual-inheritance", "cpp", "java", "gate"]
+    },
+    {
+      "question": "Method Hiding ও Method Overriding-এর পার্থক্য কী?",
+      "answer": "Method Overriding: instance methods-এর সাথে ঘটে, runtime polymorphism কাজ করে, @Override annotation। Method Hiding: static methods-এর সাথে ঘটে, polymorphism কাজ করে না। Parent reference: overriding-তে child method call হয়, hiding-তে parent method call হয়। compile time binding hiding-তে, runtime binding overriding-তে।",
+      "tags": ["method-hiding", "method-overriding", "comparison", "gate"]
+    },
+    {
+      "question": "Base pointer দিয়ে polymorphic behavior কীভাবে ঘটে?",
+      "answer": "Base pointer derived object point করলে virtual function call-এ derived class-র method execute হয়। mechanism: vtable — প্রতিটি virtual class-এর একটি table। object-তে vptr থাকে pointing to vtable। call হলে vptr দিয়ে vtable access, correct method jump। non-virtual method call-এ compile time binding। Base* ptr = new Derived(); ptr->show(); — Derived-র show() call হবে।",
+      "tags": ["base-pointer", "polymorphism", "vtable", "gate", "isro"]
+    },
+    {
+      "question": "Polymorphic behavior-এ object slicing কীভাবে সমস্যা তৈরি করে?",
+      "answer": "Base b = Derived(); যদি Derived-র virtual methods থাকে, b তে vptr lost হয় — slicing। b.show() call করলে Base-র show() call হবে, Derived-র নয়। solution: Base* ptr = new Derived(); বা Base& ref = derivedObj; ব্যবহার করো। STL vector<Base> তে slice হবে, vector<Base*> বা vector<unique_ptr<Base>> ব্যবহার করো।",
+      "tags": ["polymorphism", "object-slicing", "base-pointer"]
+    },
+    {
+      "question": "C++-তে virtual destructor কেন প্রয়োজন?",
+      "answer": "Base class-এ destructor virtual না হলে Base pointer delete করার সময় Derived-র destructor call হয় না — memory/resource leak হয়। virtual destructor ensure করে polymorphic class-সঠিকভাবে destroy হয়। যেমন: Base* ptr = new Derived(); delete ptr; — virtual destructor থাকলে Derived-র destructor call হবে। Rule: polymorphic class-তে সবসময় virtual destructor রাখো।",
+      "tags": ["virtual-destructor", "cpp", "memory-management", "gate"]
+    },
+    {
+      "question": "Java-তে multiple inheritance class-দিয়ে কেন সম্ভব নয়?",
+      "answer": "Java multiple inheritance class-দিয়ে সম্ভব নয় diamond problem avoid করার জন্য। যদি Class D extends B, C এবং B, C উভয়ই extends A — D-তে A-র method দুবার inherit হয়, ambiguity তৈরি হয়। Java solution: class single inheritance, interface multiple inheritance। default method conflict হলে compiler error দেয়, child class-কে explicitly override করতে হয়।",
+      "tags": ["multiple-inheritance", "java", "diamond-problem"]
+    },
+    {
+      "question": "Polymorphism ছাড়া OOP কেন অসম্পূর্ণ?",
+      "answer": "Polymorphism ছাড়া OOP-এর মূল সুবিধাগুলো হারিয়ে যায়: (1) Code flexibility নেই — প্রতিটি derived type-এর জন্য separate code লিখতে হয়। (2) Open/Closed Principle impossible। (3) Design patterns (Strategy, Observer, Factory) implement করা যায় না। (4) Base pointer দিয়ে generic code লেখা সম্ভব নয়। (5) Runtime behavior change করা যায় না। polymorphism ব্যবহার করলেই DRY, SOLID maintain হয়।",
+      "tags": ["polymorphism", "oop", "importance", "gate"]
     }
   ]
 }

@@ -488,6 +488,121 @@
       "question": "Pipeline Register কী?",
       "answer": "Pipeline Register হলো pipeline stages-এর মধ্যে থাকে যা intermediate results store করে। এতে প্রতিটি stage স্বাধীনভাবে কাজ করতে পারে। Pipeline CPI ≈ 1 (ideal), তবে hazards (structural, data, control) performance degrade করে।",
       "tags": ["pipeline-register", "processor"]
+    },
+    {
+      "question": "K-Map-এ Don't Care Condition সহ উদাহরণ দাও।",
+      "answer": "ধরো F(A,B,C,D) = Σ(1,3,5,7,8,12) + d(2,4,9,10)। এখানে d(...) don't care conditions। K-Map-এ 1-গুলোকে group করার সময় X-কে 1 বা 0 হিসেবে যেকোনোভাবে ব্যবহার করা যায়। যেমন: cell 2,4,9,10-কে 1 ধরে 8-cell group তৈরি করলে F = D' পাওয়া যায় — অন্যথায় expression বড় হতো। Don't Care ব্যবহার করে group যত বড় করা যায়, expression তত minimized হয়।",
+      "tags": ["k-map", "dont-care", "example"]
+    },
+    {
+      "question": "K-Map-এ 3-variable Don't Care উদাহরণ কীভাবে solve করে?",
+      "answer": "F(A,B,C) = Σ(0,1,5) + d(2,7)। 3-variable K-Map (2×4): প্রথম row (A=0): BC=00→1, BC=01→1, BC=11→X, BC=10→X। দ্বিতীয় row (A=1): BC=00→0, BC=01→1, BC=11→X, BC=10→0। cell 0,1,2 (A=0, BC=00,01,10) এবং cell 1,5 (A=0,1; BC=01) group করে: F = B'C' + C। Don't Care 7-কে 1 ধরে group বড় করে optimized result পাওয়া যায়।",
+      "tags": ["k-map", "dont-care", "3-variable"]
+    },
+    {
+      "question": "NAND gate দিয়ে F = AB + CD function কীভাবে implement করে?",
+      "answer": "De Morgan's theorem ব্যবহার করে: F = AB + CD = ((AB)' · (CD)')'। প্রথমে A,B দিয়ে NAND, C,D দিয়ে NAND — দুটি NAND gate। তারপর দুটি NAND output-কে আবার NAND gate-এ দিলে F = ((AB)' · (CD)')' = AB + CD। মোট 3টি NAND gate লাগে। Universal gate হিসেবে NAND দিয়ে যেকোনো SOP expression implement করা যায়।",
+      "tags": ["nand-gate", "implementation", "universal"]
+    },
+    {
+      "question": "NOR gate দিয়ে F = (A+B)(C+D) function কীভাবে implement করে?",
+      "answer": "De Morgan's theorem: F = (A+B)(C+D) = ((A+B)' + (C+D)')'। প্রথমে A,B দিয়ে NOR, C,D দিয়ে NOR — দুটি NOR gate। তারপর দুটি output-কে NOR gate-এ দিলে F = ((A+B)' + (C+D)')' = (A+B)(C+D)। মোট 3টি NOR gate লাগে। NOR gate দিয়ে POS expression directly implement করা যায়।",
+      "tags": ["nor-gate", "implementation", "universal"]
+    },
+    {
+      "question": "NAND gate দিয়ে XOR gate কীভাবে তৈরি করে?",
+      "answer": "XOR = A'B + AB' = (AB')(A'B)' = ((AB')' · (A'B)')'। ধাপ: (1) A,B দিয়ে NAND → (AB)' (2) (AB)',A দিয়ে NAND → A'(AB)'' = A'B (3) (AB)',B দিয়ে NAND → B'(AB)' = AB' (4) 2 ও 3-এর output NAND → (A'B · AB')' = (A'B + AB')' = (XOR)' (5) 4-এর output আবার NAND as NOT → XOR। মোট 4টি NAND gate লাগে।",
+      "tags": ["nand-gate", "xor", "implementation"]
+    },
+    {
+      "question": "8:1 Multiplexer দিয়ে Boolean function F(A,B,C) = Σ(1,2,5,7) কীভাবে implement করে?",
+      "answer": "8:1 MUX-তে 3 select lines (A,B,C) এবং 8 data inputs (I0-I7) লাগে। Truth Table-তে: m1=1,I1=1; m2=1,I2=1; m5=1,I5=1; m7=1,I7=1; বাকি I0=I3=I4=I6=0। I0=0, I1=1, I2=1, I3=0, I4=0, I5=1, I6=0, I7=1। A,B,C select lines-এ connect করলে F implement হয়। 8:1 MUX দিয়ে 3-variable-এর যেকোনো function সরাসরি implement করা যায়।",
+      "tags": ["multiplexer", "implementation", "8-1-mux"]
+    },
+    {
+      "question": "4:1 Multiplexer দিয়ে 2-variable Boolean function F(A,B) = Σ(0,3) কীভাবে implement করে?",
+      "answer": "4:1 MUX: select lines S1=A, S0=B। Data inputs: I0=F(0,0)=1, I1=F(0,1)=0, I2=F(1,0)=0, I3=F(1,1)=1। অর্থাৎ I0=1, I1=0, I2=0, I3=1। MUX-এ connect করলে A=0,B=0 হলে I0=1, A=1,B=1 হলে I3=1 output হবে। 4:1 MUX দিয়ে 2-variable function সরাসরি implement করা যায়।",
+      "tags": ["multiplexer", "implementation", "4-1-mux"]
+    },
+    {
+      "question": "3:8 Decoder দিয়ে F(A,B,C) = Σ(0,3,5) কীভাবে implement করে?",
+      "answer": "3:8 Decoder: 3 inputs (A,B,C), 8 outputs (Y0-Y7)। প্রতিটি minterm-এর জন্য একটি AND gate লাগে। F = Y0 + Y3 + Y5। তিনটি OR gate (বা 3-input OR gate) দিয়ে decoder-এর Y0, Y3, Y5 output যোগ করলে F implement হয়। Decoder + OR gate দিয়ে যেকোনো SOP function implement করা যায়।",
+      "tags": ["decoder", "implementation", "3-8-decoder"]
+    },
+    {
+      "question": "1:4 Demultiplexer কীভাবে কাজ করে এবং এর application কী?",
+      "answer": "1:4 DEMUX: 1 data input, 2 select lines (S1,S0), 4 outputs (Y0-Y3)। S1=0,S0=0 হলে Y0=data, S1=0,S0=1 হলে Y1=data, ইত্যাদি। Boolean expression: Y0 = S1'S0'D, Y1 = S1'S0D, Y2 = S1S0'D, Y3 = S1S0D। Application: Data routing, serial-to-parallel conversion, memory chip selection। 3:8 Decoder হলো 1:8 DEMUX input enable সহ।",
+      "tags": ["demultiplexer", "1-4-demux", "application"]
+    },
+    {
+      "question": "4-bit Ripple Carry Adder-এ total propagation delay কত এবং Carry Look-Ahead Adder-এ কত?",
+      "answer": "4-bit Ripple Carry Adder: প্রতিটি Full Adder-এ carry generate/propagate-এ 1 gate delay + sum-এ 1 gate delay = 2 gate delays per FA। Total carry delay = 4 × 2 = 8 gate delays (carry ripple করে)। 4-bit CLA: Generate ও Propagate 1 gate delay, Carry computation 2 gate delays, Sum 1 gate delay। Total ≈ 4 gate delays। CLA almost 2× দ্রুত। n-bit-এ Ripple: O(n), CLA: O(log n)।",
+      "tags": ["ripple-carry", "carry-look-ahead", "timing"]
+    },
+    {
+      "question": "Master-Slave JK Flip-Flop কীভাবে কাজ করে?",
+      "answer": "Master-Slave JK Flip-Flop: দুটি JK Flip-Flop (Master ও Slave) series-এ connected। Clock high-এ Master active (input capture করে), Slave inactive। Clock low-এ Master inactive, Slave active (Master-র output Slave-তে transfer হয়)। এতে one flip-flop per clock cycle output change হয়, racing prevent হয়। Positive edge-triggered Master-Slave-এ clock high থাকাকালীন Master latch করে, falling edge-তে Slave output দেয়।",
+      "tags": ["master-slave", "jk-flip-flop", "edge-triggered"]
+    },
+    {
+      "question": "3-bit Asynchronous (Ripple) Up Counter-এর timing diagram কেমন হয় এবং total delay কত?",
+      "answer": "3-bit Ripple Up Counter: 3টি T Flip-Flop (JK দিয়ে J=K=1)। Q0 external clock-এ toggle হয়। Q1 Q0-র output থেকে clock পায়। Q2 Q1-র output থেকে clock পায়। Sequence: 000→001→010→011→100→101→110→111→000। Each flip-flop-এর propagation delay = tp。Total worst-case delay = 3 × tp (Q2 stable হতে 3tp সময় লাগে)। High frequency-তে glitch ও timing violation হতে পারে।",
+      "tags": ["asynchronous-counter", "ripple-counter", "timing-analysis"]
+    },
+    {
+      "question": "Ring Counter ও Johnson Counter-এর বিস্তারিত পার্থক্য কী?",
+      "answer": "Ring Counter: n-bit shift register, last output Qn-1 direct feedback, n states, প্রতিটি state-এ একটিমাত্র 1 (1000, 0100, 0010, 0001)। Johnson Counter: n-bit shift register, last output inverted feedback (Qn-1'), 2n states, pattern: 0000→1000→1100→1110→1111→0111→0011→0001→0000। Ring Counter-এ decoding circuit লাগে, Johnson Counter-এ decoder সহজ (adjacent states differ by 1 bit)। Johnson Counter glitch-free decoded output দেয়।",
+      "tags": ["ring-counter", "johnson-counter", "comparison"]
+    },
+    {
+      "question": "PLA ও PAL-এর বিস্তারিত পার্থক্য কী?",
+      "answer": "PLA (Programmable Logic Array): Programmable AND plane + Programmable OR plane। যেকোনো SOP expression implement করা যায়, কিন্তু programming জটিল ও খরচ বেশি। PAL (Programmable Array Logic): Programmable AND plane + Fixed OR plane। PAL-এ প্রতিটি OR gate-এ নির্দিষ্ট সংখ্যক AND term fix থাকে (যেমন 8-10)। PAL সহজ ও সস্তা, তবে flexible কম। PLA-তে product terms যেকোনো output-এ share করা যায়, PAL-এ যায় না। Modern CPLD PAL architecture-এর উপর ভিত্তি করে।",
+      "tags": ["pla", "pal", "programmable-logic"]
+    },
+    {
+      "question": "IEEE 754 Single Precision-এ 13.625 কীভাবে represent করে?",
+      "answer": "ধাপ 1: 13 = 1101₂। 0.625 = 0.101₂ (0.625×2=1.25→1, 0.25×2=0.5→0, 0.5×2=1→1)। সুতরাং 13.625 = 1101.101₂। ধাপ 2: Normalized form = 1.101101 × 2³। ধাপ 3: Sign = 0 (positive)। Exponent = 3 + 127 = 130 = 10000010₂। Mantissa = 10110100000000000000000₂। ধাপ 4: Final binary = 0 10000010 10110100000000000000000। Hex: 0x415A0000।",
+      "tags": ["ieee-754", "single-precision", "conversion"]
+    },
+    {
+      "question": "IEEE 754-তে 0.1 (decimal) কীভাবে represent করে এবং কেন precise হয় না?",
+      "answer": "0.1₁₀ = 0.0001100110011...₂ (বিরতিহীন repeating pattern)। Normalized = 1.1001100110011... × 2⁻⁴। Sign = 0। Exponent = -4 + 127 = 123 = 01111011₂। Mantissa 23 bits-তে truncate করতে হয়: 10011001100110011001100। Repeating pattern কারণে exact representation সম্ভব নয়। এটিই floating point arithmetic-এ rounding error-র মূল কারণ। 0.1 + 0.2 ≠ 0.3 সমস্যার পেছনে এই কারণ।",
+      "tags": ["ieee-754", "precision", "rounding-error"]
+    },
+    {
+      "question": "2's Complement-এ n-bit signed number-এর range কত এবং overflow কীভাবে detect করে?",
+      "answer": "n-bit 2's Complement range: -2^(n-1) to 2^(n-1)-1। উদাহরণ: 4-bit → -8 to +7, 8-bit → -128 to +127। Overflow detection: (1) দুটি positive number যোগে negative result হলে, বা দুটি negative যোগে positive result হলে overflow হয়। (2) XOR gate দিয়ে: Overflow = Cn-1 ⊕ Cn (carry-in ও carry-out of MSB-র XOR)। (3) 4-bit: 7+1 = 0111+0001 = 1000 = -8 (overflow!) কারণ +8 > +7।",
+      "tags": ["2s-complement", "range", "overflow"]
+    },
+    {
+      "question": "Barrel Shifter কী এবং এর কাজ কী?",
+      "answer": "Barrel Shifter হলো এমন combinational circuit যা n-bit data-কে এক clock cycle-তে m positions পর্যন্ত shift করতে পারে। এতে multiple stages of multiplexers ব্যবহৃত হয়। 8-bit Barrel Shifter: 3 select lines (0-7 positions shift), 8 stages of 2:1 MUX। প্রতিটি stage-এ 1-bit shift করা যায়। Barrel Shifter ALU-তে shift/rotate operations-এ ব্যবহৃত হয়। Regular shift register-এ n-cycle লাগে, Barrel Shifter-এ শুধু 1-cycle।",
+      "tags": ["barrel-shifter", "combinational", "shift"]
+    },
+    {
+      "question": "4-bit Magnitude Comparator কীভাবে কাজ করে?",
+      "answer": "4-bit Comparator: দুটি 4-bit number A(A3A2A1A0) ও B(B3B2B1B0) compare করে। 3 outputs: A>B, A<B, A=B। ধাপ: MSB থেকে LSB পর্যন্ত compare করো। A>B: A3>B3 অথবা (A3=B3 AND A2>B2) অথবা (A3=B3 AND A2=B2 AND A1>B1) অথবা (সব equal AND A0>B0)। A=B: সব bit equal (A3=B3 AND A2=B2 AND A1=B1 AND A0=B0)। XOR gate দিয়ে equality check: (Ai ⊕ Bi)' = 1 হলে Ai=Bi। Cascading-এ দুটি 4-bit comparator যুক্ত করে 8-bit comparator তৈরি করা যায়।",
+      "tags": ["comparator", "magnitude", "4-bit"]
+    },
+    {
+      "question": "F = Σ(0,1,5,7,8,10,14) + d(2,4,12) K-Map-এ solve করো।",
+      "answer": "4-variable K-Map (4×4): Row-এ AB, Column-এ CD। 1-cells: 0(0000),1(0001),5(0101),7(0111),8(1000),10(1010),14(1110)। X-cells: 2(0010),4(0100),12(1100)। Grouping: (1) 0,1,4,5 (A'B'·C'D'+A'B'·C'D+A'B·C'D+A'B·C'D = A'C' using X as 1) — wait, let me recalculate. Group 0,1,8,9? No, 9 is not a 1. Group 0,1 (A'B'C'), 0,4,8,12 (B'C'), 5,7 (A'BD), 8,10 (AB'D'), 14,12 (ACD'). Optimized: F = B'C' + A'BD + AB'D' + ACD' (with don't cares used as 1 where beneficial).",
+      "tags": ["k-map", "4-variable", "dont-care", "example"]
+    },
+    {
+      "question": "NAND gate দিয়ে F = (A+B)(C+D)(E) function implement করো।",
+      "answer": "F = (A+B)(C+D)E। De Morgan's: F = (((A+B)') + ((C+D)') + E')'। ধাপ: (1) A,B → NOR gate → (A+B)' (2) C,D → NOR gate → (C+D)' (3) E → NOT gate (NAND as inverter) → E' (4) 1,2,3 outputs → 3-input NOR gate → ((A+B)'+(C+D)'+E')' = (A+B)(C+D)E। মোট 4 gates। বিকল্পভাবে: (A+B) ও (C+D) আগে OR gate (2 NOR gates দিয়ে) করে তারপর AND করতে হয়।",
+      "tags": ["nand-gate", "implementation", "boolean-function"]
+    },
+    {
+      "question": "16:1 Multiplexer দিয়ে F(A,B,C,D) = Σ(0,3,6,9,12,15) implement করো।",
+      "answer": "16:1 MUX: 4 select lines (A,B,C,D), 16 data inputs (I0-I15)। Minterms 0,3,6,9,12,15 output 1, বাকি 0। I0=1, I3=1, I6=1, I9=1, I12=1, I15=1, বাকি I1=I2=I4=I5=I7=I8=I10=I11=I13=I14=0। A,B,C,D কে select lines S3,S2,S1,S0 হিসেবে connect করো। যেকোনো 4-variable function 16:1 MUX দিয়ে directly implement করা যায়। 8:1 MUX ব্যবহার করলে D variable data inputs-এ logic লাগবে।",
+      "tags": ["multiplexer", "16-1-mux", "implementation"]
+    },
+    {
+      "question": "4-to-10 Line Decoder (BCD to Decimal Decoder) কী এবং এর application কী?",
+      "answer": "4-to-10 Decoder: 4-bit BCD input (0000-1001), 10 outputs (0-9)। 1010-1111 input invalid। প্রতিটি BCD code-এর জন্য একটি output active high। Application: (1) 7-segment display-এ digit selection (2) Keypad decoding (3) Memory bank selection (4) Address decoding। BCD to 7-segment decoder (CD4511 চিপ) হলো এর সবচেয়ে জনপ্রিয় application। 3:8 Decoder enable দিয়ে 4:10 Decoder তৈরি করা যায়।",
+      "tags": ["decoder", "bcd", "application"]
     }
   ]
 }

@@ -418,6 +418,161 @@
       "question": "Memory-Mapped I/O কী?",
       "answer": "Memory-Mapped I/O-তে I/O Device-কে Main Memory-র অ্যাড্রেস স্পেসে Map করা হয়। CPU একই অপারেশন দিয়ে Memory ও I/O Device-তে অ্যাক্সেস করে। Port-Mapped I/O-তে আলাদা I/O Instructions থাকে। Memory-Mapped I/O বেশি ফ্লেক্সিবল।",
       "tags": ["memory-mapped-io", "io", "hardware"]
+    },
+    {
+      "question": "RTOS-এর প্রধান বৈশিষ্ট্য কী কী?",
+      "answer": "RTOS-এর প্রধান বৈশিষ্ট্য: (1) Deterministic — প্রতিটি Operation-এর সময় আগে থেকে নির্ধারিত। (2) Low Latency — Interrupt থেকে Response দিতে কম সময় লাগে। (3) Priority-Based Scheduling — উচ্চ অগ্রাধিকারের Task আগে Execute হয়। (4) Reliability — সব সময় নির্ভরযোগ্য ভাবে কাজ করে। (5) Minimal Memory Footprint — কম মেমরিতে চলে।",
+      "tags": ["rtos", "real-time", "features"]
+    },
+    {
+      "question": "Hard Real-Time ও Soft Real-Time System-এর পার্থক্য কী?",
+      "answer": "Hard Real-Time: Deadline মিস হলে Catastrophic Failure ঘটে। যেমন: Pacemaker, Anti-Lock Braking System, Airbag System। সময়ের শর্ত অত্যন্ত কঠোর। Soft Real-Time: Deadline মিস হলে Quality of Service কমে যায়, কিন্তু System Failure হয় না। যেমন: Video Streaming, VoIP, Online Gaming।",
+      "tags": ["rtos", "hard-real-time", "soft-real-time"]
+    },
+    {
+      "question": "RTOS Scheduling-এ Rate Monotonic Scheduling (RMS) কী?",
+      "answer": "RMS হলো Static Priority Scheduling Algorithm যা Hard Real-Time System-এ ব্যবহৃত হয়। যে Task-এর Period কম, তার Priority বেশি। নিশ্চিত করা হয় যে সব Task Deadline-এর মধ্যে সম্পন্ন হয়। Utilization Bound: U = Σ(Ci/Pi) ≤ n(2^(1/n) - 1)। n → ∞ হলে U ≈ 0.69।",
+      "tags": ["rms", "rtos", "scheduling", "rate-monotonic"]
+    },
+    {
+      "question": "RTOS-এ Deadlock Avoidance কীভাবে করা হয়?",
+      "answer": "RTOS-এ Deadlock Avoidance: (1) Priority Inheritance Protocol — কম Priority Task যদি রিসোর্স ধরে থাকে, তাহলে উচ্চ Priority Task-এর Priority ধারণ করে। (2) Priority Ceiling Protocol — প্রতিটি রিসোর্সের একটি সর্বোচ্চ Priority নির্ধারিত থাকে। (3) Resource Preemption — প্রয়োজনে রিসোর্স জোর করে নেওয়া।",
+      "tags": ["rtos", "deadlock", "priority-inheritance"]
+    },
+    {
+      "question": "CPU Cache কী এবং এটি কীভাবে কাজ করে?",
+      "answer": "CPU Cache হলো একটি ছোট, দ্রুত SRAM Memory যা CPU ও Main Memory-এর মধ্যে Buffer হিসেবে কাজ করে। Cache Line দিয়ে Data Block আকারে সংরক্ষিত হয়। L1 Cache (সবচেয়ে দ্রুত, 1-64KB), L2 Cache (মধ্যম গতি, 256KB-1MB), L3 Cache (বৃহৎ, 2MB-50MB)। Cache Hit হলে সরাসরি Data পাওয়া যায়, Miss হলে Memory থেকে আনতে হয়।",
+      "tags": ["cache", "cpu-cache", "memory-hierarchy"]
+    },
+    {
+      "question": "CPU Cache-এ Mapping Strategies কী কী?",
+      "answer": "Cache Mapping Strategies: (1) Direct Mapped — প্রতিটি Memory Block শুধুমাত্র একটি নির্দিষ্ট Cache Line-এ যেতে পারে। সবচেয়ে সহজ, Conflict Miss বেশি। (2) Fully Associative — Memory Block যেকোনো Cache Line-এ যেতে পারে। সবচেয়ে ব্যয়বহুল। (3) Set Associative — Direct ও Fully Associative-এর মধ্যবর্তী। n-Way Set Associative-তে প্রতিটি Set-এ nটি Line থাকে।",
+      "tags": ["cache", "mapping", "direct-mapped", "associative"]
+    },
+    {
+      "question": "Cache Coherence Problem কী?",
+      "answer": "Cache Coherence Problem তখন ঘটে যখন একাধিক CPU Cache-এ একই Memory Location-এর Different Values থাকে। যেমন: CPU 1 Cache-এ x=5 এবং CPU 2 Cache-এ x=10 থাকতে পারে। এটি Multiprocessor System-এ সমস্যা তৈরি করে। Cache Coherence Protocol দিয়ে এই সমস্যা সমাধান করা হয়।",
+      "tags": ["cache-coherence", "multiprocessor", "consistency"]
+    },
+    {
+      "question": "MESI Cache Coherence Protocol কী?",
+      "answer": "MESI Protocol চারটি State ব্যবহার করে: (1) Modified (M) — Cache-তে Data আছে, Dirty, Main Memory-তে নেই। (2) Exclusive (E) — Cache-তে Data আছে, Clean, Main Memory-র সাথে মিল। (3) Shared (S) — একাধিক Cache-তে Data আছে, Clean। (4) Invalid (I) — Cache Entry অবৈধ। এটি Snooping Protocol ব্যবহার করে Bus-এ মনিটর করে।",
+      "tags": ["mesi", "cache-coherence", "protocol", "snooping"]
+    },
+    {
+      "question": "MESI Protocol-এ প্রতিটি State-এর Transition কীভাবে ঘটে?",
+      "answer": "MESI Transitions: Local Read → Invalid থেকে Exclusive (Shared না থাকলে)। Remote Read → Modified থেকে Shared (Bus Read দেখলে)। Local Write → Shared/Exclusive থেকে Modified (Invalidate পাঠায়)। Bus Read → Modified থেকে Shared (Write-back করে)। Flush Operation দিয়ে Dirty Data Memory-তে ফেরানো হয়।",
+      "tags": ["mesi", "state-transition", "cache-coherence"]
+    },
+    {
+      "question": "MESI Protocol-এ Exclusive State-এর গুরুত্ব কী?",
+      "answer": "Exclusive State নির্দেশ করে যে Cache-তে আছে এমন Data Main Memory-র সাথে মিলেছে এবং অন্য কোনো Cache-তে নেই। এই State-এ Write করলে State Modified-এ পরিণত হয় এবং Bus Transaction প্রয়োজন হয় না। এটি Bus Traffic কমায় এবং Performance বাড়ায়। Exclusive ছাড়া প্রতিটি Write-তে Invalidate Message পাঠাতে হতো।",
+      "tags": ["mesi", "exclusive", "performance"]
+    },
+    {
+      "question": "Process State Diagram-এ 6টি State কী কী এবং তাদের Transitions?",
+      "answer": "6-State Model: (1) New → Ready (Admit)। (2) Ready → Running (Dispatch)। (3) Running → Ready (Timeout/Preemption)। (4) Running → Waiting (I/O Request)। (5) Waiting → Ready (I/O Completion)। (6) Running → Terminated (Exit)। Suspended Ready ও Suspended Waiting — দুটি অতিরিক্ত State যেখানে Process Swap Out হয়।",
+      "tags": ["process-states", "diagram", "transitions"]
+    },
+    {
+      "question": "Process State Diagram-এ Suspend State কী?",
+      "answer": "Suspend Ready: Process Ready কিন্তু Main Memory-তে নেই, Disk-এ Swap Out হয়েছে। Resume হলে Memory-তে ফিরে আসে। Suspended Waiting/Blocked: Process Waiting এবং Disk-এ Swap Out হয়েছে। I/O সম্পন্ন হলে Suspend Ready-তে যায়। Suspend State Memory Management-এ ব্যবহৃত হয় — কম Memory Load রাখতে।",
+      "tags": ["process-states", "suspended", "memory-management"]
+    },
+    {
+      "question": "Context Switch Time কীভাবে গণনা করা হয়?",
+      "answer": "Context Switch Time = Save Current Process State + Load New Process State + TLB Flush Time। যেমন: Save Time = 2μs, Load Time = 2μs, TLB Flush = 1μs হলে Total = 5μs। আরও যোগ হয়: Kernel Mode Entry/Exit Time, Cache Pollution Overhead। GATE CSE-তে প্রদত্ত Time দিয়ে Total Overhead গণনা করা হয়।",
+      "tags": ["context-switch", "overhead", "calculation", "gate"]
+    },
+    {
+      "question": "Context Switch-এ TLB Flush কেন প্রয়োজন?",
+      "answer": "প্রতিটি Process-এর আলাদা Page Table থাকে। পুরানো Process-এর TLB Entry নতুন Process-এর জন্য ভুল হতে পারে। TLB Flush না করলে Wrong Physical Address-এ Access হতে পারে। ASID (Address Space ID) ব্যবহার করলে TLB Flush না করেও কাজ চলতে পারে। কিন্তু ASID সব Hardware-তে নেই।",
+      "tags": ["tlb-flush", "context-switch", "performance"]
+    },
+    {
+      "question": "Many-to-One Multithreading Model কী?",
+      "answer": "Many-to-One-এ অনেকগুলো Thread একটি মাত্র Kernel Thread-এ Map করা হয়। যদি একটি Thread System Call করে বা Block হয়, পুরো Process Block হয়ে যায়। একাধিক Thread Parallelism পায় না। সবচেয়ে সহজ কিন্তু কম কার্যকর। উদাহরণ: Green Threads (Java-এর পুরানো Version)।",
+      "tags": ["many-to-one", "threading-model", "kernel-thread"]
+    },
+    {
+      "question": "One-to-One Multithreading Model কী?",
+      "answer": "One-to-One-এ প্রতিটি User Thread-এর জন্য আলাদা একটি Kernel Thread থাকে। একটি Thread Block হলে অন্য Thread-কে প্রভাবিত করে না। Better Concurrency এবং Parallelism সম্ভব। তবে প্রতিটি User Thread-এর জন্য Kernel Thread তৈরি করতে হয়, তাই Overhead বেশি। উদাহরণ: Windows, Linux (NPTL)।",
+      "tags": ["one-to-one", "threading-model", "kernel-thread"]
+    },
+    {
+      "question": "Many-to-Many Multithreading Model কী?",
+      "answer": "Many-to-Many-এ nটি User Thread mটি Kernel Thread-এ Map করা হয় (n ≥ m)। Developer নির্ধারণ করে কতটি Thread Parallelism পাবে। একটি Thread Block হলে অন্য Kernel Thread-এ অন্য Thread চলতে পারে। Flexible কিন্তু Complex। Two-Level Model: Many-to-Many-এর সাথে User Thread-কে Directly Kernel Thread-এ Map করার সুবিধা।",
+      "tags": ["many-to-many", "threading-model", "two-level"]
+    },
+    {
+      "question": "Memory Allocation-এ First-Fit Strategy কী?",
+      "answer": "First-Fit-এ প্রথম যে Free Partition প্রয়োজনীয় সাইজের বড় বা সমান, সেটিতে প্রসেস বরাদ্দ করা হয়। সবচেয়ে দ্রুত — শুরু থেকে খুঁজে প্রথম যোগ্য জায়গায় বসায়। গড় কার্যকরতা ভালো। তবে শুরুর দিকে ছোট ছোট Holes তৈরি হতে পারে। Best-Fit ও Worst-Fit-এর তুলনায় বেশি জনপ্রিয়।",
+      "tags": ["memory-allocation", "first-fit", "strategy"]
+    },
+    {
+      "question": "Memory Allocation-এ Best-Fit Strategy কী?",
+      "answer": "Best-Fit-এ সবচেয়ে ছোট যে Free Partition প্রয়োজনীয় সাইজের বড় বা সমান, সেটিতে বরাদ্দ করা হয়। সবচেয়ে কম Wasted Space। তবে পুরো List Scan করতে হয় — ধীর। খুব ছোট Holes তৈরি হয় যেগুলো ব্যবহার করা যায় না (External Fragmentation বেশি)। Sorted List ব্যবহার করলে Speed বাড়ে।",
+      "tags": ["memory-allocation", "best-fit", "strategy"]
+    },
+    {
+      "question": "Memory Allocation-এ Worst-Fit Strategy কী?",
+      "answer": "Worst-Fit-এ সবচেয়ে বড় Free Partition-এ বরাদ্দ করা হয়। বড় Holes অবশিষ্ট থাকে — ছোট প্রসেসের জন্য কার্যকর। তবে পুরো List Scan করতে হয়। Large Process-এর জন্য Best-Fit-এর তুলনায় ভালো। Best-Fit ও Worst-Fit-ই First-Fit-এর তুলনায় বেশি সময় নেয় এবং বেশি External Fragmentation তৈরি করে।",
+      "tags": ["memory-allocation", "worst-fit", "strategy"]
+    },
+    {
+      "question": "Page Fault Service Time কীভাবে গণনা করা হয়?",
+      "answer": "Page Fault Service Time = Trap to OS + Process Termination Check + Find Free Frame + Disk I/O (Read Page) + Update Page Table + Restart Instruction। যেমন: Trap = 1μs, Find Frame = 0.5μs, Disk I/O = 8ms, Update Table = 0.5μs। Total ≈ 8.002ms। Effective Access Time (EAT) = (1-p)×Memory Access Time + p×Page Fault Service Time।",
+      "tags": ["page-fault", "service-time", "eat", "gate"]
+    },
+    {
+      "question": "EAT (Effective Access Time) গণনার সূত্র কী এবং উদাহরণ?",
+      "answer": "EAT = (1 - p) × ma + p × pf। ma = Memory Access Time (যেমন 100ns), pf = Page Fault Service Time (যেমন 8ms), p = Page Fault Rate। উদাহরণ: p = 0.001 (0.1% Page Fault)। EAT = (0.999 × 100ns) + (0.001 × 8,000,000ns) = 99.9ns + 8,000ns = 8,099.9ns ≈ 8.1μs। TLB থাকলে: EAT = (1-p)(tlb+ma) + p×pf।",
+      "tags": ["eat", "effective-access-time", "calculation", "gate"]
+    },
+    {
+      "question": "EAT-তে TLB থাকলে গণনা কীভাবে বদলায়?",
+      "answer": "TLB Hit Ratio = α (যেমন 0.99)। Hit হলে 1 Memory Access লাগে (TLB + Cache/Memory)। Miss হলে TLB Access + Memory Access (Page Table) + Memory Access (Data) = 3 Access। EAT = α × (tlb + ma) + (1-α) × (tlb + 2×ma)। p = Page Fault Rate হলে: EAT = (1-p) × [α(tlb+ma) + (1-α)(tlb+2×ma)] + p × pf।",
+      "tags": ["eat", "tlb", "hit-ratio", "gate"]
+    },
+    {
+      "question": "Thrashing কীভাবে শনাক্ত করা হয়?",
+      "answer": "Thrashing শনাক্ত: (1) CPU Utilization হঠাৎ খুব কমে যায়। (2) Degree of Multiprogramming বাড়ালেও CPU Utilization কমে। (3) Page Fault Rate অত্যধিক বাড়ে। (4) OS Paging Rate বেশি দেখায়। Working Set Model বা Page Fault Frequency (PFF) ব্যবহার করে Thrashing শনাক্ত ও নিয়ন্ত্রণ করা হয়।",
+      "tags": ["thrashing", "detection", "cpu-utilization"]
+    },
+    {
+      "question": "Working Set Model কী?",
+      "answer": "Working Set Model-এ Window Size Δ নির্ধারিত হয়। Working Set W(t, Δ) = সমস্ত Pages যেগুলো t - Δ থেকে t সময়ের মধ্যে Reference করা হয়েছে। যদি কোনো Process-এর Working Set Frame-এর চেয়ে বেশি লাগে, তাহলে Thrashing হবে। OS নিশ্চিত করে যে Σ(Working Set Size of all processes) ≤ Total Frames।",
+      "tags": ["working-set", "thrashing", "model", "gate"]
+    },
+    {
+      "question": "Contiguous File Allocation কী?",
+      "answer": "Contiguous Allocation-এ প্রতিটি ফাইল মেমরিতে একটি ধারাবাহিক Block-এ সংরক্ষিত হয়। সবচেয়ে সহজ — Sequential ও Direct Access সম্ভব। তবে External Fragmentation হয় (ফাইল মুছে দিলে খালি জায়গা ছড়িয়ে পড়ে)। File Size আগে থেকে জানা প্রয়োজন। Pre-allocation প্রয়োজন। উদাহরণ: ISO Image, CD-ROM।",
+      "tags": ["contiguous", "file-allocation", "fragmentation"]
+    },
+    {
+      "question": "Linked File Allocation কী?",
+      "answer": "Linked Allocation-এ প্রতিটি Block পরবর্তী Block-এর Pointer ধারণ করে। External Fragmentation নেই — যেকোনো জায়গায় ব্লক রাখা যায়। তবে (1) Pointer-এ জায়গা নষ্ট হয়। (2) Random Access ধীর — শুধু Sequential Access। (3) একটি Pointer নষ্ট হলে পুরো Chain হারিয়ে যায়। FAT (File Allocation Table) দিয়ে এই সমস্যা কমানো হয়।",
+      "tags": ["linked", "file-allocation", "fat"]
+    },
+    {
+      "question": "Indexed File Allocation কী?",
+      "answer": "Indexed Allocation-এ প্রতিটি ফাইলের একটি আলাদা Index Block থাকে যেটি ফাইলের সব Block-এর Address ধারণ করে। Sequential ও Direct Access দুটোই সম্ভব। External Fragmentation নেই। তবে (1) Index Block-এর জন্য অতিরিক্ত Space লাগে। (2) বড় ফাইলের জন্য Multi-Level Index প্রয়োজন। Unix inode-তে এই Method ব্যবহৃত হয়।",
+      "tags": ["indexed", "file-allocation", "inode"]
+    },
+    {
+      "question": "RAID কী এবং RAID Levels-এর তুলনা কী?",
+      "answer": "RAID (Redundant Array of Independent Disks) একাধিক Disk-কে একসাথে ব্যবহার করে Performance ও Reliability বাড়ায়। RAID 0: Striping — সবচেয়ে দ্রুত, Redundancy নেই। RAID 1: Mirroring — সবচেয়ে নিরাপদ, 2× Cost। RAID 5: Block-Level Striping + Distributed Parity — ভালো Balance। RAID 6: Double Parity — 2 Disk Failure সহনশীল। RAID 10: Mirror + Stripe — উচ্চ Performance ও Reliability।",
+      "tags": ["raid", "levels", "storage", "comparison"]
+    },
+    {
+      "question": "RAID 0 ও RAID 1-এর পার্থক্য কী?",
+      "answer": "RAID 0 (Striping): Data Block সমানভাবে সব Disk-এ বিভক্ত হয়। সবচেয়ে দ্রুত (All Disks-এর Bandwidth ব্যবহার হয়)। কিন্তু একটি Disk Failed হলে পুরো Data হারিয়ে যায়। RAID 1 (Mirroring): প্রতিটি Disk-এ একই Data-এর Copy থাকে। একটি Disk Failed হলেও Data নিরাপদ। কিন্তু 50% Storage Wasted।",
+      "tags": ["raid-0", "raid-1", "striping", "mirroring"]
+    },
+    {
+      "question": "RAID 5-এ Parity কীভাবে কাজ করে?",
+      "answer": "RAID 5-এ Striping সহ Distributed Parity ব্যবহার করা হয়। প্রতিটি Stripe-এ একটি Parity Block থাকে যেটি XOR Operation-এ তৈরি হয়। যেমন: P = D1 ⊕ D2 ⊕ D3। একটি Disk Failed হলে Parity দিয়ে হারানো Data পুনরুদ্ধার করা যায়। Minimum 3 Disk প্রয়োজন। Usable Capacity = (n-1) × Disk Size।",
+      "tags": ["raid-5", "parity", "xor", "fault-tolerance"]
     }
   ]
 }

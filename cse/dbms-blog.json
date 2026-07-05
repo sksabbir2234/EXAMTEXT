@@ -463,6 +463,141 @@
       "question": "Partitioning কী?",
       "answer": "Partitioning হলো table-কে smaller, manageable parts-এ ভাগ করা। Types: (1) Horizontal — rows ভাগ করা। (2) Vertical — columns ভাগ করা। Query performance improve করে, maintenance easier হয়।",
       "tags": ["partitioning", "database-design"]
+    },
+    {
+      "question": "দ্বিতীয় সর্বোচ্চ বেতন (Second Highest Salary) SQL query কীভাবে বানাবে?",
+      "answer": "বেশি কয়েকটি পদ্ধতি আছে: (1) Subquery: SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees); (2) LIMIT/OFFSET: SELECT DISTINCT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 1; (3) DENSE_RANK(): SELECT salary FROM (SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk FROM employees) t WHERE rnk = 2; DENSE_RANK method robust — দুটি highest salary equal হলেও সঠিক result দেয়।",
+      "tags": ["sql", "second-highest-salary", "subquery", "interview"]
+    },
+    {
+      "question": "SQL query দিয়ে duplicate records কীভাবে খুঁজে বের করবে?",
+      "answer": "GROUP BY ও HAVING ব্যবহার করে: SELECT column_name, COUNT(*) FROM table_name GROUP BY column_name HAVING COUNT(*) > 1; একাধিক columns-এ duplicate খুঁজতে: SELECT col1, col2, COUNT(*) FROM table GROUP BY col1, col2 HAVING COUNT(*) > 1; Window function দিয়ে: SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY col ORDER BY id) AS rn FROM table) t WHERE rn > 1;",
+      "tags": ["sql", "duplicates", "group-by", "interview"]
+    },
+    {
+      "question": "Duplicate rows delete করার SQL query কী?",
+      "answer": "CTE ব্যবহার করে সবচেয়ে efficient পদ্ধতি: WITH cte AS (SELECT *, ROW_NUMBER() OVER (PARTITION BY col1, col2 ORDER BY id) AS rn FROM table_name) DELETE FROM cte WHERE rn > 1; অন্য পদ্ধতি: DISTINCT table থেকে data বের করে truncate করে আবার insert করা। MySQL-তে self-join দিয়েও delete করা যায়।",
+      "tags": ["sql", "delete-duplicates", "cte", "interview"]
+    },
+    {
+      "question": "Relational Algebra-তে Division (÷) operator কীভাবে কাজ করে? উদাহরণ দিন।",
+      "answer": "Division R(A,B) ÷ S(B) হলো এমন tuples যার B values S-র সব B values cover করে। যেমন: R = Students(student_id, course), S = RequiredCourses(course)। R ÷ S = সেসব student_ids যারা সব required courses-এ enroll করেছে। Formal definition: π_A(R) - π_A((π_A(R) × S) - R)। এটি 'for all' queries solve করে।",
+      "tags": ["relational-algebra", "division-operator", "gate"]
+    },
+    {
+      "question": "Outer Join-কে SQL query দিয়ে equivalent expression কীভাবে লিখবে?",
+      "answer": "LEFT JOIN equivalent: SELECT * FROM R LEFT JOIN S ON R.id = S.r_id; একে UNION-based equivalent লেখা যায়: SELECT R.*, S.* FROM R LEFT JOIN S ON R.id = S.r_id হলো SELECT * FROM R, S WHERE R.id = S.r_id UNION SELECT * FROM R, NULL WHERE R.id NOT IN (SELECT r_id FROM S); FULL OUTER JOIN: LEFT JOIN UNION RIGHT JOIN। GATE-তে এই equivalence প্রশ্ন করা হয়।",
+      "tags": ["relational-algebra", "outer-join", "equivalence", "gate"]
+    },
+    {
+      "question": "Functional Dependency Closure (X⁺) কীভাবে compute করে? ধাপ বিশ্লেষণ করুন।",
+      "answer": "Algorithm: (1) Start with result = X। (2) Repeat: FD set-এর প্রতিটি FD (Y → Z) check করুন — যদি Y ⊆ result হয়, তাহলে result = result ∪ Z। (3) যতক্ষণ result পরিবর্তন না হয়, repeat করুন। উদাহরণ: R(A,B,C,D), FDs: A→B, B→C, C→D। A⁺ = {A} → {A,B} → {A,B,C} → {A,B,C,D}। Time complexity: O(|FDs| × |Attributes|)।",
+      "tags": ["functional-dependency", "closure", "algorithm", "gate"]
+    },
+    {
+      "question": "Candidate Key খুঁজে বের করার algorithm কী?",
+      "answer": "Step 1: Attributes-এর partition করুন — (1) Attributes যারা FD-তে left side-এ আসে (2) Attributes যারা left side-এ কখনো আসে না (always in candidate key) (3) Attributes যারা উভয় জায়গায় আসে। Step 2: Essential attributes-কে n দিয়ে start করুন। Step 3: Closure compute করুন — সব attributes cover হলে candidate key। Step 4: Size বাড়িয়ে minimal candidate keys খুঁজুন। GATE-তে এই method-এ candidate key find করতে বলা হয়।",
+      "tags": ["candidate-key", "algorithm", "finding", "gate"]
+    },
+    {
+      "question": "2PL (Two-Phase Locking) ও Strict 2PL-এর মধ্যে মৌলিক পার্থক্য কী?",
+      "answer": "2PL: (1) Growing Phase — locks acquire করে (2) Shrinking Phase — locks release করে। Lock point-এর পর unlock শুরু হয়। Strict 2PL: shrinking phase শুরু হয় শুধুমাত্র commit/abort-এর পর। অর্থাৎ transaction complete না হওয়া পর্যন্ত সব lock hold করে। Strict 2PL cascading rollback prevent করে এবং recoverable schedule ensure করে — যা plain 2PL guarantee দেয় না।",
+      "tags": ["2pl", "strict-2pl", "locking", "difference", "interview"]
+    },
+    {
+      "question": "B+ Tree-তে insertion trace কীভাবে করবে? step by step দেখান।",
+      "answer": "ধাপ: (1) Root থেকে শুরু করে leaf node-তে search করুন। (2) Leaf-তে key insert করুন। (3) Leaf overflow হলে (m-1 key exceed) two-way split করুন — mid key up যায়, বাকি দুই ভাগে split। (4) Internal node-তে up যাওয়া key insert করুন। (5) Internal overflow হলে সেটিও split করুন। (6) Root split হলে নতুন root তৈরি হয়, tree height বাড়ে। Order-4 B+ Tree-তে 3 key-র পর split হয়।",
+      "tags": ["b-plus-tree", "insertion", "trace", "gate"]
+    },
+    {
+      "question": "B+ Tree-তে deletion trace কীভাবে করবে?",
+      "answer": "ধাপ: (1) Search করে key-টি leaf-তে খুঁজুন। (2) Key delete করুন। (3) Leaf underflow (min ⌈(m-1)/2⌉ keys) হলে: (a) Borrow key from sibling (rotation) বা (b) Merge with sibling। (4) Merge-তে parent-র key delete হয়। (5) Parent underflow হলে সেটিও merge/rotate করুন। (6) Root-এর একটি child মাত্র থাকলে root delete হয়, height কমে।",
+      "tags": ["b-plus-tree", "deletion", "trace", "gate"]
+    },
+    {
+      "question": "Clustered Index ও Non-Clustered Index-এর বিস্তারিত পার্থক্য কী?",
+      "answer": "Clustered Index: (1) Table-র physical row order index-এর সাথে match করে। (2) একটি table-তে শুধুমাত্র একটি (leaf node-ই data page)। (3) Primary key auto clustered। (4) Range query-তে faster। Non-Clustered: (1) Separate structure — index page-এ row pointer (RID/Clustering Key) থাকে। (2) একাধিক থাকতে পারে। (3) Bookmark lookup দরকার। (4) High-cardinality columns-এ ভালো।",
+      "tags": ["clustered-index", "non-clustered-index", "comparison", "interview"]
+    },
+    {
+      "question": "Bitmap Index কী এবং কখন ব্যবহার করবে?",
+      "answer": "Bitmap Index প্রতিটি distinct value-এর জন্য একটি bit vector ধারণ করে। যেমন gender='M' এর জন্য: [1,0,1,1,0,...] — প্রতিটি row-র জন্য 1 বা 0। AND/OR operations bitwise এ হয়, অত্যন্ত fast। সুবিধা: (1) Low-cardinality columns (gender, status) এ efficient (2) Aggregate queries fast। অসুবিধা: (1) High-cardinality-তে space overhead (2) DML operations slow। Data warehousing, OLAP-তে ব্যবহৃত হয়।",
+      "tags": ["bitmap-index", "indexing", "data-warehousing"]
+    },
+    {
+      "question": "Hash Index কীভাবে কাজ করে? সীমাবদ্ধতা কী কী?",
+      "answer": "Hash Index hash function দিয়ে key-কে bucket-এ map করে। Search: O(1) average। Bucket overflow হলে chaining বা open addressing ব্যবহার হয়। সীমাবদ্ধতা: (1) Equality query (id=5) efficient কিন্তু range query (age>20) inefficient (2) Hash collision-এ performance degrade (3) Ordered traversal support করে না (4) Dynamic resizing overhead। In-memory DBMS, Redis-তে ব্যবহৃত হয়।",
+      "tags": ["hash-index", "indexing", "limitations", "interview"]
+    },
+    {
+      "question": "ACID properties-কে ব্যাংকিং transaction-এর উদাহরণ দিয়ে ব্যাখ্যা করুন।",
+      "answer": "ধরুন A, B দুই অ্যাকাউন্ট। T1: A থেকে 500 টাকা B-তে পাঠানো। Atomicity: A-র debit ও B-র credit — দুটো একসাথে হবে বা একটিও হবে না। Consistency: T1-এর আগে ও পরে মোট ব্যালেন্স সমান থাকবে (A+B সমান)। Isolation: অন্য কোনো transaction T2 A-র ব্যালেন্স T1 commit-এর আগে দেখতে পাবে না। Durability: T1 commit হলে পরে power failure হলেও data safe থাকবে।",
+      "tags": ["acid", "banking", "transaction", "real-world"]
+    },
+    {
+      "question": "SQL Injection কী এবং এটি কীভাবে প্রতিরোধ করবে?",
+      "answer": "SQL Injection হলো attacker malicious SQL code input field-এ প্রবেশ করানো। উদাহরণ: input ' OR '1'='1 দিলে WHERE clause bypass হয়। Prevention: (1) Prepared Statements / Parameterized Queries ব্যবহার করুন (2) Input validation ও sanitization করুন (3) Stored Procedures ব্যবহার করুন (4) Least privilege principle মেনে চলুন (5) ORM libraries ব্যবহার করুন। যেমন: Python-তে cursor.execute('SELECT * FROM users WHERE id=%s', (user_id,))",
+      "tags": ["sql-injection", "security", "prevention", "interview"]
+    },
+    {
+      "question": "Star Schema ও Snowflake Schema-এর বিস্তারিত পার্থক্য কী?",
+      "answer": "Star Schema: Fact table কেন্দ্রে, dimension tables denormalized — সরাসরি fact-র সাথে connected। Query performance fast (কম JOIN)। Snowflake Schema: Dimension tables normalized — multiple levels-এ split। Space efficient কিন্তু query-তে বেশি JOIN লাগে। উদাহরণ: Star-তে dim_product(product_id, name, category, brand) — single table। Snowflake-তে dim_product → dim_category → dim_brand — hierarchical normalization। Data warehousing-তে Star schema বেশি popular।",
+      "tags": ["star-schema", "snowflake-schema", "data-warehousing", "comparison"]
+    },
+    {
+      "question": "Functional Dependency-র Armstrong's Axioms দিয়ে Closure Compute করার পদ্ধতি কী?",
+      "answer": "Step 1: X⁺ = X (start)। Step 2: Reflexivity — if Y ⊆ X, then add Y। Step 3: Augmentation — if X → Y, then XZ → YZ। Step 4: Transitivity — if X → Y and Y → Z, then X → Z। Step 2-4 repeat করুন যতক্ষণ X⁺ change না হয়। Derived rules: Decomposition (X→YZ ⇒ X→Y, X→Z), Union (X→Y, X→Z ⇒ X→YZ), Pseudo-transitivity (X→Y, WY→Z ⇒ WX→Z)।",
+      "tags": ["functional-dependency", "closure", "armstrongs-axioms", "gate"]
+    },
+    {
+      "question": "Candidate Key finding algorithm-এ নতুন একটি relation-তে example দিয়ে দেখান।",
+      "answer": "R(A,B,C,D), FDs: A→B, BC→D, D→C। Step 1: A left-এ আসে, D left-এ আসে না — D must be in key। Step 2: D⁺ = {D,C} (D→C)। C পাওয়া গেছে, BC→D check — B নেই। D⁺ ≠ all attrs। Step 3: AD test: AD⁺ = {A,D} → {A,D,B} (A→B) → {A,D,B,C} (BC→D, C আছে) → full set। AD candidate key। Step 4: BD test: BD⁺ = {B,D} → {B,D,C} → BD+ = {B,D,C} — A পাওয়া যায় না। So only AD is candidate key।",
+      "tags": ["candidate-key", "algorithm", "example", "gate"]
+    },
+    {
+      "question": "2PL-তে deadlock কীভাবে ঘটে? একটি example দিন।",
+      "answer": "T1: lock(X), T2: lock(Y)। T1: lock(Y) — wait (T2 holds Y)। T2: lock(X) — wait (T1 holds X)। Deadlock! Wait-for graph-এ cycle: T1→T2→T1। Prevention পদ্ধতি: Wait-Die — T1 (older) wait করে, T2 (younger) abort ও retry। Wound-Wait — T1 wound (abort) T2। Timeout-based: নির্দিষ্ট সময় পর abort। Detection: periodically WFG check করে, cycle থাকলে victim selection।",
+      "tags": ["2pl", "deadlock", "example", "concurrency"]
+    },
+    {
+      "question": "B+ Tree-তে internal node-র split কীভাবে হয়? diagram সহ ব্যাখ্যা করুন।",
+      "answer": "Order-4 B+ Tree-তে max 3 keys per node। যখন 4th key insert হয়: Leaf split — [10,20,30,40] → left=[10,20], right=[30,40], mid(30) parent-এ up যায়। Internal node split — parent-ও full থাকলে mid key up যায়, two children-এ split হয়। Root split হলে new root তৈরি হয়। Key propagation up: leaf-র mid key internal node-তে copy হয়, internal node-র mid key root-তে copy হয়। GATE-তে B+ tree diagram trace করতে বলা হয়।",
+      "tags": ["b-plus-tree", "split", "internal-node", "gate"]
+    },
+    {
+      "question": "Bitmap Index-এর সাথে B+ Tree Index-এর তুলনা করুন।",
+      "answer": "B+ Tree: (1) High-cardinality columns-এ efficient (2) Range query support করে (3) Ordered traversal possible (4) Space: O(n × k)। Bitmap: (1) Low-cardinality columns-এ efficient (2) Equality & aggregate fast (3) No ordering support (4) Space: O(n × distinct_values)। Use cases: B+ Tree — OLTP, search-heavy; Bitmap — OLAP, analytical queries।.Bitmap AND/OR bitwise operations: gender='M' AND status='active' = bitwise AND।",
+      "tags": ["bitmap-index", "b-plus-tree", "comparison", "indexing"]
+    },
+    {
+      "question": "Strict 2PL-তে recoverable schedule-র guarantee কীভাবে থাকে?",
+      "answer": "Strict 2PL-তে transaction T-র exclusive lock T commit/abort না হওয়া পর্যন্ত hold থাকে। তাই T2 T-র uncommitted data read করতে পারে না (S-lock wait করতে হবে)। ফলে every Strict 2PL schedule recoverable। Moreover, cascadeless — T2 শুধু committed data read করে। Cascading rollback completely prevent হয়। Plain 2PL-তে shrinking phase early শুরু হতে পারে, তাই recoverable guarantee নেই।",
+      "tags": ["strict-2pl", "recoverable", "guarantee", "concurrency"]
+    },
+    {
+      "question": "B+ Tree-তে leaf node-র merge operation কীভাবে হয়?",
+      "answer": "Underflow হলে (min keys পূরণ হয় না): (1) Left sibling-এ borrow চেষ্টা করুন — parent-র separator key rotate করুন। (2) Borrow সম্ভব না হলে merge: left sibling + current node merge করুন, parent-র separator key merge-তে যায়। (3) Parent-তে key delete হয়। (4) Parent underflow হলে recursive merge — root-এর single child থাকলে root delete, tree height কমে।",
+      "tags": ["b-plus-tree", "merge", "underflow", "deletion"]
+    },
+    {
+      "question": "ACID-র Consistency কীভাবে enforce হযং? Database constraints কী ভূমিকা রাখে?",
+      "answer": "Consistency enforce করতে: (1) Primary key constraint — duplicate নিষেধ (2) Foreign key — orphan record নিষেধ (3) Check constraint — invalid value নিষেধ (4) NOT NULL — missing data নিষেধ (5) Triggers — business logic enforce। যেমন: bank transfer-তে CHECK(balance >= 0) ensure করে negative balance হয় না। Application-level validation DBMS constraints-র complement।",
+      "tags": ["acid", "consistency", "constraints", "enforcement"]
+    },
+    {
+      "question": "SQL Injection-এর একটি practical example দিন এবং কীভাবে parameterized query এটি prevent করে তা ব্যাখ্যা করুন।",
+      "answer": "Vulnerable: query = \"SELECT * FROM users WHERE name='\" + username + \"'\"। Input: admin' -- → query becomes: SELECT * FROM users WHERE name='admin' --' — comment rest bypass password। Safe: cursor.execute('SELECT * FROM users WHERE name=%s', (username,))। Parameterized query-তে input value query structure থেকে separate — DBMS treat করে as literal value, not SQL code। Prepared statement-তে first template prepare হয়, তারপর parameters bind হয়।",
+      "tags": ["sql-injection", "parameterized-query", "security", "example"]
+    },
+    {
+      "question": "Star Schema-তে Fact Table ও Dimension Table-র ভূমিকা কী? একটি retail example দিন।",
+      "answer": "Fact Table: measures (sales_amount, quantity) ও foreign keys (product_id, store_id, date_id) ধারণ করে। Numeric, aggregatable data। Dimension Table: descriptive attributes — dim_product(product_id, name, category, price), dim_store(store_id, city, state), dim_date(date_id, day, month, year)। Example: SELECT dim_store.city, SUM(fact_sales.amount) FROM fact_sales JOIN dim_store ON fact_sales.store_id = dim_store.store_id GROUP BY dim_store.city। Star schema-তে single JOIN-ই sufficient।",
+      "tags": ["star-schema", "fact-table", "dimension-table", "retail-example"]
+    },
+    {
+      "question": "Functional Dependency দিয়ে Minimal Cover (Canonical Cover) কীভাবে compute করে?",
+      "answer": "Step 1: Right side single attribute-এ ভাগ করুন: A→BC হলে A→B, A→C। Step 2: Extraneous attributes remove করুন — FD থেকে একটি attribute বাদ দিয়ে closure same থাকলে extraneous। Step 3: Redundant FDs remove করুন — অন্য FDs-র closure থেকে derive করা গেলে redundant। Step 4: Left side unnecessary attributes remove। GATE-তে minimal cover find করতে বলা হয় — important concept।",
+      "tags": ["minimal-cover", "canonical-cover", "functional-dependency", "gate"]
     }
   ]
 }

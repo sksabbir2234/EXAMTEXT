@@ -1,0 +1,463 @@
+{
+  "subject": "CSE College Teacher",
+  "title": "GATE CSE Previous Year Quick Revision — সবচেয়ে বেশি জিজ্ঞাসিত প্রশ্ন 100+",
+  "description": "GATE CSE পূর্ববর্তী বছরের সবচেয়ে বেশি জিজ্ঞাসিত 100+ প্রশ্ন — দ্রুত পুনরালোচনার জন্য",
+  "slideUrl": null,
+  "content": [
+    {
+      "question": "Quick Sort-এর গড় এবং সর্বোচ্চ সময় জটিলতা কত?",
+      "answer": "Quick Sort-এর গড় সময় জটিলতা O(n log n) এবং সর্বোচ্চ (worst-case) সময় জটিলতা O(n²)। সর্বোচ্চ ক্ষেত্রে ঘটে যখন pivot সর্বদা ছোট বা বড় মান নির্বাচিত হয় (যেমন ইতিমধ্যে সাজানো অ্যারে)। Median-of-three বা randomized pivot ব্যবহার করলে এটি বাদ দেওয়া যায়।",
+      "tags": ["sorting", "quicksort", "time-complexity", "gate-pyq"]
+    },
+    {
+      "question": "Merge Sort কেন Quick Sort-এর চেয়ে বেশি নির্ভরযোগ্য?",
+      "answer": "Merge Sort-এর সর্বোচ্চ সময় জটিলতাও O(n log n), যা Quick Sort-এর O(n²)-এর চেয়ে ভালো। Merge Sort স্থির (stable) সর্টিং অ্যালগরিদম, অর্থাৎ সমান মানের উপাদানগুলোর আসল ক্রম বজায় থাকে। তবে Merge Sort-এ অতিরিক্ত O(n) স্মৃতি প্রয়োজন হয়।",
+      "tags": ["sorting", "mergesort", "stability", "gate-pyq"]
+    },
+    {
+      "question": "AVL ট্রি-তে rotation কত প্রকার এবং কখন প্রয়োগ হয়?",
+      "answer": "AVL ট্রি-তে 4 প্রকার rotation আছে: (1) LL Rotation — বাম পাশে বাম ভারসাম্যহীনতা। (2) RR Rotation — ডান পাশে ডান ভারসাম্যহীনতা। (3) LR Rotation — বাম পাশে ডান ভারসাম্যহীনতা। (4) RL Rotation — ডান পাশে বাম ভারসাম্যহীনতা। প্রতিটি insertion/deletion এর পর balance factor |bf| > 1 হলে rotation প্রয়োগ করা হয়।",
+      "tags": ["avl-tree", "rotation", "balanced-tree", "gate-pyq"]
+    },
+    {
+      "question": "Binary Search Tree (BST)-এর average এবং worst-case search time কত?",
+      "answer": "BST-এর average-case search time O(log n) এবং worst-case search time O(n)। Worst-case ঘটে যখন BST একটি linked list-এর মতো হয় (যেমন ক্রমানুসারে ইনসার্ট করলে)। AVL বা Red-Black Tree ব্যবহার করলে worst-case O(log n) নিশ্চিত করা যায়।",
+      "tags": ["bst", "search", "time-complexity", "gate-pyq"]
+    },
+    {
+      "question": "Heap Sort-এর space complexity কত এবং এটি in-place কি?",
+      "answer": "Heap Sort-এর space complexity O(1) — এটি in-place sorting algorithm। Max-heap build করতে O(n) সময় লাগে এবং প্রতিটি extract-max O(log n) সময় নেয়। মোট সময় O(n log n)। তবে Heap Sort stable নয়।",
+      "tags": ["heapsort", "space-complexity", "in-place", "gate-pyq"]
+    },
+    {
+      "question": "Dijkstra's algorithm নেগেটিভ ওয়েটেড edge এ কাজ করে কেন না?",
+      "answer": "Dijkstra's algorithm greedy approach ব্যবহার করে — এটি ধরে নেয় যে একবার কোনো vertex থেকে সর্বনিম্ন দূরত্ব নির্ধারিত হলে সেটি চূড়ান্ত। কিন্তু নেগেটিভ edge থাকলে পরবর্তীতে সেই দূরত্ব আরো কমানো সম্ভব, যা greedy assumption ভেঙে দেয়। নেগেটিভ cycle থাকলে তো আরোও সমস্যা হয় — দূরত্ব অসীমভাবে কমতে পারে। Bellman-Ford algorithm নেগেটিভ edge সহ্য করে।",
+      "tags": ["dijkstra", "negative-weight", "shortest-path", "gate-pyq"]
+    },
+    {
+      "question": "Bellman-Ford algorithm-এর সময় জটিলতা কত এবং negative cycle detect করে কিভাবে?",
+      "answer": "Bellman-Ford algorithm-এর সময় জটিলতা O(VE)। এটি V-1 বার edge relaxation করে। যদি V-1 বার relaxation-এর পরও আবার একটি relaxation সম্ভব হয়, তাহলে negative cycle আছে। প্রতিটি vertex-এর distance infinity দিয়ে শুরু করা হয়, source vertex 0।",
+      "tags": ["bellman-ford", "negative-cycle", "time-complexity", "gate-pyq"]
+    },
+    {
+      "question": "Kruskal's এবং Prim's algorithm-এর মধ্যে পার্থক্য কী?",
+      "answer": "Kruskal's edge-based greedy algorithm — সব edge weight অনুযায়ী সাজিয়ে ছোট থেকে বড় edge যোগ করে, cycle না হলে। Union-Find data structure ব্যবহার করে। Prim's vertex-based — একটি vertex থেকে শুরু করে সবচেয়ে কম weight edge যোগ করে। Kruskal's dense graph-এ ভালো (O(E log E)), Prim's sparse graph-এ ভালো (O(E log V) heap ব্যবহার করলে)।",
+      "tags": ["kruskal", "prim", "mst", "gate-pyq"]
+    },
+    {
+      "question": "Topological Sort কী এবং কোন ধরনের graph-এ সম্ভব?",
+      "answer": "Topological Sort হলো DAG (Directed Acyclic Graph)-এর vertices-এর একটি ক্রমিক সাজানো যেখানে প্রতিটি directed edge u→v-এর জন্য u, v-এর আগে আসে। DFS বা Kahn's algorithm (in-degree based) ব্যবহার করে topological sort করা যায়। Cycle থাকলে topological sort সম্ভব নয়।",
+      "tags": ["topological-sort", "dag", "dfs", "gate-pyq"]
+    },
+    {
+      "question": "Dynamic Programming (DP) এবং Greedy Algorithm-এর মধ্যে পার্থক্য কী?",
+      "answer": "Greedy algorithm প্রতিটি step-এ সেরা পছন্দ করে, backtrack করে না। DP সব subproblem সমাধান করে এবং memoization/tabulation ব্যবহার করে। Greedy optimal substructure থাকলে কাজ করে, DP optimal substructure + overlapping subproblem থাকলে কাজ করে। 0/1 Knapsack DP-তে সমাধান হয়, Fractional Knapsack greedy-তে।",
+      "tags": ["dynamic-programming", "greedy", "comparison", "gate-pyq"]
+    },
+    {
+      "question": "Master Theorem দিয়ে T(n) = 2T(n/2) + n এর সমাধান কত?",
+      "answer": "Master Theorem: T(n) = aT(n/b) + O(n^d)। এখানে a=2, b=2, d=1। log_b(a) = log₂(2) = 1 = d। Case 2 apply হয়: T(n) = O(n^d log n) = O(n log n)। এটি Merge Sort-এর recurrence।",
+      "tags": ["master-theorem", "recurrence", "mergesort", "gate-pyq"]
+    },
+    {
+      "question": "KMP (Knuth-Morris-Pratt) algorithm-এর time complexity কত এবং failure function কী করে?",
+      "answer": "KMP algorithm-এর time complexity O(n+m) যেখানে n=text length, m=pattern length। Failure function (prefix function) pattern-এর জন্য তৈরি হয় যা বলে কতটুকু prefix suffix-এর সাথে মিলে। এটি pattern-এ পুনরায় matching এড়িয়ে চলে। Naive pattern matching O(nm) সময় নেয়।",
+      "tags": ["kmp", "pattern-matching", "failure-function", "gate-pyq"]
+    },
+    {
+      "question": "Binary Heap-এ insert এবং delete-এর time complexity কত?",
+      "answer": "Binary Max-Heap-এ insert O(log n) সময় নেয় — শেষে insert করে upward heapify করে। Delete-max/minও O(log n) — শেষের element মুছে root-এ রেখে downward heapify করে। Build-heap O(n) সময়ে সম্ভব। Peek (root দেখা) O(1)।",
+      "tags": ["heap", "insert", "delete", "time-complexity", "gate-pyq"]
+    },
+    {
+      "question": "Stack ব্যবহার করে postfix expression কিভাবে evaluate করে?",
+      "answer": "বাম থেকে ডানে scan করো: operand পেলে stack-এ push করো, operator পেলে stack থেকে দুটি operand pop করে operation করো এবং result push করো। শেষে stack-এ একটিই element থাকে — সেটি চূড়ান্ত ফলাফল। উদাহরণ: 3 4 + 2 * → (3+4)*2 = 14।",
+      "tags": ["stack", "postfix", "evaluation", "gate-pyq"]
+    },
+    {
+      "question": "Queue ব্যবহার করে BFS-এর space এবং time complexity কত?",
+      "answer": "BFS-এর time complexity O(V+E) যেখানে V=vertices, E=edges। Space complexity O(V) — সব vertex একবার queue-তে যেতে পারে। BFS level-order traversal, সর্বনিম্ন পাথ খুঁজে (unweighted graph)। Queue FIFO principle অনুসরণ করে।",
+      "tags": ["bfs", "queue", "time-complexity", "space-complexity", "gate-pyq"]
+    },
+    {
+      "question": "DFS-এর space complexity কত এবং BFS থেকে পার্থক্য কী?",
+      "answer": "DFS-এর space complexity O(V) ( recursion stack )। BFS queue ব্যবহার করে, DFS stack (বা recursion) ব্যবহার করে। BFS সবচেয়ে ছোট path খুঁজে (unweighted), DFS সম্পূর্ণ path খুঁজে। DFS memory efficient যদি graph গভীর না হয়। Cycle detection-এ DFS বেশি জনপ্রিয়।",
+      "tags": ["dfs", "bfs", "comparison", "gate-pyq"]
+    },
+    {
+      "question": "LCS (Longest Common Subsequence)-এর DP time complexity কত?",
+      "answer": "LCS-এর time complexity O(mn) যেখানে m এবং n দুটি string-এর দৈর্ঘ্য। Space complexity O(mn)। Space-optimized version O(min(mn)) করা যায় শুধু দুটি row ব্যবহার করে। LCS-এর recurrence: if x[i]==y[j] then dp[i][j] = 1 + dp[i-1][j-1], else dp[i][j] = max(dp[i-1][j], dp[i][j-1])।",
+      "tags": ["lcs", "dynamic-programming", "time-complexity", "gate-pyq"]
+    },
+    {
+      "question": "0/1 Knapsack problem-এর DP time complexity কত?",
+      "answer": "0/1 Knapsack-এর time complexity O(nW) যেখানে n=items-এর সংখ্যা, W=capacity। এট pseudo-polynomial time algorithm কারণ W binary এ লেখা হলে O(n × 2^bits) = O(nW) polynomial নয়। Fractional Knapsack greedy O(n log n) এ সমাধান হয়।",
+      "tags": ["knapsack", "dynamic-programming", "pseudo-polynomial", "gate-pyq"]
+    },
+    {
+      "question": "Matrix Chain Multiplication (MCM)-এর DP time complexity কত?",
+      "answer": "MCM-এর time complexity O(n³)। এখানে n = matrices-এর সংখ্যা + 1 (dimension array-এর size)। Recurrence: dp[i][j] = min over k of (dp[i][k] + dp[k+1][j] + p[i-1]*p[k]*p[j])। Space complexity O(n²)।",
+      "tags": ["mcm", "dynamic-programming", "time-complexity", "gate-pyq"]
+    },
+    {
+      "question": "Floyd-Warshall algorithm-এর time এবং space complexity কত?",
+      "answer": "Floyd-Warshall algorithm all-pairs shortest path খুঁজে। Time complexity O(V³), Space complexity O(V²)। এটি negative weight edge সহ্য করে তবে negative cycle নয়। 3 nested loops: for k, for i, for j — dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j])।",
+      "tags": ["floyd-warshall", "all-pairs", "time-complexity", "gate-pyq"]
+    },
+    {
+      "question": "Process এবং Thread-এর মধ্যে মূল পার্থক্য কী?",
+      "answer": "Process হলো কার্যকর প্রোগ্রাম — এর নিজের memory space (code, data, heap, stack) আছে। Thread হলো process-এর ভেতরের একটি lightweight execution unit — একই process-এর সব thread একই memory space শেয়ার করে। Process isolation বেশি, thread creation overhead কম। Thread crash পুরো process-কে মারতে পারে।",
+      "tags": ["process", "thread", "difference", "gate-pyq"]
+    },
+    {
+      "question": "Deadlock-এর ৪টি Coffman condition কী কী?",
+      "answer": "(1) Mutual Exclusion — resource একসাথে একটিই process ব্যবহার করতে পারে। (2) Hold and Wait — process ধরে রেখে অন্য resource অপেক্ষা করে। (3) No Preemption — resource forcibly নেওয়া যায় না। (4) Circular Wait — একটি circular chain of processes যারা একে অপরের resource অপেক্ষা করে। এদের মধ্যে একটি ভাঙলে deadlock হবে না।",
+      "tags": ["deadlock", "coffman", "conditions", "gate-pyq"]
+    },
+    {
+      "question": "Banker's Algorithm deadlocks avoidance-এ কিভাবে কাজ করে?",
+      "answer": "Banker's Algorithm (Dijkstra) safety check করে। প্রতিটি process-এর maximum need, allocation, এবং available জানা থাকে। একটি safe sequence খুঁজে যেখানে প্রতিটি process তার remaining need পূরণ করতে পারে এবং তারপর resource ফিরিয়ে দেয়। যদি safe sequence থাকে, state safe। নাহলে unsafe — deadlock হতে পারে।",
+      "tags": ["bankers-algorithm", "deadlock-avoidance", "safety-check", "gate-pyq"]
+    },
+    {
+      "question": "CPU Scheduling-এ Round Robin (RR) algorithm-এর average waiting time কমাতে time quantum কীভাবে নির্বাচন করে?",
+      "answer": "Time quantum খুব ছোট হলে context switching overhead বাড়ে। খুব বড় হলে FCFS-এর মতো হয়ে যায়। সাধারণত average burst time-এর 80% থেকে 2× মধ্যে রাখা হয়। GATE-এ RR-এর waiting time calculate করতে Gantt chart আঁকতে হয়।",
+      "tags": ["round-robin", "cpu-scheduling", "time-quantum", "gate-pyq"]
+    },
+    {
+      "question": "Semaphore-এর binary এবং counting পার্থক্য কী?",
+      "answer": "Binary Semaphore-এর মান 0 বা 1 — এটি mutex lock হিসেবে কাজ করে। Counting Semaphore-এর মান 0 থেকে n পর্যন্ত হতে পারে — এটি resource pool-এর জন্য ব্যবহৃত হয়। P(wait) operation semaphore-এর মান 1 কমায়, V(signal) operation 1 বাড়ায়।",
+      "tags": ["semaphore", "binary", "counting", "gate-pyq"]
+    },
+    {
+      "question": "LRU Page Replacement Algorithm কী এবং Belady's Anomaly কী?",
+      "answer": "LRU (Least Recently Used) — সবচেয়ে দীর্ঘক্ষণ ব্যবহৃত page বাদ দেয়। LRU-তে Belady's anomaly হয় না (increasing frames → fewer faults)। FIFO-তে Belady's anomaly হয় — frame বাড়ালেও page fault বাড়তে পারে। Optimal algorithm (Bélády) সবচেয়ে কম page fault দেয় তবে implement করা যায় না।",
+      "tags": ["lru", "page-replacement", "beladys-anomaly", "gate-pyq"]
+    },
+    {
+      "question": "Virtual Memory কী এবং Demand Paging কিভাবে কাজ করে?",
+      "answer": "Virtual Memory প্রতিটি process-কে অনুমানিত বিশাল address space দেয়। Demand Paging-এ page disk-এ থাকে, access করার সময় page fault হয়, OS page কে memory-তে আনে। TLB (Translation Lookaside Buffer) address translation দ্রুত করে। Effective Access Time (EAT) = hit_ratio × memory_time + (1 - hit_ratio) × page_fault_time।",
+      "tags": ["virtual-memory", "demand-paging", "page-fault", "gate-pyq"]
+    },
+    {
+      "question": "Paging এবং Segmentation-এর মধ্যে পার্থক্য কী?",
+      "answer": "Paging fixed-size blocks (pages) — logical address = page number + offset। External fragmentation নেই, internal fragmentation আছে। Segmentation variable-size blocks — logical address = segment number + offset। External fragmentation আছে, internal fragmentation নেই। Paging user-কে জানায় না, segmentation logical units (code, data) অনুযায়ী ভাগ করে।",
+      "tags": ["paging", "segmentation", "fragmentation", "gate-pyq"]
+    },
+    {
+      "question": "DBMS-এ Normalization কেন প্রয়োজন এবং BCNF কী?",
+      "answer": "Normalization data redundancy কমায় এবং update/insert/delete anomaly রোধ করে। BCNF (Boyce-Codd Normal Form) 3NF-এর আরো কঠোর version — প্রতিটি determinant candidate key হতে হবে। 3NF-এ prime attribute-এর dependency allow করা হয়, BCNF-এ নয়।",
+      "tags": ["normalization", "bcnf", "redundancy", "gate-pyq"]
+    },
+    {
+      "question": "SQL-এ INNER JOIN, LEFT JOIN, RIGHT JOIN এবং FULL JOIN-এর পার্থক্য কী?",
+      "answer": "INNER JOIN — শুধু মিলিয়ে যাওয়া rows return করে। LEFT JOIN — বাম টেবিলের সব rows এবং ডানে মিলিয়ে যাওয়া rows। RIGHT JOIN — ডান টেবিলের সব rows এবং বামে মিলিয়ে যাওয়া rows। FULL JOIN — উভয় টেবিলের সব rows, মিলে না গেলে NULL।",
+      "tags": ["sql", "join", "inner-join", "left-join", "gate-pyq"]
+    },
+    {
+      "question": "Transaction-এর ACID properties কী কী?",
+      "answer": "(A) Atomicity — transaction সম্পূর্ণ হবে বা একটিও হবে না। (C) Consistency — transaction-এর আগে ও পরে database consistent state-এ থাকবে। (I) Isolation — একই সাথে চলমান transactions একে অপরের উপর প্রভাব ফেলবে না। (D) Durability — commit হওয়ার পর change persist থাকবে।",
+      "tags": ["acid", "transaction", "properties", "gate-pyq"]
+    },
+    {
+      "question": "Conflict Serializability কী এবং precedence graph দিয়ে কিভাবে check করে?",
+      "answer": "Conflict serializability check করতে precedence graph তৈরি করো: প্রতিটি transaction vertex। conflicting operations (R-W, W-R, W-W same item different transactions) এ edge add করো। যদি graph cycle-free হয়, schedule conflict serializable। Cycle থাকলে serializable নয়।",
+      "tags": ["conflict-serializability", "precedence-graph", "gate-pyq"]
+    },
+    {
+      "question": "OSI Model-এর ৭টি layer কী কী এবং প্রতিটির কাজ কী?",
+      "answer": "(1) Application — user interface (HTTP, FTP)। (2) Presentation — data encryption, compression, translation। (3) Session — connection management। (4) Transport — end-to-end delivery, TCP/UDP। (5) Network — routing, IP addressing। (6) Data Link — framing, error detection, MAC। (7) Physical — bits transmission over cable/wireless। Mnemonic: All People Seem To Need Data Processing।",
+      "tags": ["osi-model", "layers", "networking", "gate-pyq"]
+    },
+    {
+      "question": "TCP এবং UDP-এর মধ্যে মূল পার্থক্য কী?",
+      "answer": "TCP connection-oriented, reliable, ordered delivery, flow control (sliding window), congestion control আছে। UDP connectionless, unreliable, no ordering guarantee, faster। TCP 3-way handshake দিয়ে শুরু হয়। TCP file transfer, email, web-এ ব্যবহৃত হয়। UDP video streaming, gaming, DNS-এ ব্যবহৃত হয়।",
+      "tags": ["tcp", "udp", "transport-layer", "gate-pyq"]
+    },
+    {
+      "question": "TCP 3-Way Handshake কিভাবে কাজ করে?",
+      "answer": "(1) Client → Server: SYN (connection request)। (2) Server → Client: SYN-ACK (acknowledge +自己的SYN)। (3) Client → Server: ACK (acknowledge server's SYN)। এরপর connection established হয়। Termination 4-Way Handshake (FIN, ACK, FIN, ACK)।",
+      "tags": ["tcp", "three-way-handshake", "connection", "gate-pyq"]
+    },
+    {
+      "question": "Subnet Mask 255.255.255.224 দিয়ে কতটি hosts বসতে পারে?",
+      "answer": "255.255.255.224 = /27 prefix। Host bits = 32 - 27 = 5 bits। Total addresses = 2^5 = 32। Usable hosts = 32 - 2 = 30 (network address এবং broadcast address বাদ)।",
+      "tags": ["subnetting", "subnet-mask", "hosts", "gate-pyq"]
+    },
+    {
+      "question": "DNS (Domain Name System) কী এবং কিভাবে কাজ করে?",
+      "answer": "DNS domain name (যেমন google.com)-কে IP address-এ রূপান্তরিত করে। Browser DNS cache → OS cache → recursive resolver → root server → TLD server (.com) → authoritative server। UDP port 53 ব্যবহৃত হয় (TCP zone transfer-এ)।",
+      "tags": ["dns", "domain-name", "resolution", "gate-pyq"]
+    },
+    {
+      "question": "Compiler Design-এ FIRST এবং FOLLOW set কী করে?",
+      "answer": "FIRST(X) হলো X-এর দ্বারা উৎপাদিত string-এর প্রথম terminal-এর সেট। FOLLOW(A) হলো A-এর পরে আসতে পারে এমন terminal-এর সেট। LL(1) parsing-এ এদের ব্যবহার হয় — প্রতিটি production rule-এর জন্য FIRST/FOLLOW set disjoint হলে grammar LL(1)।",
+      "tags": ["first-set", "follow-set", "ll1-parsing", "gate-pyq"]
+    },
+    {
+      "question": "LR(0), SLR, CLR, LALR parsing-এর পার্থক্য কী?",
+      "answer": "LR(0) সব lookahead ছাড়াই shift/reduce decide করে — সবচেয়ে কম শক্তিশালী। SLR FOLLOW set দেখে reduce decide করে। CLR (Canonical LR) সবচেয়ে শক্তিশালী, সব state-এ lookahead ব্যবহার করে। LALR CLR-এর simplified version — states merge করে, power CLR-এর সমান নয় তবে practical। YACC/Bison LALR ব্যবহার করে।",
+      "tags": ["lr-parsing", "slr", "clr", "lalr", "gate-pyq"]
+    },
+    {
+      "question": "K-Map (Karnaugh Map) দিয়ে F(A,B,C,D) = Σm(0,2,5,7,8,10,13,15) minimize করো।",
+      "answer": "4-variable K-Map-এ 16 cells। m0=0000, m2=0010, m5=0101, m7=0111, m8=1000, m10=1010, m13=1101, m15=1111। Grouping: (m0,m2,m8,m10) = B'D'। (m5,m7,m13,m15) = BD। Minimal SOP: F = B'D' + BD।",
+      "tags": ["k-map", "boolean-algebra", "minimization", "gate-pyq"]
+    },
+    {
+      "question": "Multiplexer (MUX) কী এবং 2:1 MUX-এর boolean expression কী?",
+      "answer": "Multiplexer একটি combinational circuit যে বেশি input-এর মধ্যে একটি নির্বাচন করে output-এ পাঠায়। 2:1 MUX: Y = (S' ∧ I0) + (S ∧ I1)। n-input MUX-এ 2^n data lines এবং n select lines থাকে।",
+      "tags": ["multiplexer", "combinational-circuit", "gate-pyq"]
+    },
+    {
+      "question": "Half Adder এবং Full Adder-এর পার্থক্য কী?",
+      "answer": "Half Adder দুটি binary input (A, B) নেয়, Sum = A⊕B, Carry = A∧B। Full Adder তিনটি input নেয় (A, B, Cin) — দুটি Half Adder এবং একটি OR gate দিয়ে তৈরি। Sum = A⊕B⊕Cin, Cout = (A∧B) + (Cin∧(A⊕B))। Half Adder carry-in handle করে না।",
+      "tags": ["half-adder", "full-adder", "combinational", "gate-pyq"]
+    },
+    {
+      "question": "SR Flip-Flop, JK Flip-Flop, D Flip-Flop, T Flip-Flop-এর পার্থক্য কী?",
+      "answer": "SR: Set-Reset, S=1→Q=1, R=1→invalid। JK: SR-এর improvement, J=K=1→toggle (invalid state নেই)। D (Data/Delay): single input, clock-এ D input Q-তে copy হয়। T (Toggle): T=1→toggle, T=0→hold। D flip-flop সবচেয়ে বেশি ব্যবহৃত।",
+      "tags": ["flip-flop", "sr", "jk", "d", "t", "gate-pyq"]
+    },
+    {
+      "question": "2's complement representation-এ overflow কিভাবে detect করে?",
+      "answer": "n-bit 2's complement-এ: দুটি positive number যোগ করলে result negative হলে overflow। দুটি negative number যোগ করলে result positive হলে overflow। সুতরাং: sign bits of operands same কিন্তু sign bit of result different হলে overflow। XOR of carry-in এবং carry-out of MSB-ও overflow indicate করে।",
+      "tags": ["twos-complement", "overflow", "arithmetic", "gate-pyq"]
+    },
+    {
+      "question": "IEEE 754 Single Precision floating point format-এ -12.25 লেখো।",
+      "answer": "-12.25 = -1100.01₂ = -1.10001 × 2³। Sign bit = 1 (negative)। Exponent = 3 + 127 = 130 = 10000010₂। Mantissa = 10001000000000000000000। Binary: 1 10000010 10001000000000000000000 = 0xC1440000।",
+      "tags": ["ieee754", "floating-point", "representation", "gate-pyq"]
+    },
+    {
+      "question": "Pipeline processor-এ speedup কত হয় k stages এবং n instructions থাকলে?",
+      "answer": "Ideal speedup = k (যদি সব stage সমান time নেয়)। বাস্তবে: Non-pipelined time = n × k × Δt। Pipelined time = (k + n - 1) × Δt। Speedup = (n × k) / (k + n - 1)। n→∞ হলে speedup → k। CPI (Cycles Per Instruction) pipelining-এ 1-এর কাছে হয়।",
+      "tags": ["pipeline", "speedup", "performance", "gate-pyq"]
+    },
+    {
+      "question": "Cache memory mapping techniques কত প্রকার?",
+      "answer": "তিন প্রকার: (1) Direct Mapping — প্রতিটি memory block একটি নির্দিষ্ট cache line-এ যায়। (2) Fully Associative — যেকোনো cache line-এ যেতে পারে। (3) Set-Associative — cache sets-এ ভাগ, প্রতিটি set-এ m-way associativity। Hit rate: Fully Associative > Set-Associative > Direct। Cost: Fully Associative সবচেয়ে ব্যয়বহুল।",
+      "tags": ["cache", "mapping", "memory-hierarchy", "gate-pyq"]
+    },
+    {
+      "question": "Pumping Lemma for Regular Language কী এবং কীভাবে ব্যবহার করে?",
+      "answer": "Pumping Lemma বলে যদি L regular language হয়, তাহলে একটি pumping length p আছে যে k ≥ p length-এর যেকোনো string w ∈ L-কে w = xyz আকারে লেখা যায় যেখানে |xy| ≤ p, |y| ≥ 0, এবং সব i ≥ 0-এ xy^iz ∈ L। Language regular নয় প্রমাণ করতে: একটি w বেছে নাও, pumping lemma violates দেখাও।",
+      "tags": ["pumping-lemma", "regular-language", "gate-pyq"]
+    },
+    {
+      "question": "Turing Machine কী এবং Church-Turing Thesis কী বলে?",
+      "answer": "Turing Machine (TM) একটি theoretical model — এর একটি infinite tape, read/write head, এবং finite control আছে। এটি যেকোনো computable function compute করতে পারে। Church-Turing Thesis বলে: যেকোনো effectively computable function একটি Turing Machine দিয়ে compute করা যায়। TM সবসময় halt নাও করতে পারে (Halting Problem)।",
+      "tags": ["turing-machine", "church-turing", "halting-problem", "gate-pyq"]
+    },
+    {
+      "question": "Halting Problem কেন undecidable?",
+      "answer": "Halting Problem: দেওয়া হলো একটি program P এবং input I, P I-এ halt করবে কি না? Rice's Theorem অনুযায়ী non-trivial property of RE languages undecidable। Halting Problem proof by contradiction: ধরো H আছে, H(P,I) halt করলে true দেয়। তাহলে D(P) = if H(P,P) then loop else halt — D(D) paradox তৈরি হয়।",
+      "tags": ["halting-problem", "undecidable", "rice-theorem", "gate-pyq"]
+    },
+    {
+      "question": "Context Free Grammar (CFG) এব� Regular Grammar-এর পার্থক্য কী?",
+      "answer": "Regular Grammar: productions A→aB বা A→a (right linear)। PDA দিয়ে recognize করা যায় না, FA দিয়ে হয়। CFG: productions A→α (any α ∈ (V∪T)*)। PDA দিয়ে recognize করা যায়। CFG আরো শক্তিশালী — nested structures (parentheses, if-else) express করতে পারে। Regular language CFG-এর subset।",
+      "tags": ["cfg", "regular-grammar", "power", "gate-pyq"]
+    },
+    {
+      "question": "Chomsky Hierarchy-এর ৪টি level কী কী?",
+      "answer": "(0) Type 0 — Recursively Enumerable (Turing Machine)। (1) Type 1 — Context-Sensitive (Linear Bounded Automata)। (2) Type 2 — Context-Free (Pushdown Automata)। (3) Type 3 — Regular (Finite Automata)। Type 3 ⊂ Type 2 ⊂ Type 1 ⊂ Type 0।",
+      "tags": ["chomsky-hierarchy", "formal-languages", "gate-pyq"]
+    },
+    {
+      "question": "Symbol Table compiler-এ কী কাজ করে?",
+      "answer": "Symbol Table compiler-এর একটি data structure যেখানে variables, functions, constants-এর নাম, type, scope, memory location সংরক্ষিত থাকে। Lexical analysis phase-এ entries add হয়। Scope resolution, type checking, code generation-এ ব্যবহৃত হয়। Hash table সবচেয়ে common implementation।",
+      "tags": ["symbol-table", "compiler", "gate-pyq"]
+    },
+    {
+      "question": "Three-Address Code (TAC) কী?",
+      "answer": "Three-Address Code intermediate representation-এর একটি form — প্রতিটি statement সর্বোচ্চ তিনটি operand ব্যবহার করে। যেমন: t1 = a + b; t2 = t1 * c। DAG, SSA (Static Single Assignment) TAC-এর variants। Code optimization এবং code generation-এ সহায়ক।",
+      "tags": ["three-address-code", "intermediate-representation", "gate-pyq"]
+    },
+    {
+      "question": "Coupling এবং Cohesion কী এবং ভালো software design-এ কী চাওয়া হয়?",
+      "answer": "Coupling হলো modules-এর মধ্যে dependency — কম coupling ভালো (loose coupling)। Cohesion হলো একটি module-এর ভেতরের elements-এর সম্পর্ক — বেশি cohesion ভালো (high cohesion)। Best: low coupling, high cohesion। Tight coupling → পরিবর্তন করলে অন্য module-ও affected।",
+      "tags": ["coupling", "cohesion", "software-design", "gate-pyq"]
+    },
+    {
+      "question": "Cyclomatic Complexity কী এবং কীভাবে গণনা করে?",
+      "answer": "Cyclomatic Complexity = E - N + 2P (E=edges, N=nodes, P=connected components) অথবা decision points + 1। এটি program-এর independent paths-এর সংখ্যা দেখায়। Higher complexity → more testing needed। Basis path testing-এ সব independent paths test করা হয়।",
+      "tags": ["cyclomatic-complexity", "testing", "basis-path", "gate-pyq"]
+    },
+    {
+      "question": "Spiral Model কী এবং কেন use করে?",
+      "answer": "Spiral Model risk-driven SDLC model — প্রতিটি iteration-এ planning, risk analysis, engineering, evaluation থাকে। Large, complex, risk-prone projects-এ ব্যবহৃত হয়। Prototyping এবং waterfall-এর সমন্বয়। Customer প্রতিটি spiral-এ feedback দেয়। Cost high তবে risk কম।",
+      "tags": ["spiral-model", "sdlc", "risk-driven", "gate-pyq"]
+    },
+    {
+      "question": "Agile Methodology-এ Scrum framework কী?",
+      "answer": "Scrum Agile-এর একটি framework — roles: Product Owner, Scrum Master, Development Team। Events: Sprint (2-4 weeks), Daily Standup, Sprint Planning, Sprint Review, Retrospective। Artifacts: Product Backlog, Sprint Backlog, Increment। Self-organizing, cross-functional team incrementally deliver করে।",
+      "tags": ["scrum", "agile", "sprint", "gate-pyq"]
+    },
+    {
+      "question": "OOP-এর ৪টি pillars কী কী?",
+      "answer": "(1) Encapsulation — data এবং methods একসাথে bundle করা + access control (private, public)। (2) Abstraction — essential features দেখানো, implementation hide করা। (3) Inheritance — parent class-এর properties child class-এ reuse করা। (4) Polymorphism — একই interface different implementations (overloading, overriding)।",
+      "tags": ["oop", "encapsulation", "abstraction", "inheritance", "polymorphism", "gate-pyq"]
+    },
+    {
+      "question": "Abstract Class এবং Interface-এর পার্থক্য কী?",
+      "answer": "Abstract Class partial implementation দেয়, concrete + abstract methods থাকে। Single inheritance। Interface pure contract — all methods abstract (default methods ছাড়া)। Multiple interfaces implement করা যায়। Java-তে abstract class একটি, interface অনেকগুলো। C++-তে virtual functions abstract class তৈরি করে।",
+      "tags": ["abstract-class", "interface", "oop", "gate-pyq"]
+    },
+    {
+      "question": "Compile-time Polymorphism এবং Runtime Polymorphism-এর পার্থক্য কী?",
+      "answer": "Compile-time (Static): Method Overloading — একই নাম different parameters। Compiler resolve করে। Runtime (Dynamic): Method Overriding — subclass parent method override করে। Virtual function + vtable দিয়ে runtime resolve হয়। C++-তে virtual keyword, Java-তে default।",
+      "tags": ["compile-time", "runtime", "polymorphism", "overloading", "overriding", "gate-pyq"]
+    },
+    {
+      "question": "Virtual Function কী এবং vtable কীভাবে কাজ করে?",
+      "answer": "Virtual function C++-এ base class-এ declare করা method যে subclass-এ override করা যায়। vtable (virtual table) প্রতিটি class-এর একটি table যেখানে virtual functions-এর addresses থাকে। Object-এর ভেতরে vptr (vtable pointer) থাকে। Runtime-এ vptr দিয়ে correct function call হয়।",
+      "tags": ["virtual-function", "vtable", "dynamic-dispatch", "gate-pyq"]
+    },
+    {
+      "question": "Design Patterns কী এবং Factory Pattern কী করে?",
+      "answer": "Design Patterns reusable solutions to common problems। Creational (Factory, Singleton, Builder), Structural (Adapter, Decorator, Proxy), Behavioral (Observer, Strategy, Iterator)। Factory Pattern: object creation logic encapsulate করে, superclass return করে। Client কে specific class জানতে হয় না।",
+      "tags": ["design-patterns", "factory", "creational", "gate-pyq"]
+    },
+    {
+      "question": "CAP Theorem কী?",
+      "answer": "CAP Theorem (Brewer's Theorem) বলে distributed system-এ একই সাথে তিনটি থেকে বেশি পাওয়া যায় না: (C) Consistency — সব node একই data দেখে। (A) Availability — প্রতিটি request response পায়। (P) Partition Tolerance — network failure সহ্য করে। CP system (MongoDB, HBase) বা AP system (Cassandra, DynamoDB) বেছে নিতে হয়।",
+      "tags": ["cap-theorem", "distributed-systems", "gate-pyq"]
+    },
+    {
+      "question": "IPv4 এবং IPv6-এর মধ্যে পার্থক্য কী?",
+      "answer": "IPv4: 32-bit address, 4.3 billion addresses, dotted decimal (192.168.1.1), header 20-60 bytes। IPv6: 128-bit address, 3.4×10³⁸ addresses, hexadecimal (2001:0db8::1), header fixed 40 bytes। IPv6 built-in IPSec, no NAT needed, better QoS, simpler header।",
+      "tags": ["ipv4", "ipv6", "internet-protocol", "gate-pyq"]
+    },
+    {
+      "question": "HTTP এবং HTTPS-এর পার্থক্য কী?",
+      "answer": "HTTP: Port 80, unencrypted data। HTTPS: Port 443, SSL/TLS encryption। HTTPS data-in-transit protect করে, certificate-based authentication দেয়। HTTPS handshake HTTP-এর পরে SSL/TLS handshake করে। Modern browsers HTTP-কে "not secure"标记 করে।",
+      "tags": ["http", "https", "ssl", "tls", "gate-pyq"]
+    },
+    {
+      "question": "C Programming-এ pointer কী এবং NULL pointer ও dangling pointer-এর পার্থক্য কী?",
+      "answer": "Pointer হলো একটি variable যা memory address ধারণ করে। NULL pointer: কোনো valid address-এ pointing করে না (int *p = NULL)। Dangling pointer: memory deallocate হওয়ার পরও সেই address-এ pointing করে — garbage value access হতে পারে। free(p) এর পর p = NULL করতে হয়।",
+      "tags": ["pointer", "null-pointer", "dangling-pointer", "c-programming", "gate-pyq"]
+    },
+    {
+      "question": "C-এ malloc() এবং calloc()-এর পার্থক্য কী?",
+      "answer": "malloc(size): size bytes allocate করে, uninitialized (garbage value)। calloc(n, size): n elements, প্রতিটি size bytes, initialize 0 দিয়ে। malloc দ্রুত, calloc ধীর (initialization এর কারণে)। উভয়ই failure-এ NULL return করে। realloc() existing block resize করে।",
+      "tags": ["malloc", "calloc", "dynamic-memory", "c-programming", "gate-pyq"]
+    },
+    {
+      "question": "C-এ structure এবং union-এর পার্থক্য কী?",
+      "answer": "Structure: সব members একসাথে memory ধারণ করে। sizeof = সব members-এর size যোগ (+ padding)। Union: সব members একই memory location শেয়ার করে। sizeof = সবচেয়ে বড় member-এর size। একই সময়ে একটিই member access করা যায়।",
+      "tags": ["structure", "union", "memory-layout", "c-programming", "gate-pyq"]
+    },
+    {
+      "question": "C-এ storage classes কত প্রকার এবং পার্থক্য কী?",
+      "answer": "চার প্রকার: (1) auto — default, stack-এ, block scope। (2) register — CPU register-এ store (compiler hint), very fast। (3) static — initialization once, function-এর lifetime program duration, file scope বা function scope। (4) extern — global variable declare, other files থেকে access।",
+      "tags": ["storage-class", "auto", "static", "extern", "c-programming", "gate-pyq"]
+    },
+    {
+      "question": "Recursion এব� Iteration-এর পার্থক্য কী?",
+      "answer": "Recursion: function নিজেকে call করে, base case প্রয়োজন। Stack overhead থাকে (stack overflow risk)। Code ছোট ও clear। Iteration: loop (for, while) ব্যবহার করে। Stack efficient, overhead কম। Recursion tree, memoization DP-তে সহায়ক। Tail recursion optimization কিছু compilers করে।",
+      "tags": ["recursion", "iteration", "comparison", "gate-pyq"]
+    },
+    {
+      "question": "Graph-এ cycle detection DFS দিয়ে কিভাবে করে?",
+      "answer": "Undirected graph-এ: DFS চালাও, যদি visited vertex-এর neighbor আবার আসে এবং parent না হয়, তাহলে cycle আছে। Directed graph-এ: DFS recursion stack-এ vertex থাকলে (gray state) এবং back edge পাওয়া গেলে cycle আছে। Three-color marking: white (unvisited), gray (processing), black (done)।",
+      "tags": ["cycle-detection", "dfs", "graph", "gate-pyq"]
+    },
+    {
+      "question": "Disjoint Set Union (DSU) / Union-Find data structure কী এবং কোথায় ব্যবহৃত হয়?",
+      "answer": "DSU disjoint sets কে efficiently manage করে — find (কোন set-এ element আছে) এবং Union (দুটি set একত্রিত করা)। Path compression এবং union by rank ব্যবহার করলে amortized O(α(n)) ≈ O(1)। Kruskal's MST-তে cycle detection-এ ব্যবহৃত হয়।",
+      "tags": ["dsu", "union-find", "kruskal", "gate-pyq"]
+    },
+    {
+      "question": "Segment Tree এবং Binary Indexed Tree (Fenwick Tree) কী?",
+      "answer": "Segment Tree range queries (sum, min, max) O(log n) এবং point update O(log n) করে। Space O(4n)। Binary Indexed Tree (Fenwick) similar কাজ করে Space O(n) তে, implementation সহজ। Both competitive programming-এ ব্যবহৃত। Range update + range query-এ Lazy Propagation ব্যবহার হয়।",
+      "tags": ["segment-tree", "fenwick-tree", "range-query", "gate-pyq"]
+    },
+    {
+      "question": "Bitwise operators কী কী এবং কোথায় ব্যবহৃত হয়?",
+      "answer": "& (AND), | (OR), ^ (XOR), ~ (NOT), << (left shift), >> (right shift)। XOR tricks: a^a=0, a^0=a। Power of 2 check: n & (n-1) == 0। Set/clear/toggle i-th bit: mask = 1 << i। Masking: n & mask। Bitwise operations extremely fast — competitive programming-এ ব্যাপক ব্যবহৃত।",
+      "tags": ["bitwise", "operators", "tricks", "gate-pyq"]
+    },
+    {
+      "question": "String matching-এ Rabin-Karp algorithm কী করে?",
+      "answer": "Rabin-Karp pattern matching-এ rolling hash ব্যবহার করে। Pattern-এর hash compute করো, text-এর প্রতিটি window-এর hash তুলনা করো। Hash match হলে character-by-character verify করো। Average O(n+m), worst O(nm)। Multiple pattern search-এ efficient।",
+      "tags": ["rabin-karp", "pattern-matching", "hash", "gate-pyq"]
+    },
+    {
+      "question": "Trie data structure কী এবং কোথায় ব্যবহৃত হয়?",
+      "answer": "Trie (Prefix Tree) string-দের store করার tree structure — প্রতিটি node একটি character represent করে। Search O(m) (m = string length), insertion O(m)। Autocomplete, spell checker, dictionary implementation-এ ব্যবহৃত হয়। Space optimized: Patricia Trie / Radix Tree।",
+      "tags": ["trie", "prefix-tree", "string", "gate-pyq"]
+    },
+    {
+      "question": "Graph coloring কী এবং greedy coloring algorithm কী করে?",
+      "answer": "Graph coloring vertices-কে এমনভাবে color দেয় যে adjacent vertices একই color না হয়। Minimum colors = chromatic number χ(G)। Greedy algorithm: vertices ক্রমানুসারে traverse করো, প্রতিটি vertex-এ সবচেয়ে কম যে color available সেটি দাও। Worst case Δ+1 colors (Δ = max degree)। Bipartite graph-এ 2 colors যথেষ্ট।",
+      "tags": ["graph-coloring", "chromatic-number", "greedy", "gate-pyq"]
+    },
+    {
+      "question": "Shortest path algorithms-এর তুলনা: Dijkstra, Bellman-Ford, Floyd-Warshall?",
+      "answer": "Dijkstra: single-source, no negative weight, O((V+E)logV) with min-heap। Bellman-Ford: single-source, negative weight + cycle detect, O(VE)। Floyd-Warshall: all-pairs, O(V³), negative weight detect। Johnson's: all-pairs using Bellman-Ford + Dijkstra, O(VE + V²logV)।",
+      "tags": ["shortest-path", "dijkstra", "bellman-ford", "floyd-warshall", "gate-pyq"]
+    },
+    {
+      "question": "OS-এ Banker's Algorithm দিয়ে safe state check করার example দাও।",
+      "answer": "Process P0-P4, Resource A(10), B(5), C(7)। Allocation: P0=(0,1,0), P1=(2,0,0), P2=(3,0,2), P3=(2,1,1), P4=(0,0,2)। Need: P0=(0,0,0), P1=(2,0,2), P2=(0,0,0), P3=(1,0,0), P4=(0,0,2)। Available=(3,3,2)। Safe sequence: P0→P2→P3→P4→P1 (or P0→P2→P4→P3→P1)। State safe।",
+      "tags": ["bankers-algorithm", "safe-state", "example", "gate-pyq"]
+    },
+    {
+      "question": "TCP Congestion Control-এ Slow Start এবং AIMD কী?",
+      "answer": "Slow Start: cwnd = 1 MSS, প্রতিটি ACK-এ cwnd doubled (exponential growth)। ssthresh-এ পৌঁছালে Congestion Avoidance (linear growth: cwnd += 1 MSS per RTT)। Loss হলে: Timeout → cwnd = 1, ssthresh = cwnd/2। Triple duplicate ACK → ssthresh = cwnd/2, cwnd = ssthresh (Fast Recovery)।",
+      "tags": ["tcp", "congestion-control", "slow-start", "aimd", "gate-pyq"]
+    },
+    {
+      "question": "Normal form check: R(A,B,C,D), FD: A→B, B→C, A→D। R কোন Normal Form-এ আছে?",
+      "answer": "Candidate key: A (সব key derive করে)। Prime attributes: {A}। Non-prime: {B,C,D}। 2NF: Partial dependency check — A একটি single attribute key, partial dependency নেই। 3NF: B→C — C non-prime, B non-prime but B is not superkey। 3NF violate! R 2NF-এ আছে। BCNF: B→C — B superkey নয়, BCNF violate। Final answer: 2NF।",
+      "tags": ["normalization", "2nf", "3nf", "gate-pyq"]
+    },
+    {
+      "question": "B+ Tree-এ order 5 (max 4 keys) এ minimum keys per node কত?",
+      "answer": "Order m=5: internal node max children = 5, min children = ⌈m/2⌉ = 3। Root node min 2 children (if not leaf)। Leaf node max keys = 4, min keys = ⌈(m-1)/2⌉ = 2। Non-root internal node min keys = ⌈m/2⌉ - 1 = 2।",
+      "tags": ["bplus-tree", "order", "keys", "gate-pyq"]
+    },
+    {
+      "question": "Pipelining-এ data hazard, control hazard, structural hazard কী?",
+      "answer": "Data Hazard: instruction dependent on previous instruction-এর result (RAW, WAR, WAW)। Solution: forwarding, stalling। Control Hazard: branch instruction-এর outcome জানা না। Solution: branch prediction, delay slots। Structural Hazard: same hardware একাধিক instruction ব্যবহার করতে চায়। Solution: duplicate hardware।",
+      "tags": ["pipeline-hazard", "data-hazard", "control-hazard", "gate-pyq"]
+    },
+    {
+      "question": "Addressing Modes কত প্রকার?",
+      "answer": "(1) Immediate — operand instruction-এ আছে। (2) Direct — address-এ operand আছে। (3) Indirect — address-এ pointer, pointer-এ operand। (4) Register — register-এ operand। (5) Register Indirect — register-এ address। (6) Displacement — base + offset। (7) Indexed — base + index register। Most common: Immediate, Direct, Register, Register Indirect।",
+      "tags": ["addressing-modes", "computer-architecture", "gate-pyq"]
+    },
+    {
+      "question": "Binary to Decimal conversion: 101101.101₂ = ?",
+      "answer": "Integer part: 1×32 + 0×16 + 1×8 + 1×4 + 0×2 + 1×1 = 32+8+4+1 = 45। Fractional: 1×0.5 + 0×0.25 + 1×0.125 = 0.5+0.125 = 0.625। Total: 45.625₁₀।",
+      "tags": ["number-system", "binary", "conversion", "gate-pyq"]
+    },
+    {
+      "question": "Hexadecimal A3F₁₆ to Binary রূপান্তর করো।",
+      "answer": "A = 1010, 3 = 0011, F = 1111। A3F₁₆ = 1010 0011 1111₂। প্রতিটি hex digit 4 bits-এ convert হয়।",
+      "tags": ["number-system", "hexadecimal", "conversion", "gate-pyq"]
+    },
+    {
+      "question": "De Morgan's Laws কী?",
+      "answer": "(1) NOT(A AND B) = (NOT A) OR (NOT B) → (A·B)' = A' + B'। (2) NOT(A OR B) = (NOT A) AND (NOT B) → (A+B)' = A'·B'। Boolean algebra-এর সবচেয়ে গুরুত্বপূর্ণ laws। K-map simplification-এ এবং logic circuit design-এ ব্যাপক ব্যবহৃত।",
+      "tags": ["de-morgan", "boolean-algebra", "gate-pyq"]
+    },
+    {
+      "question": "ROM এবং RAM-এর পার্থক্য কী?",
+      "answer": "ROM (Read Only Memory): non-volatile, data permanently stored, read-only। RAM (Random Access Memory): volatile, read/write, power off-এ data যায়। ROM types: PROM (programmable once), EPROM (UV erasable), EEPROM (electrically erasable)। RAM types: SRAM (fast, expensive, cache), DRAM (slower, cheap, main memory)।",
+      "tags": ["rom", "ram", "memory", "gate-pyq"]
+    },
+    {
+      "question": "Six Sigma কী?",
+      "answer": "Six Sigma quality control methodology — 3.4 defects per million opportunities (DPMO) লক্ষ্য করে। DMAIC cycle: Define, Measure, Analyze, Improve, Control। Motorola এ উদ্ভাবিত, GE-তে জনপ্রিয়। প্রতিটি sigma level defect rate কমায়।",
+      "tags": ["six-sigma", "quality", "gate-pyq"]
+    },
+    {
+      "question": "Microprocessor এবং Microcontroller-এর পার্থক্য কী?",
+      "answer": "Microprocessor: CPU only, external RAM/ROM/IO needed (যেমন Intel x86)। Microcontroller: CPU + RAM + ROM + IO সব একটি chip-এ (যেমন Arduino's ATmega328)। Microprocessor high performance, microcontroller embedded systems-এ। Microprocessor power consumption বেশি।",
+      "tags": ["microprocessor", "microcontroller", "gate-pyq"]
+    }
+  ]
+}

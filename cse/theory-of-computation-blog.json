@@ -433,6 +433,151 @@
       "question": "GATE CSE-তে Chomsky Hierarchy থেকে কী ধরনের প্রশ্ন আসে?",
       "answer": "GATE-তে Chomsky Hierarchy থেকে প্রশ্ন: (1) ভাষাকে সঠিক Type-তে শ্রেণীবদ্ধ করা। (2) প্রতিটি Type-এর automaton জানা। (3) Closure properties-এর তারতম্য। (4) Type 0 থেকে Type 3-এ reduce করা। (5) Undecidable problem শনাক্ত। (6) PDA, LBA, TM-এর সম্পর্ক।",
       "tags": ["gate", "chomsky-hierarchy", "questions"]
+    },
+    {
+      "question": "DFA construction: \"ab\" দিয়ে শেষ হওয়া string স্বীকারকারী DFA কীভাবে তৈরি করবে?",
+      "answer": "DFA তৈরি (Σ={a,b}): (1) States: q₀ (start), q₁, q₂ (final)। (2) Transitions: δ(q₀,a)=q₁, δ(q₀,b)=q₀, δ(q₁,a)=q₁, δ(q₁,b)=q₂, δ(q₂,a)=q₁, δ(q₂,b)=q₀। (3) Logic: q₀ = 'ab' শুরু হয়নি, q₁ = 'a' পেয়েছে, q₂ = 'ab' পেয়েছে (accept)। q₂ থেকে 'a' হলে q₁-তে, 'b' হলে q₀-তে ফিরে যায়।",
+      "tags": ["dfa", "construction", "interview", "gate"]
+    },
+    {
+      "question": "DFA construction: জোড়া সংখ্যক 0 থাকা string স্বীকারকারী DFA কীভাবে তৈরি করবে?",
+      "answer": "DFA তৈরি (Σ={0,1}): (1) States: q₀ (start, final - জোড়া 0), q₁ (বিজোড়া 0)। (2) Transitions: δ(q₀,0)=q₁, δ(q₀,1)=q₀, δ(q₁,0)=q₀, δ(q₁,1)=q₁। (3) Logic: 0 পাল্লে অবস্থা toggle করে, 1 পাল্লে অবস্থা অপরিবর্তিত থাকে। শুধু q₀ final state। এটি 2-state minimal DFA।",
+      "tags": ["dfa", "construction", "even-zeros", "gate"]
+    },
+    {
+      "question": "NFA থেকে DFA রূপান্তরের step-by-step example দাও।",
+      "answer": "Example: NFA যা 'ab' বা 'ba' স্বীকার করে। NFA: Σ={a,b}, states={q₀,q₁,q₂}, δ(q₀,a)={q₀,q₁}, δ(q₀,b)={q₀}, δ(q₁,b)={q₂}, δ(q₂,b)={q₂}, δ(q₀,b)={q₀,q₁}। Subset Construction: DFA start = ε-closure(q₀)={q₀}। {q₀} a→{q₀,q₁}, {q₀} b→{q₀}। {q₀,q₁} a→{q₀,q₁}, {q₀,q₁} b→{q₀,q₂}। {q₀,q₂} a→{q₀,q₁}, {q₀,q₂} b→{q₀,q₁,q₂}। Final states: যেসব subset-এ q₂ আছে।",
+      "tags": ["nfa", "dfa", "subset-construction", "interview"]
+    },
+    {
+      "question": "Pumping Lemma ব্যবহার করে L = {aⁿbⁿ | n ≥ 0} Regular নয় প্রমাণ করো।",
+      "answer": "প্রমাণ: (1) ধরো L Regular। (2) Pumping length p আছে। (3) w = aᵖbᵖ ∈ L এবং |w| = 2p ≥ p। (4) w = xyz যেখানে |y| > 0, |xy| ≤ p। (5) y শুধু 'a' দিয়ে তৈরি (যেমন y = aᵏ, k > 0)। (6) xy²z = aᵖ⁺ᵏbᵖ, যেখানে p+k ≠ p (যেহেতু k > 0)। (7) তাই aᵖ⁺ᵏbᵖ ∉ L — Pumping Lemma-র সাথে বিরোধিতা। (8) সুতরাং L Regular নয়।",
+      "tags": ["pumping-lemma", "regular", "proof", "gate", "interview"]
+    },
+    {
+      "question": "CFG for balanced parentheses কীভাবে লেখে?",
+      "answer": "CFG: S → (S) | SS | ε। (1) S → (S) : একটি জোড়া parentheses ভিতরে থাকে। (2) S → SS : দুটি balanced string concat। (3) S → ε : শূন্য string। উদাহরণ: ((())) → (S) → ((S)) → (((S))) → (((ε)))। এই CFG balanced parentheses সম্পূর্ণভাবে উৎপাদন করে।",
+      "tags": ["cfg", "balanced-parentheses", "construction", "interview"]
+    },
+    {
+      "question": "CFG for L = {aⁿbⁿ | n ≥ 0} কী?",
+      "answer": "CFG: S → aSb | ε। (1) S → aSb : প্রতিটি 'a'-এর জন্য শেষে একটি 'b' যোগ হয়। (2) S → ε : n=0-র জন্য। Derivation: S → aSb → aaSbb → aabSabb → ... → aⁿbⁿ। এটি deterministic — প্রতিটি step-এ একটি 'a' ও একটি 'b' যোগ হয়।",
+      "tags": ["cfg", "anbn", "construction", "gate"]
+    },
+    {
+      "question": "CFG-কে CNF (Chomsky Normal Form)-এ রূপান্তর করার step-by-step example দাও।",
+      "answer": "Example: G = ({S,A,B}, {a,b}, {S→AB|a, A→a, B→b}, S)। CNF Conversion: (1) Start symbol S → AB দুটি non-terminal — ইতিমধ্যে CNF-এ আছে। (2) S → a: terminal production — CNF-এ নয়। নতুন rule: X → a, Y → b। তাহলে S → X, A → X, B → Y। (3) চূড়ান্ত CNF: S → AB | X, A → X, B → Y, X → a, Y → b।",
+      "tags": ["cnf", "cfg", "conversion", "gate"]
+    },
+    {
+      "question": "CFG to CNF রূপান্তরের সাধারণ ধাপগুলো কী কী?",
+      "answer": "CNF রূপান্তরের ধাপ: (1) Start symbol নতুন start symbol তৈরি করো (যদি S → ε থাকে)। (2) Nullable non-terminals বের করো ও productions সরিয়ে ফেলো। (3) Unit productions (A → B) বাদ দাও। (4) Useless productions বাদ দাও (non-generating, unreachable)। (5) বাকি productions-কে CNF-এর format-এ ভাঙো (A → BC বা A → a)।",
+      "tags": ["cnf", "conversion", "algorithm", "gate"]
+    },
+    {
+      "question": "PDA construction: L = {aⁿbⁿ | n ≥ 0} স্বীকারকারী PDA কীভাবে তৈরি করবে?",
+      "answer": "PDA (Final State acceptance): States: {q₀, q₁, q₂}, Σ={a,b}, Γ={A, Z₀}, start=q₀, final={q₂}। Transitions: (1) δ(q₀, ε, Z₀) = {(q₁, Z₀)} — শুরু। (2) δ(q₁, a, Z₀) = {(q₁, AZ₀)} — 'a' পেলে stack-এ 'A' চাপো। (3) δ(q₁, a, A) = {(q₁, AA)} — 'a' পেলে 'A' চাপো। (4) δ(q₁, b, A) = {(q₂, ε)} — 'b' পেলে stack থেকে 'A' বাদ দাও। (5) δ(q₂, b, A) = {(q₂, ε)} — আরো 'b' থাকলে 'A' বাদ দাও। (6) δ(q₂, ε, Z₀) = {(q₂, Z₀)} — accept।",
+      "tags": ["pda", "construction", "anbn", "interview"]
+    },
+    {
+      "question": "Turing Machine: L = {aⁿbⁿ | n ≥ 0} স্বীকারকারী TM কীভাবে কাজ করে?",
+      "answer": "TM Algorithm: (1) বামদিক থেকে একটি 'a' খুঁজে 'X' দিয়ে replace করো। (2) ডানদিকে যাও এবং 'b' খুঁজে 'Y' দিয়ে replace করো। (3) বামদিকে ফিরে যাও 'X' এর পরের 'a' খুঁজে। (4) পুনরাবৃত্তি করো যতক্ষণ সব 'a' ও 'b' 'X' ও 'Y' দিয়ে replace না হয়। (5) সব হলে accept। 'a' বা 'b' বাকি থাকলে reject।",
+      "tags": ["turing-machine", "anbn", "construction", "gate"]
+    },
+    {
+      "question": "Decidable ভাষা কী? Undecidable ভাষা কী? উদাহরণসহ ব্যাখ্যা করো।",
+      "answer": "Decidable: এমন ভাষা L যার জন্য একটি TM আছে যা সব input-এ halt করে এবং correct answer দেয়। উদাহরণ: (1) Regular Languages — DFA দিয়ে decidable। (2) CFL Membership — CYK algorithm। (3) aⁿbⁿ — simple TM। Undecidable: এমন ভাষা যার জন্য কোনো TM সব সময় halt করে না। উদাহরণ: (1) A_TM = {⟨M,w⟩ | M accepts w}। (2) HALT_TM। (3) EQ_TM।",
+      "tags": ["decidable", "undecidability", "examples", "interview"]
+    },
+    {
+      "question": "Rice's Theorem-এর প্রয়োগে কিছু undecidable problem প্রমাণ করো।",
+      "answer": "Rice's Theorem প্রয়োগ: RE-র সব non-trivial property undecidable। (1) L(M) = ∅ কিনা — undecidable (non-trivial, কারণ কিছু TM খালি ভাষা স্বীকার করে, কিছু না)। (2) L(M) = Σ* কিনা — undecidable। (3) L(M) finite কিনা — undecidable। (4) L(M) regular কিনা — undecidable। (5) L(M) CFL কিনা — undecidable। Trivial property (সব TM-এর জন্য true/false): Rice's Theorem apply হয় না।",
+      "tags": ["rices-theorem", "undecidability", "application", "gate", "interview"]
+    },
+    {
+      "question": "Regular, CFL, RE — Closure Properties-এর তুলনামূলক টেবিল দাও।",
+      "answer": "Closure Properties Table: (1) Union: Regular ✓, CFL ✓, RE ✓। (2) Intersection: Regular ✓, CFL ✗ (CFL∩CFL≠CFL), RE ✗। (3) Complement: Regular ✓, CFL ✗, RE ✗। (4) Concatenation: Regular ✓, CFL ✓, RE ✓। (5) Kleene Star: Regular ✓, CFL ✓, RE ✓। (6) Reversal: Regular ✓, CFL ✓, RE ✓। (7) Homomorphism: Regular ✓, CFL ✓, RE ✓। (8) Inverse Homomorphism: Regular ✓, CFL ✓, RE ✓।",
+      "tags": ["closure-properties", "regular", "cfl", "re", "comparison", "gate"]
+    },
+    {
+      "question": "Myhill-Nerode Theorem-এর basics কী? কীভাবে DFA minimize করতে ব্যবহার করে?",
+      "answer": "Myhill-Nerode Theorem: (1) সম্পর্ক: x ~_L y ⟺ ∀z, xz ∈ L ⟺ yz ∈ L। (2) Equivalence classes = distinct behaviors। (3) Index = classes-এর সংখ্যা = minimal DFA-র state সংখ্যা। (4) L Regular ⟺ index finite। Example: L = {ab}। ab, ε, a, b — 4টি class → minimal DFA 4 states। Table Filling Algorithm-এ: distinguishable pairs mark করে, unmarked pairs merge করে minimal DFA পাওয়া যায়।",
+      "tags": ["myhill-nerode", "theorem", "dfa-minimization", "basics"]
+    },
+    {
+      "question": "Ambiguous grammar কী? উদাহরণ দাও।",
+      "answer": "Ambiguous Grammar: এমন CFG যেখানে একটি string-এর দুটি বা ততোধিক ভিন্ন parse tree বা leftmost derivation থাকে। উদাহরণ: E → E + E | E * E | (E) | id। String: id + id * id। Parse Tree 1: (E+E*E) → (id + (id * id)) — '+' আগে। Parse Tree 2: (E*(E+E)) → ((id + id) * id) — '*' আগে। দুটি ভিন্ন tree → grammar ambiguous।",
+      "tags": ["ambiguous", "grammar", "cfg", "example", "gate"]
+    },
+    {
+      "question": "CFG-তে Ambiguity কেন সমস্যা? Unambiguous grammar কেন দরকার?",
+      "answer": "Ambiguity-র সমস্যা: (1) Parser সঠিক parse tree বাছতে পারে না। (2) Operator precedence ambiguous। (3) Code generation-এ ভিন্ন output। (4) Compiler design-এ error। Solution: Unambiguous grammar — operator precedence ও associativity নির্ধারণ করে। উদাহরণ: E → E + T | T, T → T * F | F, F → (E) | id। '+' lower precedence, '*' higher, both left-associative।",
+      "tags": ["ambiguous", "grammar", "compiler", "interview"]
+    },
+    {
+      "question": "PDA construction: Balanced parentheses স্বীকারকারী PDA কী?",
+      "answer": "PDA (Empty Stack acceptance): Σ={(,)}, Γ={Z₀, (}, start=q₀। Transitions: (1) δ(q₀, ε, Z₀) = {(q₀, Z₀)}। (2) δ(q₀, (, Z₀) = {(q₀, (Z₀)} — '(' পেলে stack-এ '(' চাপো। (3) δ(q₀, (, () = {(q₀, (()} — '(' পেলে '(' চাপো। (4) δ(q₀, ), () = {(q₀, ε)} — ')' পেলে stack থেকে '(' বাদ দাও। Acceptance: stack খালি হলে accept।",
+      "tags": ["pda", "balanced-parentheses", "construction"]
+    },
+    {
+      "question": "Turing Machine: L = {ww | w ∈ {a,b}*} স্বীকারকারী TM কীভাবে কাজ করে?",
+      "answer": "TM Algorithm: (1) বামদিকে একটি বর্ণ X দিয়ে replace করো এবং সেটি marker হিসেবে মনে রাখো। (2) ডানদিকে যাও, match বর্ণ খুঁজো (যেমন, 'a' হলে পরের half-এ 'a' খুঁজো)। (3) Match পেলে X দিয়ে replace করো। (4) বামদিকে ফিরে যাও। (5) পুনরাবৃত্তি। (6) সব বর্ণ X হলে accept। mismatch হলে reject।",
+      "tags": ["turing-machine", "ww", "construction", "interview"]
+    },
+    {
+      "question": "CFL-এর Closure Properties-এর গুরুত্বপূর্ণ বিষয় কী কী?",
+      "answer": "CFL Closure Properties: (1) Union, Concatenation, Kleene Star: Closed। (2) Reversal, Homomorphism, Inverse Homomorphism: Closed। (3) Intersection: CFL ∩ Regular = CFL (Closed), CFL ∩ CFL: Closed নয়। (4) Complement: CFL Closed নয়। (5) Substitution: Closed। (6) গুরুত্ব: CFL ∩ CFL undecidable — Rice's Theorem-এর সাথে সম্পর্কিত।",
+      "tags": ["cfl", "closure-properties", "gate"]
+    },
+    {
+      "question": "Deterministic CFL (DCFL) কী? DCFL-এর উদাহরণ দাও।",
+      "answer": "DCFL: সেই CFL যা DPDA (Deterministic PDA) দ্বারা স্বীকৃত। DPDA-তে প্রতিটি অবস্থা-input-stack symbol জোড়ায় সর্বোচ্চ একটি move থাকে। উদাহরণ: (1) {aⁿbⁿ | n ≥ 0} — DPDA। (2) {wcwᴿ | w ∈ {a,b}*} — DPDA। (3) Balanced parentheses — DPDA। (4) {wwᴿ | w ∈ {a,b}*} — DCFL (কিন্তু {ww} DCFL নয়)। DCFL ⊂ CFL। DCFL Complement-এর সাথে Closed।",
+      "tags": ["dcfl", "cfl", "pda", "definition"]
+    },
+    {
+      "question": "Post Correspondence Problem (PCP) কী? এটি কেন undecidable?",
+      "answer": "PCP: দেওয়া আছে tiles: {(t₁,b₁), (t₂,b₂), ..., (tₖ,bₖ)}। প্রশ্ন: sequence i₁,i₂,...,iₘ আছে কি যেন tᵢ₁tᵢ₂...tᵢₘ = bᵢ₁bᵢ₂...bᵢₘ? Undecidable কারণ: PCP Halting Problem-এ reduction করা যায়। যদি PCP decide করা যেত, Halting Problem-ও decide করা যেত — যা impossible। PCP ব্যবহার করে Ambiguity Problem, Emptiness Problem ইত্যাদি undecidable problem প্রমাণ করা হয়।",
+      "tags": ["pcp", "undecidability", "gate"]
+    },
+    {
+      "question": "Turing Machine-এ Recognizable (RE) কিন্তু Decidable (Recursive) নয় এমন ভাষার উদাহরণ কী?",
+      "answer": "A_TM = {⟨M,w⟩ | M accepts w} — RE কিন্তু Recursive নয়। (1) RE: TM M দিয়ে w accept হলে halt করে accept করবে। (2) Recursive নয়: w ∉ A_TM হলে M halt করে না (loop-এ যায়)। (3) A_TM complement — Recursive (decidable) কিন্তু RE নয়। (4) HALT_TM — RE কিন্তু Recursive নয়।",
+      "tags": ["recognizable", "decidable", "turing-machine", "example"]
+    },
+    {
+      "question": "CFG-তে Unit Production কী? কেন বাদ দেওয়া হয়?",
+      "answer": "Unit Production: এমন rule যেমন A → B, যেখানে ডানপক্ষে শুধু একটি non-terminal। (1) Unit productions CNF/GNF রূপান্তরে বাধা সৃষ্টি করে। (2) String derivation-এ অপ্রয়োজনীয় steps যোগ করে। (3) B থেকে terminal string পাওয়া গেলে A → (B-এর rules) direct লেখা যায়। বাদ দেওয়ার ধাপ: (1) Unit pairs বের করো। (2) A → B এবং B → α (non-unit) থাকলে A → α যোগ করো। (3) সব unit productions বাদ দাও।",
+      "tags": ["cfg", "unit-production", "simplification"]
+    },
+    {
+      "question": "Turing Machine: L = {aⁿbⁿcⁿ | n ≥ 0} স্বীকারকারী TM কীভাবে কাজ করে?",
+      "answer": "TM Algorithm: (1) বামদিকে থেকে একটি 'a' খুঁজে 'X' দিয়ে replace করো। (2) 'b' খুঁজে 'Y' দিয়ে replace করো। (3) 'c' খুঁজে 'Z' দিয়ে replace করো। (4) বামদিকে ফিরে যাও। (5) পুনরাবৃত্তি। (6) সব X, Y, Z হলে accept। (7) mismatch হলে reject। NPDA-তেও সম্ভব নয় — TM-এর প্রয়োজন।",
+      "tags": ["turing-machine", "anbncn", "construction"]
+    },
+    {
+      "question": "Intersection of two CFL-এর সমস্যা কী?",
+      "answer": "CFL ∩ CFL CFL নাও হতে পারে। উদাহরণ: L₁ = {aⁿbⁿcᵐ | n,m ≥ 0} — CFL (CFG: S→AB, A→aAb|ε, B→cB|ε)। L₂ = {aᵐbⁿcⁿ | m,n ≥ 0} — CFL (CFG: S→AB, A→aA|ε, B→bBc|ε)। L₁ ∩ L₂ = {aⁿbⁿcⁿ | n ≥ 0} — CFL নয় (Pumping Lemma দিয়ে প্রমাণযোগ্য)। তবে CFL ∩ Regular Language = CFL।",
+      "tags": ["cfl", "intersection", "closure", "gate", "interview"]
+    },
+    {
+      "question": "Ambiguous grammar থেকে unambiguous grammar কীভাবে তৈরি করবে? Example দাও।",
+      "answer": "Example: E → E + E | E * E | id — Ambiguous। Solution: Operator precedence ব্যবহার করে unambiguous grammar তৈরি: E → E + T | T, T → T * F | F, F → id। (1) '+' lower precedence (E level-এ)। (2) '*' higher precedence (T level-এ)। (3) দুটি left-associative। (4) id + id * id এর একটিই parse tree: id + (id * id)।",
+      "tags": ["ambiguous", "grammar", "unambiguous", "example", "interview"]
+    },
+    {
+      "question": "NFA-তে ε-transition থাকলে DFA তৈরি করার সময় কী সমস্যা হয়?",
+      "answer": "ε-transition-এর সমস্যা: (1) Subset Construction-এ ε-closure বের করতে হয়। (2) একটি NFA state-এর ε-closure একাধিক state অন্তর্ভুক্ত করে। (3) DFA-র state = NFA-র states-এর subset। (4) সংখ্যা বাড়ে: NFA-তে n states হলে DFA-তে সর্বোচ্চ 2ⁿ states। (5) ε-transition ছাড়া NFA-তেও subset construction প্রয়োজন। Solution: ε-closure আগে বের করো, তারপর move(T,a) = ε-closure(∪_{q∈T} δ(q,a))।",
+      "tags": ["nfa", "epsilon-transition", "subset-construction"]
+    },
+    {
+      "question": "Turing Machine: L = {aⁿ | n is prime} স্বীকারকারী TM কীভাবে কাজ করে?",
+      "answer": "TM Algorithm (primality test): (1) Tape-এর বামদিকে 2 'a' চিহ্নিত করো। (2) একটি counter track-এ গুণ করো: 2×3=6, 2×4=8, ... prime নাম্বার check করো। (3) প্রতিটি prime p-এর জন্য check করো n/p integer কিনা। (4) কোনো p-এ divisible না হলে n prime। (5) Accept/reject। এটি semi-decidable — halt করবে, কিন্তু time বেশি লাগবে।",
+      "tags": ["turing-machine", "prime", "construction"]
+    },
+    {
+      "question": "Context-Sensitive Language (CSL) কী? LBA কীভাবে সম্পর্কিত?",
+      "answer": "CSL: Type 1 Chomsky Hierarchy-র language। (1) Grammar: αAβ → αγβ, γ ≠ ε (context-sensitive)। (2) LBA (Linear Bounded Automaton) দ্বারা স্বীকৃত। (3) LBA = tape input-এর দৈর্ঘ্যে সীমিত TM। (4) CSL ⊃ CFL, CSL ⊂ RE। (5) {aⁿbⁿcⁿ | n ≥ 1} — CSL (CFL নয়)। (6) CSL complement — CSL (closed)। (7) CFL proper subset of CSL।",
+      "tags": ["csl", "lba", "context-sensitive", "chomsky-hierarchy"]
     }
   ]
 }

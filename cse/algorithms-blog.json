@@ -1,7 +1,7 @@
 {
   "subject": "CSE College Teacher",
-  "title": "Algorithms — সম্পূর্ণ Q&A গাইড (50+ প্রশ্নোত্তর)",
-  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Algorithms-এর 50+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
+  "title": "Algorithms — সম্পূর্ণ Q&A গাইড (80+ প্রশ্নোত্তর)",
+  "description": "GATE CSE ও ভারতীয় প্রকৌশল পরীক্ষার উপর ভিত্তি করে Algorithms-এর 80+ গুরুত্বপূর্ণ প্রশ্নোত্তর",
   "slideUrl": null,
   "content": [
     {
@@ -373,6 +373,116 @@
       "question": "Graph-এ Adjacency Matrix ও Adjacency List-এর পার্থক্য কী?",
       "answer": "Adjacency Matrix: V×V space O(V²), edge check O(1), add edge O(1)। Adjacency List: O(V+E) space, edge check O(degree), add edge O(1)। Dense graph-এ Matrix efficient, sparse graph-এ List efficient। GATE CSE-তে space comparison নিয়ে প্রশ্ন আসে।",
       "tags": ["graph", "representation", "adjacency"]
+    },
+    {
+      "question": "T(n) = T(n/2) + 1 recurrence relation কীভাবে solve করবে? Master Theorem কি প্রযোজ্য?",
+      "answer": "T(n) = T(n/2) + 1 — এখানে a=1, b=2, d=0। log₂1 = 0 = d, তাই Master Theorem-এর Case 2 প্রযোজ্য। T(n) = O(n⁰ · log n) = O(log n)। এটি Binary Search-এর recurrence। মনে রাখবে: যখন a=1, b=2, constant extra work, তখন output O(log n)। Recursion tree-তে প্রতিটি level-এ ১টি node, log₂n টি level, প্রতিটিতে O(1) cost।",
+      "tags": ["recurrence", "master-theorem", "binary-search", "logarithmic"]
+    },
+    {
+      "question": "T(n) = 2T(n/2) + n recurrence relation কীভাবে solve করবে? Master Theorem কি প্রযোজ্য?",
+      "answer": "T(n) = 2T(n/2) + n — এখানে a=2, b=2, d=1। log₂2 = 1 = d, তাই Case 2 প্রযোজ্য। T(n) = O(n log n)। এটি Merge Sort-এর recurrence। Recursion tree-তে log₂n টি level, প্রতিটি level-এ n টি কাজ, মোট O(n log n)। Case 2-তে split খরচ ও recursive খরচ সমান order-এ।",
+      "tags": ["recurrence", "master-theorem", "merge-sort"]
+    },
+    {
+      "question": "T(n) = 4T(n/2) + n এবং T(n) = 3T(n/2) + n — এদের solution কী?",
+      "answer": "T(n) = 4T(n/2) + n: a=4, b=2, d=1। log₂4 = 2 > d=1, তাই Case 3। T(n) = O(n²)। T(n) = 3T(n/2) + n: a=3, b=2, d=1। log₂3 ≈ 1.585 > d=1, তাই Case 3। T(n) = O(n^1.585)। Case 3-তে recursive work dominate করে।",
+      "tags": ["recurrence", "master-theorem", "case-3"]
+    },
+    {
+      "question": "Master Theorem-এর কোন case-তে solution O(nᵈ log n) আসে?",
+      "answer": "Master Theorem-এর Case 2: যদি d = log_b(a), তাহলে T(n) = O(nᵈ log n)। যেমন T(n) = 2T(n/2) + n — a=2, b=2, d=1, log₂2=1=d → O(n log n)। T(n) = T(n/2) + 1 — a=1, b=2, d=0, log₂1=0=d → O(log n)। এই case-তে split cost ও work সমান order-এ থাকে।",
+      "tags": ["master-theorem", "case-2", "recurrence"]
+    },
+    {
+      "question": "Master Theorem কোন recurrence-তে কাজ করে না?",
+      "answer": "Master Theorem কাজ করে না যখন: (1) a < 1 (কোনো recursive call নেই)। (2) b ≤ 1 (input ছোট হয় না)। (3) d < 0 (extra work negative order)। (4) T(n) = T(n/2) + T(n/4) — non-uniform split। (5) T(n) = 2T(n/2) + n/log n — logarithmic factor থাকলে। এক্ষেত্রে Akra-Bazzi method বা Recursion Tree ব্যবহার করতে হয়।",
+      "tags": ["master-theorem", "limitations", "recurrence"]
+    },
+    {
+      "question": "Amortized Analysis-তে Splay Tree-র operation-এর cost কীভাবে O(log n) থাকে?",
+      "answer": "Splay Tree BST-র একটি variant যেখানে প্রতিটি access-এর পর node-কে root-এ splay করা হয়। Individual operation O(n) হতে পারে কিন্তু m টি operations-এর amortized cost O(m log n)।势 potential method: Φ = Σ log(size of subtree)। প্রতিটি splay operation potential কমায়। GATE CSE-তে splay tree-র amortized bound জিজ্ঞাসা করা হয়।",
+      "tags": ["amortized", "splay-tree", "binary-search-tree"]
+    },
+    {
+      "question": "Dynamic Array (ArrayList, vector) তে amortized O(1) কীভাবে হয়?",
+      "answer": "Dynamic Array push operation-এ: সাধারণত O(1)। কিন্তু array পুরো হলে double size করে copy করতে হয় — এই operation O(n)। n টি push-এ সর্বোচ্চ ⌈log₂n⌉ বার resize হয়। মোট copy cost: n + n/2 + n/4 + ... ≤ 2n = O(n)। গড়: O(n)/n = O(1) per push। এটি Aggregate Method-এর amortized analysis।",
+      "tags": ["amortized", "dynamic-array", "data-structure"]
+    },
+    {
+      "question": "Z-Algorithm কী এবং Z-array কী?",
+      "answer": "Z-Algorithm string S-এর প্রতিটি position i-এর জন্য Z[i] গণনা করে — S[i..n-1] ও S-এর prefix-এর দীর্ঘতম common substring-র length। Z-array: Z[0] = 0 (বা n), Z[i] = longest substring starting at i যা S-এর prefix। Pattern matching-এ: text T ও pattern P-কে concat করে Z-array বানাও। যদি Z[i] = |P|, পাওয়া গেল। Time: O(n+m)।",
+      "tags": ["string", "z-algorithm", "pattern-matching"]
+    },
+    {
+      "question": "Z-array কীভাবে compute করে? Z-box concept ব্যাখ্যা করো।",
+      "answer": "Z-array compute: left (L) ও right (R) ধরো যেন S[L..R] একটি Z-box (prefix match)। নতুন i-এ: (1) i > R: সরাসরি match extend করো। (2) i ≤ R: Z[i-L] ব্যবহার করো। যদি Z[i-L] < R-i+1, Z[i] = Z[i-L]। Else extend করো। R update করো। প্রতিটি character O(1) বার compare হয়। Time: O(n)।",
+      "tags": ["z-algorithm", "z-box", "linear-time"]
+    },
+    {
+      "question": "Suffix Array কী?",
+      "answer": "Suffix Array হলো string S-এর সব suffix-এর sorted order-এর index array। যেমন S = 'banana': suffixes sorted: 'a'(5), 'ana'(3), 'anana'(1), 'banana'(0), 'na'(4), 'nana'(2)। SA = [5, 3, 1, 0, 4, 2]। Suffix Array দিয়ে substring search, longest repeated substring ইত্যাদি solve করা যায়। Space: O(n)।",
+      "tags": ["string", "suffix-array", "data-structure"]
+    },
+    {
+      "question": "Suffix Array ও Suffix Trie-এর পার্থক্য কী?",
+      "answer": "Suffix Trie: সব suffix store করে tree-তে, O(n²) space, O(m) search। Suffix Array: sorted index array, O(n) space, binary search দিয়ে O(m log n) search। Suffix Array space-efficient এবং practical-তে বেশি ব্যবহৃত হয়। Suffix Array-এ LCP array যোগ করলে Suffix Tree-র সমতুল্য তথ্য পাওয়া যায়।",
+      "tags": ["string", "suffix-array", "suffix-trie", "comparison"]
+    },
+    {
+      "question": "N-Queen Problem-এ backtracking কীভাবে কাজ করে? Step by step ব্যাখ্যা করো।",
+      "answer": "N-Queen Backtracking: (1) প্রথম column-এ প্রথম row-এ Queen place করো। (2) Next column-এ প্রতিটি row-এ Queen রাখো, check করো safe কি — same row, same diagonal-এ অন্য Queen নেই। (3) Safe হলে next column-এ যাও। (4) সব column-এ Queen place হলে solution পাওয়া গেল। (5) Invalid হলে backtrack করো — আগের column-এ Queen সরাও। Time: O(N!), Space: O(N²)।",
+      "tags": ["backtracking", "n-queen", "recursion"]
+    },
+    {
+      "question": "Graph Coloring-এ backtracking কীভাবে কাজ করে?",
+      "answer": "Graph Coloring Backtracking: (1) প্রথম vertex-কে প্রথম color দাও। (2) Next vertex-তে প্রতিটি color try করো। (3) Check করো adjacent vertex-দের সাথে color conflict আছে কি। (4) Conflict না হলে next vertex-তে যাও। (5) সব vertex color হলে solution পাওয়া গেল। (6) Valid color না মিললে backtrack করো। m colors দিয়ে graph m-colorable কি না check করতে O(m^V) time লাগে।",
+      "tags": ["backtracking", "graph-coloring", "np-hard"]
+    },
+    {
+      "question": "System Design-এ Consistent Hashing কী?",
+      "answer": "Consistent Hashing হলো distributed system-এ data ভাগ করার technique। Server ও key-দেকে hash ring-এ map করা হয়। Key-কে clockwise direction-ে প্রথম server-এ store করা হয়। Server add/remove হলে সামান্য data move হয় — সব data rehash হয় না। Virtual node ব্যবহার করে load balance করা হয়। DynamoDB, Cassandra-তে ব্যবহৃত হয়।",
+      "tags": ["system-design", "consistent-hashing", "distributed"]
+    },
+    {
+      "question": "Load Balancing-এর প্রধান algorithms কী কী?",
+      "answer": "Load Balancing algorithms: (1) Round Robin: ক্রমিকভাবে request distribute করে। (2) Least Connections: সবচেয়ে কম connection আছে এমন server-এ পাঠায়। (3) IP Hash: client IP-এর hash অনুযায়ী server assign করে — sticky session। (4) Weighted Round Robin: server capacity অনুযায়ী ভার বণ্টন। (5) Least Response Time: সবচেয়ে দ্রুত respond করে এমন server নির্বাচন।",
+      "tags": ["system-design", "load-balancing", "distributed"]
+    },
+    {
+      "question": "Consistent Hashing-তে Virtual Node কেন প্রয়োজন?",
+      "answer": "Consistent Hashing-তে সাধারণত few servers থাকলে hash ring-এ uneven distribution হয় — কিছু server-তে বেশি data, কিছুতে কম। Virtual node: প্রতিটি physical server-কে multiple positions-এ hash ring-এ map করা হয়। এতে load evenly distribute হয়। যেমন 3 servers, 150 virtual nodes — প্রতিটি server ~50 positions-এ। Server add/remove করলেও load balanced থাকে।",
+      "tags": ["system-design", "consistent-hashing", "virtual-node"]
+    },
+    {
+      "question": "দেওয়া আছে একটি sorted array। দুটি সংখ্যা খুঁজে বের করো যাদের sum K। Time Complexity কত হবে?",
+      "answer": "Sorted array-তে Two Pointer approach: একটি pointer শুরুতে, অন্যটি শেষে। যদি arr[left] + arr[right] == K, পাওয়া গেল। যদি sum < K, left++। যদি sum > K, right--। Time: O(n), Space: O(1)। Unsorted array-তে Hash Map ব্যবহার করতে হয় — O(n) time, O(n) space। Interview-এ sorted array-তে two pointer solution প্রত্যাশিত।",
+      "tags": ["array", "two-pointer", "interview", "sum"]
+    },
+    {
+      "question": "একটি string palindrome কিনা check করো। Two pointer approach ব্যবহার করো।",
+      "answer": "Palindrome Check: দুটি pointer — একটি শুরুতে, অন্যটি শেষে। প্রতিটি step-এ দুটি character compare করো। mismatch না হওয়া পর্যন্ত left++, right--। Time: O(n), Space: O(1)। Case-insensitive হলে toLowerCase() করো। Ignore spaces/punctuation হলে skip করো। Interview-এ follow-up: longest palindrome substring বের করা।",
+      "tags": ["string", "palindrome", "two-pointer", "interview"]
+    },
+    {
+      "question": "Linked List-এর middle element one pass-এ কীভাবে খুঁজবে?",
+      "answer": "Slow-Fast Pointer (Tortoise-Hare) approach: slow pointer ১ step যায়, fast pointer ২ step যায়। fast শেষে পৌঁছালে slow middle position-এ থাকে। Time: O(n), Space: O(1)। Even length list-এ দুটি middle থাকে — slow pointer প্রথমটি দেখায়। Interview-এ এই technique বারবার জিজ্ঞাসা হয়। Cycle detection-এও একই technique ব্যবহৃত হয়।",
+      "tags": ["linked-list", "fast-slow-pointer", "two-pointer", "interview"]
+    },
+    {
+      "question": "Unsorted array-তে দুটি সংখ্যা যাদের sum K তা খুঁজে বের করো — Hash Map approach ব্যাখ্যা করো।",
+      "answer": "Hash Map approach: প্রতিটি element-এর জন্য check করো K - arr[i] hash map-এ আছে কি। যদি আছে, pair পাওয়া গেল। না হলে arr[i] = index map-এ store করো। Time: O(n), Space: O(n)। Sorted array-তে two pointer O(1) space-তে কাজ করে। Interview-এ interviewer জানতে চাইবে space-time tradeoff।",
+      "tags": ["array", "hash-map", "interview", "sum"]
+    },
+    {
+      "question": "Linked List-তে cycle detection-এর algorithm কী? Floyd's algorithm ব্যাখ্যা করো।",
+      "answer": "Floyd's Cycle Detection (Tortoise-Hare): slow pointer ১ step, fast pointer ২ step যায়। cycle থাকলে দুটি অবশ্যই একই node-তে মিলবে। cycle শুরুর node খুঁজতে: একটি pointer head-এ, অন্যটি meeting point-এ রাখো। দুটো একে একে ১ step এগিয়ে যাও — যেখানে মিলবে সেটিই cycle-এর শুরু। Time: O(n), Space: O(1)।",
+      "tags": ["linked-list", "cycle-detection", "fast-slow-pointer", "interview"]
+    },
+    {
+      "question": "Array-তে একটি element যা বাকি সব element একবার করে আছে কিন্তু এটি দুবার আছে — কীভাবে খুঁজবে?",
+      "answer": "Approaches: (1) XOR: সব element XOR করো — একবার আসা সব cancel হবে, দুইবার আসা থাকবে। Time: O(n), Space: O(1)। (2) Hash Map: frequency count করো। (3) Math: সব যোগ করে প্রতিটি element-এর sum বিয়োগ করো। XOR approach interview-এ সবচেয়ে preferred কারণ O(1) space।",
+      "tags": ["array", "bit-manipulation", "xor", "interview"]
     }
   ]
 }

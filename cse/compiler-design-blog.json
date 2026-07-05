@@ -515,9 +515,129 @@
       "tags": ["gate", "important-topics", "compiler-design"]
     },
     {
-      "question": "Compiler Design কেন গুরুত্বপূর্ণ?",
-      "answer": "Compiler Design গুরুত্বপূর্ণ কারণ: (1) এটি software engineering-এর fundamental concept। (2) Language design, tools, IDE — সব compiler theory-র উপর ভিত্তি করে। (3) Program analysis, optimization, security — সব area-তে apply হয়। (4) GATE CSE-তে 5-8 marks পর্যন্ত প্রশ্ন আসে। (5) Software industry-তে সরাসরি প্রয়োগ হয়।",
-      "tags": ["importance", "compiler-design", "career"]
+      "question": "FIRST ও FOLLOW Set নিয়ে একটি উদাহরণ দিন।",
+      "answer": "ধরুন Grammar: S → AB, A → aA | ε, B → bB | b। First(A) = {a, ε}। First(B) = {b}। First(S) = First(A) = {a, b} (কারণ A → ε সম্ভব)। Follow(S) = {$}। Follow(A) = First(B) = {b} (কারণ S → AB-তে A-র পর B আছে)। Follow(B) = Follow(S) = {$}। GATE CSE-তে প্রায়ই এরকম ছোট grammar দিয়ে First/Follow বের করতে বলা হয়।",
+      "tags": ["first", "follow", "computation", "example"]
+    },
+    {
+      "question": "LL(1) Parsing Table কীভাবে তৈরি করে?",
+      "answer": "LL(1) Parsing Table তৈরির ধাপ: (1) প্রতিটি non-terminal A-এর জন্য First ও Follow সেট বের করো। (2) প্রতিটি production A → α-এর জন্য: যদি α থেকে terminal a উৎপন্ন হয়, তাহলে M[A, a]-তে A → α বসাও। (3) যদি α → ε সম্ভব হয়, তাহলে Follow(A)-এর প্রতিটি b-এর জন্য M[A, b]-তে A → α বসাও। (4) দুটি production একই cell-এ আসলে grammar LL(1) নয়।",
+      "tags": ["ll1", "parsing-table", "construction"]
+    },
+    {
+      "question": "Left Recursion Elimination-এর উদাহরণ দিন।",
+      "answer": "Grammar: A → Aα | β। এটি direct left recursive। নতুন grammar: A → βA', A' → αA' | ε। উদাহরণ: E → E + T | T থেকে E → TE', E' → +TE' | ε। GATE CSE-তে এরকম elimination অনেকবার জিজ্ঞাসা হয়। Indirect left recursion-ও সমাধান করতে হয় — প্রথমে non-terminals-কে ক্রমানুসারে সাজাও, তারপর direct elimination করো।",
+      "tags": ["left-recursion", "elimination", "example"]
+    },
+    {
+      "question": "Left Factoring কী? একটি উদাহরণ দিন।",
+      "answer": "Left Factoring হলো LL(1) parsing-এর জন্য grammar transform করার পদ্ধতি যখন দুটি production একই prefix ভাগ করে। Grammar: A → αβ | αγ। Left factoring: A → αA', A' → β | γ। উদাহরণ: S → if E then S else S | if E then S থেকে S → if E then S S', S' → else S | ε। এতে LL(1) parsing table-তে entry conflict কমে।",
+      "tags": ["left-factoring", "ll1", "grammar"]
+    },
+    {
+      "question": "Shift-Reduce Parsing-এর একটি Trace দিন।",
+      "answer": "Grammar: S → (S) | ε। Input: (())। Trace: (1) Shift '(' → Stack: ( (2) Shift '(' → Stack: (( (3) Reduce S → ε → Stack: (S (4) Shift ')' → Stack: (S) (5) Reduce S → (S) → Stack: SS (6) Shift ')' → Stack: SS) (7) Reduce S → (S) → Stack: SSS → error নয়, সঠিক trace: Stack: ε, Input: (()) → Shift ( → Stack: ( → Shift ( → Stack: (( → Reduce S → ε → Stack: (S → Shift ) → Stack: (S) → Reduce S → (S) → Stack: S → Shift ) → Stack: S) → Reduce S → (S) → Stack: S → Accept।",
+      "tags": ["shift-reduce", "trace", "bottom-up"]
+    },
+    {
+      "question": "LR(0) Item Sets কীভাবে নির্মাণ করে?",
+      "answer": "LR(0) Item Set Construction: (1) Augmented grammar তৈরি করো (S' → S যোগ করো)। (2) I₀ = closure({S' → •S})। (3) প্রতিটি item set I-এর জন্য প্রতিটি grammar symbol X-এর জন্য goto(I, X) বের করো। (4) goto(I, X) = closure({A → αX•β | A → α•Xβ ∈ I})। (5) নতুন set পাওয়া গেলে সেটিকে collection-এ যোগ করো। (6) যতক্ষণ নতুন set না আসে চলো।",
+      "tags": ["lr0", "item-sets", "construction"]
+    },
+    {
+      "question": "LR(0) Item Set Construction-এর একটি বাস্তব উদাহরণ দিন।",
+      "answer": "Grammar: S' → S, S → CC, C → cC | d। I₀ = closure({S' → •S}) = {S' → •S, S → •CC, C → •cC, C → •d}। goto(I₀, S) = {S' → S•}। goto(I₀, C) = {S → C•C, C → •cC, C → •d}। goto(I₀, c) = {C → c•C, C → •cC, C → •d}। goto(I₀, d) = {C → d•}। এভাবে সব states তৈরি হয়। GATE CSE-তে এরকম 4-5 productions-এর grammar দিয়ে item sets বানাতে বলা হয়।",
+      "tags": ["lr0", "example", "item-sets"]
+    },
+    {
+      "question": "Constant Folding-এর বাস্তব উদাহরণ দিন।",
+      "answer": "Constant Folding উদাহরণ: (1) x = 3 + 4 * 2 কে x = 11 বানানো। (2) y = true && false কে y = false বানানো। (3) z = \"hello\" + \" world\" কে z = \"hello world\" বানানো। (4) a = 10 / 2 কে a = 5 বানানো। Compile-time-এ evaluate করায় runtime computation বাদ যায়। Nested constant expressions-ও handle করা হয় — যেমন x = (2 + 3) * (4 + 1) কে x = 25 বানানো।",
+      "tags": ["constant-folding", "optimization", "example"]
+    },
+    {
+      "question": "Dead Code Elimination-এর বাস্তব উদাহরণ দিন।",
+      "answer": "Dead Code Elimination উদাহরণ: (1) x = 10; y = 20; — যদি x আর কোথাও ব্যবহার না হয়, তাহলে x = 10; remove করো। (2) একটি if statement যেখানে condition সবসময় false — পুরো if block remove করো। (3) unreachable code after return — remove করো। (4) Unused function — entire function remove করো। SSA form-এ dead code detection সহজ কারণ definition-use chain clear থাকে।",
+      "tags": ["dead-code", "elimination", "example"]
+    },
+    {
+      "question": "Loop Invariant Code Motion-এর একটি উদাহরণ দিন।",
+      "answer": "Loop Invariant Code Motion উদাহরণ: Input: while(i < n) { x = a + b; y = x * i; i++; }। এখানে x = a + b লুপের বাইরে সরানো যায় কারণ a ও b লুপের ভেতরে পরিবর্তিত হয় না। Optimized: x = a + b; while(i < n) { y = x * i; i++; }। এতে প্রতিটি iteration-এ a+b calculate না করেই হয়। শর্ত: (1) computation loop-invariant হতে হবে। (2) expression-এর operands loop-এর ভেতরে change হতে হবে না।",
+      "tags": ["loop-invariant", "code-motion", "example"]
+    },
+    {
+      "question": "SSA (Static Single Assignment) Form-এর একটি উদাহরণ দিন।",
+      "answer": "Original: a = 1; if (cond) { a = 2; b = a + 1; } else { b = a + 3; } c = b + a;। SSA: a₁ = 1; if (cond) { a₂ = 2; b₁ = a₂ + 1; } else { b₂ = a₁ + 3; } b₃ = φ(b₁, b₂); a₃ = φ(a₂, a₁); c₁ = b₃ + a₃;। প্রতিটি variable ঠিক একবার assign হয়েছে। φ function merge point-এ different versions মিলিত করে। SSA dead code elimination, constant propagation, copy propagation সহজ করে।",
+      "tags": ["ssa", "phi-function", "example"]
+    },
+    {
+      "question": "Register Allocation-এ Graph Coloring Approach কীভাবে কাজ করে?",
+      "answer": "Graph Coloring Register Allocation: (1) Interference Graph তৈরি করো — variables যারা একই সাথে live তাদের node connect করো। (2) k colors দিয়ে graph color করো (k = number of registers)। (3) প্রতিটি color একটি register-কে represent করে। (4) Colorable হলে register assignment ready। (5) NOT k-colorable হলে spill — কিছু variables memory-তে পাঠাও। Chaitin's algorithm spill heuristic ব্যবহার করে। GATE CSE-তে graph coloring-এর steps জিজ্ঞাসা করা হয়।",
+      "tags": ["graph-coloring", "register-allocation", "interference-graph"]
+    },
+    {
+      "question": "Peephole Optimization-এর কিছু নির্দিষ্ট উদাহরণ দিন।",
+      "answer": "Peephole Optimization উদাহরণ: (1) Redundant load/store elimination: load r1, x; store r1, x → remove। (2) Constant propagation: mov r1, 5; add r2, r1, 3 → add r2, 5, 3 → mov r2, 8। (3) Strength reduction: mul r1, r2, 2 → shl r1, r2, 1। (4) Jump optimization: jmp L1; L1: jmp L2 → jmp L2। (5) Null sequence elimination: mov r1, r2; mov r2, r1 → mov r1, r2।",
+      "tags": ["peephole", "optimization", "examples"]
+    },
+    {
+      "question": "Lexical Analyzer-এ কোন কোন ধরনের Tokens থাকে?",
+      "answer": "Token Types: (1) Keywords — if, while, int, return। (2) Identifiers — variable names। (3) Literals — 42, 3.14, 'a', \"hello\"। (4) Operators — +, -, *, /, ==, !=, <, >। (5) Delimiters — ;, ,, (, ), {, }। (6) Comments — //, /* */। (7) Preprocessor directives — #include, #define। (8) Special tokens — EOF, ERROR। প্রতিটি token-এর জন্য একটি regular expression pattern থাকে।",
+      "tags": ["token-types", "lexical-analysis", "scanner"]
+    },
+    {
+      "question": "Regular Expression থেকে NFA তৈরি করার Thompson's Construction কী?",
+      "answer": "Thompson's Construction: (1) Base case: 'a' → NFA with one transition. (2) Concatenation: NFA(r1) ও NFA(r2) connect করো। (3) Union: r1|r2 → new start state থেকে ε-transitions। (4) Kleene star: r* → new start/accept states ও ε-transitions। প্রতিটি regex operator-এর জন্য একটি composition rule আছে। DFA তৈরি করতে হলে subset construction ব্যবহার করো। GATE CSE-তে 2-3 operators-এর NFA বানাতে বলা হয়।",
+      "tags": ["regex", "nfa", "thompson-construction"]
+    },
+    {
+      "question": "Type Checking Rules-এর উদাহরণ দিন।",
+      "answer": "Type Checking Rules: (1) Arithmetic: if type(E1) = int AND type(E2) = int, then type(E1 + E2) = int। (2) Comparison: if type(E1) = int AND type(E2) = int, then type(E1 < E2) = bool। (3) Assignment: type(LHS) must equal type(RHS)। (4) Function call: argument types must match parameter types। (5) Array access: index must be int, result type = element type। (6) Type coercion: int → float implicit conversion অনুমোদিত থাকতে পারে।",
+      "tags": ["type-checking", "rules", "semantic"]
+    },
+    {
+      "question": "Storage Allocation Strategies-এর তুলনা করুন।",
+      "answer": "Storage Allocation Strategies: (1) Stack Allocation — automatic, LIFO, fast, size limited। (2) Heap Allocation — manual/dynamic, flexible, slower, size unlimited। (3) Static Allocation — compile-time fixed, global variables। (4) Register Allocation — fastest, limited count। (5) Pool Allocation — same-type objects grouped। Scope-এর উপর নির্ভর করে strategy বাছাই হয়। Local variables → stack, dynamic objects → heap, globals → static।",
+      "tags": ["storage-allocation", "strategies", "comparison"]
+    },
+    {
+      "question": "LL(1) Parsing Table-তে Multiple Entry থাকলে কী হয়?",
+      "answer": "LL(1) Parsing Table-তে একই cell-এ দুটি production থাকলে grammar LL(1) নয়। যেমন: M[A, a]-তে A → α ও A → β দুটোই থাকলে conflict। এটি FIRST/FOLLOW intersection থেকে দেখা যায়। Grammar-কে LL(1) বানাতে: (1) Left factoring করো। (2) Left recursion eliminate করো। যদি conflict না যায়, তাহলে LL(1) parser তৈরি সম্ভব নয়।",
+      "tags": ["ll1", "conflict", "parsing-table"]
+    },
+    {
+      "question": "LR(0) vs SLR(1) Parser-এর মূল পার্থক্য কী?",
+      "answer": "LR(0) Parser: 0 lookahead ব্যবহার করে। LR(0) item sets থেকে parser table তৈরি করে। অনেক grammar-তে shift/reduce conflict হয়। SLR(1) Parser: 1 lookahead token ব্যবহার করে। LR(0) item sets তৈরি করে কিন্তু reduce action-এর জন্য FOLLOW set check করে। LR(0) অপেক্ষা বেশি grammar handle করে। যেমন: S → Aa | bA, A → a — LR(0)-তে conflict, SLR(1) resolve করে।",
+      "tags": ["lr0", "slr1", "comparison"]
+    },
+    {
+      "question": "Instruction Selection-এ Tree Pattern Matching কীভাবে কাজ করে?",
+      "answer": "Tree Pattern Matching: (1) IR-কে expression tree-তে রূপান্তর করো। (2) প্রতিটি tree pattern-এর সাথে match করো। (3) যে pattern match করে সেই machine instruction বাছাই করো। (4) Dynamic programming ব্যবহার করে optimal covering বের করো। Aho-Corasick algorithm tree matching-এ ব্যবহৃত হয়। Instruction selection instruction cost minimize করে এবং code quality determine করে।",
+      "tags": ["instruction-selection", "tree-pattern", "code-generation"]
+    },
+    {
+      "question": "Copy Propagation কী? একটি উদাহরণ দিন।",
+      "answer": "Copy Propagation হলো এমন assignment-কে সরিয়ে দেওয়া যেখানে x = y হলে y-কে x-এর জায়গায় ব্যবহার করা হয়। উদাহরণ: x = a; b = x + 1; c = x * 2;। Copy propagation: b = a + 1; c = a * 2;। এতে x-এর assignment dead code হয়ে যায়। Copy propagation প্রায়ই dead code elimination-এর সাথে ব্যবহৃত হয়। SSA form-এ copy propagation trivial হয়ে যায়।",
+      "tags": ["copy-propagation", "optimization", "example"]
+    },
+    {
+      "question": "Dominator Tree তৈরি করার Algorithm কী?",
+      "answer": "Dominator Tree Algorithm: (1) Start node root। (2) প্রতিটি node N-এর জন্য immediate dominator (idom) বের করো। (3) সূত্র: idom(N) = intersect(p, N-এর সব predecessors)। (4) intersect(p1, p2) = find common dominator। (5) Iteratively refine করো যতক্ষণ converges না হয়। এটি O(n²) time-তে করা যায়। Lengauer-Tarjan algorithm O(n α(n)) time-তে করে। Dominator tree loop optimization ও SSA construction-এ ব্যবহৃত হয়।",
+      "tags": ["dominator-tree", "algorithm", "cfg"]
+    },
+    {
+      "question": "Cross-Compiler ও Self-Compiler-এর পার্থক্য কী?",
+      "answer": "Cross-Compiler: একটি platform (host) এ চলে কিন্তু অন্য platform (target) এর জন্য code generate করে। যেমন: x86 PC থেকে ARM code compile। Embedded systems-এ ব্যবহৃত। Self-Compiler: যে compiler নিজেই নিজেকে compile করতে পারে। যেমন: C compiler C-এ লেখা। Bootstrap compilation: পুরো compiler source code দিয়ে নতুন compiler তৈরি। Self-compiler compiler design-এর একটি fundamental concept।",
+      "tags": ["cross-compiler", "self-compiler", "bootstrap"]
+    },
+    {
+      "question": "Data Flow Analysis-এ Iterative Algorithm কীভাবে কাজ করে?",
+      "answer": "Iterative Data Flow Algorithm: (1) Initialize: IN[start] = ∅ (forward) বা OUT[end] = ∅ (backward)। (2) Loop: প্রতিটি basic block-এর জন্য IN[B] ও OUT[B] update করো। (3) Forward: OUT[B] = gen[B] ∪ (IN[B] - kill[B]), IN[B] = meet(OUT[P]) (সব predecessors P)। (4) Backward: IN[B] = gen[B] ∪ (OUT[B] - kill[B]), OUT[B] = meet(IN[S]) (সব successors S)। (5) Converges না হলে repeat। Reaching definitions, live variables — সব এই algorithm-তে solve হয়।",
+      "tags": ["data-flow", "iterative", "algorithm"]
+    },
+    {
+      "question": "Strength Reduction-এর বাস্তব উদাহরণ দিন।",
+      "answer": "Strength Reduction উদাহরণ: (1) Multiplication by 2 → Left shift: x * 2 কে x << 1 বানানো। (2) Loop induction variable: for(i=0; i<n; i++) a[i*4]=0; — i*4 কে j=0; j+=4 বানানো। (3) x * 8 → x << 3। (4) Division by power of 2 → Right shift: x / 4 কে x >> 2। GATE CSE-তে multiplication to shift conversion প্রায়ই জিজ্ঞাসা করা হয়। Strength reduction runtime cost উল্লেখযোগ্যভাবে কমায়।",
+      "tags": ["strength-reduction", "optimization", "example"]
     }
   ]
 }
