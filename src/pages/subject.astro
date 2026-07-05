@@ -28,13 +28,14 @@ try {
     console.error('[subject.astro] subject fetch error:', err);
   }
 
-  // Fetch published exams
+  // Fetch published exams (no composite index — single query + JS filter)
   try {
     const snap = await db.collection('exams')
       .where('subjectId', '==', subjectId)
-      .where('published', '==', true)
       .get();
-    exams = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    exams = snap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(e => e.published === true);
   } catch (err) {
     console.error('[subject.astro] exams fetch error:', err);
     fetchError = true;
