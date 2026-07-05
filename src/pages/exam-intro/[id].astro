@@ -6,6 +6,7 @@ import { getAdminDb } from '../../lib/firebase-admin';
 
 const { id } = Astro.params;
 let exam: any = { title: 'Exam', totalQuestions: 0, durationMinutes: 0, subjectName: '' };
+let fetchError = false;
 
 try {
   const db = getAdminDb();
@@ -14,10 +15,15 @@ try {
     exam = { id: snap.id, ...snap.data() };
     try {
       const subSnap = await db.collection('subjects').doc(exam.subjectId).get();
-      if (subSnap.exists) exam.subjectName = subSnap.data()!.name;
+      if (subSnap.exists && subSnap.data()!.name) exam.subjectName = subSnap.data()!.name;
     } catch {}
+  } else {
+    fetchError = true;
   }
-} catch {}
+} catch (err) {
+  console.error('[exam-intro] error:', err);
+  fetchError = true;
+}
 ---
 <Layout
   title={`${exam.title} - ExamText`}
@@ -27,6 +33,14 @@ try {
   navTitle={exam.title}
 >
   <div class="max-w-lg mx-auto px-4 py-12">
+    {fetchError ? (
+      <div class="card p-8 text-center animate-scale-in">
+        <div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-6">⚠️</div>
+        <h1 class="text-xl font-bold text-surface-900 mb-2">Exam not found</h1>
+        <p class="text-surface-400 text-sm mb-6">This exam may have been removed or the link is invalid.</p>
+        <a href="/" class="btn-primary text-sm px-6 py-3 inline-block">Go Home</a>
+      </div>
+    ) : (
     <!-- Exam Info Card -->
     <div class="card p-8 text-center mb-6 animate-scale-in">
       <div class="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center text-3xl mx-auto mb-6">📋</div>
@@ -56,6 +70,7 @@ try {
         </button>
       </form>
     </div>
+    )}
   </div>
   <script is:inline define:vars={{ examId: id }}>
     const form = document.getElementById('name-form');

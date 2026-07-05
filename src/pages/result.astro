@@ -8,6 +8,14 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
 <Layout title="Result - ExamText" navBack={true} navTitle="Exam Result">
   <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
 
+    {(!examId || !attemptId) ? (
+      <div class="card p-8 text-center animate-scale-in">
+        <div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-6">⚠️</div>
+        <h1 class="text-xl font-bold text-surface-900 mb-2">Invalid result link</h1>
+        <p class="text-surface-400 text-sm mb-6">Missing exam or attempt information.</p>
+        <a href="/" class="btn-primary text-sm px-6 py-3 inline-block">Go Home</a>
+      </div>
+    ) : (
     <!-- Result Card -->
     <div id="result-card" class="card p-8 text-center animate-scale-in">
       <div class="flex justify-center py-8">
@@ -33,6 +41,7 @@ const scoreParam = Astro.url.searchParams.get('score') || '0';
       </h2>
       <div id="review" class="space-y-1"></div>
     </div>
+    )}
   </div>
 
   <script is:inline define:vars={{ examId, scoreParam }}>

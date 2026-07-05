@@ -1,24 +1,32 @@
-import { initializeApp, cert, getApps } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';
+import { initializeApp, cert, getApps, type App } from 'firebase-admin/app';
+import { getFirestore, type Firestore } from 'firebase-admin/firestore';
 
-function getAdminApp() {
-  if (getApps().length > 0) return getApps()[0];
+let _app: App | null = null;
+let _db: Firestore | null = null;
+
+export function getAdminDb(): Firestore {
+  if (_db) return _db;
 
   const projectId = import.meta.env.FIREBASE_PROJECT_ID;
   const clientEmail = import.meta.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = import.meta.env.FIREBASE_PRIVATE_KEY;
+  const privateKeyRaw = import.meta.env.FIREBASE_PRIVATE_KEY;
 
-  if (!projectId || !clientEmail || !privateKey) {
+  if (!projectId || !clientEmail || !privateKeyRaw) {
     throw new Error(
-      'Firebase Admin env vars not set: FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY'
+      `Firebase Admin: missing env vars. Have: projectId=${!!projectId}, clientEmail=${!!clientEmail}, privateKey=${!!privateKeyRaw}`
     );
   }
 
-  return initializeApp({
-    credential: cert({ projectId, clientEmail, privateKey: privateKey.replace(/\\n/g, '\n') }),
-  });
-}
+  const privateKey = privateKeyRaw.replace(/\\n/g, '\n');
 
-export function getAdminDb() {
-  return getFirestore(getAdminApp());
+  if (!getApps().length) {
+    _app = initializeApp({
+      credential: cert({ projectId, clientEmail, privateKey }),
+    });
+  } else {
+    _app = getApps()[0];
+  }
+
+  _db = getFirestore(_app!);
+  return _db;
 }
