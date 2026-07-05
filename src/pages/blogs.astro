@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getAdminDb } from '../lib/firebase-admin';
+
+let blogs: any[] = [];
+let fetchError = false;
+
+try {
+  const db = getAdminDb();
+  const snap = await db.collection('blogs').where('published', '==', true).get();
+  blogs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  const subIds = [...new Set(blogs.map(b => b.subjectId).filter(Boolean))];
+  const subNames: Record<string, string> = {};
+  for (const sid of subIds) {
+    try {
+      const s = await db.collection('subjects').doc(sid).get();
+      if (s.exists) subNames[sid] = s.data()!.name || sid;
+    } catch { subNames[sid] = sid; }
+  }
+  blogs = blogs.map(b => ({ ...b, subjectName: subNames[b.subjectId] || '' }));
+
+  blogs.sort((a, b) => {
+    const ta = a.createdAt?._seconds || a.createdAt?.seconds || 0;
+    const tb = b.createdAt?._seconds || b.createdAt?.seconds || 0;
+    return tb - ta;
+  });
+} catch (err) {
+  console.error('[blogs.astro] Error:', err);
+  fetchError = true;
+}
+---
+<Layout title="Study Resources - ExamText" navBack={true} navTitle="Study Resources">
+  <div class="max-w-3xl mx-auto px-4 py-10">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold text-surface-900 mb-2">📚 Study Resources</h1>
+      <p class="text-surface-400">Bangla Q&A guides for every chapter</p>
+      <div class="flex justify-center gap-2 mt-4">
+        <div class="h-1.5 w-16 bg-brand-500 rounded-full"></div>
+        <div class="h-1.5 w-8 bg-brand-200 rounded-full"></div>
+        <div class="h-1.5 w-4 bg-brand-100 rounded-full"></div>
+      </div>
+    </div>
+
+    {fetchError ? (
+      <div class="card p-8 text-center animate-scale-in">
+        <div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-6">⚠️</div>
+        <h2 class="text-lg font-bold text-surface-900 mb-2">Unable to load resources</h2>
+        <p class="text-surface-400 text-sm mb-6">Please refresh the page.</p>
+        <button onclick="window.location.reload()" class="btn-primary text-sm px-6 py-3">Retry</button>
+      </div>
+    ) : blogs.length === 0 ? (
+      <div class="card p-8 text-center animate-scale-in">
+        <div class="w-16 h-16 rounded-3xl bg-brand-50 flex items-center justify-center text-3xl mx-auto mb-6">📖</div>
+        <h2 class="text-lg font-bold text-surface-900 mb-2">No resources yet</h2>
+        <p class="text-surface-400 text-sm mb-6">Study resources will appear here once published.</p>
+        <a href="/" class="btn-primary text-sm px-6 py-3 inline-block">Go Home</a>
+      </div>
+    ) : (
+      <div class="space-y-4">
+        {blogs.map((blog, i) => (
+          <a href={`/blog?id=${blog.id}`} class="card p-5 block hover:shadow-lg hover:border-brand-200 transition-all duration-200 group animate-fade-up" style={`animation-delay:${i * 0.05}s;opacity:0;`}>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-brand-50 group-hover:bg-brand-100 flex items-center justify-center text-2xl transition-colors">
+                📝
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-bold text-surface-900 group-hover:text-brand-600 transition-colors leading-snug mb-1">{blog.title}</h3>
+                {blog.description && <p class="text-sm text-surface-400 line-clamp-2 mb-2">{blog.description}</p>}
+                <div class="flex flex-wrap items-center gap-2 text-xs text-surface-400">
+                  {blog.subjectName && <span class="px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 font-semibold">{blog.subjectName}</span>}
+                  <span>{blog.content?.length || 0} Q&A</span>
+                  {blog.slideUrl && <span class="text-emerald-500">• Slides available</span>}
+                </div>
+              </div>
+              <svg class="w-5 h-5 text-surface-300 group-hover:text-brand-500 shrink-0 mt-1 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>
