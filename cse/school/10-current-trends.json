@@ -1,0 +1,881 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — Current Trends (AI/IoT/Cloud)",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য Current Trends (AI/IoT/Cloud) বিষয়ে 97টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "AI কী?",
+      "answer": "Artificial Intelligence।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT কী?",
+      "answer": "Internet of Things।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud Computing?",
+      "answer": "Internet-এ server/storage।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SaaS, PaaS, IaaS?",
+      "answer": "Software, Platform, Infrastructure as Service।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Machine Learning কী?",
+      "answer": "Data-তে শিখে predict।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Deep Learning কী?",
+      "answer": "Multi-layer neural network।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Big Data কী?",
+      "answer": "বিশাল data। 3 V's।",
+      "tags": [
+        "current-trends",
+        "big-data",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Blockchain কী?",
+      "answer": "Decentralized ledger।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "5G কী?",
+      "answer": "5th gen mobile — 100x faster।",
+      "tags": [
+        "current-trends",
+        "networking",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AR ও VR?",
+      "answer": "AR: real+digital। VR: fully digital।",
+      "tags": [
+        "current-trends",
+        "ar-vr",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Robotics কী?",
+      "answer": "Robot build + control।",
+      "tags": [
+        "current-trends",
+        "robotics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Quantum Computing?",
+      "answer": "Qubit — superposition।",
+      "tags": [
+        "current-trends",
+        "computing",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Green Computing?",
+      "answer": "Eco-friendly IT।",
+      "tags": [
+        "current-trends",
+        "computing",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NLP কী?",
+      "answer": "Natural Language Processing।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer Vision?",
+      "answer": "Image/video understand।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Neural Network কী?",
+      "answer": "Brain model — layers।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CNN কী?",
+      "answer": "Convolutional NN — image।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "RNN কী?",
+      "answer": "Recurrent NN — sequence।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Transformer কী?",
+      "answer": "Attention mechanism। GPT, BERT।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "ChatGPT কী?",
+      "answer": "OpenAI LLM chatbot।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Supervised Learning?",
+      "answer": "Labelled data train।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Unsupervised Learning?",
+      "answer": "No label — clustering।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Reinforcement Learning?",
+      "answer": "Reward/punishment train।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Transfer Learning?",
+      "answer": "Task A→Task B reuse।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Deepfake কী?",
+      "answer": "AI fake video।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI Ethics?",
+      "answer": "Fair, transparent, accountable।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data Science কী?",
+      "answer": "Data analyze → insight।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data Visualization?",
+      "answer": "Data→graph/chart। Tableau।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT Sensors?",
+      "answer": "Temperature, motion, light।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Smart Home?",
+      "answer": "IoT automation। Alexa।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Smart Agriculture?",
+      "answer": "Sensor precision farming।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Smart City কী?",
+      "answer": "ICT-based urban management।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Wearable Tech?",
+      "answer": "Smartwatch, fitness tracker।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IIoT কী?",
+      "answer": "Industrial IoT — automation।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Edge Computing?",
+      "answer": "Local processing।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Serverless Computing?",
+      "answer": "No server manage। AWS Lambda।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Microservices?",
+      "answer": "App→small services।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Docker কী?",
+      "answer": "Container platform।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Kubernetes?",
+      "answer": "Container orchestration।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CI/CD কী?",
+      "answer": "Continuous Integration/Deployment।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DevOps কী?",
+      "answer": "Dev + Ops collaboration।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Infrastructure as Code?",
+      "answer": "Terraform — infra code।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Virtualization কী?",
+      "answer": "VMware — multi OS।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud Models?",
+      "answer": "Public, Private, Hybrid।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Smart Contract?",
+      "answer": "Auto-executing — Ethereum।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DApp কী?",
+      "answer": "Decentralized App।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Consensus Mechanism?",
+      "answer": "PoW, PoS।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "5G Features?",
+      "answer": "10 Gbps, 1ms latency।",
+      "tags": [
+        "current-trends",
+        "networking",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AR Apps?",
+      "answer": "Pokemon Go, IKEA Place।",
+      "tags": [
+        "current-trends",
+        "ar-vr",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "VR Apps?",
+      "answer": "Gaming, Medical training।",
+      "tags": [
+        "current-trends",
+        "ar-vr",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Robotics Sensors?",
+      "answer": "LIDAR, Camera, Gyroscope।",
+      "tags": [
+        "current-trends",
+        "robotics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Humanoid Robot?",
+      "answer": "ASIMO, Sophia।",
+      "tags": [
+        "current-trends",
+        "robotics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Qubit কী?",
+      "answer": "0+1 together — superposition।",
+      "tags": [
+        "current-trends",
+        "computing",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Metaverse কী?",
+      "answer": "Virtual 3D internet।",
+      "tags": [
+        "current-trends",
+        "computing",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Web3 কী?",
+      "answer": "Decentralized web।",
+      "tags": [
+        "current-trends",
+        "computing",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "E-waste কী?",
+      "answer": "Electronic waste।",
+      "tags": [
+        "current-trends",
+        "computing",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "QR Code কী?",
+      "answer": "2D barcode — scan।",
+      "tags": [
+        "current-trends",
+        "technology",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Podcast কী?",
+      "answer": "Audio content — Spotify।",
+      "tags": [
+        "current-trends",
+        "media",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ AML?",
+      "answer": "Auto ML — auto model।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Ethics concerns?",
+      "answer": "Bias, privacy, job loss।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT-এ MQTT?",
+      "answer": "Lightweight IoT protocol।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ API Gateway?",
+      "answer": "Request manage, rate limit।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Blockchain-এ PoW/PoS?",
+      "answer": "Consensus — mining/staking।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ GAN কী?",
+      "answer": "Generative Adversarial Network — fake content তৈরি।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ AutoML?",
+      "answer": "Automated ML pipeline।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT-এ Fog Computing?",
+      "answer": "Edge-এর কাছে processing।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ Multi-cloud?",
+      "answer": "Multiple cloud providers use।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ Hybrid Cloud?",
+      "answer": "Public + Private mix।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Blockchain-এ Private Blockchain?",
+      "answer": "Permissioned — enterprise use।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Sentiment Analysis?",
+      "answer": "Text-তে emotion detect।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Object Detection?",
+      "answer": "Image-তে object identify। YOLO।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT-এ Digital Twin?",
+      "answer": "Physical object-এর virtual replica।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ Load Balancing?",
+      "answer": "Traffic distribute — AWS ELB।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ Auto Scaling?",
+      "answer": "Demand অনুযায়ী scale।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Blockchain-এ NFT?",
+      "answer": "Non-Fungible Token — unique digital asset।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Federated Learning?",
+      "answer": "Decentralized ML — privacy।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Few-shot Learning?",
+      "answer": "Minimal data train।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Zero-shot Learning?",
+      "answer": "No training data — generalize।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT-এ Zigbee?",
+      "answer": "Low-power wireless protocol।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT-এ LoRaWAN?",
+      "answer": "Long-range, low-power IoT।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ Storage Classes?",
+      "answer": "Hot, Cool, Archive — AWS S3।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ Disaster Recovery?",
+      "answer": "Backup + failover plan।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Blockchain-এ 51% Attack?",
+      "answer": "Majority control — network compromise।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Attention Mechanism?",
+      "answer": "Focus on relevant input parts।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Word Embedding?",
+      "answer": "Word→vector — Word2Vec, GloVe।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Knowledge Graph?",
+      "answer": "Entities + relationships।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT-এ M2M Communication?",
+      "answer": "Machine to Machine।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT-এ Predictive Maintenance?",
+      "answer": "Sensor data-তে predict failure।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ CDN কীভাবে কাজ করে?",
+      "answer": "Edge server-ে cache — fast delivery।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ Serverless Benefits?",
+      "answer": "No infra manage, auto scale, pay per use।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Blockchain-এ Merkle Tree?",
+      "answer": "Hash tree — data integrity।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Prompt Engineering?",
+      "answer": "AI-কে সঠিক input দেওয়া।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Hallucination?",
+      "answer": "AI মিথ্যা তথ্য তৈরি করে।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IoT-এ MQTT vs HTTP?",
+      "answer": "MQTT: lightweight, publish-subscribe। HTTP: request-response।",
+      "tags": [
+        "current-trends",
+        "iot",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud-এ CAP Theorem?",
+      "answer": "Consistency, Availability, Partition tolerance — pick 2।",
+      "tags": [
+        "current-trends",
+        "cloud",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Blockchain-এ Permissioned vs Permissionless?",
+      "answer": "Permissioned: restricted। Permissionless: open।",
+      "tags": [
+        "current-trends",
+        "blockchain",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AI-এ Structured Output?",
+      "answer": "AI output JSON format।",
+      "tags": [
+        "current-trends",
+        "ai",
+        "ntrca"
+      ]
+    }
+  ]
+}

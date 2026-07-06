@@ -1,0 +1,337 @@
+﻿{
+    "subject":  "CSE College Teacher",
+    "examTitle":  "NTRCA School ICT — Computer Fundamentals \u0026 History",
+    "durationMinutes":  20,
+    "questions":  [
+                      {
+                          "questionText":  "কম্পিউটারের জনক কে বলা হয়?",
+                          "options":  [
+                                          "চার্লস ব্যাবেজ",
+                                          "এলান টুরিং",
+                                          "জন ভন নিউম্যান",
+                                          "ব্লেজ পাস্কাল"
+                                      ],
+                          "correctOptionIndex":  0,
+                          "explanation":  "চার্লস ব্যাবেজ — ১৮৩৭ সালে Analytical Engine এর নকশা করেন।"
+                      },
+                      {
+                          "questionText":  "প্রথম ইলেকট্রনিক কম্পিউটার কোনটি?",
+                          "options":  [
+                                          "UNIVAC",
+                                          "ENIAC",
+                                          "EDVAC",
+                                          "MARK-I"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "ENIAC — ১৯৪৬ সালে জন মোচলি ও জন একার্ট নির্মাণ করেন।"
+                      },
+                      {
+                          "questionText":  "কম্পিউটারের প্রথম প্রজন্মে কী ব্যবহৃত হতো?",
+                          "options":  [
+                                          "Transistor",
+                                          "Vacuum Tube",
+                                          "Integrated Circuit",
+                                          "Microprocessor"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "১ম প্রজন্মে Vacuum Tube ব্যবহৃত হতো।"
+                      },
+                      {
+                          "questionText":  "কম্পিউটারের প্রজন্ম কয়টি?",
+                          "options":  [
+                                          "৩টি",
+                                          "৪টি",
+                                          "৫টি",
+                                          "৬টি"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "৫টি প্রজন্ম আছে — 1st থেকে 5th।"
+                      },
+                      {
+                          "questionText":  "Analog কম্পিউটার কী করে?",
+                          "options":  [
+                                          "ডিজিটাল ডাটা প্রক্রিয়া করে",
+                                          "ধারাবাহিক মান প্রক্রিয়া করে",
+                                          "শুধু গণনা করে",
+                                          "শুধু সংরক্ষণ করে"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Analog কম্পিউটার ধারাবাহিক মান (continuous value) প্রক্রিয়া করে।"
+                      },
+                      {
+                          "questionText":  "CPU-র মূল অংশ কোনগুলো?",
+                          "options":  [
+                                          "RAM, ROM, Cache",
+                                          "ALU, CU, Register",
+                                          "Monitor, Keyboard, Mouse",
+                                          "HDD, SSD, DVD"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "CPU-র তিনটি মূল অংশ: ALU, CU ও Register।"
+                      },
+                      {
+                          "questionText":  "RAM কোন ধরনের memory?",
+                          "options":  [
+                                          "Non-volatile",
+                                          "Volatile",
+                                          "Read-only",
+                                          "Secondary"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "RAM Volatile — বিদ্যুৎ চলে গেলে ডাটা মুছে যায়।"
+                      },
+                      {
+                          "questionText":  "ROM কোন ধরনের memory?",
+                          "options":  [
+                                          "Volatile",
+                                          "Non-volatile",
+                                          " Temporary",
+                                          "Cache"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "ROM Non-volatile — স্থায়ী ভাবে ডাটা রাখে।"
+                      },
+                      {
+                          "questionText":  "Primary Memory-এর উদাহরণ কোনটি?",
+                          "options":  [
+                                          "Hard Disk",
+                                          "Pendrive",
+                                          "RAM",
+                                          "CD-ROM"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "RAM Primary Memory-এর উদাহরণ।"
+                      },
+                      {
+                          "questionText":  "Secondary Memory-এর উদাহরণ কোনটি?",
+                          "options":  [
+                                          "RAM",
+                                          "ROM",
+                                          "Cache",
+                                          "Hard Disk"
+                                      ],
+                          "correctOptionIndex":  3,
+                          "explanation":  "Hard Disk Secondary Memory।"
+                      },
+                      {
+                          "questionText":  "System Software-এর উদাহরণ কোনটি?",
+                          "options":  [
+                                          "Microsoft Word",
+                                          "Operating System",
+                                          "Google Chrome",
+                                          "Photoshop"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Operating System হলো System Software।"
+                      },
+                      {
+                          "questionText":  "Application Software-এর উদাহরণ কোনটি?",
+                          "options":  [
+                                          "Windows",
+                                          "Linux",
+                                          "Microsoft Excel",
+                                          "BIOS"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Microsoft Excel হলো Application Software।"
+                      },
+                      {
+                          "questionText":  "Input Device কোনটি?",
+                          "options":  [
+                                          "Monitor",
+                                          "Printer",
+                                          "Keyboard",
+                                          "Speaker"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Keyboard Input Device।"
+                      },
+                      {
+                          "questionText":  "Output Device কোনটি?",
+                          "options":  [
+                                          "Mouse",
+                                          "Keyboard",
+                                          "Scanner",
+                                          "Monitor"
+                                      ],
+                          "correctOptionIndex":  3,
+                          "explanation":  "Monitor Output Device।"
+                      },
+                      {
+                          "questionText":  "Bit কী?",
+                          "options":  [
+                                          "৮ bit",
+                                          "একটি byte",
+                                          "সবচেয়ে ছোট data unit",
+                                          "একটি word"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Bit হলো সবচেয়ে ছোট data unit — 0 বা 1।"
+                      },
+                      {
+                          "questionText":  "১ Byte কত bit?",
+                          "options":  [
+                                          "4 bit",
+                                          "8 bit",
+                                          "16 bit",
+                                          "32 bit"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "১ Byte = 8 bit।"
+                      },
+                      {
+                          "questionText":  "Cache Memory কোথায় থাকে?",
+                          "options":  [
+                                          "Hard Disk-এ",
+                                          "RAM-এ",
+                                          "CPU ও RAM-এর মধ্যে",
+                                          "Monitor-এ"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Cache Memory CPU ও RAM-এর মধ্যে থাকে।"
+                      },
+                      {
+                          "questionText":  "BIOS কী?",
+                          "options":  [
+                                          "একটি প্রোগ্রাম",
+                                          "একটি hardware",
+                                          "একটি cable",
+                                          "একটি port"
+                                      ],
+                          "correctOptionIndex":  0,
+                          "explanation":  "BIOS হলো একটি প্রোগ্রাম যা ROM-এ থাকে।"
+                      },
+                      {
+                          "questionText":  "Microprocessor প্রথম কোনটি?",
+                          "options":  [
+                                          "Intel 8085",
+                                          "Intel 4004",
+                                          "Intel 8086",
+                                          "AMD Ryzen"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Intel 4004 প্রথম মাইক্রোপ্রসেসর (১৯৭১)।"
+                      },
+                      {
+                          "questionText":  "Firmware কী?",
+                          "options":  [
+                                          "সফটওয়্যার",
+                                          "হার্ডওয়্যার",
+                                          "Hardware-র মধ্যে সংরক্ষিত সফটওয়্যার",
+                                          "নেটওয়ার্ক"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Firmware হলো Hardware-র মধ্যে সংরক্ষিত সফটওয়্যার।"
+                      },
+                      {
+                          "questionText":  "Supercomputer কোন কাজে ব্যবহৃত হয়?",
+                          "options":  [
+                                          "বাড়ির কাজে",
+                                          "অফিসের কাজে",
+                                          "গবেষণা ও গণনায়",
+                                          "দোকানের কাজে"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Supercomputer গবেষণা ও জটিল গণনায় ব্যবহৃত হয়।"
+                      },
+                      {
+                          "questionText":  "Desktop Computer কী?",
+                          "options":  [
+                                          "পকেটের কম্পিউটার",
+                                          "টেবিলে বসানো কম্পিউটার",
+                                          "হাতের কম্পিউটার",
+                                          "সার্ভার"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Desktop Computer টেবিলে বসানো কম্পিউটার।"
+                      },
+                      {
+                          "questionText":  "Laptop কোন ধরনের কম্পিউটার?",
+                          "options":  [
+                                          "Mainframe",
+                                          "Supercomputer",
+                                          "Microcomputer",
+                                          "Minicomputer"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Laptop হলো Microcomputer।"
+                      },
+                      {
+                          "questionText":  "Server কী করে?",
+                          "options":  [
+                                          "ডাটা সংরক্ষণ করে",
+                                          "সেবা প্রদান করে",
+                                          "মুদ্রণ করে",
+                                          "গান বাজায়"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Server অন্য devices-কে সেবা প্রদান করে।"
+                      },
+                      {
+                          "questionText":  "Software কী?",
+                          "options":  [
+                                          "ভৌতিক অংশ",
+                                          "প্রোগ্রাম",
+                                          "কেবল",
+                                          "Port"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Software হলো প্রোগ্রাম যা কম্পিউটারকে চালায়।"
+                      },
+                      {
+                          "questionText":  "Hardware কী?",
+                          "options":  [
+                                          "প্রোগ্রাম",
+                                          "ভৌতিক অংশ",
+                                          "ডাটা",
+                                          "ইন্টারনেট"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Hardware হলো কম্পিউটারের ভৌতিক অংশ।"
+                      },
+                      {
+                          "questionText":  "Abacus কী?",
+                          "options":  [
+                                          "কম্পিউটার",
+                                          "গণনা যন্ত্র",
+                                          "প্রিন্টার",
+                                          "স্ক্যানার"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Abacus হলো প্রাচীনতম গণনা যন্ত্র।"
+                      },
+                      {
+                          "questionText":  "ENIAC কোন সালে তৈরি হয়?",
+                          "options":  [
+                                          "১৯৪০",
+                                          "১৯৪৬",
+                                          "১৯৫০",
+                                          "১৯৫৫"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "ENIAC ১৯৪৬ সালে তৈরি হয়।"
+                      },
+                      {
+                          "questionText":  "Volatlie Memory কী?",
+                          "options":  [
+                                          "স্থায়ী memory",
+                                          "বিদ্যুৎ চলে গেলে ডাটা যায়",
+                                          "শুধু পড়া যায়",
+                                          "Secondary memory"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Volatile Memory বিদ্যুৎ চলে গেলে ডাটা মুছে যায়।"
+                      },
+                      {
+                          "correctOptionIndex":  0,
+                          "options":  [
+                                          "Bit",
+                                          "Memory",
+                                          "Data",
+                                          "None"
+                                      ],
+                          "explanation":  "Byte হলো Bit-এর group।",
+                          "questionText":  "Byte কোন একক?"
+                      }
+                  ]
+}

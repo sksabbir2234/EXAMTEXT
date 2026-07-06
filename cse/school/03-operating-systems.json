@@ -1,0 +1,485 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — Operating Systems",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য Operating Systems বিষয়ে 53টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "OS কী?",
+      "answer": "হার্ডওয়্যার ও সফটওয়্যারের সেতুবন্ধন।",
+      "tags": [
+        "operating-system",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এর প্রধান কাজ?",
+      "answer": "Process, Memory, File, Device, Security Management।",
+      "tags": [
+        "operating-system",
+        "functions",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Windows ও Linux?",
+      "answer": "Windows: GUI, proprietary। Linux: Open source, secure।",
+      "tags": [
+        "operating-system",
+        "comparison",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Linux Distro কি কি?",
+      "answer": "Ubuntu, Fedora, Linux Mint।",
+      "tags": [
+        "operating-system",
+        "linux",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Process ও Thread?",
+      "answer": "Process: সম্পূর্ণ প্রোগ্রাম। Thread: ছোট execution unit।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Virtual Memory কী?",
+      "answer": "RAM-এর বাইরে disk-কে memory হিসেবে।",
+      "tags": [
+        "operating-system",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multitasking OS কী?",
+      "answer": "একই সাথে একাধিক প্রোগ্রাম।",
+      "tags": [
+        "operating-system",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Batch Processing OS?",
+      "answer": "একসাথে প্রক্রিয়া। User interaction নেই।",
+      "tags": [
+        "operating-system",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Real-Time OS?",
+      "answer": "সময়-সংবেদনশীল। Medical, Air Traffic।",
+      "tags": [
+        "operating-system",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Deadlock কী?",
+      "answer": "দুই process পরস্পর অপেক্ষা।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Process States?",
+      "answer": "New, Ready, Running, Waiting, Terminated।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Context Switching?",
+      "answer": "CPU process switch করা।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Scheduling Algorithms?",
+      "answer": "FCFS, SJF, Round Robin, Priority।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Device Driver কী?",
+      "answer": "Hardware-OS সেতুবন্ধন।",
+      "tags": [
+        "operating-system",
+        "device",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Interrupt কী?",
+      "answer": "CPU-কে signal — event ঘটেছে।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Kernel কী?",
+      "answer": "OS-এর মূল অংশ। Monolithic, Micro।",
+      "tags": [
+        "operating-system",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Boot Process?",
+      "answer": "BIOS → POST → MBR → OS Load।",
+      "tags": [
+        "operating-system",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Pagination কী?",
+      "answer": "Memory কে fixed-size page-এ ভাগ।",
+      "tags": [
+        "operating-system",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Thrashing কী?",
+      "answer": "অতিরিক্ত page fault — system slow।",
+      "tags": [
+        "operating-system",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Semaphore কী?",
+      "answer": "Process synchronization tool।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Mutex কী?",
+      "answer": "Mutual Exclusion — একসময়ে এক process।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "System Call কী?",
+      "answer": "User→kernel request। fork(), open()।",
+      "tags": [
+        "operating-system",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "File Permission?",
+      "answer": "Read, Write, Execute। chmod, chown।",
+      "tags": [
+        "operating-system",
+        "file-system",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "File System?",
+      "answer": "FAT32, NTFS, ext4।",
+      "tags": [
+        "operating-system",
+        "file-system",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Spooling কী?",
+      "answer": "Printer queue management।",
+      "tags": [
+        "operating-system",
+        "device",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Virtual Memory-এ Page Fault?",
+      "answer": "Page RAM-এ নেই — disk থেকে load।",
+      "tags": [
+        "operating-system",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Thread কী?",
+      "answer": "Lightweight process — share memory।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Multiprocessing?",
+      "answer": "Multiple CPU — parallel processing।",
+      "tags": [
+        "operating-system",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Time Sharing?",
+      "answer": "CPU time slice — interactive।",
+      "tags": [
+        "operating-system",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Daemon Process?",
+      "answer": "Background service process।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ IPC?",
+      "answer": "Inter-Process Communication — Pipe, Socket।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Disk Scheduling?",
+      "answer": "FCFS, SSTF, SCAN।",
+      "tags": [
+        "operating-system",
+        "device",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ RAID?",
+      "answer": "Redundant Array — performance + reliability।",
+      "tags": [
+        "operating-system",
+        "device",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Swap Space?",
+      "answer": "Virtual memory disk space।",
+      "tags": [
+        "operating-system",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-� File Allocation?",
+      "answer": "Contiguous, Linked, Indexed।",
+      "tags": [
+        "operating-system",
+        "file-system",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Operating System-এ Asymmetric MP?",
+      "answer": "Master-slave processor।",
+      "tags": [
+        "operating-system",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Operating System-এ Symmetric MP?",
+      "answer": "All processors equal।",
+      "tags": [
+        "operating-system",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Operating System-এ Containerization?",
+      "answer": "Docker — app isolation।",
+      "tags": [
+        "operating-system",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Scheduler কী?",
+      "answer": "Process schedule করে। Long, Short, Medium।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ System Call Types?",
+      "answer": "Process, File, Device, Information, Communication।",
+      "tags": [
+        "operating-system",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Priority Inversion?",
+      "answer": "Low priority holds resource — high waits।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Starvation?",
+      "answer": "Process indefinitely wait।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Livelock?",
+      "answer": "Processes active but no progress।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ File Descriptor?",
+      "answer": "Open file reference — integer।",
+      "tags": [
+        "operating-system",
+        "file-system",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Inode?",
+      "answer": "File metadata — Unix/Linux।",
+      "tags": [
+        "operating-system",
+        "file-system",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Journaling?",
+      "answer": "File system recovery — ext4।",
+      "tags": [
+        "operating-system",
+        "file-system",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ IPC Methods?",
+      "answer": "Pipe, Message Queue, Shared Memory, Socket।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Process Control Block?",
+      "answer": "Process info — PCB।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-� Page Table?",
+      "answer": "Virtual→Physical mapping।",
+      "tags": [
+        "operating-system",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Cooperative ও Preemptive?",
+      "answer": "Cooperative: voluntarily yield। Preemptive: forced।",
+      "tags": [
+        "operating-system",
+        "process",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Reentrant?",
+      "answer": "Multiple instances — concurrent safe।",
+      "tags": [
+        "operating-system",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ File Locking?",
+      "answer": "Concurrent access prevent।",
+      "tags": [
+        "operating-system",
+        "file-system",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OS-এ Memory-mapped File?",
+      "answer": "File→memory mapping।",
+      "tags": [
+        "operating-system",
+        "file-system",
+        "ntrca"
+      ]
+    }
+  ]
+}

@@ -331,7 +331,7 @@
     },
     {
       "question": "HTTP এবং HTTPS-এর পার্থক্য কী?",
-      "answer": "HTTP: Port 80, unencrypted data। HTTPS: Port 443, SSL/TLS encryption। HTTPS data-in-transit protect করে, certificate-based authentication দেয়। HTTPS handshake HTTP-এর পরে SSL/TLS handshake করে। Modern browsers HTTP-কে "not secure"标记 করে।",
+      "answer": "HTTP: Port 80, unencrypted data। HTTPS: Port 443, SSL/TLS encryption। HTTPS data-in-transit protect করে, certificate-based authentication দেয়। HTTPS handshake HTTP-এর পরে SSL/TLS handshake করে। Modern browsers HTTP-কে 'not secure'标记 করে।",
       "tags": ["http", "https", "ssl", "tls", "gate-pyq"]
     },
     {

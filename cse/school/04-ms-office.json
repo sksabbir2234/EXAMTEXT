@@ -1,0 +1,260 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — MS Office / Office Applications",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য MS Office / Office Applications বিষয়ে 28টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "Word-এ Mail Merge?",
+      "answer": "একটি টেমপ্লেটে একাধিক চিঠি।",
+      "tags": [
+        "ms-office",
+        "word",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ VLOOKUP?",
+      "answer": "=VLOOKUP(val, table, col, [range])।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "PowerPoint-এ Slide Master?",
+      "answer": "সব slide-এর design control।",
+      "tags": [
+        "ms-office",
+        "powerpoint",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ IF ফর্মুলা?",
+      "answer": "=IF(condition, true, false)।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Word-এ Table of Contents?",
+      "answer": "Heading apply → References → TOC।",
+      "tags": [
+        "ms-office",
+        "word",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ SUM, AVERAGE, COUNT?",
+      "answer": "=SUM(), =AVERAGE(), =COUNT()।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "PowerPoint Transitions ও Animations?",
+      "answer": "Transitions: slide effect। Animations: object effect।",
+      "tags": [
+        "ms-office",
+        "powerpoint",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ Absolute Reference?",
+      "answer": "$A$1 — copy করলেও স্থির।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Word-এ Find & Replace?",
+      "answer": "Ctrl+H।",
+      "tags": [
+        "ms-office",
+        "word",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ Pivot Table?",
+      "answer": "Data summary tool।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Word-এ Header/Footer?",
+      "answer": "পৃষ্ঠার উপরে/নিচে।",
+      "tags": [
+        "ms-office",
+        "word",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ Conditional Formatting?",
+      "answer": "Condition অনুযায়ী color change।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "PowerPoint-এ Slide Show?",
+      "answer": "F5 (শুরু থেকে)।",
+      "tags": [
+        "ms-office",
+        "powerpoint",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ CONCATENATE?",
+      "answer": "=A1&' '&B1।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Word-এ Page Break?",
+      "answer": "Ctrl+Enter।",
+      "tags": [
+        "ms-office",
+        "word",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ Data Validation?",
+      "answer": "Input constraint — dropdown, range।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ MAX/MIN?",
+      "answer": "=MAX(A1:A10), =MIN(A1:A10)।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ Named Range?",
+      "answer": "Range-এর name assign।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Word-এ Spell Check?",
+      "answer": "F7।",
+      "tags": [
+        "ms-office",
+        "word",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "PowerPoint-এ SmartArt?",
+      "answer": "Visual diagram tool।",
+      "tags": [
+        "ms-office",
+        "powerpoint",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ Chart Types?",
+      "answer": "Bar, Line, Pie, Column।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ Freeze Panes?",
+      "answer": "Row/column lock।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Word-এ Macro?",
+      "answer": "Automated VBA script।",
+      "tags": [
+        "ms-office",
+        "word",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Word-এ Track Changes?",
+      "answer": "Edit tracking।",
+      "tags": [
+        "ms-office",
+        "word",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "PowerPoint-এ Presenter View?",
+      "answer": "Notes + next slide।",
+      "tags": [
+        "ms-office",
+        "powerpoint",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "MS Office-এ File Extensions?",
+      "answer": ".docx, .xlsx, .pptx।",
+      "tags": [
+        "ms-office",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "MS Office-এ Undo/Redo?",
+      "answer": "Ctrl+Z / Ctrl+Y।",
+      "tags": [
+        "ms-office",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Excel-এ Named Range?",
+      "answer": "Range-ের name। =SUM(Sales)।",
+      "tags": [
+        "ms-office",
+        "excel",
+        "ntrca"
+      ]
+    }
+  ]
+}

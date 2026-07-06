@@ -1,0 +1,593 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — Database Management",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য Database Management বিষয়ে 65টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "DBMS কী?",
+      "answer": "Database Management System।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Table, Row, Column, PK?",
+      "answer": "Table: সারণি। Row: record। Column: field। PK: unique।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SELECT query?",
+      "answer": "SELECT col FROM table WHERE cond;",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "INSERT INTO?",
+      "answer": "INSERT INTO table (col) VALUES (val);",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "UPDATE?",
+      "answer": "UPDATE table SET col=val WHERE cond;",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DELETE?",
+      "answer": "DELETE FROM table WHERE cond;",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "WHERE ও HAVING?",
+      "answer": "WHERE: group আগে। HAVING: group পরে।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "JOIN কী?",
+      "answer": "Table connect। INNER, LEFT, RIGHT, FULL।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "GROUP BY ও ORDER BY?",
+      "answer": "GROUP: group করে। ORDER: sort করে।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Foreign Key কী?",
+      "answer": "অন্য table-র PK reference।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Aggregate Functions?",
+      "answer": "COUNT, SUM, AVG, MAX, MIN।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Normalization কী?",
+      "answer": "Redundancy কমানো। 1NF, 2NF, 3NF।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "ACID Properties?",
+      "answer": "Atomicity, Consistency, Isolation, Durability।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "ALTER TABLE?",
+      "answer": "Table modify। ADD/DROP column।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DROP ও DELETE?",
+      "answer": "DELETE: row। DROP: table।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DISTINCT?",
+      "answer": "Duplicate remove।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "LIKE Operator?",
+      "answer": "Pattern match। %, _।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "BETWEEN?",
+      "answer": "Range filter।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IN Operator?",
+      "answer": "Multiple match।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Subquery?",
+      "answer": "Query inside query।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "VIEW কী?",
+      "answer": "Virtual table — stored query।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "INDEX কী?",
+      "answer": "Query speed optimize।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "TRUNCATE?",
+      "answer": "All delete, structure safe।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "UNION?",
+      "answer": "Combine results। UNION ALL: all।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DDL, DML, DCL?",
+      "answer": "DDL: CREATE। DML: SELECT/INSERT। DCL: GRANT।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "ER Diagram?",
+      "answer": "Entity-Relationship — DB design।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Candidate Key কী?",
+      "answer": "Unique identifier candidate।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Composite Key?",
+      "answer": "Multi-column unique key।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Schema কী?",
+      "answer": "DB structure — tables, types।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Stored Procedure?",
+      "answer": "DB-এ saved procedure।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Trigger কী?",
+      "answer": "Event-auto execute।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Transaction কী?",
+      "answer": "Unit of work। COMMIT, ROLLBACK।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NoSQL কী?",
+      "answer": "Non-relational। MongoDB, Redis।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Sharding কী?",
+      "answer": "DB split across servers।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Replication?",
+      "answer": "Data copy — backup।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data Independence?",
+      "answer": "Schema change, app safe।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Query Optimization?",
+      "answer": "SQL fast — index, rewrite।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OLTP ও OLAP?",
+      "answer": "OLTP: transaction। OLAP: analytical।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data Warehouse?",
+      "answer": "Historical data store।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data Mining?",
+      "answer": "Pattern extract from large data।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SQL-এ Self Join?",
+      "answer": "Table self-সাথে join।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SQL-এ Cross Join?",
+      "answer": "Cartesian product।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Cursor?",
+      "answer": "Row-by-row process।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Connection Pooling?",
+      "answer": "Connection reuse।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Referential Integrity?",
+      "answer": "FK must exist in parent।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Super Key?",
+      "answer": "Unique identifier set।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Graph DB?",
+      "answer": "Neo4j — nodes+edges।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Document Store?",
+      "answer": "MongoDB — JSON docs।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Key-Value Store?",
+      "answer": "Redis, DynamoDB।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Subquery Types?",
+      "answer": "Single-row, Multi-row, Correlated।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ CASE Expression?",
+      "answer": "Conditional logic in SQL।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-� IS NULL?",
+      "answer": "NULL check। WHERE col IS NULL।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ LIMIT/OFFSET?",
+      "answer": "Result pagination।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Materialized View?",
+      "answer": "Physical copy of query result।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Partition?",
+      "answer": "Table split — performance।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-� ACID example?",
+      "answer": "Bank transfer — atomic, consistent।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SQL-এ RANK() Window Function?",
+      "answer": "Rank rows — gaps for ties।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SQL-এ ROW_NUMBER()?",
+      "answer": "Sequential number — no gaps।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SQL-� LEAD/LAG?",
+      "answer": "Next/Previous row value।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Cursor-এর ধরন?",
+      "answer": "Forward, Scrollable, Updatable।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Isolation Levels?",
+      "answer": "Read Uncommitted → Serializable।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Deadlock Prevention?",
+      "answer": "Lock ordering, timeout।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ Window Functions?",
+      "answer": "ROW_NUMBER, RANK, LEAD, LAG।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ CTE (WITH clause)?",
+      "answer": "WITH cte AS (SELECT...) SELECT...।",
+      "tags": [
+        "database",
+        "sql",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Database-এ JSON Support?",
+      "answer": "PostgreSQL JSONB — NoSQL feature।",
+      "tags": [
+        "database",
+        "basics",
+        "ntrca"
+      ]
+    }
+  ]
+}

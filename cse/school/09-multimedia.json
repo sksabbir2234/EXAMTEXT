@@ -1,0 +1,305 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — Multimedia & Graphics",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য Multimedia & Graphics বিষয়ে 33টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "Multimedia কী?",
+      "answer": "Text+Image+Audio+Video।",
+      "tags": [
+        "multimedia",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Image Formats?",
+      "answer": "JPEG, PNG, GIF, BMP, SVG।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Raster ও Vector?",
+      "answer": "Raster: pixel। Vector: formula।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Audio Formats?",
+      "answer": "MP3, WAV, AAC, FLAC।",
+      "tags": [
+        "multimedia",
+        "audio",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Video Formats?",
+      "answer": "MP4, AVI, MKV, MOV।",
+      "tags": [
+        "multimedia",
+        "video",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Resolution কী?",
+      "answer": "W×H pixels। HD, 4K।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "FPS কী?",
+      "answer": "Frames per second। 24-60।",
+      "tags": [
+        "multimedia",
+        "video",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Lossy ও Lossless?",
+      "answer": "Lossy: quality loss। Lossless: no loss।",
+      "tags": [
+        "multimedia",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Color Models?",
+      "answer": "RGB, CMYK, HSV।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Codec কী?",
+      "answer": "Encoder-Decoder। compress/decompress।",
+      "tags": [
+        "multimedia",
+        "audio",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Bitrate কী?",
+      "answer": "Data rate — kbps, Mbps।",
+      "tags": [
+        "multimedia",
+        "audio",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Sampling Rate?",
+      "answer": "Audio samples/sec। 44.1kHz।",
+      "tags": [
+        "multimedia",
+        "audio",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Storyboarding?",
+      "answer": "Content visual plan।",
+      "tags": [
+        "multimedia",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Typography কী?",
+      "answer": "Font, spacing, readability।",
+      "tags": [
+        "multimedia",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Usability কী?",
+      "answer": "Easy to use।",
+      "tags": [
+        "multimedia",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Animation-এর ধরন?",
+      "answer": "2D, 3D, Stop Motion।",
+      "tags": [
+        "multimedia",
+        "animation",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Image Editing Software?",
+      "answer": "Photoshop, GIMP, Canva।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Audio Editing Software?",
+      "answer": "Audacity, Adobe Audition।",
+      "tags": [
+        "multimedia",
+        "audio",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Video Editing Software?",
+      "answer": "Premiere Pro, DaVinci Resolve।",
+      "tags": [
+        "multimedia",
+        "video",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Aspect Ratio?",
+      "answer": "16:9, 4:3, 1:1।",
+      "tags": [
+        "multimedia",
+        "video",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Container Format?",
+      "answer": "MP4, MKV — video+audio+subtitle।",
+      "tags": [
+        "multimedia",
+        "video",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DPI ও PPI?",
+      "answer": "DPI: print। PPI: screen।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Color Theory?",
+      "answer": "Color wheel, complementary।",
+      "tags": [
+        "multimedia",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Accessibility?",
+      "answer": "Disabled-friendly design।",
+      "tags": [
+        "multimedia",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Asset Management?",
+      "answer": "Files organize, store।",
+      "tags": [
+        "multimedia",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Channel?",
+      "answer": "Mono (1), Stereo (2), Surround (5.1)।",
+      "tags": [
+        "multimedia",
+        "audio",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Interlaced/Progressive?",
+      "answer": "Interlaced: odd/even lines। Progressive: all together।",
+      "tags": [
+        "multimedia",
+        "video",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Image Compression Ratio?",
+      "answer": "Original/Compressed — higher = more compression।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Audio Normalization?",
+      "answer": "Volume level standardize করা।",
+      "tags": [
+        "multimedia",
+        "audio",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Chroma Subsampling?",
+      "answer": "Color reduce — 4:4:4, 4:2:0।",
+      "tags": [
+        "multimedia",
+        "video",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Pixel কী?",
+      "answer": "Image-এর সবচেয়ে ছোট unit।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Vector উদাহরণ?",
+      "answer": "SVG, AI, EPS।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multimedia-এ Bitmap উদাহরণ?",
+      "answer": "JPEG, PNG, BMP, GIF।",
+      "tags": [
+        "multimedia",
+        "image",
+        "ntrca"
+      ]
+    }
+  ]
+}

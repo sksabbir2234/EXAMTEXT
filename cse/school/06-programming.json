@@ -1,0 +1,1286 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — Programming Basics",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য Programming Basics বিষয়ে 142টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "Algorithm কী?",
+      "answer": "সমস্যা সমাধানের ধাপে ধাপে নির্দেশনা।",
+      "tags": [
+        "programming",
+        "algorithm",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Flowchart কী?",
+      "answer": "Algorithm-এর graphical। Oval, Rectangle, Diamond।",
+      "tags": [
+        "programming",
+        "flowchart",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Variable কী?",
+      "answer": "মেমরি location — নামকৃত।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Loop কি কি?",
+      "answer": "for, while, do-while।",
+      "tags": [
+        "programming",
+        "loops",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "if-else কী?",
+      "answer": "Condition check — true/false।",
+      "tags": [
+        "programming",
+        "conditions",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Array কী?",
+      "answer": "একই type একাধিক element।",
+      "tags": [
+        "programming",
+        "arrays",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Function কী?",
+      "answer": "Reusable code block।",
+      "tags": [
+        "programming",
+        "functions",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ printf/scanf?",
+      "answer": "printf: output। scanf: input।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ pointer?",
+      "answer": "Memory address holder। *p access।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ print()?",
+      "answer": "print('Hello')। f-string support।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data Types কি কি?",
+      "answer": "int, float, char, string, bool।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "String কী?",
+      "answer": "অক্ষরের ধারাবাহিক।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Recursion কী?",
+      "answer": "Function calls itself। Base case লাগে।",
+      "tags": [
+        "programming",
+        "advanced",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Sorting Algorithms?",
+      "answer": "Bubble, Quick, Merge।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Search Algorithms?",
+      "answer": "Linear (O(n)), Binary (O(log n))।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Stack কী?",
+      "answer": "LIFO। push, pop।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Queue কী?",
+      "answer": "FIFO। enqueue, dequeue।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Linked List কী?",
+      "answer": "Node chain। data + next pointer।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Tree কী?",
+      "answer": "Hierarchy। Root, Node, Leaf।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Graph কী?",
+      "answer": "Vertex + Edge।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Time Complexity?",
+      "answer": "O(1), O(log n), O(n), O(n²)।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Big O Notation?",
+      "answer": "Worst case complexity।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Stack ও Array-এর পার্থক্য?",
+      "answer": "Stack: LIFO operations। Array: random access।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Queue-এর প্রকারভেদ?",
+      "answer": "Simple, Priority, Circular, Deque।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Hash Table কী?",
+      "answer": "Key-value — O(1) lookup।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Binary Search Tree?",
+      "answer": "Left < Root < Right। O(log n)।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Heap কী?",
+      "answer": "Complete binary tree। Max/Min।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "BFS কী?",
+      "answer": "Breadth-First Search — Queue use।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DFS কী?",
+      "answer": "Depth-First Search — Stack/Recursion।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Dijkstra's Algorithm?",
+      "answer": "Shortest path — weighted graph।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Merge Sort কীভাবে কাজ করে?",
+      "answer": "Divide → Sort → Merge। O(n log n)।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Quick Sort কীভাবে কাজ করে?",
+      "answer": "Pivot → Partition → Recurse। O(n log n) avg।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Dynamic Programming কী?",
+      "answer": "Subproblem solve, reuse। Memoization।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Greedy Algorithm কী?",
+      "answer": "প্রতিটি step-ে best choice।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Divide and Conquer?",
+      "answer": "ভাগ করে solve, merge।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Backtracking?",
+      "answer": "সব try, fail হলে backtrack।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Trie কী?",
+      "answer": "Prefix tree — string-এ efficient।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Disjoint Set?",
+      "answer": "Union-Find — connectivity।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Compiler ও Interpreter?",
+      "answer": "Compiler: সব একসাথে। Interpreter: line by line।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Syntax Error?",
+      "answer": "ভুল syntax — compile হয় না।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Runtime Error?",
+      "answer": "Run করার সময় error।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Logic Error?",
+      "answer": "Run হয়, ভুল output।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "HTML কী?",
+      "answer": "HyperText Markup Language — web structure।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CSS কী?",
+      "answer": "Cascading Style Sheets — design।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "JavaScript কী?",
+      "answer": "Web interactivity। Browser-এ run।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OOP-এর ৪ Pillars?",
+      "answer": "Encapsulation, Inheritance, Polymorphism, Abstraction।",
+      "tags": [
+        "programming",
+        "oop",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Encapsulation কী?",
+      "answer": "Data + method একসাথে। public, private।",
+      "tags": [
+        "programming",
+        "oop",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Inheritance কী?",
+      "answer": "Parent property child-এ। Reuse।",
+      "tags": [
+        "programming",
+        "oop",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Polymorphism কী?",
+      "answer": "একই method, different behavior।",
+      "tags": [
+        "programming",
+        "oop",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Abstraction কী?",
+      "answer": "Complex hide, essential show।",
+      "tags": [
+        "programming",
+        "oop",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ List ও Tuple?",
+      "answer": "List: mutable []। Tuple: immutable ()।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Dictionary?",
+      "answer": "Key-value pair। {'k': 'v'}।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Exception Handling?",
+      "answer": "try-except block।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Class/Object?",
+      "answer": "Blueprint/Instance।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ lambda?",
+      "answer": "Anonymous function। lambda x: x*2।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ map/filter?",
+      "answer": "map: apply all। filter: condition apply।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ file handling?",
+      "answer": "open(), read(), write()।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ module?",
+      "answer": ".py file — import math।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ List Comprehension?",
+      "answer": "[x*2 for x in range(10)]।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Sets?",
+      "answer": "Unique elements। {1,2,3}।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Generator?",
+      "answer": "yield — memory efficient।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Decorator?",
+      "answer": "@ — function modify wrapper।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ self?",
+      "answer": "Instance reference।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ super()?",
+      "answer": "Parent class access।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Virtual Environment?",
+      "answer": "Isolated env। venv।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ args/kwargs?",
+      "answer": "*args: tuple। **kwargs: dict।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ context manager?",
+      "answer": "with statement — auto cleanup।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ enumerate?",
+      "answer": "index + value।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ zip?",
+      "answer": "Multiple iterables together।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ any/all?",
+      "answer": "any: any True। all: all True।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ is ও ==?",
+      "answer": "==: value। is: identity।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ mutable/immutable?",
+      "answer": "Mutable: list, dict। Immutable: int, tuple।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "HTML-এ tag কী?",
+      "answer": "Content define। <tag>content</tag>।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "HTML-এ form?",
+      "answer": "Input collect। <input>, <button>।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CSS-এ Flexbox?",
+      "answer": "Layout — align, distribute।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CSS-এ Grid?",
+      "answer": "2D layout — rows, columns।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "JavaScript-এ DOM?",
+      "answer": "Document Object Model — HTML tree।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "JSON কী?",
+      "answer": "JavaScript Object Notation — data format।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Responsive Design?",
+      "answer": "সব screen-তে fit। Media query।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SEO কী?",
+      "answer": "Search Engine Optimization।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Version Control?",
+      "answer": "Code track। Git, GitHub।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Git কী?",
+      "answer": "Version control system।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "GitHub কী?",
+      "answer": "Git hosting platform।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SDLC কী?",
+      "answer": "Software Dev Life Cycle।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Agile Development?",
+      "answer": "Iterative approach। Scrum।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "API কী?",
+      "answer": "Software communication। REST, GraphQL।",
+      "tags": [
+        "programming",
+        "web",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ __init__?",
+      "answer": "Constructor — init object।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ import?",
+      "answer": "Module load। from math import sqrt।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Jupyter Notebook?",
+      "answer": "Interactive coding — data science।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ struct?",
+      "answer": "Custom data type।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ typedef?",
+      "answer": "Type alias।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ enum?",
+      "answer": "Named constants।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ union?",
+      "answer": "Shared memory struct।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ malloc/free?",
+      "answer": "Dynamic memory alloc/free।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ #include?",
+      "answer": "Header file include।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "C-এ macro?",
+      "answer": "#define — preprocessor substitution।",
+      "tags": [
+        "programming",
+        "c-language",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ string slicing?",
+      "answer": "s[1:5], s[::-1] (reverse)।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ dict comprehension?",
+      "answer": "{k:v for k,v in items}।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ try-except-finally?",
+      "answer": "finally: always execute।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ raise?",
+      "answer": "Exception manually।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ logging?",
+      "answer": "Debug/info/warning log।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ sorted vs sort?",
+      "answer": "sorted: new list। sort: in-place।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ any/all?",
+      "answer": "any: any True। all: all True।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ mutable/immutable examples?",
+      "answer": "Mutable: list, dict, set। Immutable: int, tuple, str।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ is vs ==?",
+      "answer": "==: value match। is: same object।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ if __name__?",
+      "answer": "Direct run check।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ pip?",
+      "answer": "Package installer। pip install numpy।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Pseudocode?",
+      "answer": "English algorithm representation।",
+      "tags": [
+        "programming",
+        "algorithm",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Fibonacci recursive?",
+      "answer": "fib(n) = fib(n-1)+fib(n-2)।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Factorial recursive?",
+      "answer": "fact(n) = n×fact(n-1)।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Tower of Hanoi?",
+      "answer": "3 rods, n disks। 2^n-1 moves।",
+      "tags": [
+        "programming",
+        "algorithms",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Adjacency Matrix?",
+      "answer": "2D array — graph representation।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Topological Sort?",
+      "answer": "DAG ordering।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ enumerate example?",
+      "answer": "for i,v in enumerate(list)।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ zip example?",
+      "answer": "for a,b in zip(list1,list2)।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ map/filter example?",
+      "answer": "map(f,list), filter(f,list)।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Bitwise Operators?",
+      "answer": "& | ^ ~ << >>।",
+      "tags": [
+        "programming",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Class Inheritance?",
+      "answer": "class Child(Parent)।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Method Overriding?",
+      "answer": "Child redefines Parent method।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-ए Multiple Inheritance?",
+      "answer": "class Child(A, B)।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ MRO?",
+      "answer": "Method Resolution Order — lookup sequence।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Stack Overflow?",
+      "answer": "Stack full — push error।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Queue Overflow?",
+      "answer": "Queue full — enqueue error।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Circular Queue?",
+      "answer": "Queue首尾相连 — space efficient।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Programming-এ Deque?",
+      "answer": "Double-ended queue — both ends operate।",
+      "tags": [
+        "programming",
+        "data-structures",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Dataclasses?",
+      "answer": "@dataclass — auto __init__, __repr__।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-� Type Hints?",
+      "answer": "def func(x: int) -> str:।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Walrus Operator?",
+      "answer": ":= অপারেটর — assign inside expression করে।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Match Statement?",
+      "answer": "Python 3.10+ — pattern matching।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Decorator example?",
+      "answer": "@timer\ndef func(): pass।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Context Manager example?",
+      "answer": "with open('f.txt') as f:।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Generator example?",
+      "answer": "def gen(): yield 1; yield 2।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ f-string?",
+      "answer": "f'Hello {name}' — formatted string।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-� Ternary Operator?",
+      "answer": "'yes' if x > 0 else 'no'।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-� Unpacking?",
+      "answer": "a, b = [1, 2]। *rest = [1,2,3,4]।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Walrus Operator?",
+      "answer": ":= — assign in expression।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ __str__ ও __repr__?",
+      "answer": "__str__: readable। __repr__: developer debug।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ staticmethod?",
+      "answer": "@staticmethod — no self।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ classmethod?",
+      "answer": "@classmethod — class access।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Dataclass example?",
+      "answer": "@dataclass\nclass Point: x: int; y: int।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Type Hints example?",
+      "answer": "def add(a: int, b: int) -> int:।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Python-এ Match Statement?",
+      "answer": "match x:\n case 1: ...।",
+      "tags": [
+        "programming",
+        "python",
+        "ntrca"
+      ]
+    }
+  ]
+}

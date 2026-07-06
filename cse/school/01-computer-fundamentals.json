@@ -1,0 +1,548 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — Computer Fundamentals & History",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য Computer Fundamentals & History বিষয়ে 60টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "কম্পিউটারের জনক কে বলা হয়?",
+      "answer": "চার্লস ব্যাবেজ — তিনি ১৮৩৭ সালে Analytical Engine এর নকশা করেন।",
+      "tags": [
+        "computer-fundamentals",
+        "history",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "প্রথম ইলেকট্রনিক কম্পিউটার কোনটি?",
+      "answer": "ENIAC — ১৯৪৬ সালে জন মোচলি ও জন একার্ট নির্মাণ করেন।",
+      "tags": [
+        "computer-fundamentals",
+        "history",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "কম্পিউটারের ৫টি প্রজন্ম কি কি?",
+      "answer": "1st (Vacuum Tubes), 2nd (Transistors), 3rd (IC), 4th (Microprocessor), 5th (AI)।",
+      "tags": [
+        "computer-fundamentals",
+        "history",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Analog, Digital, Hybrid কম্পিউটারের পার্থক্য?",
+      "answer": "Analog: ধারাবাহিক মান। Digital: 0 ও 1। Hybrid: দুইয়ের সমন্বয়।",
+      "tags": [
+        "computer-fundamentals",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CPU-র তিনটি মূল অংশ?",
+      "answer": "ALU, CU, Register।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Primary ও Secondary Memory-এর পার্থক্য?",
+      "answer": "Primary: দ্রুত, সাময়িক। Secondary: স্থায়ী, বেশি ক্ষমতা।",
+      "tags": [
+        "computer-fundamentals",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "RAM ও ROM-এর পার্থক্য?",
+      "answer": "RAM: Volatile, read/write। ROM: Non-volatile, read only।",
+      "tags": [
+        "computer-fundamentals",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Software-এর দুই প্রকার?",
+      "answer": "System Software (OS, Driver) ও Application Software (Word, Excel)।",
+      "tags": [
+        "computer-fundamentals",
+        "software",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CPU Clock Speed কী?",
+      "answer": "নির্দেশনা প্রক্রিয়াকরণের গতি — GHz-তে মাপা হয়।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Input ও Output Device-এর উদাহরণ?",
+      "answer": "Input: Keyboard, Mouse। Output: Monitor, Printer।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Volatile ও Non-volatile Memory?",
+      "answer": "Volatile: বিদ্যুৎ চলে গেলে ডাটা যায় (RAM)। Non-volatile: স্থায়ী (ROM, SSD)।",
+      "tags": [
+        "computer-fundamentals",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Bootstrap Loader কী?",
+      "answer": "কম্পিউটার চালু হলে OS লোড করার প্রথম প্রোগ্রাম।",
+      "tags": [
+        "computer-fundamentals",
+        "software",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Microprocessor কী?",
+      "answer": "CPU-র সব অংশ এক চিপে। Intel 4004 প্রথম (১৯৭১)।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Bit ও Byte-এর পার্থক্য?",
+      "answer": "Bit: 0 বা 1। Byte: 8 bit।",
+      "tags": [
+        "computer-fundamentals",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Firmware কী?",
+      "answer": "Hardware-র মধ্যে সংরক্ষিত সফটওয়্যার — BIOS, Router।",
+      "tags": [
+        "computer-fundamentals",
+        "software",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cache Memory কী?",
+      "answer": "CPU ও RAM-এর মধ্যে দ্রুত মেমরি — L1, L2, L3।",
+      "tags": [
+        "computer-fundamentals",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "BIOS কী?",
+      "answer": "Basic Input Output System — hardware check ও OS load। ROM-এ।",
+      "tags": [
+        "computer-fundamentals",
+        "software",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Bus কী?",
+      "answer": "Data, Address, Control — তিন ধরনের bus।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DRAM ও SRAM-এর পার্থক্য?",
+      "answer": "DRAM: refresh লাগে, সস্তা। SRAM: দ্রুত, cache-তে।",
+      "tags": [
+        "computer-fundamentals",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Pipelining কী?",
+      "answer": "CPU instruction processing-এর কৌশল — throughput বাড়ায়।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Parallel Processing কী?",
+      "answer": "একাধিক CPU/core দিয়ে একসাথে কাজ।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Supercomputer কী?",
+      "answer": "বিশ্বের সবচেয়ে শক্তিশালী — FLOPS-তে মাপা।",
+      "tags": [
+        "computer-fundamentals",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Mainframe Computer কী?",
+      "answer": "বড় প্রতিষ্ঠানে ব্যবহৃত, হাজারো user handle করে।",
+      "tags": [
+        "computer-fundamentals",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Embedded System কী?",
+      "answer": "নির্দিষ্ট কাজের জন্য ডিজাইন — Washing Machine, Car।",
+      "tags": [
+        "computer-fundamentals",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Abacus কী?",
+      "answer": "প্রাচীনতম গণনা যন্ত্র — ৫০০০ বছর আগে।",
+      "tags": [
+        "computer-fundamentals",
+        "history",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "UNIVAC কী?",
+      "answer": "প্রথম বাণিজ্যিক কম্পিউটার (১৯৫১)।",
+      "tags": [
+        "computer-fundamentals",
+        "history",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data ও Information-এর পার্থক্য?",
+      "answer": "Data: কাঁচি তথ্য। Information: প্রক্রিয়াকৃত ডাটা।",
+      "tags": [
+        "computer-fundamentals",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Hardware ও Software-এর পার্থক্য?",
+      "answer": "Hardware: ভৌতিক। Software: প্রোগ্রাম।",
+      "tags": [
+        "computer-fundamentals",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Clock Cycle কী?",
+      "answer": "CPU-এর একটি instruction cycle।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Fetch-Decode-Execute Cycle?",
+      "answer": "Instruction fetch → decode → execute → store।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Register কী?",
+      "answer": "CPU-র ভেতরের দ্রুত memory — Accumulator, PC, IR।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "ALU কী?",
+      "answer": "Arithmetic Logic Unit — গাণিতিক ও যৌক্তিক operation।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "GPU কী?",
+      "answer": "Graphics Processing Unit — graphics render, parallel compute।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SSD ও HDD-এর পার্থক্য?",
+      "answer": "SSD: flash, fast, no moving parts। HDD: magnetic, slow, cheap।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "UPS কী?",
+      "answer": "Uninterruptible Power Supply — বিদ্যুৎ চলে গেলে backup।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "POST কী?",
+      "answer": "Power-On Self Test — চালু হওয়ার সময় hardware check।",
+      "tags": [
+        "computer-fundamentals",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "File Extension কী?",
+      "answer": ".txt, .jpg, .mp4 — file type indicate করে।",
+      "tags": [
+        "computer-fundamentals",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Keyboard-এ Shortcut Keys?",
+      "answer": "Ctrl+C (Copy), Ctrl+V (Paste), Ctrl+Z (Undo), Ctrl+S (Save)।",
+      "tags": [
+        "computer-fundamentals",
+        "keyboard",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Projector কীভাবে কাজ করে?",
+      "answer": "LCD/DLP — image project।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Touchscreen কী?",
+      "answer": "Resistive, Capacitive।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Barcode কী?",
+      "answer": "Product ID — laser scan।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OCR কী?",
+      "answer": "Image→text extract।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "MICR কী?",
+      "answer": "Magnetic Ink — cheque।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OMR কী?",
+      "answer": "Optical Mark — answer sheet।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Plotter কী?",
+      "answer": "Large format printer।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Supercomputer examples?",
+      "answer": "Fugaku, Summit, Frontier।",
+      "tags": [
+        "computer-fundamentals",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Workstation কী?",
+      "answer": "Single-user powerful — CAD।",
+      "tags": [
+        "computer-fundamentals",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Minicomputer কী?",
+      "answer": "Multi-user mid-range।",
+      "tags": [
+        "computer-fundamentals",
+        "types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data Bus Width?",
+      "answer": "একসাথে transfer bits। 32/64।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Memory Hierarchy?",
+      "answer": "Register→Cache→RAM→Disk।",
+      "tags": [
+        "computer-fundamentals",
+        "memory",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ Barcode ও QR Code পার্থক্য?",
+      "answer": "Barcode: 1D। QR: 2D, more data।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ Power Supply Unit?",
+      "answer": "PSU — AC to DC convert।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ Motherboard কী?",
+      "answer": "Main board — all components connect।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ Expansion Slot?",
+      "answer": "PCI, PCIe — GPU, NIC add করার জায়গা।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ IRQ?",
+      "answer": "Interrupt Request — hardware signal।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ DMA?",
+      "answer": "Direct Memory Access — CPU bypass।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ CMOS?",
+      "answer": "BIOS settings store — battery powered।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ Bus Speed?",
+      "answer": "MHz/GHz — data transfer rate।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ Word Size?",
+      "answer": "CPU data width — 32/64 bit।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Computer-এ Machine Cycle?",
+      "answer": "Fetch, Decode, Execute, Store।",
+      "tags": [
+        "computer-fundamentals",
+        "hardware",
+        "ntrca"
+      ]
+    }
+  ]
+}

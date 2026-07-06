@@ -1,0 +1,746 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — Computer Networks & Internet",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য Computer Networks & Internet বিষয়ে 82টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "LAN, WAN, MAN?",
+      "answer": "LAN: ছোট। WAN: বৃহৎ। MAN: মাঝারি।",
+      "tags": [
+        "networking",
+        "lan-wan",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network Topology কি কি?",
+      "answer": "Star, Bus, Ring, Mesh।",
+      "tags": [
+        "networking",
+        "topology",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "TCP/IP Model?",
+      "answer": "Application, Transport, Internet, Network Access।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "HTTP ও HTTPS?",
+      "answer": "HTTP: 80, unencrypted। HTTPS: 443, SSL।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "IP Address কী?",
+      "answer": "Device unique address। IPv4 (32-bit), IPv6 (128-bit)।",
+      "tags": [
+        "networking",
+        "ip-address",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DNS কী?",
+      "answer": "Domain→IP translate।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "WWW কী?",
+      "answer": "World Wide Web। Tim Berners-Lee 1989।",
+      "tags": [
+        "networking",
+        "internet",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Router ও Switch?",
+      "answer": "Router: network connect। Switch: devices connect।",
+      "tags": [
+        "networking",
+        "devices",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Modem কী?",
+      "answer": "Modulator-Demodulator।",
+      "tags": [
+        "networking",
+        "devices",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Email কীভাবে কাজ করে?",
+      "answer": "SMTP (send), POP3/IMAP (receive)।",
+      "tags": [
+        "networking",
+        "email",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Search Engine কী?",
+      "answer": "Crawling, Indexing, Ranking।",
+      "tags": [
+        "networking",
+        "internet",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "VPN কী?",
+      "answer": "Virtual Private Network — encrypted tunnel।",
+      "tags": [
+        "networking",
+        "internet",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "MAC Address কী?",
+      "answer": "48-bit hardware address।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Bandwidth কী?",
+      "answer": "Data transfer rate — Mbps/Gbps।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Protocol কী?",
+      "answer": "যোগাযোগের নিয়ম। HTTP, FTP।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "WiFi ও Ethernet?",
+      "answer": "WiFi: Wireless। Ethernet: Wired, faster।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OSI Model?",
+      "answer": "7 layers: Physical→Application।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "FTP কী?",
+      "answer": "File Transfer Protocol। Port 20/21।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "URL কী?",
+      "answer": "Web address — protocol+domain+path।",
+      "tags": [
+        "networking",
+        "internet",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "ISP কী?",
+      "answer": "Internet Service Provider।",
+      "tags": [
+        "networking",
+        "internet",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "TCP ও UDP?",
+      "answer": "TCP: reliable। UDP: fast, connectionless।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Port Number কী?",
+      "answer": "Service identification। HTTP=80, FTP=21।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DHCP কী?",
+      "answer": "Auto IP assign।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "ARP কী?",
+      "answer": "IP→MAC translate।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NAT কী?",
+      "answer": "Private→Public IP translate।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Star Topology-এর সুবিধা?",
+      "answer": "সহজ fault detection, এক cable fail হলে বাকি চলে।",
+      "tags": [
+        "networking",
+        "topology",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Mesh Topology কী?",
+      "answer": "সব device connect। Redundant, reliable।",
+      "tags": [
+        "networking",
+        "topology",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Ring Topology কী?",
+      "answer": "Circular — token passing।",
+      "tags": [
+        "networking",
+        "topology",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Bus Topology কী?",
+      "answer": "একটি cable। সস্তা।",
+      "tags": [
+        "networking",
+        "topology",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Intranet ও Extranet?",
+      "answer": "Intranet: internal। Extranet: partner access।",
+      "tags": [
+        "networking",
+        "network-types",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cloud Storage কী?",
+      "answer": "Internet-এ data store। Google Drive।",
+      "tags": [
+        "networking",
+        "internet",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "WiFi Standards?",
+      "answer": "802.11a/b/g/n/ac/ax (WiFi 6)।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Bluetooth কী?",
+      "answer": "Short-range wireless — 10m।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NFC কী?",
+      "answer": "Near Field Communication — contactless payment।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Client-Server Model?",
+      "answer": "Client request, Server response।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "P2P Network?",
+      "answer": "সব device equal — no server।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "DDoS Attack?",
+      "answer": "Multiple source-এ flood।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Brute Force Attack?",
+      "answer": "সব combination try — password crack।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Encryption কী?",
+      "answer": "Data code-তে। AES, RSA।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Hashing কী?",
+      "answer": "Data→fixed hash। MD5, SHA-256।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "WPA2 কী?",
+      "answer": "WiFi security protocol।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Tor কী?",
+      "answer": "Anonymous browsing — onion routing।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Load Balancer কী?",
+      "answer": "Traffic distribute।",
+      "tags": [
+        "networking",
+        "devices",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CDN কী?",
+      "answer": "Content Delivery Network — fast access।",
+      "tags": [
+        "networking",
+        "internet",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Ping কমান্ড?",
+      "answer": "Network test। ICMP echo।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Zero Trust Model?",
+      "answer": "Never trust, always verify।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Penetration Testing?",
+      "answer": "Authorized security test।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Signature?",
+      "answer": "Document authenticity verify।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Certificate Authority?",
+      "answer": "SSL certificate issuer।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Honeypot কী?",
+      "answer": "Attacker decoy system।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "5G কী?",
+      "answer": "5th gen mobile — 100x faster।",
+      "tags": [
+        "current-trends",
+        "networking",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "5G Features?",
+      "answer": "10 Gbps, 1ms latency।",
+      "tags": [
+        "current-trends",
+        "networking",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Bridge কী?",
+      "answer": "LAN connect।",
+      "tags": [
+        "networking",
+        "devices",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Gateway?",
+      "answer": "Different protocol connect।",
+      "tags": [
+        "networking",
+        "devices",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ SMTP?",
+      "answer": "Email send। Port 25।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ POP3 ও IMAP?",
+      "answer": "POP3: download। IMAP: server access।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ HTTPS SSL?",
+      "answer": "Secure layer — encryption।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Packet Sniffing?",
+      "answer": "Traffic capture। Wireshark।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Man-in-Middle?",
+      "answer": "Data intercept।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-ে Shoulder Surfing?",
+      "answer": "Over shoulder — password steal।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ WiFi Security?",
+      "answer": "WPA2, WPA3।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ VPN Protocols?",
+      "answer": "OpenVPN, WireGuard, IPSec।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ DLP?",
+      "answer": "Data Loss Prevention।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Incident Response?",
+      "answer": "Breach handling procedure।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Proxy ও Reverse Proxy?",
+      "answer": "Proxy: client→server। Reverse: server→client।",
+      "tags": [
+        "networking",
+        "internet",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ 802.11 Standard?",
+      "answer": "WiFi — a/b/g/n/ac/ax।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ 802.3 Standard?",
+      "answer": "Ethernet।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ 802.15 Standard?",
+      "answer": "Bluetooth/WPAN।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Anycast?",
+      "answer": "Nearest server receive।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Multicast?",
+      "answer": "One-to-many।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Broadcast?",
+      "answer": "One-to-all।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Latency কী?",
+      "answer": "Delay — ms। Lower = better।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Jitter কী?",
+      "answer": "Latency variation। VoIP-এ problem।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Throughput কী?",
+      "answer": "Actual data transfer rate।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ Socket কী?",
+      "answer": "IP + Port — communication endpoint।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ TTL?",
+      "answer": "Time To Live — packet lifetime।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ MTU?",
+      "answer": "Maximum Transmission Unit।",
+      "tags": [
+        "networking",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ TCP Handshake?",
+      "answer": "SYN → SYN-ACK → ACK।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ HTTP Methods?",
+      "answer": "GET, POST, PUT, DELETE, PATCH।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-� HTTP Status Codes?",
+      "answer": "200 OK, 404 Not Found, 500 Error।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ DNS Records?",
+      "answer": "A, AAAA, CNAME, MX, TXT।",
+      "tags": [
+        "networking",
+        "protocols",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Network-এ SSL/TLS Handshake?",
+      "answer": "Certificate verify → key exchange → secure।",
+      "tags": [
+        "networking",
+        "cyber-security",
+        "ntrca"
+      ]
+    }
+  ]
+}

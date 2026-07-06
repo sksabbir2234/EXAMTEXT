@@ -1,0 +1,337 @@
+﻿{
+    "subject":  "CSE College Teacher",
+    "examTitle":  "NTRCA School ICT — Computer Networks \u0026 Internet",
+    "durationMinutes":  20,
+    "questions":  [
+                      {
+                          "questionText":  "LAN কোন এলাকার network?",
+                          "options":  [
+                                          "বৃহৎ এলাকা",
+                                          "ছোট এলাকা",
+                                          "মাঝারি এলাকা",
+                                          "বিশ্বব্যাপী"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "LAN হলো Local Area Network — ছোট এলাকা (বাড়ি, স্কুল)।"
+                      },
+                      {
+                          "questionText":  "WAN কোন এলাকার network?",
+                          "options":  [
+                                          "ছোট এলাকা",
+                                          "মাঝারি এলাকা",
+                                          "বৃহৎ এলাকা",
+                                          "বাড়ি"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "WAN হলো Wide Area Network — বৃহৎ এলাকা (দেশ, বিশ্ব)।"
+                      },
+                      {
+                          "questionText":  "MAN কোন এলাকার network?",
+                          "options":  [
+                                          "ছোট এলাকা",
+                                          "মাঝারি এলাকা (শহর)",
+                                          "বৃহৎ এলাকা",
+                                          "বাড়ি"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "MAN হলো Metropolitan Area Network — শহর পর্যন্ত।"
+                      },
+                      {
+                          "questionText":  "Star Topology-এ সব connect হয়?",
+                          "options":  [
+                                          "একটি cable-তে",
+                                          "কেন্দ্রীয় hub-তে",
+                                          "Circular-ভাবে",
+                                          "Mesh-ভাবে"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Star Topology-এ সব device কেন্দ্রীয় hub/switch-তে connect থাকে।"
+                      },
+                      {
+                          "questionText":  "TCP/IP Model-এ কয়টি layer আছে?",
+                          "options":  [
+                                          "4টি",
+                                          "5টি",
+                                          "6টি",
+                                          "7টি"
+                                      ],
+                          "correctOptionIndex":  0,
+                          "explanation":  "TCP/IP Model-এ 4টি layer — Application, Transport, Internet, Network Access।"
+                      },
+                      {
+                          "questionText":  "HTTP Port কত?",
+                          "options":  [
+                                          "21",
+                                          "25",
+                                          "80",
+                                          "443"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "HTTP Port 80।"
+                      },
+                      {
+                          "questionText":  "HTTPS Port কত?",
+                          "options":  [
+                                          "80",
+                                          "443",
+                                          "21",
+                                          "25"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "HTTPS Port 443।"
+                      },
+                      {
+                          "questionText":  "DNS কী করে?",
+                          "options":  [
+                                          "IP address assign করে",
+                                          "Domain name কে IP-তে translate করে",
+                                          "Email পাঠায়",
+                                          "File save করে"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "DNS domain name (google.com) কে IP address-তে translate করে।"
+                      },
+                      {
+                          "questionText":  "Router কী করে?",
+                          "options":  [
+                                          "ডাটা save করে",
+                                          "Network connect করে",
+                                          "প্রিন্ট করে",
+                                          "গান বাজায়"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Router দুটি বিভিন্ন network connect করে।"
+                      },
+                      {
+                          "questionText":  "Switch কী করে?",
+                          "options":  [
+                                          "Network connect করে",
+                                          "Devices connect করে",
+                                          "File save করে",
+                                          "প্রিন্ট করে"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Switch একটি network-এর ভেতরে devices connect করে।"
+                      },
+                      {
+                          "questionText":  "Modem কী?",
+                          "options":  [
+                                          "Router",
+                                          "Switch",
+                                          "Modulator-Demodulator",
+                                          "Hub"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Modem হলো Modulator-Demodulator — digital ↔ analog signal।"
+                      },
+                      {
+                          "questionText":  "Email-এ SMTP কী করে?",
+                          "options":  [
+                                          "receive করে",
+                                          "send করে",
+                                          "delete করে",
+                                          "save করে"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "SMTP দিয়ে email পাঠানো (send) হয়।"
+                      },
+                      {
+                          "questionText":  "Email-এ POP3 কী করে?",
+                          "options":  [
+                                          "Email send করে",
+                                          "Email receive/download করে",
+                                          "Email delete করে",
+                                          "Email forward করে"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "POP3 দিয়ে email receive/download করা হয়।"
+                      },
+                      {
+                          "questionText":  "Search Engine কী?",
+                          "options":  [
+                                          "Email client",
+                                          "Web search tool",
+                                          "File manager",
+                                          "Media player"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Search Engine (Google, Bing) web search করার tool।"
+                      },
+                      {
+                          "questionText":  "VPN কী?",
+                          "options":  [
+                                          "Virtual Public Network",
+                                          "Virtual Private Network",
+                                          "Very Private Network",
+                                          "Very Public Network"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "VPN = Virtual Private Network।"
+                      },
+                      {
+                          "questionText":  "MAC Address কত bit?",
+                          "options":  [
+                                          "32-bit",
+                                          "48-bit",
+                                          "64-bit",
+                                          "128-bit"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "MAC Address 48-bit hardware address।"
+                      },
+                      {
+                          "questionText":  "Bandwidth কী?",
+                          "options":  [
+                                          " Cable-এর width",
+                                          "Data transfer rate",
+                                          "Speed of light",
+                                          "File size"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Bandwidth হলো Data transfer rate — Mbps/Gbps-তে মাপা হয়।"
+                      },
+                      {
+                          "questionText":  "WiFi কোন standard?",
+                          "options":  [
+                                          "802.3",
+                                          "802.11",
+                                          "802.15",
+                                          "802.1"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "WiFi হলো 802.11 standard।"
+                      },
+                      {
+                          "questionText":  "Bluetooth কত range?",
+                          "options":  [
+                                          "~1m",
+                                          "~10m",
+                                          "~100m",
+                                          "~1km"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Bluetooth-এর range প্রায় 10 meter।"
+                      },
+                      {
+                          "questionText":  "IP Address কী?",
+                          "options":  [
+                                          "Domain name",
+                                          "Device-এর unique address",
+                                          "File name",
+                                          "Password"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "IP Address হলো প্রতিটি device-এর unique address।"
+                      },
+                      {
+                          "questionText":  "IPv4 কত bit?",
+                          "options":  [
+                                          "16-bit",
+                                          "32-bit",
+                                          "64-bit",
+                                          "128-bit"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "IPv4 32-bit address।"
+                      },
+                      {
+                          "questionText":  "IPv6 কত bit?",
+                          "options":  [
+                                          "32-bit",
+                                          "64-bit",
+                                          "128-bit",
+                                          "256-bit"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "IPv6 128-bit address।"
+                      },
+                      {
+                          "questionText":  "FTP কোন port ব্যবহার করে?",
+                          "options":  [
+                                          "80",
+                                          "443",
+                                          "20/21",
+                                          "25"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "FTP Port 20 (data) ও 21 (control)।"
+                      },
+                      {
+                          "questionText":  "DHCP কী করে?",
+                          "options":  [
+                                          "Domain name assign করে",
+                                          "IP address automatically assign করে",
+                                          "Email পাঠায়",
+                                          "File save করে"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "DHCP automatically IP address assign করে।"
+                      },
+                      {
+                          "questionText":  "ARP কী করে?",
+                          "options":  [
+                                          "IP address থেকে MAC address খুঁজে বের করে",
+                                          "Domain name খুঁজে বের করে",
+                                          "Email খুঁজে বের করে",
+                                          "File খুঁজে বের করে"
+                                      ],
+                          "correctOptionIndex":  0,
+                          "explanation":  "ARP IP address দিয়ে MAC address খুঁজে বের করে।"
+                      },
+                      {
+                          "questionText":  "Ping কমান্ড কী করে?",
+                          "options":  [
+                                          "File delete করে",
+                                          "Network connectivity test করে",
+                                          "Email পাঠায়",
+                                          "File save করে"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Ping দিয়ে Network connectivity test করা হয়।"
+                      },
+                      {
+                          "questionText":  "Proxy Server কী?",
+                          "options":  [
+                                          "সরাসরি server",
+                                          "Client-Server এর মধ্যস্বত্বভোগী",
+                                          "একটি browser",
+                                          "একটি file"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Proxy Server client ও server-এর মধ্যে মধ্যস্বত্বভোগী।"
+                      },
+                      {
+                          "questionText":  "Intranet কী?",
+                          "options":  [
+                                          "বহির্গত network",
+                                          "একটি প্রতিষ্ঠানের ভেতরের private network",
+                                          "Internet",
+                                          "WiFi"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Intranet হলো একটি প্রতিষ্ঠানের ভেতরের private network।"
+                      },
+                      {
+                          "questionText":  "WiFi-এর speed Ethernet-এর তুলনায় কেমন?",
+                          "options":  [
+                                          "বেশি দ্রুত",
+                                          "কম দ্রুত",
+                                          "সমান",
+                                          "WiFi আছে না"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "WiFi-এর speed Ethernet-এর তুলনায় কম।"
+                      },
+                      {
+                          "questionText":  "OSI Model-এ কয়টি layer?",
+                          "options":  [
+                                          "4টি",
+                                          "5টি",
+                                          "6টি",
+                                          "7টি"
+                                      ],
+                          "correctOptionIndex":  3,
+                          "explanation":  "OSI Model-এ 7টি layer আছে।"
+                      }
+                  ]
+}

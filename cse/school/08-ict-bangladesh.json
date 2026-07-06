@@ -1,0 +1,386 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — ICT in Bangladesh & Education",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য ICT in Bangladesh & Education বিষয়ে 42টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "NCTB ICT Class 6-10?",
+      "answer": "6: Intro। 7: Number, Programming। 8: DB, Network। 9-10: C, Python, Security।",
+      "tags": [
+        "ict-bangladesh",
+        "nctb",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh কী?",
+      "answer": "ICT-based economy — vision 2021।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "e-Governance কী?",
+      "answer": "সরকারি সেবা অনলাইনে।",
+      "tags": [
+        "ict-bangladesh",
+        "e-governance",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cyber Security কী?",
+      "answer": "Network protect। CIA Triad।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Copyright কী?",
+      "answer": "স্রষ্টার অধিকার।",
+      "tags": [
+        "ict-bangladesh",
+        "ethics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Phishing কী?",
+      "answer": "মিথ্যা site/email দিয়ে প্রতারণা।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Firewall কী?",
+      "answer": "Network traffic filter।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Virus ও Worm?",
+      "answer": "Virus: host-এ attach। Worm: standalone।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Ransomware কী?",
+      "answer": "Data lock — money demand।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Strong Password?",
+      "answer": "8+ chars, upper+lower+number+symbol।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NTRCA কী?",
+      "answer": "Teacher Registration Authority। 2005।",
+      "tags": [
+        "ict-bangladesh",
+        "ntrca",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SMART Board কী?",
+      "answer": "Interactive whiteboard।",
+      "tags": [
+        "ict-bangladesh",
+        "education",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "E-learning কী?",
+      "answer": "Online learning। Google Classroom।",
+      "tags": [
+        "ict-bangladesh",
+        "education",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Open Source Software?",
+      "answer": "Free source code। Linux।",
+      "tags": [
+        "ict-bangladesh",
+        "software",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "CIA Triad?",
+      "answer": "Confidentiality, Integrity, Availability।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Data Privacy কী?",
+      "answer": "Personal data protection।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Divide কী?",
+      "answer": "Tech access gap।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Security Act?",
+      "answer": "2018 — cyber crime law।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cyberbullying কী?",
+      "answer": "Online harassment।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Cookie কী?",
+      "answer": "Browser data — tracking।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Two-Factor Auth?",
+      "answer": "Password + OTP/biometric।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Footprint?",
+      "answer": "Online activity trace।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Social Engineering?",
+      "answer": "People trick — info steal।",
+      "tags": [
+        "ict-bangladesh",
+        "cyber-security",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "10 Minute School?",
+      "answer": "BD online education platform।",
+      "tags": [
+        "ict-bangladesh",
+        "education",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Blended Learning?",
+      "answer": "Online + Offline mix।",
+      "tags": [
+        "ict-bangladesh",
+        "education",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Flipped Classroom?",
+      "answer": "Video আগে, class-এ practice।",
+      "tags": [
+        "ict-bangladesh",
+        "education",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Gamification?",
+      "answer": "Game elements in education।",
+      "tags": [
+        "ict-bangladesh",
+        "education",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Freelancing কী?",
+      "answer": "Online work — Upwork, Fiverr।",
+      "tags": [
+        "ict-bangladesh",
+        "education",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Outsourcing?",
+      "answer": "BD top outsourcing country।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "BTRC কী?",
+      "answer": "Telecom Regulatory Commission।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Bangabandhu Satellite?",
+      "answer": "BD's first satellite। 2018।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh-এ ICT Park?",
+      "answer": "Kaliakoir Hi-Tech Park।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NTRCA-তে ICT পরীক্ষার ধরন?",
+      "answer": "MCQ + Written — 100 marks।",
+      "tags": [
+        "ict-bangladesh",
+        "ntrca",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh-এ Startup Bangladesh?",
+      "answer": "Startup support initiative।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh-এ Hi-Tech Park?",
+      "answer": "Kaliakoir — IT hub।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh-এ Bandabandhu Satellite?",
+      "answer": "2018 — first satellite।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh-এ e-Health?",
+      "answer": "Online health service।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh-এ e-Education?",
+      "answer": "Online education — 10 Minute School।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NTRCA-তে ICT Subject Code?",
+      "answer": "152 — ICT Written (School)।",
+      "tags": [
+        "ict-bangladesh",
+        "ntrca",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh-এ Digital Security Act?",
+      "answer": "2018 — cyber crime law।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Digital Bangladesh-এ e-Government?",
+      "answer": "Service digitization — passport, tax।",
+      "tags": [
+        "ict-bangladesh",
+        "digital-bangladesh",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NTRCA-তে ICT Preparation Tips?",
+      "answer": "Concept clear, practice MCQ, current affairs।",
+      "tags": [
+        "ict-bangladesh",
+        "ntrca",
+        "ntrca"
+      ]
+    }
+  ]
+}

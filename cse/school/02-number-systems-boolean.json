@@ -1,0 +1,431 @@
+{
+  "subject": "NTRCA School ICT",
+  "title": "NTRCA ICT Written — Number Systems & Boolean Algebra",
+  "description": "NTRCA ICT Written পরীক্ষার জন্য Number Systems & Boolean Algebra বিষয়ে 47টি গুরুত্বপূর্ণ প্রশ্নোত্তর।",
+  "slideUrl": "",
+  "content": [
+    {
+      "question": "Binary Number System কী?",
+      "answer": "০ ও ১ দিয়ে গঠিত। Base-2।",
+      "tags": [
+        "number-systems",
+        "binary",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Binary থেকে Decimal?",
+      "answer": "1010₂ = 8+0+2+0 = 10₁₀।",
+      "tags": [
+        "number-systems",
+        "conversion",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Hexadecimal কেন ব্যবহৃত হয়?",
+      "answer": "Binary ছোট ও সহজ করার জন্য। Base-16।",
+      "tags": [
+        "number-systems",
+        "hexadecimal",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Octal Number System কী?",
+      "answer": "Base-8। 1 octal = 3 bit।",
+      "tags": [
+        "number-systems",
+        "octal",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "1's ও 2's Complement?",
+      "answer": "1's: 0↔1 swap। 2's: 1's + 1।",
+      "tags": [
+        "number-systems",
+        "binary",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Binary Addition?",
+      "answer": "0+0=0, 0+1=1, 1+1=10 (carry 1)।",
+      "tags": [
+        "number-systems",
+        "binary-arithmetic",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Binary Multiplication?",
+      "answer": "1×1=1, 1×0=0। shift ও add।",
+      "tags": [
+        "number-systems",
+        "binary-arithmetic",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "BCD কী?",
+      "answer": "Binary Coded Decimal — 4-bit per digit।",
+      "tags": [
+        "number-systems",
+        "encoding",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "ASCII কী?",
+      "answer": "7-bit code, 128 chars। A=65, a=97।",
+      "tags": [
+        "number-systems",
+        "encoding",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Unicode কী?",
+      "answer": "বিশ্বব্যাপী সব ভাষার character। UTF-8।",
+      "tags": [
+        "number-systems",
+        "encoding",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Decimal থেকে Binary?",
+      "answer": "2 দিয়ে ভাগ, ভাগশেষ নিচ থেকে উপরে। 10₁₀ = 1010₂।",
+      "tags": [
+        "number-systems",
+        "conversion",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Hex থেকে Binary?",
+      "answer": "প্রতিটি hex digit = 4 bit। A₁₆ = 1010₂।",
+      "tags": [
+        "number-systems",
+        "conversion",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Gray Code কী?",
+      "answer": "একবারে একটি বিট পরিবর্তন। K-Map-এ ব্যবহৃত।",
+      "tags": [
+        "number-systems",
+        "encoding",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Hamming Code কী?",
+      "answer": "Error detect ও correction।",
+      "tags": [
+        "number-systems",
+        "encoding",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Floating Point কী?",
+      "answer": "দশমিক সংখ্যা representation। IEEE 754।",
+      "tags": [
+        "number-systems",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Signed ও Unsigned?",
+      "answer": "Unsigned: শুধু positive। Signed: MSB sign bit।",
+      "tags": [
+        "number-systems",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Endianness কী?",
+      "answer": "Byte order — Big (MSB first), Little (LSB first)।",
+      "tags": [
+        "number-systems",
+        "basics",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Logic Gate কী?",
+      "answer": "AND, OR, NOT — মূল gate।",
+      "tags": [
+        "boolean-algebra",
+        "logic-gates",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "AND Gate truth table?",
+      "answer": "0&0=0, 0&1=0, 1&0=0, 1&1=1।",
+      "tags": [
+        "boolean-algebra",
+        "logic-gates",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "OR Gate truth table?",
+      "answer": "0|0=0, 0|1=1, 1|0=1, 1|1=1।",
+      "tags": [
+        "boolean-algebra",
+        "logic-gates",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NOT Gate truth table?",
+      "answer": "!0=1, !1=0।",
+      "tags": [
+        "boolean-algebra",
+        "logic-gates",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NAND Gate কী?",
+      "answer": "NOT-AND। Universal Gate।",
+      "tags": [
+        "boolean-algebra",
+        "logic-gates",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "NOR Gate কী?",
+      "answer": "NOT-OR। Universal Gate।",
+      "tags": [
+        "boolean-algebra",
+        "logic-gates",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "XOR Gate কী?",
+      "answer": "Exclusive-OR: ভিন্ন হলে 1।",
+      "tags": [
+        "boolean-algebra",
+        "logic-gates",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "XNOR Gate কী?",
+      "answer": "XOR-এর বিপরীত। সমান হলে 1।",
+      "tags": [
+        "boolean-algebra",
+        "logic-gates",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "De Morgan's Theorem?",
+      "answer": "(A+B)' = A'·B' এবং (A·B)' = A'+B'।",
+      "tags": [
+        "boolean-algebra",
+        "theorem",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "A + A'B = ?",
+      "answer": "A + B।",
+      "tags": [
+        "boolean-algebra",
+        "simplification",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Absorption Law?",
+      "answer": "A + AB = A এবং A(A+B) = A।",
+      "tags": [
+        "boolean-algebra",
+        "theorem",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Idempotent Law?",
+      "answer": "A + A = A এবং A · A = A।",
+      "tags": [
+        "boolean-algebra",
+        "theorem",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Identity Law?",
+      "answer": "A + 0 = A এবং A · 1 = A।",
+      "tags": [
+        "boolean-algebra",
+        "theorem",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Complement Law?",
+      "answer": "A + A' = 1 এবং A · A' = 0।",
+      "tags": [
+        "boolean-algebra",
+        "theorem",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Null Law?",
+      "answer": "A + 1 = 1 এবং A · 0 = 0।",
+      "tags": [
+        "boolean-algebra",
+        "theorem",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "K-Map কী?",
+      "answer": "Boolean expression simplify করার গ্রাফিক্যাল পদ্ধতি।",
+      "tags": [
+        "boolean-algebra",
+        "k-map",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Half Adder কী?",
+      "answer": "দুটি bit যোগ। Sum = A⊕B, Carry = A·B।",
+      "tags": [
+        "boolean-algebra",
+        "addition",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Full Adder কী?",
+      "answer": "তিনটি bit যোগ। Sum = A⊕B⊕Cin।",
+      "tags": [
+        "boolean-algebra",
+        "addition",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Multiplexer কী?",
+      "answer": "একাধিক input থেকে এক select করে।",
+      "tags": [
+        "boolean-algebra",
+        "combinational",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Demultiplexer কী?",
+      "answer": "একটি input থেকে একাধিক output।",
+      "tags": [
+        "boolean-algebra",
+        "combinational",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Encoder ও Decoder?",
+      "answer": "Encoder: n→log₂n output। Decoder: log₂n→n output।",
+      "tags": [
+        "boolean-algebra",
+        "combinational",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Flip-Flop কী?",
+      "answer": "১ বিট স্মৃতি। SR, JK, D, T।",
+      "tags": [
+        "boolean-algebra",
+        "sequential",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "SR Flip-Flop কী?",
+      "answer": "Set-Reset। S=1: Q=1।",
+      "tags": [
+        "boolean-algebra",
+        "sequential",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "D Flip-Flop কী?",
+      "answer": "Data flip-flop — 1-bit storage।",
+      "tags": [
+        "boolean-algebra",
+        "sequential",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Register কী?",
+      "answer": "একাধিক flip-flop — multi-bit storage।",
+      "tags": [
+        "boolean-algebra",
+        "sequential",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Counter কী?",
+      "answer": "Binary count করে। Up, Down।",
+      "tags": [
+        "boolean-algebra",
+        "sequential",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Tri-state Buffer কী?",
+      "answer": "0, 1, High-Z — bus-এ ব্যবহৃত।",
+      "tags": [
+        "boolean-algebra",
+        "combinational",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Parity Bit কী?",
+      "answer": "Error detect।",
+      "tags": [
+        "boolean-algebra",
+        "combinational",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Consensus Theorem?",
+      "answer": "AB + A'C + BC = AB + A'C।",
+      "tags": [
+        "boolean-algebra",
+        "theorem",
+        "ntrca"
+      ]
+    },
+    {
+      "question": "Duality Principle?",
+      "answer": "AND ↔ OR, 0 ↔ 1।",
+      "tags": [
+        "boolean-algebra",
+        "theorem",
+        "ntrca"
+      ]
+    }
+  ]
+}

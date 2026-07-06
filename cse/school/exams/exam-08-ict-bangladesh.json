@@ -1,0 +1,337 @@
+﻿{
+    "subject":  "CSE College Teacher",
+    "examTitle":  "NTRCA School ICT — ICT in Education \u0026 Bangladesh",
+    "durationMinutes":  20,
+    "questions":  [
+                      {
+                          "questionText":  "NTRCA কী?",
+                          "options":  [
+                                          "Bank",
+                                          "Teacher Registration Authority",
+                                          "Hospital",
+                                          "University"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "NTRCA = National Teacher\u0027s Registration Certification Authority।"
+                      },
+                      {
+                          "questionText":  "NTRCA কোন সালে প্রতিষ্ঠিত?",
+                          "options":  [
+                                          "2000",
+                                          "2005",
+                                          "2010",
+                                          "2015"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "NTRCA 2005 সালে প্রতিষ্ঠিত।"
+                      },
+                      {
+                          "questionText":  "Digital Bangladesh কী?",
+                          "options":  [
+                                          "Game",
+                                          "ICT-based economy",
+                                          "Movie",
+                                          "Song"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Digital Bangladesh হলো ICT ব্যবহারে ডিজিটাল অর্থনীতি।"
+                      },
+                      {
+                          "questionText":  "e-Governance কী?",
+                          "options":  [
+                                          "Email",
+                                          "সরকারি সেবা অনলাইনে",
+                                          "Photo",
+                                          "Song"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "e-Governance সরকারি সেবা অনলাইনে প্রদান।"
+                      },
+                      {
+                          "questionText":  "Cyber Security কী?",
+                          "options":  [
+                                          "Email",
+                                          "Network protect করা",
+                                          "File save",
+                                          "Game"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Cyber Security Network/Internet কে রক্ষা করা।"
+                      },
+                      {
+                          "questionText":  "Copyright কী?",
+                          "options":  [
+                                          "Software",
+                                          "স্রষ্টার অধিকার",
+                                          "Hardware",
+                                          "Network"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Copyright স্রষ্টার আইনগত অধিকার।"
+                      },
+                      {
+                          "questionText":  "Phishing কী?",
+                          "options":  [
+                                          "মাছ ধরা",
+                                          "মিথ্যা site দিয়ে প্রতারণা",
+                                          "Email",
+                                          "File"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Phishing মিথ্যা site/email দিয়ে প্রতারণা।"
+                      },
+                      {
+                          "questionText":  "Firewall কী?",
+                          "options":  [
+                                          "Email client",
+                                          "Network traffic filter",
+                                          "File manager",
+                                          "Player"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Firewall Network traffic filter।"
+                      },
+                      {
+                          "questionText":  "SMART Board কী?",
+                          "options":  [
+                                          "Table",
+                                          "Interactive whiteboard",
+                                          "Chair",
+                                          "Computer"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "SMART Board Interactive whiteboard।"
+                      },
+                      {
+                          "questionText":  "E-learning কী?",
+                          "options":  [
+                                          "Game",
+                                          "অনলাইনে শেখা",
+                                          "Song",
+                                          "Photo"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "E-learning অনলাইনে শেখা।"
+                      },
+                      {
+                          "questionText":  "Google Classroom কী?",
+                          "options":  [
+                                          "Game",
+                                          "LMS platform",
+                                          "Browser",
+                                          "Email"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Google Classroom একটি LMS।"
+                      },
+                      {
+                          "questionText":  "Open Source Software কী?",
+                          "options":  [
+                                          "Paid",
+                                          "Source code উন্মুক্ত",
+                                          "Closed",
+                                          "None"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Open Source Software-এর source code উন্মুক্ত।"
+                      },
+                      {
+                          "questionText":  "CIA Triad কী?",
+                          "options":  [
+                                          "Agency",
+                                          "Confidentiality, Integrity, Availability",
+                                          "Internet Access",
+                                          "None"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "CIA = Confidentiality, Integrity, Availability।"
+                      },
+                      {
+                          "questionText":  "Digital Divide কী?",
+                          "options":  [
+                                          "Calculator",
+                                          "Technology access gap",
+                                          "Game",
+                                          "Software"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Digital Divide Technology access gap।"
+                      },
+                      {
+                          "questionText":  "Cyberbullying কী?",
+                          "options":  [
+                                          "Game",
+                                          "অনলাইনে হয়রানি",
+                                          "Email",
+                                          "File"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Cyberbullying অনলাইনে হয়রানি।"
+                      },
+                      {
+                          "questionText":  "Strong Password কেমন?",
+                          "options":  [
+                                          "Numbers only",
+                                          "Letters only",
+                                          "8+ mixed chars",
+                                          "Small"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Strong Password 8+ chars, mixed types।"
+                      },
+                      {
+                          "questionText":  "Cookie কী?",
+                          "options":  [
+                                          "Food",
+                                          "Browser data",
+                                          "File",
+                                          "Program"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Cookie browser-এ রাখা data।"
+                      },
+                      {
+                          "questionText":  "2FA কী?",
+                          "options":  [
+                                          "1 password",
+                                          "2 passwords",
+                                          "Password + OTP",
+                                          "OTP only"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "2FA = Password + OTP/biometric।"
+                      },
+                      {
+                          "questionText":  "NCTB Class 9-10 ICT তে কি আছে?",
+                          "options":  [
+                                          "HW only",
+                                          "C, Python, Network, Security",
+                                          "MS Office only",
+                                          "Nothing"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "C, Python, Network, Security, Multimedia।"
+                      },
+                      {
+                          "questionText":  "10 Minute School কী?",
+                          "options":  [
+                                          "School",
+                                          "BD online education",
+                                          "Game",
+                                          "Bank"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "10 Minute School BD online education।"
+                      },
+                      {
+                          "questionText":  "Freelancing কী?",
+                          "options":  [
+                                          "Job",
+                                          "অনলাইনে আয়",
+                                          "Study",
+                                          "Game"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Freelancing অনলাইনে কাজ করে আয়।"
+                      },
+                      {
+                          "questionText":  "BTRC কী?",
+                          "options":  [
+                                          "Bank",
+                                          "Telecom Regulatory Commission",
+                                          "Hospital",
+                                          "University"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "BTRC = Bangladesh Telecommunication Regulatory Commission।"
+                      },
+                      {
+                          "questionText":  "Digital Security Act কোন সালে?",
+                          "options":  [
+                                          "2015",
+                                          "2018",
+                                          "2020",
+                                          "2022"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Digital Security Act 2018।"
+                      },
+                      {
+                          "questionText":  "ICT শিক্ষার গুরুত্ব?",
+                          "options":  [
+                                          "No importance",
+                                          "Digital literacy, problem solving",
+                                          "Entertainment",
+                                          "None"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "ICT digital literacy, problem solving-এ গুরুত্বপূর্ণ।"
+                      },
+                      {
+                          "questionText":  "BD-তে সবচেয়ে বেশি ব্যবহৃত OS?",
+                          "options":  [
+                                          "Linux",
+                                          "Windows",
+                                          "macOS",
+                                          "Unix"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "BD-তে Windows সবচেয়ে বেশি ব্যবহৃত।"
+                      },
+                      {
+                          "questionText":  "Flipped Classroom কী?",
+                          "options":  [
+                                          "Normal class",
+                                          "Video আগে, class-ে practice",
+                                          "Online only",
+                                          "Offline only"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Flipped Classroom-ে video আগে দেখে class-ে practice হয়।"
+                      },
+                      {
+                          "questionText":  "Gamification কী?",
+                          "options":  [
+                                          "Game playing",
+                                          "Game elements in education",
+                                          "Game development",
+                                          "Game design"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Gamification হলো শিক্ষায় game elements ব্যবহার।"
+                      },
+                      {
+                          "questionText":  "Blended Learning কী?",
+                          "options":  [
+                                          "Only online",
+                                          "Only offline",
+                                          "Online + Offline mix",
+                                          "None"
+                                      ],
+                          "correctOptionIndex":  2,
+                          "explanation":  "Blended Learning online + offline mix।"
+                      },
+                      {
+                          "questionText":  "Digital Bangladesh Vision কোন সালের?",
+                          "options":  [
+                                          "2015",
+                                          "2021",
+                                          "2025",
+                                          "2030"
+                                      ],
+                          "correctOptionIndex":  1,
+                          "explanation":  "Digital Bangladesh Vision 2021।"
+                      },
+                      {
+                          "correctOptionIndex":  1,
+                          "options":  [
+                                          "Agriculture",
+                                          "Software + Service export",
+                                          "None",
+                                          "Farming"
+                                      ],
+                          "explanation":  "BD ICT Sector software + service export করে।",
+                          "questionText":  "BD ICT Sector কী?"
+                      }
+                  ]
+}

@@ -58,8 +58,23 @@ import Layout from '../layouts/Layout.astro';
           <!-- Drag & Drop Zone -->
           <div id="drop-zone" class="relative border-2 border-dashed border-surface-200 rounded-2xl p-8 text-center hover:border-brand-400 hover:bg-brand-50/30 transition-all cursor-pointer mb-4">
             <div class="text-3xl mb-2">📁</div>
-            <p class="text-sm text-surface-400">Drag & drop a .json file here, or <span class="text-brand-600 font-semibold">browse</span></p>
-            <input type="file" id="json-file" accept=".json" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+            <p class="text-sm text-surface-400">Drag & drop .json files here, or <span class="text-brand-600 font-semibold">browse</span></p>
+            <p class="text-xs text-surface-300 mt-1">Select multiple files to upload in batch</p>
+            <input type="file" id="json-file" accept=".json" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+          </div>
+
+          <!-- File Queue -->
+          <div id="file-queue" class="hidden mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-surface-700" id="queue-count">0 files</span>
+              <button id="queue-clear" class="text-xs text-red-400 hover:text-red-600 transition">Clear all</button>
+            </div>
+            <div id="queue-list" class="space-y-2 max-h-48 overflow-auto"></div>
+            <button id="upload-all-btn" class="btn-primary w-full mt-3 text-sm">Upload All</button>
+            <div id="batch-progress" class="hidden mt-3">
+              <div class="w-full bg-surface-100 rounded-full h-2 mb-2"><div id="batch-bar" class="bg-brand-500 h-2 rounded-full transition-all" style="width:0%"></div></div>
+              <p id="batch-status" class="text-xs text-surface-400 text-center"></p>
+            </div>
           </div>
 
         <textarea id="json-text" rows="8" placeholder='{"subject":"CSE College Teacher","examTitle":"Chapter 1","durationMinutes":20,"questions":[...]}' class="w-full p-4 border-2 border-surface-200 rounded-2xl font-mono text-sm focus:border-brand-500 outline-none transition resize-none text-surface-600 placeholder:text-surface-300"></textarea>
@@ -136,8 +151,23 @@ import Layout from '../layouts/Layout.astro';
 
           <div id="blog-drop-zone" class="relative border-2 border-dashed border-surface-200 rounded-2xl p-8 text-center hover:border-brand-400 hover:bg-brand-50/30 transition-all cursor-pointer mb-4">
             <div class="text-3xl mb-2">📁</div>
-            <p class="text-sm text-surface-400">Drag & drop a .json file here, or <span class="text-brand-600 font-semibold">browse</span></p>
-            <input type="file" id="blog-json-file" accept=".json" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+            <p class="text-sm text-surface-400">Drag & drop .json files here, or <span class="text-brand-600 font-semibold">browse</span></p>
+            <p class="text-xs text-surface-300 mt-1">Select multiple files to upload in batch</p>
+            <input type="file" id="blog-json-file" accept=".json" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+          </div>
+
+          <!-- Blog File Queue -->
+          <div id="blog-file-queue" class="hidden mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-surface-700" id="blog-queue-count">0 files</span>
+              <button id="blog-queue-clear" class="text-xs text-red-400 hover:text-red-600 transition">Clear all</button>
+            </div>
+            <div id="blog-queue-list" class="space-y-2 max-h-48 overflow-auto"></div>
+            <button id="blog-upload-all-btn" class="btn-primary w-full mt-3 text-sm">Upload All</button>
+            <div id="blog-batch-progress" class="hidden mt-3">
+              <div class="w-full bg-surface-100 rounded-full h-2 mb-2"><div id="blog-batch-bar" class="bg-brand-500 h-2 rounded-full transition-all" style="width:0%"></div></div>
+              <p id="blog-batch-status" class="text-xs text-surface-400 text-center"></p>
+            </div>
           </div>
 
           <textarea id="blog-json-text" rows="8" placeholder='{"subject":"CSE College Teacher","title":"Data Structures Guide","content":[{"question":"...","answer":"..."}]}' class="w-full p-4 border-2 border-surface-200 rounded-2xl font-mono text-sm focus:border-brand-500 outline-none transition resize-none text-surface-600 placeholder:text-surface-300"></textarea>
@@ -317,11 +347,52 @@ import Layout from '../layouts/Layout.astro';
       const liveValidation = document.getElementById('live-validation');
       const uploadSubtitle = document.getElementById('upload-subtitle');
 
-      // Drag & drop
+      // File queue for batch upload
+      let examFileQueue = [];
+      const fileQueueEl = document.getElementById('file-queue');
+      const queueListEl = document.getElementById('queue-list');
+      const queueCountEl = document.getElementById('queue-count');
+
+      function renderExamQueue() {
+        if (examFileQueue.length === 0) { fileQueueEl.classList.add('hidden'); return; }
+        fileQueueEl.classList.remove('hidden');
+        queueCountEl.textContent = examFileQueue.length + ' file' + (examFileQueue.length !== 1 ? 's' : '');
+        queueListEl.innerHTML = examFileQueue.map((f, i) => {
+          const statusCls = f.status === 'done' ? 'text-emerald-500' : f.status === 'error' ? 'text-red-500' : f.status === 'uploading' ? 'text-brand-500' : 'text-surface-400';
+          const statusText = f.status === 'done' ? '✓ Done' : f.status === 'error' ? '✗ ' + (f.error || 'Error') : f.status === 'uploading' ? '...' : 'Pending';
+          return '<div class="flex items-center gap-2 p-2 bg-surface-50 rounded-xl text-sm"><span class="truncate flex-1 text-surface-700">' + f.name + '</span><span class="text-xs ' + statusCls + ' shrink-0">' + statusText + '</span>' + (f.status === 'pending' ? '<button onclick="removeExamQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0">✕</button>' : '') + '</div>';
+        }).join('');
+      }
+      window.removeExamQueue = (i) => { examFileQueue.splice(i, 1); renderExamQueue(); };
+      document.getElementById('queue-clear').addEventListener('click', () => { examFileQueue = []; renderExamQueue(); });
+
+      // Add files to queue from input
+      function addExamFiles(files) {
+        for (const f of files) {
+          if (!f.name.endsWith('.json')) continue;
+          const reader = new FileReader();
+          reader.onload = ev => {
+            examFileQueue.push({ name: f.name, content: ev.target.result, status: 'pending' });
+            renderExamQueue();
+          };
+          reader.readAsText(f);
+        }
+      }
+
+      // Drag & drop (single or multi)
       ['dragenter','dragover'].forEach(e => dropZone.addEventListener(e, ev => { ev.preventDefault(); dropZone.classList.add('border-brand-400','bg-brand-50/30'); }));
       ['dragleave','drop'].forEach(e => dropZone.addEventListener(e, ev => { ev.preventDefault(); dropZone.classList.remove('border-brand-400','bg-brand-50/30'); }));
-      dropZone.addEventListener('drop', e => { const f = e.dataTransfer?.files[0]; if (f) readFile(f); });
-      document.getElementById('json-file').addEventListener('change', e => { if (e.target.files[0]) readFile(e.target.files[0]); });
+      dropZone.addEventListener('drop', e => {
+        const files = e.dataTransfer?.files;
+        if (files && files.length > 1) { addExamFiles(files); return; }
+        if (files && files.length === 1) { readFile(files[0]); }
+      });
+      document.getElementById('json-file').addEventListener('change', e => {
+        const files = e.target.files;
+        if (files.length > 1) { addExamFiles(files); e.target.value = ''; return; }
+        if (files[0]) readFile(files[0]);
+        e.target.value = '';
+      });
 
       function readFile(file) {
         const reader = new FileReader();
@@ -422,6 +493,37 @@ import Layout from '../layouts/Layout.astro';
           }
         } catch(e) { document.getElementById('upload-result').innerHTML = `<p class="text-red-500 text-sm">${e.message}</p>`; window.showToast('Error'); }
         btn.disabled = false; btn.textContent = editMode ? 'Save Changes' : 'Confirm Upload';
+      });
+
+      // Batch upload all queued exam files
+      document.getElementById('upload-all-btn').addEventListener('click', async () => {
+        const pending = examFileQueue.filter(f => f.status === 'pending');
+        if (pending.length === 0) { window.showToast('No pending files'); return; }
+        const btn = document.getElementById('upload-all-btn');
+        btn.disabled = true; btn.textContent = 'Uploading...';
+        document.getElementById('batch-progress').classList.remove('hidden');
+        let done = 0;
+        const total = pending.length;
+        for (const f of pending) {
+          f.status = 'uploading'; renderExamQueue();
+          document.getElementById('batch-status').textContent = 'Uploading ' + f.name + ' (' + (done + 1) + '/' + total + ')';
+          document.getElementById('batch-bar').style.width = Math.round((done / total) * 100) + '%';
+          try {
+            const parsed = JSON.parse(f.content);
+            const res = await fetch('/api/admin/upload', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+            const data = await res.json();
+            if (res.ok) { f.status = 'done'; } else { f.status = 'error'; f.error = data.error || 'Failed'; }
+          } catch (e) { f.status = 'error'; f.error = e.message; }
+          done++;
+          document.getElementById('batch-bar').style.width = Math.round((done / total) * 100) + '%';
+          renderExamQueue();
+        }
+        document.getElementById('batch-status').textContent = 'Done! ' + examFileQueue.filter(f => f.status === 'done').length + '/' + total + ' uploaded';
+        document.getElementById('batch-bar').style.width = '100%';
+        btn.disabled = false; btn.textContent = 'Upload All';
+        window.showToast('Batch upload complete');
+        loadManageList();
+        setTimeout(() => { document.getElementById('batch-progress').classList.add('hidden'); }, 3000);
       });
 
       // --- Manage Tab ---
@@ -591,11 +693,51 @@ import Layout from '../layouts/Layout.astro';
       const blogLiveValidation = document.getElementById('blog-live-validation');
       const blogUploadSubtitle = document.getElementById('blog-upload-subtitle');
 
-      // Blog drag & drop
+      // Blog file queue for batch upload
+      let blogFileQueue = [];
+      const blogFileQueueEl = document.getElementById('blog-file-queue');
+      const blogQueueListEl = document.getElementById('blog-queue-list');
+      const blogQueueCountEl = document.getElementById('blog-queue-count');
+
+      function renderBlogQueue() {
+        if (blogFileQueue.length === 0) { blogFileQueueEl.classList.add('hidden'); return; }
+        blogFileQueueEl.classList.remove('hidden');
+        blogQueueCountEl.textContent = blogFileQueue.length + ' file' + (blogFileQueue.length !== 1 ? 's' : '');
+        blogQueueListEl.innerHTML = blogFileQueue.map((f, i) => {
+          const statusCls = f.status === 'done' ? 'text-emerald-500' : f.status === 'error' ? 'text-red-500' : f.status === 'uploading' ? 'text-brand-500' : 'text-surface-400';
+          const statusText = f.status === 'done' ? '✓ Done' : f.status === 'error' ? '✗ ' + (f.error || 'Error') : f.status === 'uploading' ? '...' : 'Pending';
+          return '<div class="flex items-center gap-2 p-2 bg-surface-50 rounded-xl text-sm"><span class="truncate flex-1 text-surface-700">' + f.name + '</span><span class="text-xs ' + statusCls + ' shrink-0">' + statusText + '</span>' + (f.status === 'pending' ? '<button onclick="removeBlogQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0">✕</button>' : '') + '</div>';
+        }).join('');
+      }
+      window.removeBlogQueue = (i) => { blogFileQueue.splice(i, 1); renderBlogQueue(); };
+      document.getElementById('blog-queue-clear').addEventListener('click', () => { blogFileQueue = []; renderBlogQueue(); });
+
+      function addBlogFiles(files) {
+        for (const f of files) {
+          if (!f.name.endsWith('.json')) continue;
+          const reader = new FileReader();
+          reader.onload = ev => {
+            blogFileQueue.push({ name: f.name, content: ev.target.result, status: 'pending' });
+            renderBlogQueue();
+          };
+          reader.readAsText(f);
+        }
+      }
+
+      // Blog drag & drop (single or multi)
       ['dragenter','dragover'].forEach(e => blogDropZone.addEventListener(e, ev => { ev.preventDefault(); blogDropZone.classList.add('border-brand-400','bg-brand-50/30'); }));
       ['dragleave','drop'].forEach(e => blogDropZone.addEventListener(e, ev => { ev.preventDefault(); blogDropZone.classList.remove('border-brand-400','bg-brand-50/30'); }));
-      blogDropZone.addEventListener('drop', e => { const f = e.dataTransfer?.files[0]; if (f) { const r = new FileReader(); r.onload = ev => { blogJsonText.value = ev.target.result; blogValidateLive(); }; r.readAsText(f); } });
-      document.getElementById('blog-json-file').addEventListener('change', e => { if (e.target.files[0]) { const r = new FileReader(); r.onload = ev => { blogJsonText.value = ev.target.result; blogValidateLive(); }; r.readAsText(e.target.files[0]); } });
+      blogDropZone.addEventListener('drop', e => {
+        const files = e.dataTransfer?.files;
+        if (files && files.length > 1) { addBlogFiles(files); return; }
+        if (files && files.length === 1) { const r = new FileReader(); r.onload = ev => { blogJsonText.value = ev.target.result; blogValidateLive(); }; r.readAsText(files[0]); }
+      });
+      document.getElementById('blog-json-file').addEventListener('change', e => {
+        const files = e.target.files;
+        if (files.length > 1) { addBlogFiles(files); e.target.value = ''; return; }
+        if (files[0]) { const r = new FileReader(); r.onload = ev => { blogJsonText.value = ev.target.result; blogValidateLive(); }; r.readAsText(files[0]); }
+        e.target.value = '';
+      });
 
       function blogValidateContent(content) {
         const errs = [];
@@ -686,6 +828,37 @@ import Layout from '../layouts/Layout.astro';
           }
         } catch(e) { document.getElementById('blog-upload-result').innerHTML = `<p class="text-red-500 text-sm">${e.message}</p>`; window.showToast('Error'); }
         btn.disabled = false; btn.textContent = blogEditMode ? 'Save Changes' : 'Confirm Upload';
+      });
+
+      // Batch upload all queued blog files
+      document.getElementById('blog-upload-all-btn').addEventListener('click', async () => {
+        const pending = blogFileQueue.filter(f => f.status === 'pending');
+        if (pending.length === 0) { window.showToast('No pending files'); return; }
+        const btn = document.getElementById('blog-upload-all-btn');
+        btn.disabled = true; btn.textContent = 'Uploading...';
+        document.getElementById('blog-batch-progress').classList.remove('hidden');
+        let done = 0;
+        const total = pending.length;
+        for (const f of pending) {
+          f.status = 'uploading'; renderBlogQueue();
+          document.getElementById('blog-batch-status').textContent = 'Uploading ' + f.name + ' (' + (done + 1) + '/' + total + ')';
+          document.getElementById('blog-batch-bar').style.width = Math.round((done / total) * 100) + '%';
+          try {
+            const parsed = JSON.parse(f.content);
+            const res = await fetch('/api/admin/blog/upload', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+            const data = await res.json();
+            if (res.ok) { f.status = 'done'; } else { f.status = 'error'; f.error = data.error || 'Failed'; }
+          } catch (e) { f.status = 'error'; f.error = e.message; }
+          done++;
+          document.getElementById('blog-batch-bar').style.width = Math.round((done / total) * 100) + '%';
+          renderBlogQueue();
+        }
+        document.getElementById('blog-batch-status').textContent = 'Done! ' + blogFileQueue.filter(f => f.status === 'done').length + '/' + total + ' uploaded';
+        document.getElementById('blog-batch-bar').style.width = '100%';
+        btn.disabled = false; btn.textContent = 'Upload All';
+        window.showToast('Batch upload complete');
+        loadBlogList();
+        setTimeout(() => { document.getElementById('blog-batch-progress').classList.add('hidden'); }, 3000);
       });
 
       // Blog Manage List
