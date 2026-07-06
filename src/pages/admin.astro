@@ -130,6 +130,13 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- Manage List -->
+        <div id="bulk-actions" class="hidden mb-4 p-3 bg-brand-50 border border-brand-200 rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="select-all-exams" class="w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer">
+            <span class="text-sm font-medium text-surface-700"><span id="selected-count">0</span> selected</span>
+          </div>
+          <button id="bulk-delete-exams" class="px-4 py-1.5 text-xs font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600 transition">Delete Selected</button>
+        </div>
         <div id="manage-list">
           <div class="flex justify-center py-12">
             <div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
@@ -200,6 +207,13 @@ import Layout from '../layouts/Layout.astro';
           <div class="flex items-center gap-3 mb-6">
             <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-lg">📚</div>
             <h2 class="text-lg font-bold text-surface-900">Manage Blogs</h2>
+          </div>
+          <div id="blog-bulk-actions" class="hidden mb-4 p-3 bg-brand-50 border border-brand-200 rounded-2xl flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" id="select-all-blogs" class="w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer">
+              <span class="text-sm font-medium text-surface-700"><span id="blog-selected-count">0</span> selected</span>
+            </div>
+            <button id="bulk-delete-blogs" class="px-4 py-1.5 text-xs font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600 transition">Delete Selected</button>
           </div>
           <div id="blog-manage-list">
             <div class="flex justify-center py-12">
@@ -529,10 +543,45 @@ import Layout from '../layouts/Layout.astro';
       // --- Manage Tab ---
       let allSubjects = [];
       let currentFilter = 'all';
+      let selectedExams = new Set();
+
+      function updateExamBulkUI() {
+        const bar = document.getElementById('bulk-actions');
+        const allExamIds = [];
+        allSubjects.forEach(s => s.exams.forEach(e => allExamIds.push(e.id)));
+        if (allExamIds.length === 0) { bar.classList.add('hidden'); return; }
+        bar.classList.remove('hidden');
+        document.getElementById('selected-count').textContent = selectedExams.size;
+        const selectAll = document.getElementById('select-all-exams');
+        selectAll.checked = selectedExams.size > 0 && selectedExams.size === allExamIds.length;
+        selectAll.indeterminate = selectedExams.size > 0 && selectedExams.size < allExamIds.length;
+      }
+
+      document.getElementById('select-all-exams').addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        selectedExams.clear();
+        if (checked) { allSubjects.forEach(s => s.exams.forEach(ex => selectedExams.add(ex.id))); }
+        document.querySelectorAll('.exam-check').forEach(cb => cb.checked = checked);
+        updateExamBulkUI();
+      });
+
+      document.getElementById('bulk-delete-exams').addEventListener('click', async () => {
+        if (selectedExams.size === 0) return;
+        const ok = await showConfirm('Delete ' + selectedExams.size + ' exam(s)?', 'This cannot be undone.', 'Delete All');
+        if (!ok) return;
+        let done = 0;
+        for (const id of selectedExams) {
+          try { await fetch('/api/admin/exam/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); done++; } catch {}
+        }
+        selectedExams.clear();
+        window.showToast('Deleted ' + done + ' exams');
+        loadManageList();
+      });
 
       function renderManageList(filter = '', pubFilter = 'all') {
         const el = document.getElementById('manage-list');
         let filtered = allSubjects;
+        selectedExams.clear();
 
         if (filter) {
           const q = filter.toLowerCase();
@@ -555,6 +604,8 @@ import Layout from '../layouts/Layout.astro';
         document.getElementById('stat-questions').textContent = totalQ;
         document.getElementById('stat-published').textContent = published;
         document.getElementById('stat-attempts').textContent = totalAttempts;
+
+        updateExamBulkUI();
 
         if (filtered.length === 0) {
           el.innerHTML = `<div class="text-center py-16"><div class="w-16 h-16 rounded-3xl bg-surface-100 flex items-center justify-center text-3xl mx-auto mb-4">📭</div><p class="text-surface-400 font-medium">${filter ? 'No matching results' : 'No data yet'}</p><p class="text-surface-300 text-sm mt-1">${filter ? 'Try a different search' : 'Upload an exam to get started'}</p></div>`;
@@ -582,10 +633,13 @@ import Layout from '../layouts/Layout.astro';
                 ${s.exams.map(e => `
                   <div class="p-4 border border-surface-100 rounded-2xl hover:border-brand-200 transition group">
                     <div class="flex items-start justify-between mb-2">
-                      <div class="min-w-0 flex-1"><div class="font-semibold text-sm text-surface-800 truncate">${e.title}</div>
-                      <div class="flex items-center gap-2 mt-1 text-xs text-surface-400">
-                        <span>${e.totalQuestions||0} Q</span><span>·</span><span>${e.durationMinutes||0}m</span>
-                      </div></div>
+                      <div class="flex items-center gap-2 min-w-0 flex-1">
+                        <input type="checkbox" class="exam-check w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer shrink-0" data-eid="${e.id}" onchange="toggleExamSelect('${e.id}',this.checked)">
+                        <div class="min-w-0 flex-1"><div class="font-semibold text-sm text-surface-800 truncate">${e.title}</div>
+                        <div class="flex items-center gap-2 mt-1 text-xs text-surface-400">
+                          <span>${e.totalQuestions||0} Q</span><span>·</span><span>${e.durationMinutes||0}m</span>
+                        </div></div>
+                      </div>
                       <label class="relative inline-flex items-center cursor-pointer shrink-0 ml-2"><input type="checkbox" ${e.published?'checked':''} onchange="togglePub('${e.id}',this.checked)" class="sr-only peer"><div class="w-9 h-5 bg-surface-200 rounded-full peer peer-checked:bg-emerald-500 transition-colors after:content-[''] after:absolute after:w-4 after:h-4 after:bg-white after:rounded-full after:left-0.5 after:top-0.5 after:transition peer-checked:after:translate-x-4"></div></label>
                     </div>
                     <div class="flex items-center gap-3 mt-2 text-xs">
@@ -683,6 +737,11 @@ import Layout from '../layouts/Layout.astro';
         const ok = await showConfirm('Delete Subject?', `Delete "${name}" and ALL its exams.`, 'Delete All');
         if (!ok) return;
         try { await fetch(`/api/admin/subject/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); window.showToast('Deleted'); loadManageList(); } catch { window.showToast('Error'); }
+      };
+
+      window.toggleExamSelect = (id, checked) => {
+        if (checked) selectedExams.add(id); else selectedExams.delete(id);
+        updateExamBulkUI();
       };
 
       // --- Blog Tab ---
@@ -862,8 +921,48 @@ import Layout from '../layouts/Layout.astro';
       });
 
       // Blog Manage List
+      let selectedBlogs = new Set();
+
+      function updateBlogBulkUI() {
+        const bar = document.getElementById('blog-bulk-actions');
+        const allBlogEls = document.querySelectorAll('.blog-check');
+        if (allBlogEls.length === 0) { bar.classList.add('hidden'); return; }
+        bar.classList.remove('hidden');
+        document.getElementById('blog-selected-count').textContent = selectedBlogs.size;
+        const selectAll = document.getElementById('select-all-blogs');
+        selectAll.checked = selectedBlogs.size > 0 && selectedBlogs.size === allBlogEls.length;
+        selectAll.indeterminate = selectedBlogs.size > 0 && selectedBlogs.size < allBlogEls.length;
+      }
+
+      window.toggleBlogSelect = (id, checked) => {
+        if (checked) selectedBlogs.add(id); else selectedBlogs.delete(id);
+        updateBlogBulkUI();
+      };
+
+      document.getElementById('select-all-blogs').addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        selectedBlogs.clear();
+        if (checked) { document.querySelectorAll('.blog-check').forEach(cb => { cb.checked = true; selectedBlogs.add(cb.dataset.bid); }); }
+        else { document.querySelectorAll('.blog-check').forEach(cb => { cb.checked = false; }); }
+        updateBlogBulkUI();
+      });
+
+      document.getElementById('bulk-delete-blogs').addEventListener('click', async () => {
+        if (selectedBlogs.size === 0) return;
+        const ok = await showConfirm('Delete ' + selectedBlogs.size + ' blog(s)?', 'This cannot be undone.', 'Delete All');
+        if (!ok) return;
+        let done = 0;
+        for (const id of selectedBlogs) {
+          try { await fetch('/api/admin/blog/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); done++; } catch {}
+        }
+        selectedBlogs.clear();
+        window.showToast('Deleted ' + done + ' blogs');
+        loadBlogList();
+      });
+
       async function loadBlogList() {
         const el = document.getElementById('blog-manage-list');
+        selectedBlogs.clear();
         el.innerHTML = '<div class="flex justify-center py-12"><div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div></div>';
         try {
           const res = await fetch('/api/admin/blogs');
@@ -872,18 +971,23 @@ import Layout from '../layouts/Layout.astro';
           if (blogs.error) { el.innerHTML = `<div class="text-center py-12"><p class="text-red-500 font-medium">${blogs.error}</p></div>`; return; }
           if (blogs.length === 0) {
             el.innerHTML = '<div class="text-center py-12"><div class="w-16 h-16 rounded-3xl bg-surface-100 flex items-center justify-center text-3xl mx-auto mb-4">📭</div><p class="text-surface-400 font-medium">No blogs yet</p><p class="text-surface-300 text-sm mt-1">Create one above</p></div>';
+            document.getElementById('blog-bulk-actions').classList.add('hidden');
             return;
           }
+          updateBlogBulkUI();
           el.innerHTML = blogs.map(b => `
             <div class="p-4 border border-surface-100 rounded-2xl mb-3 hover:border-brand-200 transition">
               <div class="flex items-start justify-between gap-3">
-                <div class="min-w-0 flex-1">
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="font-semibold text-sm text-surface-800 truncate">${b.title}</span>
-                    <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${b.published ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}">${b.published ? 'Published' : 'Draft'}</span>
+                <div class="flex items-start gap-2 min-w-0 flex-1">
+                  <input type="checkbox" class="blog-check w-4 h-4 mt-0.5 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer shrink-0" data-bid="${b.id}" onchange="toggleBlogSelect('${b.id}',this.checked)">
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="font-semibold text-sm text-surface-800 truncate">${b.title}</span>
+                      <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${b.published ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}">${b.published ? 'Published' : 'Draft'}</span>
+                    </div>
+                    <div class="text-xs text-surface-400 mb-2">${b.contentCount || 0} Q&A · ${b.subjectId || '-'}</div>
+                    ${b.examId ? `<div class="text-xs text-surface-400">Linked exam: ${b.examId}</div>` : ''}
                   </div>
-                  <div class="text-xs text-surface-400 mb-2">${b.contentCount || 0} Q&A · ${b.subjectId || '-'}</div>
-                  ${b.examId ? `<div class="text-xs text-surface-400">Linked exam: ${b.examId}</div>` : ''}
                 </div>
               </div>
               <div class="flex gap-2 mt-3">
