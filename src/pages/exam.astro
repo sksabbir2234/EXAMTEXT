@@ -101,6 +101,7 @@ const examId = Astro.url.searchParams.get('id') || '';
           }
           buildDisplay(wrongSet);
           document.getElementById('submit-btn').textContent = 'Check My Answers';
+          document.getElementById('submit-btn').classList.remove('hidden');
         } else {
           buildDisplay(null);
           document.getElementById('submit-btn').classList.remove('hidden');
@@ -250,8 +251,8 @@ const examId = Astro.url.searchParams.get('id') || '';
       const unanswered = display.length - Object.keys(answers).length;
       const flaggedUnans = display.filter((_, qi) => flags[qi] && answers[qi] === undefined).length;
       let msg = 'Are you sure you want to submit?';
-      if (unanswered > 0) msg += `\\n${unanswered} question(s) unanswered.`;
-      if (flaggedUnans > 0) msg += `\\n${flaggedUnans} flagged question(s) not answered.`;
+      if (unanswered > 0) msg += `\n${unanswered} question(s) unanswered.`;
+      if (flaggedUnans > 0) msg += `\n${flaggedUnans} flagged question(s) not answered.`;
       if (confirm(msg)) submitExam();
     });
 
