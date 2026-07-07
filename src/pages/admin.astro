@@ -42,6 +42,7 @@ import Layout from '../layouts/Layout.astro';
         <button data-tab="upload" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-white text-brand-600 shadow-sm">Upload</button>
         <button data-tab="manage" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">Manage</button>
         <button data-tab="blog" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">Blog</button>
+        <button data-tab="monitor" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">📡 Monitor</button>
       </div>
 
       <!-- Upload Tab -->
@@ -253,6 +254,81 @@ import Layout from '../layouts/Layout.astro';
           <div class="flex gap-3 mt-4">
             <button id="blog-edit-save" class="px-6 py-2.5 bg-emerald-500 text-white rounded-2xl font-semibold hover:bg-emerald-600 transition-all text-sm">Save Changes</button>
             <button id="blog-edit-cancel" class="btn-ghost text-sm">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monitor Tab -->
+      <div id="tab-monitor" class="tab-content hidden">
+        <div class="space-y-4">
+          <!-- Header -->
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-lg font-bold text-surface-900 flex items-center gap-2">📡 Live Student Monitor</h2>
+              <span id="monitor-last-updated" class="text-xs text-surface-400"></span>
+            </div>
+            <button id="monitor-refresh-btn" class="btn-ghost text-sm flex items-center gap-1.5">
+              <svg id="monitor-refresh-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              Refresh
+            </button>
+          </div>
+
+          <!-- Filters -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <input type="text" id="monitor-search" placeholder="Search student name..." class="w-full pl-10 pr-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+            </div>
+            <select id="monitor-subject-filter" class="px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition bg-white">
+              <option value="">All Subjects</option>
+            </select>
+            <select id="monitor-exam-filter" class="px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition bg-white">
+              <option value="">All Exams</option>
+            </select>
+          </div>
+
+          <!-- Stats Strip -->
+          <div class="grid grid-cols-3 gap-3">
+            <div class="card p-4 text-center">
+              <div class="text-2xl font-black text-brand-600" id="monitor-stat-total">-</div>
+              <div class="text-xs text-surface-400 mt-0.5 font-medium">Today's Attempts</div>
+            </div>
+            <div class="card p-4 text-center">
+              <div class="text-2xl font-black text-emerald-500" id="monitor-stat-avg">-</div>
+              <div class="text-xs text-surface-400 mt-0.5 font-medium">Avg Score Today</div>
+            </div>
+            <div class="card p-4 text-center">
+              <div class="text-2xl font-black text-purple-500" id="monitor-stat-top">-</div>
+              <div class="text-xs text-surface-400 mt-0.5 font-medium">Top Scorer Today</div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="card overflow-hidden">
+            <div id="monitor-loading" class="flex justify-center py-12">
+              <div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
+            </div>
+            <div id="monitor-empty" class="hidden text-center py-12">
+              <div class="w-16 h-16 rounded-3xl bg-surface-100 flex items-center justify-center text-3xl mx-auto mb-4">📭</div>
+              <p class="text-surface-400 font-medium">কোনো পরীক্ষার্থী নেই</p>
+              <p class="text-surface-300 text-sm mt-1">Attempts will appear here in real-time</p>
+            </div>
+            <div id="monitor-table-wrap" class="hidden overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-surface-50 border-b border-surface-200">
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Student</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Exam</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Score</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">%</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Grade</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Time</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">When</th>
+                  </tr>
+                </thead>
+                <tbody id="monitor-tbody"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -1064,8 +1140,159 @@ import Layout from '../layouts/Layout.astro';
       origTabClick.forEach(btn => {
         btn.addEventListener('click', () => {
           if (btn.dataset.tab === 'blog') loadBlogList();
+          if (btn.dataset.tab === 'monitor') { loadMonitorData(); startMonitorRefresh(); }
+          else { stopMonitorRefresh(); }
         });
       });
+
+      // --- Monitor Tab ---
+      window.monitorData = [];
+      var monitorInterval = null;
+
+      function getGrade(pct) {
+        if (pct >= 80) return { label: 'A+', color: 'text-emerald-500' };
+        if (pct >= 70) return { label: 'A',  color: 'text-green-500' };
+        if (pct >= 60) return { label: 'B',  color: 'text-blue-500' };
+        if (pct >= 50) return { label: 'C',  color: 'text-yellow-500' };
+        if (pct >= 40) return { label: 'D',  color: 'text-orange-500' };
+        return { label: 'F', color: 'text-red-500' };
+      }
+
+      function timeAgo(seconds) {
+        var diff = Math.floor(Date.now() / 1000) - seconds;
+        if (diff < 0) return 'just now';
+        if (diff < 60) return diff + 's ago';
+        if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+        return Math.floor(diff / 86400) + 'd ago';
+      }
+
+      function formatTime(secs) {
+        var m = Math.floor(secs / 60);
+        var s = secs % 60;
+        return m + 'm ' + s + 's';
+      }
+
+      function startMonitorRefresh() {
+        if (monitorInterval) clearInterval(monitorInterval);
+        monitorInterval = setInterval(function() { loadMonitorData(); }, 30000);
+      }
+
+      function stopMonitorRefresh() {
+        if (monitorInterval) clearInterval(monitorInterval);
+        monitorInterval = null;
+      }
+
+      async function loadMonitorData() {
+        var loading = document.getElementById('monitor-loading');
+        var empty = document.getElementById('monitor-empty');
+        var tableWrap = document.getElementById('monitor-table-wrap');
+        loading.classList.remove('hidden');
+        empty.classList.add('hidden');
+        tableWrap.classList.add('hidden');
+
+        try {
+          var res = await fetch('/api/admin/attempts?limit=100');
+          if (res.status === 401) { window.location.reload(); return; }
+          var data = await res.json();
+          if (data.error) { loading.classList.add('hidden'); empty.classList.remove('hidden'); return; }
+          window.monitorData = data;
+          populateSubjectFilter(data);
+          populateExamFilter(data);
+          renderMonitorTable(getFilteredData());
+          renderMonitorStats(data);
+          document.getElementById('monitor-last-updated').textContent = 'Auto-refreshes every 30s · Last: ' + new Date().toLocaleTimeString();
+        } catch(e) {
+          loading.classList.add('hidden');
+          empty.classList.remove('hidden');
+        }
+      }
+
+      function populateSubjectFilter(data) {
+        var sel = document.getElementById('monitor-subject-filter');
+        var current = sel.value;
+        var subjects = {};
+        data.forEach(function(a) { if (a.subjectId) subjects[a.subjectId] = a.subjectId; });
+        sel.innerHTML = '<option value="">All Subjects</option>' + Object.keys(subjects).sort().map(function(s) {
+          return '<option value="' + s + '"' + (s === current ? ' selected' : '') + '>' + s + '</option>';
+        }).join('');
+      }
+
+      function populateExamFilter(data) {
+        var sel = document.getElementById('monitor-exam-filter');
+        var current = sel.value;
+        var exams = {};
+        data.forEach(function(a) { if (a.examId) exams[a.examId] = a.examTitle; });
+        sel.innerHTML = '<option value="">All Exams</option>' + Object.keys(exams).sort().map(function(eid) {
+          return '<option value="' + eid + '"' + (eid === current ? ' selected' : '') + '>' + exams[eid] + '</option>';
+        }).join('');
+      }
+
+      function getFilteredData() {
+        var search = document.getElementById('monitor-search').value.toLowerCase();
+        var subject = document.getElementById('monitor-subject-filter').value;
+        var exam = document.getElementById('monitor-exam-filter').value;
+        return window.monitorData.filter(function(a) {
+          var nameMatch = !search || a.studentName.toLowerCase().includes(search);
+          var subjectMatch = !subject || a.subjectId === subject;
+          var examMatch = !exam || a.examId === exam;
+          return nameMatch && subjectMatch && examMatch;
+        });
+      }
+
+      function renderMonitorStats(data) {
+        var now = Math.floor(Date.now() / 1000);
+        var todayData = data.filter(function(a) {
+          var ts = a.createdAt && (a.createdAt._seconds || a.createdAt.seconds || 0);
+          return (now - ts) < 86400;
+        });
+        var totalToday = todayData.length;
+        var avgToday = totalToday > 0
+          ? Math.round(todayData.reduce(function(s, a) { return s + (a.score / a.total * 100); }, 0) / totalToday)
+          : 0;
+        var topToday = todayData.reduce(function(best, a) {
+          return (!best || a.score > best.score) ? a : best;
+        }, null);
+        document.getElementById('monitor-stat-total').textContent = totalToday;
+        document.getElementById('monitor-stat-avg').textContent = totalToday > 0 ? avgToday + '%' : '-';
+        document.getElementById('monitor-stat-top').textContent = topToday ? topToday.studentName + ' ' + topToday.score + '/' + topToday.total : '-';
+      }
+
+      function renderMonitorTable(data) {
+        var tbody = document.getElementById('monitor-tbody');
+        var loading = document.getElementById('monitor-loading');
+        var empty = document.getElementById('monitor-empty');
+        var tableWrap = document.getElementById('monitor-table-wrap');
+        loading.classList.add('hidden');
+        if (!data.length) {
+          empty.classList.remove('hidden');
+          tableWrap.classList.add('hidden');
+          return;
+        }
+        empty.classList.add('hidden');
+        tableWrap.classList.remove('hidden');
+        tbody.innerHTML = data.map(function(a) {
+          var pct = a.total > 0 ? Math.round(a.score / a.total * 100) : 0;
+          var grade = getGrade(pct);
+          var ts = a.createdAt && (a.createdAt._seconds || a.createdAt.seconds || 0);
+          var rowBg = pct >= 80 ? 'bg-emerald-50' : pct < 40 ? 'bg-red-50' : '';
+          return '<tr class="border-b border-surface-100 hover:bg-surface-50 transition-colors ' + rowBg + '">'
+            + '<td class="px-4 py-3 font-medium text-surface-800">' + (a.studentName || 'Anonymous') + '</td>'
+            + '<td class="px-4 py-3 text-surface-500 text-sm max-w-[200px] truncate">' + (a.examTitle || '-') + '</td>'
+            + '<td class="px-4 py-3 font-mono font-bold text-surface-800">' + a.score + '/' + a.total + '</td>'
+            + '<td class="px-4 py-3 text-surface-500">' + pct + '%</td>'
+            + '<td class="px-4 py-3 font-bold ' + grade.color + '">' + grade.label + '</td>'
+            + '<td class="px-4 py-3 text-surface-400 text-sm">' + formatTime(a.timeTaken) + '</td>'
+            + '<td class="px-4 py-3 text-surface-400 text-xs">' + timeAgo(ts) + '</td>'
+            + '</tr>';
+        }).join('');
+      }
+
+      // Filter event listeners
+      document.getElementById('monitor-search').addEventListener('input', function() { renderMonitorTable(getFilteredData()); });
+      document.getElementById('monitor-subject-filter').addEventListener('change', function() { renderMonitorTable(getFilteredData()); });
+      document.getElementById('monitor-exam-filter').addEventListener('change', function() { renderMonitorTable(getFilteredData()); });
+      document.getElementById('monitor-refresh-btn').addEventListener('click', function() { loadMonitorData(); });
     })();
   </script>
 </Layout>
