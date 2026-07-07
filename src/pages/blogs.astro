@@ -66,7 +66,11 @@ const folderKeys = Object.keys(folders);
         <a href="/" class="btn-primary text-sm px-6 py-3 inline-block">Go Home</a>
       </div>
     ) : (
-      <div class="space-y-4" id="folders-container">
+      <button id="saved-filter" type="button" class="mx-auto mb-6 flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-100 text-surface-500 hover:bg-amber-50 hover:text-amber-600 text-sm font-medium transition">
+      🔖 Saved Resources (<span id="saved-count">0</span>)
+    </button>
+
+    <div class="space-y-4" id="folders-container">
         {folderKeys.map((key, fi) => {
           const folder = folders[key];
           return (
@@ -91,7 +95,7 @@ const folderKeys = Object.keys(folders);
               <!-- Folder Contents (hidden by default) -->
               <div class="folder-contents hidden border-t border-surface-100">
                 {folder.blogs.map((blog, bi) => (
-                  <a href={`/blog?id=${blog.id}`} class="flex items-center gap-3 px-5 py-3 hover:bg-brand-50/50 transition border-b border-surface-50 last:border-0 group file-item">
+                  <a href={`/blog?id=${blog.id}`} data-bid={blog.id} class="flex items-center gap-3 px-5 py-3 hover:bg-brand-50/50 transition border-b border-surface-50 last:border-0 group file-item">
                     <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-surface-100 group-hover:bg-brand-100 flex items-center justify-center transition-colors">
                       <svg class="w-4 h-4 text-surface-400 group-hover:text-brand-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     </div>
@@ -125,6 +129,35 @@ const folderKeys = Object.keys(folders);
           contents.classList.toggle('hidden');
           if (chevron) chevron.style.transform = contents.classList.contains('hidden') ? '' : 'rotate(180deg)';
           if (icon) icon.style.color = contents.classList.contains('hidden') ? '' : '#f59e0b';
+        });
+      });
+    })();
+  </script>
+
+  <script is:inline>
+    (() => {
+      const BM_KEY = 'examtext_bookmarks';
+      const getBm = () => { try { return JSON.parse(localStorage.getItem(BM_KEY) || '[]'); } catch { return []; } };
+      const savedBtn = document.getElementById('saved-filter');
+      const countEl = document.getElementById('saved-count');
+      const items = Array.from(document.querySelectorAll('.file-item'));
+      const saved = getBm();
+      countEl.textContent = items.filter(el => saved.includes(el.dataset.bid)).length;
+
+      let active = false;
+      savedBtn.addEventListener('click', () => {
+        active = !active;
+        savedBtn.classList.toggle('bg-amber-50', active);
+        savedBtn.classList.toggle('text-amber-600', active);
+        document.querySelectorAll('.folder-card').forEach(card => {
+          const fileItems = Array.from(card.querySelectorAll('.file-item'));
+          let anyVisible = false;
+          fileItems.forEach(el => {
+            const show = !active || saved.includes(el.dataset.bid);
+            el.style.display = show ? '' : 'none';
+            if (show) anyVisible = true;
+          });
+          card.style.display = anyVisible ? '' : 'none';
         });
       });
     })();

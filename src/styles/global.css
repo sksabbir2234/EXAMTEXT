@@ -58,3 +58,59 @@ body {
     @apply transition-all duration-200;
   }
 }
+
+/* ============ DARK MODE ============ */
+html.dark { color-scheme: dark; }
+html.dark body { background: #0b1120; color: #cbd5e1; }
+html.dark .card { background: #111827; border-color: #1f2937; }
+html.dark .glass {
+  background: rgba(17, 24, 39, 0.75);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html.dark .glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+html.dark .text-surface-900 { color: #f1f5f9 !important; }
+html.dark .text-surface-800 { color: #e2e8f0 !important; }
+html.dark .text-surface-700 { color: #cbd5e1 !important; }
+html.dark .text-surface-600 { color: #94a3b8 !important; }
+html.dark .text-surface-500 { color: #94a3b8 !important; }
+html.dark .text-surface-400 { color: #94a3b8 !important; }
+html.dark .text-surface-300 { color: #64748b !important; }
+html.dark .bg-surface-50 { background: #0b1120 !important; }
+html.dark .bg-surface-100 { background: #1e293b !important; }
+html.dark .bg-surface-200 { background: #334155 !important; }
+html.dark .border-surface-100 { border-color: #1e293b !important; }
+html.dark .border-surface-200 { border-color: #334155 !important; }
+html.dark .divide-surface-100 > * { border-color: #1e293b; }
+html.dark input, html.dark textarea, html.dark select {
+  background: #0f172a;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+html.dark input::placeholder, html.dark textarea::placeholder { color: #64748b; }
+html.dark .option-card { background: #0f172a; border-color: #334155; }
+html.dark .option-card:hover { border-color: #5c7cfa; background: rgba(92,124,250,0.08); }
+html.dark .option-card.border-brand-500, html.dark .option-card.bg-brand-50 {
+  background: rgba(92,124,250,0.15);
+  border-color: #5c7cfa;
+}
+html.dark details > summary:hover { background: #1e293b; }
+html.dark .gradient-text {
+  background-image: linear-gradient(135deg, #91a7ff, #a855f7, #c084fc);
+}
+html.dark .toast { background: #e2e8f0; color: #0f172a; }
+
+/* Theme toggle button */
+#theme-toggle { transition: transform 0.3s ease; }
+#theme-toggle:hover { transform: rotate(20deg); }
+
+/* ============ PRINT (Result / Review) ============ */
+@media print {
+  body { background: #ffffff !important; }
+  nav, #timer, #theme-toggle, .no-print, #review-actions { display: none !important; }
+  .card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; break-inside: avoid; }
+  html.dark .card, html.dark body { background: #ffffff !important; color: #0f172a !important; }
+  html.dark .text-surface-800, html.dark .text-surface-900 { color: #0f172a !important; }
+}

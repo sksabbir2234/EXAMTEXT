@@ -14,9 +14,12 @@ const examId = Astro.url.searchParams.get('id') || '';
 
   <!-- Top Bar -->
   <div class="glass border-b border-surface-100/60 py-3 px-4">
-    <div class="max-w-3xl mx-auto flex items-center justify-between">
+    <div class="max-w-3xl mx-auto flex items-center justify-between gap-3">
       <h1 id="exam-title" class="font-bold text-surface-800 truncate">Loading...</h1>
-      <span id="answered-count" class="text-sm font-medium text-surface-400">0/0</span>
+      <div class="flex items-center gap-3 shrink-0">
+        <span id="answered-count" class="text-sm font-medium text-surface-400">0/0</span>
+        <button id="theme-toggle" type="button" aria-label="Toggle dark mode" class="w-9 h-9 rounded-xl bg-surface-100 hover:bg-surface-200 flex items-center justify-center transition-colors text-lg">🌙</button>
+      </div>
     </div>
   </div>
 
@@ -25,6 +28,16 @@ const examId = Astro.url.searchParams.get('id') || '';
     <div class="h-1.5 bg-surface-100 rounded-full overflow-hidden">
       <div id="progress" class="h-full bg-gradient-to-r from-brand-500 to-purple-500 rounded-full transition-all duration-500 ease-out" style="width:0%"></div>
     </div>
+  </div>
+
+  <!-- Question Navigator -->
+  <div class="max-w-3xl mx-auto px-4 mt-3">
+    <div id="qnav" class="flex gap-2 overflow-x-auto pb-2 no-print"></div>
+  </div>
+
+  <!-- Cheat warning banner -->
+  <div id="cheat-banner" class="hidden max-w-3xl mx-auto px-4 mt-2">
+    <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-700 text-xs font-medium text-center">⚠️ Tab switching detected (<span id="cheat-count">0</span>). Leaving the exam may auto-submit.</div>
   </div>
 
   <!-- Questions -->
@@ -43,39 +56,93 @@ const examId = Astro.url.searchParams.get('id') || '';
   <script is:inline>
     const urlParams = new URLSearchParams(window.location.search);
     const examId = urlParams.get('id') || '';
-    let questions = [], answers = {}, timerInterval, secondsElapsed = 0;
+    const practiceMode = urlParams.get('mode') === 'practice';
+    const practiceAttemptId = urlParams.get('attempt') || '';
+
+    let questions = [];      // original questions from API (index = original index)
+    let display = [];        // [{ origIdx, options:[{text, origIndex}], correctDisp }]
+    let answers = {};        // display position -> selected display option index
+    let flags = {};          // display position -> bool
+    let activeQi = 0;
+    let timerInterval, secondsElapsed = 0;
+    let switchCount = 0;
     const labels = ['A','B','C','D'];
+    const WRONG_PER_PENALTY = 4;
+    const PENALTY_MARKS = 1;
+
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
 
     async function loadExam() {
       try {
         const res = await fetch(`/api/exam/${examId}`);
         const exam = await res.json();
         if (exam.error) { document.getElementById('questions').innerHTML = `<p class="text-center text-red-500 py-16">Error: ${exam.error}</p>`; return; }
-        document.getElementById('exam-title').textContent = exam.title;
+        document.getElementById('exam-title').textContent = exam.title + (practiceMode ? ' (Practice Wrong)' : '');
         const qRes = await fetch(`/api/exam/${examId}/questions`);
         questions = await qRes.json();
         if (!Array.isArray(questions) || questions.length === 0) { document.getElementById('questions').innerHTML = '<p class="text-center text-red-500 py-16">No questions found.</p>'; return; }
+
+        if (practiceMode && practiceAttemptId) {
+          const attRes = await fetch(`/api/attempt/${practiceAttemptId}`);
+          const att = await attRes.json();
+          const ans = att.answers || {};
+          const wrongSet = [];
+          questions.forEach((q, i) => { if (ans[i] !== q.correctOptionIndex) wrongSet.push(i); });
+          if (wrongSet.length === 0) {
+            document.getElementById('questions').innerHTML = '<div class="card p-8 text-center"><div class="text-4xl mb-3">🎉</div><p class="font-bold text-surface-800">No wrong answers to practice!</p><a href="/exam-intro/' + examId + '" class="btn-primary text-sm px-6 py-3 inline-block mt-4">Back</a></div>';
+            return;
+          }
+          buildDisplay(wrongSet);
+          document.getElementById('submit-btn').textContent = 'Check My Answers';
+        } else {
+          buildDisplay(null);
+          document.getElementById('submit-btn').classList.remove('hidden');
+          if (exam.durationMinutes > 0 && !practiceMode) startTimer(exam.durationMinutes * 60);
+        }
         renderQuestions();
-        document.getElementById('submit-btn').classList.remove('hidden');
-        if (exam.durationMinutes > 0) startTimer(exam.durationMinutes * 60);
+        renderNavigator();
       } catch (e) {
         document.getElementById('questions').innerHTML = `<p class="text-center text-red-500 py-16">Error loading exam: ${e.message}</p>`;
       }
     }
 
+    function buildDisplay(forcedIndices) {
+      let indices;
+      if (forcedIndices) {
+        indices = forcedIndices.slice().sort((a, b) => a - b); // keep original order
+      } else {
+        indices = shuffle(questions.map((_, i) => i));
+      }
+      display = indices.map(origIdx => {
+        const q = questions[origIdx];
+        const opts = q.options.map((text, oi) => ({ text, origIndex: oi }));
+        const shuffledOpts = practiceMode ? opts : shuffle(opts);
+        const correctDisp = shuffledOpts.findIndex(o => o.origIndex === q.correctOptionIndex);
+        return { origIdx, options: shuffledOpts, correctDisp };
+      });
+    }
+
     function renderQuestions() {
-      document.getElementById('questions').innerHTML = questions.map((q, i) => `
-        <div class="card p-6 animate-fade-up" style="animation-delay:${i*0.03}s;opacity:0;">
+      document.getElementById('questions').innerHTML = display.map((d, qi) => `
+        <div class="card p-6 animate-fade-up" id="qcard-${qi}" style="animation-delay:${qi*0.03}s;opacity:0;">
           <div class="flex items-start gap-3 mb-5">
-            <span class="shrink-0 w-8 h-8 rounded-xl bg-brand-500 text-white flex items-center justify-center text-sm font-bold">${i+1}</span>
-            <p class="text-surface-800 font-medium leading-relaxed pt-0.5">${q.questionText}</p>
+            <span class="shrink-0 w-8 h-8 rounded-xl bg-brand-500 text-white flex items-center justify-center text-sm font-bold">${qi+1}</span>
+            <p class="text-surface-800 font-medium leading-relaxed pt-0.5 flex-1">${questions[d.origIdx].questionText}</p>
+            <button class="flag-btn shrink-0 w-8 h-8 rounded-xl flex items-center justify-center text-lg transition-colors ${flags[qi] ? 'bg-amber-100' : 'bg-surface-100 hover:bg-surface-200'}" data-qi="${qi}" title="Flag for review">${flags[qi] ? '🚩' : '🏳️'}</button>
           </div>
           <div class="space-y-3 ml-11">
-            ${q.options.map((opt, oi) => `
+            ${d.options.map((opt, oi) => `
               <div class="option-card flex items-center gap-3 p-4 border-2 border-surface-200 rounded-2xl cursor-pointer hover:border-brand-300 hover:bg-brand-50/50 transition-all duration-200 group"
-                   data-qi="${i}" data-oi="${oi}">
+                   data-qi="${qi}" data-oi="${oi}">
                 <span class="w-8 h-8 rounded-full bg-surface-100 group-hover:bg-brand-100 flex items-center justify-center text-xs font-bold shrink-0 transition-colors">${labels[oi]}</span>
-                <span class="font-medium text-surface-700">${opt}</span>
+                <span class="font-medium text-surface-700">${opt.text}</span>
               </div>
             `).join('')}
           </div>
@@ -84,19 +151,25 @@ const examId = Astro.url.searchParams.get('id') || '';
       updateCount();
 
       document.getElementById('questions').addEventListener('click', (e) => {
+        const flagBtn = e.target.closest('.flag-btn');
+        if (flagBtn) {
+          const qi = parseInt(flagBtn.dataset.qi);
+          flags[qi] = !flags[qi];
+          flagBtn.textContent = flags[qi] ? '🚩' : '🏳️';
+          flagBtn.classList.toggle('bg-amber-100', flags[qi]);
+          flagBtn.classList.toggle('bg-surface-100', !flags[qi]);
+          updateNavigator();
+          return;
+        }
         const card = e.target.closest('.option-card');
         if (!card) return;
-        const qi = parseInt(card.dataset.qi);
-        const oi = parseInt(card.dataset.oi);
-        selectOption(qi, oi);
+        selectOption(parseInt(card.dataset.qi), parseInt(card.dataset.oi));
       });
     }
 
     function selectOption(qi, oi) {
       document.querySelectorAll('.option-card').forEach(el => {
-        const eQi = parseInt(el.dataset.qi);
-        const eOi = parseInt(el.dataset.oi);
-        if (eQi === qi) {
+        if (parseInt(el.dataset.qi) === qi) {
           el.classList.remove('border-brand-500','bg-brand-50');
           el.classList.add('border-surface-200');
         }
@@ -107,12 +180,43 @@ const examId = Astro.url.searchParams.get('id') || '';
         sel.classList.add('border-brand-500','bg-brand-50');
       }
       answers[qi] = oi;
-      document.getElementById('progress').style.width = (Object.keys(answers).length / questions.length * 100) + '%';
+      document.getElementById('progress').style.width = (Object.keys(answers).length / display.length * 100) + '%';
       updateCount();
+      updateNavigator();
     }
 
     function updateCount() {
-      document.getElementById('answered-count').textContent = `${Object.keys(answers).length}/${questions.length}`;
+      document.getElementById('answered-count').textContent = `${Object.keys(answers).length}/${display.length}`;
+    }
+
+    function renderNavigator() {
+      const nav = document.getElementById('qnav');
+      nav.innerHTML = display.map((_, qi) => `
+        <button class="qnav-btn shrink-0 w-9 h-9 rounded-xl text-sm font-bold border-2 transition-all" data-qi="${qi}">${qi+1}</button>
+      `).join('');
+      nav.querySelectorAll('.qnav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qi = parseInt(btn.dataset.qi);
+          activeQi = qi;
+          document.getElementById('qcard-' + qi)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          updateNavigator();
+        });
+      });
+      updateNavigator();
+    }
+
+    function updateNavigator() {
+      document.querySelectorAll('.qnav-btn').forEach(btn => {
+        const qi = parseInt(btn.dataset.qi);
+        const answered = answers[qi] !== undefined;
+        const flagged = flags[qi];
+        btn.classList.remove('border-surface-200','bg-surface-100','text-surface-500','border-brand-500','bg-brand-50','text-brand-600','border-amber-400','bg-amber-50','text-amber-600','ring-2','ring-brand-400');
+        if (flagged && answered) { btn.classList.add('border-amber-400','bg-amber-50','text-amber-600'); }
+        else if (answered) { btn.classList.add('border-brand-500','bg-brand-50','text-brand-600'); }
+        else if (flagged) { btn.classList.add('border-amber-400','bg-amber-50','text-amber-600'); }
+        else { btn.classList.add('border-surface-200','bg-surface-100','text-surface-500'); }
+        if (qi === activeQi) btn.classList.add('ring-2','ring-brand-400');
+      });
     }
 
     function startTimer(total) {
@@ -131,18 +235,100 @@ const examId = Astro.url.searchParams.get('id') || '';
       }, 1000);
     }
 
-    document.getElementById('submit-btn').addEventListener('click', () => { if (confirm('Are you sure you want to submit?')) submitExam(); });
+    // Tab-switch / blur anti-cheat
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        switchCount++;
+        document.getElementById('cheat-banner').classList.remove('hidden');
+        document.getElementById('cheat-count').textContent = switchCount;
+        window.showToast('⚠️ Leaving the exam is not allowed (' + switchCount + '/3)');
+        if (switchCount >= 3) { clearInterval(timerInterval); submitExam(); }
+      }
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', () => {
+      const unanswered = display.length - Object.keys(answers).length;
+      const flaggedUnans = display.filter((_, qi) => flags[qi] && answers[qi] === undefined).length;
+      let msg = 'Are you sure you want to submit?';
+      if (unanswered > 0) msg += `\\n${unanswered} question(s) unanswered.`;
+      if (flaggedUnans > 0) msg += `\\n${flaggedUnans} flagged question(s) not answered.`;
+      if (confirm(msg)) submitExam();
+    });
+
+    function computeResults() {
+      const originalAnswers = {};
+      let correct = 0, wrong = 0;
+      display.forEach((d, qi) => {
+        const selDisp = answers[qi];
+        if (selDisp === undefined) return;
+        const origOi = d.options[selDisp].origIndex;
+        originalAnswers[d.origIdx] = origOi;
+        if (origOi === questions[d.origIdx].correctOptionIndex) correct++;
+        else wrong++;
+      });
+      const penalty = Math.floor(wrong / WRONG_PER_PENALTY) * PENALTY_MARKS;
+      const finalScore = Math.max(0, correct - penalty);
+      return { originalAnswers, correct, wrong, penalty, finalScore };
+    }
 
     async function submitExam() {
       clearInterval(timerInterval);
-      let score = 0;
-      questions.forEach((q, i) => { if (answers[i] === q.correctOptionIndex) score++; });
+      const { originalAnswers, correct, wrong, penalty, finalScore } = computeResults();
+      const total = questions.length;
+
+      if (practiceMode) {
+        showPracticeResult(originalAnswers, correct, wrong, penalty, finalScore, total);
+        return;
+      }
+
       const studentName = sessionStorage.getItem('studentName') || 'Anonymous';
       try {
-        const res = await fetch('/api/attempt', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ examId, studentName, score, total: questions.length, answers, timeTaken: secondsElapsed }) });
+        const res = await fetch('/api/attempt', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ examId, studentName, score: finalScore, correct, wrong, total, answers: originalAnswers, timeTaken: secondsElapsed }) });
         const data = await res.json();
-        window.location.href = `/result?id=${data.id}&examId=${examId}&score=${score}&total=${questions.length}`;
+        window.location.href = `/result?id=${data.id}&examId=${examId}&score=${finalScore}&correct=${correct}&wrong=${wrong}&total=${total}`;
       } catch { window.showToast('Error submitting exam'); }
+    }
+
+    function showPracticeResult(originalAnswers, correct, wrong, penalty, finalScore, total) {
+      document.getElementById('submit-btn').classList.add('hidden');
+      document.getElementById('qnav').classList.add('hidden');
+      const pct = total > 0 ? Math.round(finalScore / total * 100) : 0;
+      let html = `<div class="card p-8 text-center animate-scale-in mb-4">
+        <div class="text-6xl font-black ${pct>=50?'text-emerald-500':'text-amber-500'} mb-2">${pct}%</div>
+        <div class="text-sm text-surface-400 mb-6">Practice score (negative marking applied)</div>
+        <div class="flex justify-center gap-8 mb-6">
+          <div><div class="text-2xl font-bold text-emerald-500">${correct}</div><div class="text-xs text-surface-400">Correct</div></div>
+          <div><div class="text-2xl font-bold text-red-500">${wrong}</div><div class="text-xs text-surface-400">Wrong</div></div>
+          ${penalty>0?`<div><div class="text-2xl font-bold text-amber-500">-${penalty}</div><div class="text-xs text-surface-400">Penalty</div></div>`:''}
+        </div>
+        <div class="flex flex-wrap justify-center gap-3">
+          <button onclick="location.reload()" class="btn-primary text-sm px-5 py-2.5">Retry</button>
+          <a href="/exam-intro/${examId}" class="btn-ghost text-sm px-5 py-2.5">Finish</a>
+        </div>
+      </div>`;
+      html += `<div class="card p-6"><h2 class="text-lg font-bold text-surface-900 mb-5">📝 Review</h2><div class="space-y-1">`;
+      display.forEach((d, qi) => {
+        const q = questions[d.origIdx];
+        const studentAns = originalAnswers[d.origIdx];
+        const isCorrect = studentAns === q.correctOptionIndex;
+        html += `<div class="py-4">
+          <div class="flex items-start gap-3 mb-3">
+            <span class="shrink-0 w-7 h-7 rounded-lg ${isCorrect?'bg-emerald-500':'bg-red-500'} text-white flex items-center justify-center text-xs font-bold mt-0.5">${qi+1}</span>
+            <p class="font-medium text-surface-800 leading-relaxed">${q.questionText}</p>
+          </div>
+          <div class="ml-10 space-y-2">`;
+        d.options.forEach(opt => {
+          const oi = opt.origIndex;
+          let cls = 'border-surface-200';
+          if (oi === q.correctOptionIndex) cls = 'border-emerald-500 bg-emerald-50 text-emerald-700';
+          else if (oi === studentAns && !isCorrect) cls = 'border-red-500 bg-red-50 text-red-700';
+          const icon = oi === q.correctOptionIndex ? ' ✓' : (oi === studentAns && !isCorrect ? ' ✗' : '');
+          html += `<div class="flex items-center gap-2.5 p-3 border-2 rounded-xl text-sm ${cls}"><span class="font-bold">${labels[oi]}.</span> ${opt.text}${icon}</div>`;
+        });
+        html += `</div>${q.explanation?`<div class="ml-10 mt-3 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-xl text-sm text-amber-800">💡 ${q.explanation}</div>`:''}</div>`;
+      });
+      html += `</div></div>`;
+      document.getElementById('questions').innerHTML = html;
     }
 
     loadExam();

@@ -303,6 +303,15 @@ import Layout from '../layouts/Layout.astro';
             </div>
           </div>
 
+          <!-- Analytics: avg score per exam -->
+          <div class="card p-6 animate-fade-up">
+            <h2 class="text-lg font-bold text-surface-900 mb-1 flex items-center gap-2">
+              <span class="text-xl">📊</span> Chapter Performance
+            </h2>
+            <p class="text-xs text-surface-400 mb-4">Average score per exam (lower = weaker chapter). Negative marking applied.</p>
+            <div id="analytics-bars" class="space-y-2.5"></div>
+          </div>
+
           <!-- Table -->
           <div class="card overflow-hidden">
             <div id="monitor-loading" class="flex justify-center py-12">
@@ -1201,6 +1210,7 @@ import Layout from '../layouts/Layout.astro';
           populateExamFilter(data);
           renderMonitorTable(getFilteredData());
           renderMonitorStats(data);
+          renderAnalytics(data);
           document.getElementById('monitor-last-updated').textContent = 'Auto-refreshes every 30s · Last: ' + new Date().toLocaleTimeString();
         } catch(e) {
           loading.classList.add('hidden');
@@ -1285,6 +1295,30 @@ import Layout from '../layouts/Layout.astro';
             + '<td class="px-4 py-3 text-surface-400 text-sm">' + formatTime(a.timeTaken) + '</td>'
             + '<td class="px-4 py-3 text-surface-400 text-xs">' + timeAgo(ts) + '</td>'
             + '</tr>';
+        }).join('');
+      }
+
+      function renderAnalytics(data) {
+        var wrap = document.getElementById('analytics-bars');
+        if (!wrap) return;
+        var byExam = {};
+        data.forEach(function(a) {
+          if (!a.examId) return;
+          if (!byExam[a.examId]) byExam[a.examId] = { title: a.examTitle || a.examId, sum: 0, n: 0 };
+          byExam[a.examId].sum += (a.total > 0 ? a.score / a.total * 100 : 0);
+          byExam[a.examId].n++;
+        });
+        var rows = Object.keys(byExam).map(function(k) {
+          var e = byExam[k];
+          return { title: e.title, avg: e.n > 0 ? Math.round(e.sum / e.n) : 0, n: e.n };
+        }).sort(function(a, b) { return a.avg - b.avg; });
+        if (!rows.length) { wrap.innerHTML = '<p class="text-sm text-surface-400 text-center py-4">No attempt data yet.</p>'; return; }
+        wrap.innerHTML = rows.map(function(r) {
+          var color = r.avg >= 80 ? 'bg-emerald-500' : r.avg >= 50 ? 'bg-amber-500' : 'bg-red-500';
+          return '<div>'
+            + '<div class="flex items-center justify-between text-xs mb-1"><span class="font-medium text-surface-700 truncate pr-2">' + r.title + '</span><span class="font-bold ' + (r.avg>=80?'text-emerald-600':r.avg>=50?'text-amber-600':'text-red-600') + '">' + r.avg + '%</span></div>'
+            + '<div class="w-full bg-surface-100 rounded-full h-2"><div class="' + color + ' h-2 rounded-full transition-all" style="width:' + r.avg + '%"></div></div>'
+            + '</div>';
         }).join('');
       }
 

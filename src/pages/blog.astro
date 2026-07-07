@@ -48,6 +48,9 @@ if (!blog) return Astro.redirect('/');
             📖 {examTitle}
           </span>
         )}
+        <button id="bookmark-btn" type="button" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-surface-100 text-surface-500 hover:bg-amber-50 hover:text-amber-600 transition-colors">
+          🔖 <span id="bookmark-label">Save</span>
+        </button>
       </div>
     </div>
 
@@ -72,14 +75,20 @@ if (!blog) return Astro.redirect('/');
 
     <!-- Q&A Section -->
     <div class="mb-6 animate-fade-up" style="animation-delay:0.12s;opacity:0;">
-      <h2 class="text-lg font-bold text-surface-900 mb-4">
-        <span class="font-bengali">{blog.content?.length || 0} টি প্রশ্নোত্তর</span>
-      </h2>
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+        <h2 class="text-lg font-bold text-surface-900 flex items-center gap-2 flex-1">
+          <span class="font-bengali">{blog.content?.length || 0} টি প্রশ্নোত্তর</span>
+        </h2>
+        <div class="relative w-full sm:w-64">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" id="blog-search" placeholder="Search Q&A..." class="w-full pl-9 pr-3 py-2 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+        </div>
+      </div>
     </div>
 
-    <div class="space-y-3">
+    <div class="space-y-3" id="qa-list">
       {(blog.content || []).map((item: any, i: number) => (
-        <details class="card overflow-hidden group animate-fade-up" style={`animation-delay:${0.15 + i * 0.03}s;opacity:0;`}>
+        <details class="card overflow-hidden group animate-fade-up qa-item" data-q={(item.question||'').toLowerCase()} data-a={(item.answer||'').toLowerCase()} style={`animation-delay:${0.15 + i * 0.03}s;opacity:0;`}>
           <summary class="flex items-center gap-3 px-5 py-4 cursor-pointer select-none hover:bg-surface-50 transition-colors list-none">
             <span class="shrink-0 w-7 h-7 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold">{i + 1}</span>
             <span class="flex-1 text-sm font-semibold text-surface-800 leading-snug">{item.question}</span>
@@ -108,5 +117,42 @@ if (!blog) return Astro.redirect('/');
         </a>
       </div>
     )}
+    </div>
   </div>
+
+  <script is:inline define:vars={{ blogId: blog.id }}>
+    (() => {
+      // --- Bookmark ---
+      const BM_KEY = 'examtext_bookmarks';
+      const getBm = () => { try { return JSON.parse(localStorage.getItem(BM_KEY) || '[]'); } catch { return []; } };
+      const btn = document.getElementById('bookmark-btn');
+      const label = document.getElementById('bookmark-label');
+      const syncBm = () => {
+        const saved = getBm().includes(blogId);
+        btn.classList.toggle('bg-amber-50', saved);
+        btn.classList.toggle('text-amber-600', saved);
+        label.textContent = saved ? 'Saved' : 'Save';
+      };
+      syncBm();
+      btn.addEventListener('click', () => {
+        const arr = getBm();
+        if (arr.includes(blogId)) arr.splice(arr.indexOf(blogId), 1);
+        else arr.push(blogId);
+        localStorage.setItem(BM_KEY, JSON.stringify(arr));
+        syncBm();
+        window.showToast(arr.includes(blogId) ? 'Saved to bookmarks' : 'Removed from bookmarks');
+      });
+
+      // --- Search ---
+      const search = document.getElementById('blog-search');
+      const items = Array.from(document.querySelectorAll('.qa-item'));
+      search?.addEventListener('input', () => {
+        const q = search.value.trim().toLowerCase();
+        items.forEach((el) => {
+          const match = !q || el.dataset.q.includes(q) || el.dataset.a.includes(q);
+          (el).style.display = match ? '' : 'none';
+        });
+      });
+    })();
+  </script>
 </Layout>

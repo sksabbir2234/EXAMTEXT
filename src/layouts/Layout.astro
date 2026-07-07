@@ -56,6 +56,7 @@ const {
           {navTitle && <span class="font-semibold text-surface-800 text-sm sm:text-base truncate max-w-[200px]">{navTitle}</span>}
         </div>
         <div class="flex items-center gap-2">
+          <button id="theme-toggle" type="button" aria-label="Toggle dark mode" class="w-9 h-9 rounded-xl bg-surface-100 hover:bg-surface-200 flex items-center justify-center transition-colors text-lg">🌙</button>
           <a href="/" class="px-3 py-1.5 text-sm font-medium text-surface-500 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all">Home</a>
           <a href="/blogs" class="px-3 py-1.5 text-sm font-medium text-surface-500 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all">Resources</a>
         </div>
@@ -71,6 +72,22 @@ const {
       t.classList.add('show');
       setTimeout(() => t.classList.remove('show'), 3000);
     };
+    (() => {
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      const saved = localStorage.getItem('examtext_theme');
+      if (saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        root.classList.add('dark');
+        if (btn) btn.textContent = '☀️';
+      }
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const isDark = root.classList.toggle('dark');
+          localStorage.setItem('examtext_theme', isDark ? 'dark' : 'light');
+          btn.textContent = isDark ? '☀️' : '🌙';
+        });
+      }
+    })();
   </script>
 </body>
 </html>
