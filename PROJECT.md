@@ -1,6 +1,6 @@
 # EXAMTEXT — Complete Project Documentation
 
-> **Version:** 3.0.0  
+> **Version:** 4.0.0  
 > **Repo:** `sksabbir2234/EXAMTEXT`  
 > **Live:** `https://examtext.vercel.app`  
 > **Firebase Project:** `examtext-7ba5f`  
@@ -10,20 +10,24 @@
 
 ## 1. What Is This Project?
 
-**ExamText** is a mobile-first online exam portal for CSE (Computer Science & Engineering) students. Students enter their name (no login), pick a subject/chapter, take a timed MCQ exam, get instant results with score/grade/review, and see a leaderboard. An admin panel (hidden, password-protected) allows uploading/managing exams via JSON.
+**ExamText** is a mobile-first online exam portal with a blog/study resource system. Students enter their name (no login), pick a subject/chapter, take a timed MCQ exam, get instant results with score/grade/review, and see a leaderboard. An admin panel (hidden, password-protected) allows uploading/managing exams AND blog resources via JSON — with multi-file batch upload and bulk delete.
 
 ### Key Features
 - **No student auth** — name-only entry per attempt
 - **10 chapters × 30 MCQs** for "CSE College Teacher" subject
+- **NTRCA School ICT** — 10 topic exams (300 MCQs) + 647 Q&A blog content
+- **Islamic History** — 30 MCQ exam (Arab history, Seerah, Khulafa-e-Rashideen)
+- **Blog/Study Resource system** — Bangla Q&A guides with folder-style UI
 - **Dynamic OG meta tags** on exam-intro for Messenger/social sharing
 - **LaTeX math rendering** via KaTeX (for equations in questions)
 - **localStorage progress tracking** — shows best score per chapter
-- **Progress bar** — "X of 10 chapters attempted"
+- **Progress bar** — "X of chapters attempted"
 - **Timeline chapter layout** — vertical timeline with chapter badges
-- **Admin panel** — tabbed UI (Upload/Manage), drag-and-drop, search/filter, edit mode, live validation, attempt stats
+- **Admin panel** — tabbed UI (Upload/Manage/Blog), multi-file batch upload, bulk delete, drag-and-drop, search/filter, edit mode, live validation, attempt stats
 - **Leaderboard** — top 50 scores per exam, ranked
 - **Result review** — shows correct/wrong markers with explanations
 - **Share/Copy Link** — native share API + clipboard
+- **Folder-style resources** — blogs grouped by subject in expandable folders
 
 ---
 
@@ -57,17 +61,45 @@ examtext/
 ├── tailwind.config.mjs        # Custom color palette, animations, shadows
 ├── package.json               # Dependencies
 ├── firestore.rules            # Firebase security rules (locked to deny-all)
-├── cse/                       # 10 chapter JSON files for upload
-│   ├── chapter1-data-structures.json
-│   ├── chapter2-algorithms.json
-│   ├── chapter3-operating-systems.json
-│   ├── chapter4-dbms.json
-│   ├── chapter5-computer-networks.json
-│   ├── chapter6-software-engineering.json
-│   ├── chapter7-oop.json
-│   ├── chapter8-theory-of-computation.json
-│   ├── chapter9-compiler-design.json
-│   └── chapter10-digital-logic.json
+├── PROJECT.md                 # This file
+├── cse/                       # Content files for upload
+│   ├── chapter1-data-structures.json      # 30 MCQs
+│   ├── chapter2-algorithms.json           # 30 MCQs
+│   ├── chapter3-operating-systems.json    # 30 MCQs
+│   ├── chapter4-dbms.json                 # 30 MCQs
+│   ├── chapter5-computer-networks.json    # 30 MCQs
+│   ├── chapter6-software-engineering.json # 30 MCQs
+│   ├── chapter7-oop.json                  # 30 MCQs
+│   ├── chapter8-theory-of-computation.json# 30 MCQs
+│   ├── chapter9-compiler-design.json      # 30 MCQs
+│   ├── chapter10-digital-logic.json       # 30 MCQs
+│   ├── ntrca-ict-blog.json               # 647 Q&A (NTRCA School ICT combined)
+│   ├── gate-pyq-revision-blog.json        # 91 Q&A (GATE PYQ revision)
+│   ├── school/                            # NTRCA School ICT content
+│   │   ├── 01-computer-fundamentals.json  # 60 Q&A blog
+│   │   ├── 02-number-systems-boolean.json # 47 Q&A blog
+│   │   ├── 03-operating-systems.json      # 53 Q&A blog
+│   │   ├── 04-ms-office.json             # 28 Q&A blog
+│   │   ├── 05-networking-internet.json    # 82 Q&A blog
+│   │   ├── 06-programming.json           # 142 Q&A blog
+│   │   ├── 07-database.json              # 65 Q&A blog
+│   │   ├── 08-ict-bangladesh.json        # 42 Q&A blog
+│   │   ├── 09-multimedia.json            # 33 Q&A blog
+│   │   ├── 10-current-trends.json        # 97 Q&A blog
+│   │   ├── exams/                         # NTRCA exam MCQs (30 each)
+│   │   │   ├── exam-01-computer-fundamentals.json
+│   │   │   ├── exam-02-number-systems-boolean.json
+│   │   │   ├── exam-03-operating-systems.json
+│   │   │   ├── exam-04-ms-office.json
+│   │   │   ├── exam-05-networking.json
+│   │   │   ├── exam-06-programming.json
+│   │   │   ├── exam-07-database.json
+│   │   │   ├── exam-08-ict-bangladesh.json
+│   │   │   ├── exam-09-multimedia.json
+│   │   │   ├── exam-10-current-trends.json
+│   │   │   └── exam-11-islamic-history.json  # 30 MCQs
+│   │   └── practice/                      # Practice sets (30 Q&A each)
+│   │       ├── set-01.json through set-10.json
 └── src/
     ├── env.d.ts               # Astro type definitions
     ├── styles/
@@ -79,13 +111,15 @@ examtext/
     │   ├── auth.ts             # Stateless HMAC-SHA256 signed cookie auth
     │   └── katex.ts            # KaTeX LaTeX rendering helper
     └── pages/
-        ├── index.astro         # Home page (hero, subject grid, coming soon)
-        ├── subject.astro       # Subject detail (timeline, chapters, progress bar)
+        ├── index.astro         # Home page (hero, subject grid, study resources CTA)
+        ├── subject.astro       # Subject detail (timeline, chapters, progress bar, folder blog links)
         ├── exam-intro/
         │   └── [id].astro      # Exam intro (SSR, dynamic OG tags, name form)
         ├── exam.astro          # Exam taking (MCQ UI, timer, option selection)
         ├── result.astro        # Result + leaderboard + review (correct/wrong markers)
-        ├── admin.astro         # Admin panel (auth gate, upload, manage, stats)
+        ├── blogs.astro         # Blog listing (folder-style grouped by subject)
+        ├── blog.astro          # Blog detail (accordion Q&A, folder icon header, slide deck link)
+        ├── admin.astro         # Admin panel (3 tabs: Upload/Manage/Blog, bulk delete, batch upload)
         ├── cse-exams.astro     # Redirects to /subject?id=cse-college-teacher
         └── api/
             ├── subjects.ts              # GET /api/subjects
@@ -100,17 +134,25 @@ examtext/
             │   └── [subjectId].ts       # GET /api/exams/[subjectId]
             ├── leaderboard/
             │   └── [examId].ts          # GET /api/leaderboard/[examId]
+            ├── blogs/
+            │   └── [subjectId].ts       # GET /api/blogs/[subjectId] (published blogs)
             └── admin/
                 ├── login.ts             # POST /api/admin/login + logout
                 ├── session.ts           # GET /api/admin/session
-                ├── upload.ts            # POST /api/admin/upload
+                ├── upload.ts            # POST /api/admin/upload (single or batch array)
                 ├── all.ts               # GET /api/admin/all (with attempt stats)
                 ├── exam/
                 │   ├── [id].ts          # GET/PUT/POST /api/admin/exam/[id]
                 │   └── [id]/
                 │       └── publish.ts   # PUT /api/admin/exam/[id]/publish
-                └── subject/
-                    └── [id].ts          # POST /api/admin/subject/[id]
+                ├── subject/
+                │   └── [id].ts          # POST /api/admin/subject/[id]
+                ├── blogs.ts             # GET /api/admin/blogs (all blogs)
+                └── blog/
+                    ├── upload.ts        # POST /api/admin/blog/upload (single or batch)
+                    ├── [id].ts          # GET/PUT/POST /api/admin/blog/[id]
+                    └── [id]/
+                        └── publish.ts   # PUT /api/admin/blog/[id]/publish
 ```
 
 ---
@@ -144,6 +186,18 @@ exams (collection)
                     ├── explanation: string|null  # "Stack follows LIFO"
                     └── marks: number            # 1
 
+blogs (collection)
+  └── {blogId} (document)
+        ├── subjectId: string         # "cse-college-teacher"
+        ├── examId: string|null       # linked exam (optional)
+        ├── title: string             # "Data Structures Guide"
+        ├── slug: string              # "data-structures-guide"
+        ├── description: string       # short description
+        ├── slideUrl: string|null     # NotebookLM slide URL
+        ├── published: boolean        # true/false
+        ├── content: array            # [{question, answer, tags?}, ...]
+        └── createdAt: Timestamp
+
 attempts (collection)
   └── {attemptId} (document)
         ├── examId: string            # reference to exams doc
@@ -160,6 +214,8 @@ attempts (collection)
 subjects (1) ──→ (many) exams        via exams.subjectId = subjects.id
 exams    (1) ──→ (many) questions    via subcollection exams/{id}/questions
 exams    (1) ──→ (many) attempts     via attempts.examId = exams.id
+subjects (1) ──→ (many) blogs        via blogs.subjectId = subjects.id
+exams    (1) ──→ (0..1) blog         via blog.examId = exams.id (optional link)
 ```
 
 ### Security Rules
@@ -221,6 +277,7 @@ Logout Flow:
 | `POST` | `/api/attempt` | Submit exam | `{examId, studentName, score, total, answers, timeTaken}` | `{id}` |
 | `GET` | `/api/attempt/[id]` | Get single attempt | — | `{id, examId, score, answers, ...}` |
 | `GET` | `/api/leaderboard/[examId]` | Top 50 scores | — | `[{id, studentName, score, ...}]` |
+| `GET` | `/api/blogs/[subjectId]` | Published blogs for subject | — | `[{id, title, contentCount, ...}]` |
 
 ### Admin APIs (auth required via cookie)
 
@@ -228,13 +285,19 @@ Logout Flow:
 |--------|-------|---------|---------|----------|
 | `POST` | `/api/admin/login` | Login/Logout | `{password}` or `{action:"logout"}` | `{ok:true}` |
 | `GET` | `/api/admin/session` | Check auth | — | `{authed: bool}` |
-| `POST` | `/api/admin/upload` | Upload new exam | `{subject, examTitle, durationMinutes, questions[]}` | `{id, warning?}` |
+| `POST` | `/api/admin/upload` | Upload exam(s) | Single: `{subject, examTitle, questions[]}` or Array: `[{...}, {...}]` | `{id}` or `{batch, uploaded, failed, results, errors}` |
 | `GET` | `/api/admin/all` | All subjects+exams+stats | — | `[{id, name, exams:[{id, attemptCount, avgScore}]}]` |
 | `GET` | `/api/admin/exam/[id]` | Exam + questions | — | `{id, title, questions[]}` |
 | `PUT` | `/api/admin/exam/[id]` | Update exam+questions | `{examTitle, durationMinutes, questions[]}` | `{message, id}` |
 | `POST` | `/api/admin/exam/[id]` | Delete exam | `{action:"delete"}` | `{message}` |
 | `PUT` | `/api/admin/exam/[id]/publish` | Toggle published | `{published: bool}` | `{message}` |
 | `POST` | `/api/admin/subject/[id]` | Delete subject+exams | `{action:"delete"}` | `{message}` |
+| `GET` | `/api/admin/blogs` | All blogs | — | `[{id, title, published, contentCount, ...}]` |
+| `POST` | `/api/admin/blog/upload` | Create blog(s) | Single: `{subject, title, content[]}` or Array: `[{...}, {...}]` | `{id}` or `{batch, uploaded, failed, results, errors}` |
+| `GET` | `/api/admin/blog/[id]` | Blog detail | — | `{id, title, content[], ...}` |
+| `PUT` | `/api/admin/blog/[id]` | Update blog | `{title, description, content[], ...}` | `{message}` |
+| `POST` | `/api/admin/blog/[id]` | Delete blog | `{action:"delete"}` | `{message}` |
+| `PUT` | `/api/admin/blog/[id]/publish` | Toggle published | `{published: bool}` | `{message}` |
 
 ---
 
@@ -243,18 +306,18 @@ Logout Flow:
 ### `index.astro` — Home Page
 - Hero section with gradient background
 - Subject grid (fetches from `/api/subjects`)
-- "Coming Soon" section with 4 placeholder cards (Bangladesh Bank, BCS, NTRCA, NPCBL)
+- "Study Resources" CTA linking to `/blogs`
+- "Coming Soon" section with placeholder cards
 - Staggered fade-up animations
 
 ### `subject.astro` — Subject Detail
 - SSR page, fetches subject name from Firestore `subjects` collection
-- Falls back to formatted slug if doc not found
-- Fetches published exams from `exams` collection
+- Fetches published exams + published blogs
 - **Sorts by chapter number** extracted from title via regex `Chapter\s+(\d+)`
 - Vertical timeline layout with gradient line
-- Each chapter card shows: number badge, title, question count, duration, "✓ Best: X/30" (from localStorage)
-- Progress bar at top: "X of 10 chapters attempted"
-- Empty state: "No exams available yet"
+- Each chapter card: number badge, title, question count, duration, blog link (folder icon), "✓ Best: X/30" (from localStorage)
+- Blog links styled as amber folder/file items
+- Progress bar at top: "X of chapters attempted"
 
 ### `exam-intro/[id].astro` — Exam Intro (SSR)
 - Dynamic OG meta tags for Messenger/social sharing
@@ -278,10 +341,27 @@ Logout Flow:
 - Saves progress to localStorage (bestScore, totalQuestions)
 - Share + Copy Link buttons
 
+### `blogs.astro` — Blog Listing (Folder UI)
+- Fetches all published blogs, groups by subject
+- **Folder-style UI**: each subject is an expandable folder card
+- Folder shows: subject name, resource count, total Q&A count
+- Click to expand → shows individual blog items as file entries
+- Each file entry: document icon, title, Q&A count, slide indicator
+- Staggered fade-up animations
+
+### `blog.astro` — Blog Detail
+- Folder icon header matching the folder theme
+- Title, description, Q&A count, linked exam badge
+- Slide deck link (NotebookLM) if available
+- **Accordion Q&A**: expandable details for each question/answer
+- Tags display per Q&A item
+- Footer CTA: "এই চ্যাপ্টারের পরীক্ষা দিন" (linked exam)
+
 ### `admin.astro` — Admin Panel
-- Server-side auth gate: calls `GET /api/admin/session` on load
-- **Upload tab**: paste JSON or drag-and-drop file, live question counter, inline validation, preview → confirm upload, edit mode for existing exams
-- **Manage tab**: stats strip (Subjects/Exams/Questions/Published/Attempts), search + Published/Draft filter, collapsible subject cards, 2-column exam grid, edit/delete/publish toggles
+- **3 tabs**: Upload, Manage, Blog
+- **Upload tab**: paste JSON or drag-and-drop, multi-file batch upload, live question counter, inline validation, preview → confirm upload, edit mode
+- **Manage tab**: stats strip, search + Published/Draft filter, collapsible subject cards, 2-column exam grid with checkboxes, **bulk delete** (select all / delete selected), edit/delete/publish toggles
+- **Blog tab**: create/upload blog with multi-file batch, manage blogs with checkboxes and bulk delete, edit form with title/description/slide URL/linked exam/content
 - Form auto-clears after successful upload
 
 ### `cse-exams.astro` — Redirect
@@ -313,13 +393,15 @@ Logout Flow:
 - Rounded-2xl/3xl corners
 - Mobile-first responsive design
 - Bengali font support
+- **Folder-style resource UI** — amber folder icons, expandable subject groups, file-entry blog items
 
 ---
 
 ## 9. JSON Upload Format
 
-Admin uploads JSON with this structure:
+### Exam Upload (single or array)
 
+Single exam:
 ```json
 {
   "subject": "CSE College Teacher",
@@ -332,22 +414,50 @@ Admin uploads JSON with this structure:
       "correctOptionIndex": 0,
       "explanation": "Stack follows Last-In-First-Out principle",
       "marks": 1
-    },
-    ...
+    }
   ]
 }
 ```
 
+Batch upload (array of exams):
+```json
+[
+  { "subject": "...", "examTitle": "...", "questions": [...] },
+  { "subject": "...", "examTitle": "...", "questions": [...] }
+]
+```
+
+### Blog Upload (single or array)
+
+Single blog:
+```json
+{
+  "subject": "CSE College Teacher",
+  "title": "Data Structures Guide",
+  "description": "Bangla Q&A for chapter 1",
+  "examId": "optional-linked-exam-id",
+  "slideUrl": "https://notebooklm.google.com/...",
+  "content": [
+    {
+      "question": "Stack কী?",
+      "answer": "Stack হলো LIFO পদ্ধতিতে কাজ করে...",
+      "tags": ["stack", "LIFO"]
+    }
+  ]
+}
+```
+
+Batch upload (array of blogs):
+```json
+[
+  { "subject": "...", "title": "...", "content": [...] },
+  { "subject": "...", "title": "...", "content": [...] }
+]
+```
+
 ### Validation Rules
-- `subject` — required, non-empty string
-- `examTitle` — required, non-empty string
-- `questions` — required, non-empty array
-- Each question:
-  - `questionText` — required string
-  - `options` — required array with ≥ 2 items
-  - `correctOptionIndex` — required number, 0 ≤ index < options.length
-  - `explanation` — optional string (nullable)
-  - `marks` — optional number, defaults to 1
+- **Exam**: `subject` required, `examTitle` required, `questions` non-empty array, each question needs `questionText`, `options` (≥2), `correctOptionIndex` (valid range)
+- **Blog**: `subject` required, `title` required, `content` non-empty array, each item needs `question` and `answer`
 
 ### Slug Generation
 - `subject` → lowercase, spaces to hyphens, strip non-word chars
@@ -388,6 +498,11 @@ Admin uploads JSON with this structure:
 | **Astro over Next.js** | Simpler SSR, no React overhead, better Vercel integration, lighter bundle. |
 | **localStorage for progress** | No server-side user tracking. Best score preserved across sessions. |
 | **No student auth** | Simplifies UX. Name-only entry per attempt. |
+| **Multi-file batch upload** | API accepts array of objects, processes sequentially, returns per-item success/error. |
+| **Bulk delete via checkboxes** | Admin UI uses select all + individual checkboxes, POST to delete endpoint. |
+| **Folder-style resource UI** | Blogs grouped by subject in expandable folders for better discoverability. |
+| **No composite Firestore index queries** | All queries use single-field filter + JS filtering to avoid 500 errors. |
+| **No `define:vars` in inline scripts** | Avoids colon-injection SyntaxError. All URL params parsed client-side via `URLSearchParams`. |
 
 ---
 
@@ -396,10 +511,12 @@ Admin uploads JSON with this structure:
 | Issue | Workaround |
 |-------|-----------|
 | Vercel firewall blocks DELETE method | All delete routes use `POST { action: "delete" }` |
-| Vercel firewall blocks PUT method | Already using PUT for updates (works fine, only DELETE blocked) |
 | Firestore Timestamp returns `{_seconds, _nanoseconds}` | Client-side sorting uses `._seconds` or `.seconds` fallback |
 | Local Node.js v24 not supported by Vercel | Build warning; Vercel uses Node.js 22 at runtime |
 | `crypto.subtle` requires HTTPS | Works on Vercel (always HTTPS), fails on localhost HTTP |
+| No composite Firestore index | All queries use single-field filter + JS filtering |
+| `define:vars` with colons breaks inline scripts | All URL params parsed client-side via `URLSearchParams` |
+| TypeScript `: any` in `<script is:inline>` | Browser JS doesn't understand TS syntax; removed from inline scripts |
 
 ---
 
@@ -430,53 +547,65 @@ git push origin main
 
 ---
 
-## 15. Firestore Security Rules
+## 15. Content Summary
 
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
-}
-```
+### CSE College Teacher — 10 Chapters (300 MCQs)
+| # | Title | File |
+|---|-------|------|
+| 1 | Data Structures | `cse/chapter1-data-structures.json` |
+| 2 | Algorithms | `cse/chapter2-algorithms.json` |
+| 3 | Operating Systems | `cse/chapter3-operating-systems.json` |
+| 4 | DBMS | `cse/chapter4-dbms.json` |
+| 5 | Computer Networks | `cse/chapter5-computer-networks.json` |
+| 6 | Software Engineering | `cse/chapter6-software-engineering.json` |
+| 7 | OOP | `cse/chapter7-oop.json` |
+| 8 | Theory of Computation | `cse/chapter8-theory-of-computation.json` |
+| 9 | Compiler Design | `cse/chapter9-compiler-design.json` |
+| 10 | Digital Logic | `cse/chapter10-digital-logic.json` |
 
-**Why deny-all?** All data access happens through Firebase Admin SDK on the server side. The Admin SDK bypasses these rules entirely. This means no client-side Firestore access is possible — everything goes through our API routes.
+### NTRCA School ICT — 10 Topic Exams (300 MCQs)
+| # | Topic | File |
+|---|-------|------|
+| 1 | Computer Fundamentals | `cse/school/exams/exam-01-computer-fundamentals.json` |
+| 2 | Number Systems & Boolean | `cse/school/exams/exam-02-number-systems-boolean.json` |
+| 3 | Operating Systems | `cse/school/exams/exam-03-operating-systems.json` |
+| 4 | MS Office | `cse/school/exams/exam-04-ms-office.json` |
+| 5 | Networking | `cse/school/exams/exam-05-networking.json` |
+| 6 | Programming | `cse/school/exams/exam-06-programming.json` |
+| 7 | Database | `cse/school/exams/exam-07-database.json` |
+| 8 | ICT Bangladesh | `cse/school/exams/exam-08-ict-bangladesh.json` |
+| 9 | Multimedia | `cse/school/exams/exam-09-multimedia.json` |
+| 10 | Current Trends | `cse/school/exams/exam-10-current-trends.json` |
+
+### Islamic History — 1 Exam (30 MCQs)
+| Title | File |
+|-------|------|
+| আরব ভূমি, সিরাত ও খোলাফায়ে রাশেদীন | `cse/school/exams/exam-11-islamic-history.json` |
+
+### Blog/Study Resources
+| Content | Q&A Count | File |
+|---------|-----------|------|
+| CSE College Teacher (all chapters) | 1,174 | `cse/*.json` (11 files) |
+| NTRCA School ICT (combined) | 647 | `cse/ntrca-ict-blog.json` |
+| NTRCA School ICT (by topic) | 649 | `cse/school/*.json` (10 files) |
+| GATE PYQ Revision | 91 | `cse/gate-pyq-revision-blog.json` |
+| Practice Sets | 300 | `cse/school/practice/set-*.json` (10 files) |
+
+**Total: 630 exam MCQs + 2,861 blog Q&A**
 
 ---
 
-## 16. Content (10 Chapters)
-
-| # | Title | File | Questions |
-|---|-------|------|-----------|
-| 1 | Data Structures | `cse/chapter1-data-structures.json` | 30 |
-| 2 | Algorithms | `cse/chapter2-algorithms.json` | 30 |
-| 3 | Operating Systems | `cse/chapter3-operating-systems.json` | 30 |
-| 4 | DBMS | `cse/chapter4-dbms.json` | 30 |
-| 5 | Computer Networks | `cse/chapter5-computer-networks.json` | 30 |
-| 6 | Software Engineering | `cse/chapter6-software-engineering.json` | 30 |
-| 7 | OOP | `cse/chapter7-oop.json` | 30 |
-| 8 | Theory of Computation | `cse/chapter8-theory-of-computation.json` | 30 |
-| 9 | Compiler Design | `cse/chapter9-compiler-design.json` | 30 |
-| 10 | Digital Logic | `cse/chapter10-digital-logic.json` | 30 |
-
-**Total: 300 MCQs**
-
-Upload via Admin panel → Upload tab → paste JSON → Preview → Confirm.
-
----
-
-## 17. Prompt Generation Guide
+## 16. Prompt Generation Guide
 
 To generate prompts for this project, include:
 
 1. **Stack context**: Astro 5, TypeScript, Firebase Firestore (Admin SDK), Tailwind CSS, Vercel
-2. **Database**: Firestore with `subjects`, `exams` (with `questions` subcollection), `attempts` collections
+2. **Database**: Firestore with `subjects`, `exams` (with `questions` subcollection), `blogs`, `attempts` collections
 3. **Auth**: Stateless HMAC-SHA256 signed cookies, `ADMIN_PASSWORD` env var, `checkAuth()` middleware
 4. **API pattern**: Astro API routes in `src/pages/api/`, all use `getAdminDb()` from `src/lib/firebase-admin.ts`
 5. **Pages**: Astro SSR pages in `src/pages/`, file-based routing
-6. **Styling**: Tailwind with custom `brand-*`/`surface-*` palette, glass morphism, rounded-2xl/3xl
-7. **Constraints**: No client Firebase SDK, POST for deletes (Vercel firewall), `data-qi`/`data-oi` for exam selection
+6. **Styling**: Tailwind with custom `brand-*`/`surface-*` palette, glass morphism, rounded-2xl/3xl, folder-style resource UI
+7. **Constraints**: No client Firebase SDK, POST for deletes (Vercel firewall), `data-qi`/`data-oi` for exam selection, no `define:vars` in inline scripts, no TS annotations in `<script is:inline>`
 8. **Deployment**: Vercel auto-deploy from GitHub `main` branch, server-only env vars
+9. **Upload formats**: Exam = `{subject, examTitle, questions[]}`, Blog = `{subject, title, content[]}`, both accept arrays for batch upload
+10. **Bulk operations**: Admin checkboxes for multi-select delete, batch upload via file queue
