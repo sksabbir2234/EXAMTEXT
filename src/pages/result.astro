@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 
 const examId = Astro.url.searchParams.get('examId') || '';
-const attemptId = Astro.url.searchParams.get('id') || '';
 const rawScore = Astro.url.searchParams.get('score') || '0';
 const rawTotal = Astro.url.searchParams.get('total') || '0';
 const rawCorrect = Astro.url.searchParams.get('correct');
@@ -21,11 +20,11 @@ const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
 <Layout title="Result - ExamText" navBack={true} navTitle="Exam Result">
   <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
 
-    {(!examId || !attemptId) ? (
+    {(!examId) ? (
       <div class="card p-8 text-center animate-scale-in">
         <div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-6">⚠️</div>
         <h1 class="text-xl font-bold text-surface-900 mb-2">Invalid result link</h1>
-        <p class="text-surface-400 text-sm mb-6">Missing exam or attempt information.</p>
+        <p class="text-surface-400 text-sm mb-6">Missing exam information.</p>
         <a href="/" class="btn-primary text-sm px-6 py-3 inline-block">Go Home</a>
       </div>
     ) : (
@@ -42,6 +41,15 @@ const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
         <span class="text-xl">🏆</span> Leaderboard
       </h2>
       <div id="leaderboard" class="divide-y divide-surface-100"></div>
+    </div>
+
+    <!-- Your Attempts (saved in your browser) -->
+    <div id="history-card" class="card p-6 hidden animate-fade-up" style="animation-delay:0.22s;opacity:0;">
+      <h2 class="text-lg font-bold text-surface-900 mb-1 flex items-center gap-2">
+        <span class="text-xl">📊</span> Your Attempts
+      </h2>
+      <p class="text-xs text-surface-400 mb-4">Saved locally in this browser — not on our server.</p>
+      <div id="history" class="divide-y divide-surface-100"></div>
     </div>
 
     <!-- Related Study Resource -->
@@ -61,7 +69,6 @@ const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
     const labels = ['A','B','C','D'];
     const params = new URLSearchParams(window.location.search);
     const examId = params.get('examId') || '';
-    const attemptId = params.get('id') || '';
     const score = parseInt(params.get('score') || '0', 10) || 0;
     const total = parseInt(params.get('total') || '0', 10) || 0;
     const correctParam = params.get('correct');
@@ -107,7 +114,7 @@ const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
             <button onclick="navigator.share && navigator.share({title:'My Result',url:window.location.href})" class="btn-ghost text-sm px-5 py-2.5">Share</button>
             <button onclick="navigator.clipboard.writeText(window.location.href);window.showToast('Link copied!')" class="btn-ghost text-sm px-5 py-2.5">Copy Link</button>
             <button onclick="window.print()" class="btn-ghost text-sm px-5 py-2.5">🖨️ Print</button>
-            ${wrongCount>0?`<a href="/exam?id=${examId}&mode=practice&attempt=${attemptId}" class="btn-primary text-sm px-5 py-2.5">🚩 Practice Wrong (${wrongCount})</a>`:''}
+            ${wrongCount>0?`<a href="/exam?id=${examId}&mode=practice" class="btn-primary text-sm px-5 py-2.5">🚩 Practice Wrong (${wrongCount})</a>`:''}
           </div>`;
 
         // Save progress to localStorage
@@ -126,14 +133,11 @@ const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
         const qRes = await fetch(`/api/exam/${examId}/questions`);
         const questions = await qRes.json();
 
-        // Fetch attempt to get student's answers
+        // Read this attempt's answers from the student's browser (localStorage)
         let studentAnswers = {};
         try {
-          const attRes = await fetch(`/api/attempt/${attemptId}`);
-          if (attRes.ok) {
-            const attData = await attRes.json();
-            studentAnswers = attData.answers || {};
-          }
+          const last = JSON.parse(localStorage.getItem('examtext_last_' + examId) || 'null');
+          if (last && last.answers) studentAnswers = last.answers;
         } catch {}
 
         document.getElementById('review-card').classList.remove('hidden');
@@ -173,6 +177,24 @@ const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
             </div>
           `).join('');
         }
+
+        // Render browser-local attempt history for this exam
+        try {
+          const all = JSON.parse(localStorage.getItem('examtext_attempts') || '[]');
+          const hist = all.filter((a) => a.examId === examId).sort((a, b) => b.date - a.date);
+          if (hist.length > 0) {
+            document.getElementById('history-card').classList.remove('hidden');
+            document.getElementById('history').innerHTML = hist.slice(0, 10).map((a, i) => {
+              const pct = a.total > 0 ? Math.round(a.score / a.total * 100) : 0;
+              return `<div class="flex items-center gap-3 py-2.5">
+                <span class="text-xs font-bold w-6 text-surface-400">#${hist.length - i}</span>
+                <span class="text-sm font-semibold text-surface-700 flex-1">${a.score}/${a.total}</span>
+                <span class="text-xs font-medium ${pct >= 50 ? 'text-emerald-500' : 'text-amber-500'}">${pct}%</span>
+                <span class="text-xs text-surface-300">${new Date(a.date).toLocaleDateString()}</span>
+              </div>`;
+            }).join('');
+          }
+        } catch {}
 
         // Fetch related blog
         try {

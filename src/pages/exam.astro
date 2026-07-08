@@ -89,10 +89,9 @@ const examId = Astro.url.searchParams.get('id') || '';
         questions = await qRes.json();
         if (!Array.isArray(questions) || questions.length === 0) { document.getElementById('questions').innerHTML = '<p class="text-center text-red-500 py-16">No questions found.</p>'; return; }
 
-        if (practiceMode && practiceAttemptId) {
-          const attRes = await fetch(`/api/attempt/${practiceAttemptId}`);
-          const att = await attRes.json();
-          const ans = att.answers || {};
+        if (practiceMode) {
+          let ans = {};
+          try { const last = JSON.parse(localStorage.getItem('examtext_last_' + examId) || 'null'); if (last && last.answers) ans = last.answers; } catch {}
           const wrongSet = [];
           questions.forEach((q, i) => { if (ans[i] !== q.correctOptionIndex) wrongSet.push(i); });
           if (wrongSet.length === 0) {
@@ -283,11 +282,30 @@ const examId = Astro.url.searchParams.get('id') || '';
       }
 
       const studentName = sessionStorage.getItem('studentName') || 'Anonymous';
+
+      // Save the FULL attempt in the student's browser (localStorage).
       try {
-        const res = await fetch('/api/attempt', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ examId, studentName, score: finalScore, correct, wrong, total, answers: originalAnswers, timeTaken: secondsElapsed }) });
-        const data = await res.json();
-        window.location.href = `/result?id=${data.id}&examId=${examId}&score=${finalScore}&correct=${correct}&wrong=${wrong}&total=${total}`;
-      } catch { window.showToast('Error submitting exam'); }
+        const rec = { examId, score: finalScore, correct, wrong, total, answers: originalAnswers, timeTaken: secondsElapsed, date: Date.now() };
+        const all = JSON.parse(localStorage.getItem('examtext_attempts') || '[]');
+        all.push(rec);
+        localStorage.setItem('examtext_attempts', JSON.stringify(all.slice(-100)));
+        localStorage.setItem('examtext_last_' + examId, JSON.stringify(rec));
+        const pk = 'examtext_progress_' + examId;
+        const ex = JSON.parse(localStorage.getItem(pk) || '{}');
+        localStorage.setItem(pk, JSON.stringify({
+          attempted: true,
+          bestScore: Math.max(ex.bestScore ?? 0, finalScore),
+          lastAttempt: new Date().toISOString(),
+          totalQuestions: total,
+        }));
+      } catch {}
+
+      // Minimal anonymous leaderboard write (fire-and-forget, no detailed data).
+      try {
+        fetch('/api/attempt', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ examId, studentName, score: finalScore, total, timeTaken: secondsElapsed }) });
+      } catch {}
+
+      window.location.href = `/result?examId=${examId}&score=${finalScore}&correct=${correct}&wrong=${wrong}&total=${total}`;
     }
 
     function showPracticeResult(originalAnswers, correct, wrong, penalty, finalScore, total) {
