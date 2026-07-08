@@ -55,3 +55,26 @@ export const GET: APIRoute = async (ctx) => {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });
   }
 };
+
+export const DELETE: APIRoute = async (ctx) => {
+  const auth = await checkAuth(ctx);
+  if (!auth.ok) return auth.response;
+
+  try {
+    const db = getAdminDb();
+    let deleted = 0;
+    let guard = 0;
+    let snap = await db.collection('attempts').limit(500).get();
+    while (!snap.empty && guard < 200) {
+      const batch = db.batch();
+      snap.docs.forEach((d) => batch.delete(d.ref));
+      await batch.commit();
+      deleted += snap.size;
+      guard++;
+      snap = await db.collection('attempts').limit(500).get();
+    }
+    return new Response(JSON.stringify({ deleted }), { headers: { 'Content-Type': 'application/json' } });
+  } catch (e: any) {
+    return new Response(JSON.stringify({ error: e.message }), { status: 500 });
+  }
+};

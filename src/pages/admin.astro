@@ -38,11 +38,12 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="max-w-6xl mx-auto px-4 py-6">
       <!-- Tabs -->
-      <div class="flex gap-1 p-1 bg-surface-100 rounded-2xl mb-6 max-w-xs">
+      <div class="flex flex-wrap gap-1 p-1 bg-surface-100 rounded-2xl mb-6 max-w-lg">
         <button data-tab="upload" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-white text-brand-600 shadow-sm">Upload</button>
         <button data-tab="manage" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">Manage</button>
         <button data-tab="blog" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">Blog</button>
         <button data-tab="monitor" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">📡 Monitor</button>
+        <button data-tab="subjects" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">📚 Subjects</button>
       </div>
 
       <!-- Upload Tab -->
@@ -267,10 +268,15 @@ import Layout from '../layouts/Layout.astro';
               <h2 class="text-lg font-bold text-surface-900 flex items-center gap-2">📡 Live Student Monitor</h2>
               <span id="monitor-last-updated" class="text-xs text-surface-400"></span>
             </div>
-            <button id="monitor-refresh-btn" class="btn-ghost text-sm flex items-center gap-1.5">
-              <svg id="monitor-refresh-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-              Refresh
-            </button>
+            <div class="flex items-center gap-2">
+              <button id="monitor-refresh-btn" class="btn-ghost text-sm flex items-center gap-1.5">
+                <svg id="monitor-refresh-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                Refresh
+              </button>
+              <button id="clear-attempts-btn" class="btn-ghost text-sm flex items-center gap-1.5 text-red-500 hover:text-red-600">
+                🗑️ Clear Data
+              </button>
+            </div>
           </div>
 
           <!-- Filters -->
@@ -343,6 +349,22 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+    <!-- Subjects Tab -->
+    <div id="tab-subjects" class="tab-content hidden">
+      <div class="card p-6 md:p-8 mb-6">
+        <h2 class="text-lg font-bold text-surface-900 mb-1">Create Subject</h2>
+        <p class="text-sm text-surface-400 mb-4">Subjects are created from a name. Exams and blogs link to a subject by this name (slug).</p>
+        <form id="subject-create-form" class="flex flex-col sm:flex-row gap-3">
+          <input id="subject-name" type="text" placeholder="Subject name (e.g. CSE College Teacher)" required autocomplete="off" class="flex-1 px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+          <button type="submit" class="btn-primary text-sm whitespace-nowrap">Create Subject</button>
+        </form>
+      </div>
+      <div class="card p-6 md:p-8">
+        <h2 class="text-lg font-bold text-surface-900 mb-4">All Subjects</h2>
+        <div id="subjects-list"><div class="flex justify-center py-12"><div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div></div></div>
+      </div>
+    </div>
 
   <!-- Confirm Modal -->
   <div id="confirm-modal" class="fixed inset-0 z-50 hidden">
@@ -1144,11 +1166,90 @@ import Layout from '../layouts/Layout.astro';
         try { await fetch(`/api/admin/blog/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); window.showToast('Deleted'); loadBlogList(); } catch { window.showToast('Error'); }
       };
 
+      // --- Subjects Tab ---
+      async function loadSubjects() {
+        var el = document.getElementById('subjects-list');
+        el.innerHTML = '<div class="flex justify-center py-12"><div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div></div>';
+        try {
+          var res = await fetch('/api/admin/subjects');
+          if (!res.ok) throw new Error('Failed to load');
+          var subjects = await res.json();
+          if (!subjects.length) {
+            el.innerHTML = '<div class="text-center py-12"><p class="text-surface-400 font-medium">No subjects yet</p><p class="text-surface-300 text-sm mt-1">Create one above</p></div>';
+            return;
+          }
+          el.innerHTML = subjects.map(function(s) {
+            return '<div class="flex items-center justify-between p-4 border border-surface-100 rounded-2xl mb-3 hover:border-brand-200 transition">'
+              + '<div class="min-w-0 flex-1">'
+              + '<div class="font-semibold text-sm text-surface-800 truncate">' + s.name + '</div>'
+              + '<div class="text-xs text-surface-400 mt-0.5">slug: ' + s.slug + '</div>'
+              + '</div>'
+              + '<div class="flex gap-2 shrink-0 ml-3">'
+              + '<button onclick="renameSubjectPrompt(\'' + s.slug + '\',\'' + s.name.replace(/'/g,"\\'") + '\')" class="px-3 py-1.5 text-xs font-medium text-brand-600 bg-brand-50 rounded-lg hover:bg-brand-100 transition">Rename</button>'
+              + '<button onclick="deleteSubjectConfirm(\'' + s.slug + '\',\'' + s.name.replace(/'/g,"\\'") + '\')" class="px-3 py-1.5 text-xs font-medium text-red-500 bg-red-50 rounded-lg hover:bg-red-100 transition">Delete</button>'
+              + '</div></div>';
+          }).join('');
+        } catch(e) { el.innerHTML = '<div class="text-center py-12"><p class="text-red-500 font-medium">' + e.message + '</p></div>'; }
+      }
+
+      document.getElementById('subject-create-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        var nameEl = document.getElementById('subject-name');
+        var name = nameEl.value.trim();
+        if (!name) return;
+        try {
+          var res = await fetch('/api/admin/subject', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) });
+          if (res.ok) {
+            window.showToast('Subject created');
+            nameEl.value = '';
+            loadSubjects();
+          } else {
+            var d = await res.json();
+            window.showToast(d.error || 'Failed');
+          }
+        } catch { window.showToast('Error'); }
+      });
+
+      window.renameSubjectPrompt = async (slug, oldName) => {
+        var newName = prompt('Rename subject "' + oldName + '" to:', oldName);
+        if (!newName || newName.trim() === oldName) return;
+        try {
+          var res = await fetch('/api/admin/subject/' + slug, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: newName.trim() }) });
+          if (res.ok) { window.showToast('Renamed'); loadSubjects(); }
+          else { var d = await res.json(); window.showToast(d.error || 'Failed'); }
+        } catch { window.showToast('Error'); }
+      };
+
+      window.deleteSubjectConfirm = async (slug, name) => {
+        var ok = await showConfirm('Delete Subject?', 'Delete "' + name + '" and all its exams and blogs. This cannot be undone.', 'Delete');
+        if (!ok) return;
+        try {
+          await fetch('/api/admin/subject/' + slug, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) });
+          window.showToast('Deleted');
+          loadSubjects();
+        } catch { window.showToast('Error'); }
+      };
+
+      // --- Clear Attempts ---
+      document.getElementById('clear-attempts-btn').addEventListener('click', async () => {
+        var ok = await showConfirm('Clear All Attempts?', 'This will permanently delete ALL leaderboard data. This cannot be undone.', 'Clear All');
+        if (!ok) return;
+        try {
+          var res = await fetch('/api/admin/attempts', { method: 'DELETE' });
+          if (res.ok) {
+            var d = await res.json();
+            window.showToast('Cleared ' + d.deleted + ' attempts');
+            loadMonitorData();
+          } else { window.showToast('Failed'); }
+        } catch { window.showToast('Error'); }
+      });
+
       // Load blogs when switching to blog tab
       const origTabClick = document.querySelectorAll('[data-tab]');
       origTabClick.forEach(btn => {
         btn.addEventListener('click', () => {
           if (btn.dataset.tab === 'blog') loadBlogList();
+          if (btn.dataset.tab === 'subjects') loadSubjects();
           if (btn.dataset.tab === 'monitor') { loadMonitorData(); startMonitorRefresh(); }
           else { stopMonitorRefresh(); }
         });
