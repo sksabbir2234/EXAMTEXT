@@ -769,7 +769,7 @@ import Layout from '../layouts/Layout.astro';
                 </button>
               </div>
               <div id="exam-reorder-${s.id}" style="display:none;" class="space-y-2 mb-3">
-                <div class="exam-reorder-list space-y-1.5" data-subject-id="${s.id}">${s.exams.sort((a,b) => (a.order??9999)-(b.order??9999)).map((e, i) => `
+                <div class="exam-reorder-list space-y-1.5" data-subject-id="${s.id}">${s.exams.sort((a,b) => (a.sortOrder??9999)-(b.sortOrder??9999)).map((e, i) => `
                   <div class="flex items-center gap-2 p-2.5 bg-surface-50 rounded-xl cursor-move drag-exam" draggable="true" data-eid="${e.id}" data-pos="${i}">
                     <span class="drag-handle text-surface-300 hover:text-surface-500 cursor-grab text-sm select-none">⠿</span>
                     <span class="position-num text-xs font-bold text-surface-400 w-4 text-center">${i + 1}</span>
@@ -1006,8 +1006,15 @@ import Layout from '../layouts/Layout.astro';
       window.saveExamOrder = async (subjectId) => {
         const list = document.querySelector('.exam-reorder-list[data-subject-id="' + subjectId + '"]');
         if (!list) return;
-        const ids = Array.from(list.querySelectorAll('.drag-exam')).map(el => el.dataset.eid).filter(Boolean);
-        if (ids.length === 0) { window.showToast('কোনো exam পাওয়া যায়নি', 'error'); return; }
+        const rows = list.querySelectorAll('.drag-exam');
+        console.log('[saveExamOrder] Found rows:', rows.length);
+        const ids = Array.from(rows).map(el => {
+          const id = el.getAttribute('data-eid');
+          console.log('  data-eid:', id, '|', el.textContent.trim().substring(0, 30));
+          return id;
+        }).filter(Boolean);
+        console.log('[saveExamOrder] orderedIds:', ids);
+        if (ids.length === 0) { window.showToast('কোনো exam পাওয়া যায়নি — data-eid খালি', 'error'); return; }
         try {
           const res = await fetch('/api/admin/exams/reorder', {
             method: 'POST',

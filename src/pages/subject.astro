@@ -43,8 +43,8 @@ try {
 
   // Sort by chapter number — compute once, sort deterministically
   const getNum = (title: string): number => {
-    const m = (title || '').match(/Chapter\s+(\d+)/i);
-    return m ? parseInt(m[1], 10) : 999;
+    const m = (title || '').match(/Unit\s+(\d+(?:\.\d+)?)/i) || (title || '').match(/Chapter\s+(\d+(?:\.\d+)?)/i);
+    return m ? parseFloat(m[1]) : 999;
   };
   exams = exams
     .map(e => ({ ...e, _chapterNum: getNum(e.title) }))
