@@ -53,7 +53,7 @@ const {
   {showNav && (
     <nav class="sticky top-0 z-40 glass border-b border-surface-100/60">
       <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
           {navBack ? (
             <a href="/" class="w-9 h-9 rounded-xl bg-surface-100 hover:bg-surface-200 flex items-center justify-center transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
@@ -64,6 +64,18 @@ const {
               <span class="text-lg font-bold gradient-text hidden sm:inline">ExamText</span>
             </a>
           )}
+          <button
+            id="navbar-install-btn"
+            class="md:hidden flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150"
+            style="display:none;"
+            aria-label="অ্যাপ ইনস্টল করুন"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v13M8 11l4 4 4-4"/>
+              <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
+            </svg>
+            ইনস্টল
+          </button>
           {navTitle && <span class="font-semibold text-surface-800 text-sm sm:text-base truncate max-w-[200px]">{navTitle}</span>}
         </div>
         <div class="flex items-center gap-2">
@@ -118,70 +130,53 @@ const {
       });
     }
 
-    // --- PWA Install Banner (Android/Chrome) ---
-    var deferredPrompt;
-    window.addEventListener('beforeinstallprompt', function (e) {
+    // --- PWA Install (Navbar Button) ---
+    window.__pwaPrompt = null;
+    var navInstallBtn = document.getElementById('navbar-install-btn');
+
+    window.addEventListener('beforeinstallprompt', function(e) {
       e.preventDefault();
-      deferredPrompt = e;
-      if (!localStorage.getItem('pwa-dismissed')) {
-        var banner = document.getElementById('pwa-install-banner');
-        if (banner) banner.style.display = 'flex';
+      window.__pwaPrompt = e;
+      if (navInstallBtn && !localStorage.getItem('pwa-installed')) {
+        navInstallBtn.style.display = 'flex';
       }
     });
-    var installBtn = document.getElementById('pwa-install-btn');
-    if (installBtn) {
-      installBtn.addEventListener('click', function () {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then(function () {
-            deferredPrompt = null;
-            var b = document.getElementById('pwa-install-banner');
-            if (b) b.style.display = 'none';
+
+    if (navInstallBtn) {
+      navInstallBtn.addEventListener('click', function() {
+        if (window.__pwaPrompt) {
+          window.__pwaPrompt.prompt();
+          window.__pwaPrompt.userChoice.then(function(result) {
+            window.__pwaPrompt = null;
+            if (result.outcome === 'accepted') {
+              localStorage.setItem('pwa-installed', '1');
+              navInstallBtn.style.display = 'none';
+            }
           });
+        } else {
+          alert('ইনস্টল করতে: ব্রাউজার মেনু (⋮) → "Add to Home Screen" বা "হোম স্ক্রিনে যোগ করুন" সিলেক্ট করুন।');
         }
       });
     }
-    var dismissBtn = document.getElementById('pwa-dismiss-btn');
-    if (dismissBtn) {
-      dismissBtn.addEventListener('click', function () {
-        localStorage.setItem('pwa-dismissed', '1');
-        var b = document.getElementById('pwa-install-banner');
-        if (b) b.style.display = 'none';
-      });
+
+    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+      localStorage.setItem('pwa-installed', '1');
+      if (navInstallBtn) navInstallBtn.style.display = 'none';
     }
-    window.addEventListener('appinstalled', function () {
-      var b = document.getElementById('pwa-install-banner');
-      if (b) b.style.display = 'none';
-      localStorage.setItem('pwa-dismissed', '1');
+
+    window.addEventListener('appinstalled', function() {
+      window.__pwaPrompt = null;
+      localStorage.setItem('pwa-installed', '1');
+      if (navInstallBtn) navInstallBtn.style.display = 'none';
     });
 
-    // --- iOS Install Instruction Toast ---
+    // iOS: show install button (no beforeinstallprompt on iOS)
     var isIos = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
-    var isInStandaloneMode = ('standalone' in navigator) && navigator.standalone;
-    var iosShown = localStorage.getItem('ios-pwa-shown');
-    if (isIos && !isInStandaloneMode && !iosShown) {
-      setTimeout(function () {
-        var toast = document.createElement('div');
-        toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;color:white;padding:12px 16px;border-radius:12px;font-size:13px;z-index:9999;max-width:300px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.4);line-height:1.5;font-family:Noto Sans Bengali,sans-serif;';
-        toast.innerHTML = '📱 <strong>হোম স্ক্রিনে যোগ করুন</strong><br>নিচে <strong>Share</strong> আইকনে ট্যাপ করুন → <strong>"Add to Home Screen"</strong> বেছে নিন';
-        document.body.appendChild(toast);
-        localStorage.setItem('ios-pwa-shown', '1');
-        setTimeout(function () { toast.remove(); }, 7000);
-      }, 3000);
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+    if (isIos && !isStandalone && !localStorage.getItem('ios-hint-shown')) {
+      if (navInstallBtn) navInstallBtn.style.display = 'flex';
+      localStorage.setItem('ios-hint-shown', '1');
     }
   </script>
-
-  <!-- PWA Install Banner -->
-  <div id="pwa-install-banner" style="display:none;" class="fixed bottom-4 left-4 right-4 z-50 bg-indigo-600 text-white rounded-2xl p-4 shadow-xl flex items-center gap-3">
-    <div class="text-3xl">📱</div>
-    <div class="flex-1">
-      <p class="font-bold text-sm">ExamText অ্যাপ ইনস্টল করুন</p>
-      <p class="text-xs text-indigo-200">হোম স্ক্রিনে যোগ করুন, অফলাইনেও ব্যবহার করুন</p>
-    </div>
-    <div class="flex flex-col gap-1">
-      <button id="pwa-install-btn" class="bg-white text-indigo-700 text-xs font-bold px-3 py-1.5 rounded-lg">ইনস্টল</button>
-      <button id="pwa-dismiss-btn" class="text-indigo-300 text-xs px-3 py-1">পরে</button>
-    </div>
-  </div>
 </body>
 </html>
