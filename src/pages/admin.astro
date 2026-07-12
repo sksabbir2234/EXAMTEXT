@@ -764,18 +764,19 @@ import Layout from '../layouts/Layout.astro';
               ${s.exams.length === 0 ? '<p class="text-surface-300 text-sm py-4 text-center">No exams in this subject</p>' : `
               <div class="flex items-center justify-between mb-3">
                 <span class="text-xs text-surface-400">${s.exams.length} exam${s.exams.length!==1?'s':''}</span>
-                <button onclick="toggleExamReorder('${s.id}')" class="text-xs font-medium text-brand-600 hover:text-brand-700 transition flex items-center gap-1" data-subject-toggle="${s.id}">
-                  <span class="reorder-label">↕️ Reorder</span>
+                <button id="reorder-toggle-${s.id}" onclick="toggleExamReorder('${s.id}')" class="text-xs font-medium text-brand-600 hover:text-brand-700 transition flex items-center gap-1">
+                  ↕️ Reorder
                 </button>
               </div>
-              <div id="exam-reorder-${s.id}" class="hidden space-y-2 mb-3">
-                <div class="exam-reorder-list space-y-1.5" data-subject-id="${s.id}">${s.exams.map((e, i) => `
-                  <div class="flex items-center gap-2 p-2.5 bg-surface-50 rounded-xl cursor-move drag-exam" draggable="true" data-eid="${e.id}" data-sid="${s.id}" data-pos="${i}">
+              <div id="exam-reorder-${s.id}" style="display:none;" class="space-y-2 mb-3">
+                <div class="exam-reorder-list space-y-1.5" data-subject-id="${s.id}">${s.exams.sort((a,b) => (a.order??9999)-(b.order??9999)).map((e, i) => `
+                  <div class="flex items-center gap-2 p-2.5 bg-surface-50 rounded-xl cursor-move drag-exam" draggable="true" data-eid="${e.id}" data-pos="${i}">
                     <span class="drag-handle text-surface-300 hover:text-surface-500 cursor-grab text-sm select-none">⠿</span>
-                    <span class="text-xs font-bold text-surface-400 w-4 text-center">${i + 1}</span>
+                    <span class="position-num text-xs font-bold text-surface-400 w-4 text-center">${i + 1}</span>
                     <span class="font-medium text-xs text-surface-700 flex-1 truncate">${e.title}</span>
+                    <span class="text-xs text-surface-400">${e.totalQuestions||0}Q</span>
                   </div>`).join('')}</div>
-                <button onclick="saveExamOrder('${s.id}')" class="w-full py-2 bg-emerald-500 text-white rounded-xl text-xs font-semibold hover:bg-emerald-600 transition">Save Exam Order</button>
+                <button onclick="saveExamOrder('${s.id}')" class="w-full py-2 bg-emerald-500 text-white rounded-xl text-xs font-semibold hover:bg-emerald-600 transition">✓ ক্রম সেভ করুন</button>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="exam-grid-${s.id}">
                 ${s.exams.map(e => `
@@ -932,62 +933,93 @@ import Layout from '../layouts/Layout.astro';
       window.toggleExamReorder = (subjectId) => {
         const reorderDiv = document.getElementById('exam-reorder-' + subjectId);
         const grid = document.getElementById('exam-grid-' + subjectId);
+        const toggleBtn = document.getElementById('reorder-toggle-' + subjectId);
         if (!reorderDiv || !grid) return;
-        const isHidden = reorderDiv.classList.contains('hidden');
-        reorderDiv.classList.toggle('hidden');
-        grid.classList.toggle('hidden');
 
-        if (isHidden) {
-          // Init drag & drop for exam reorder
-          const list = reorderDiv.querySelector('.exam-reorder-list');
-          let dragExamEl = null;
-          list.querySelectorAll('.drag-exam').forEach(el => {
-            el.addEventListener('dragstart', (e) => {
-              dragExamEl = el;
-              el.classList.add('opacity-50');
-              e.dataTransfer.effectAllowed = 'move';
-            });
-            el.addEventListener('dragend', () => {
-              el.classList.remove('opacity-50');
-              dragExamEl = null;
-              list.querySelectorAll('.drag-exam').forEach(x => x.classList.remove('border-brand-500'));
-            });
-            el.addEventListener('dragover', (e) => {
-              e.preventDefault();
-              e.dataTransfer.dropEffect = 'move';
-              el.classList.add('border-brand-500');
-            });
-            el.addEventListener('dragleave', () => el.classList.remove('border-brand-500'));
-            el.addEventListener('drop', (e) => {
-              e.preventDefault();
-              el.classList.remove('border-brand-500');
-              if (!dragExamEl || dragExamEl === el) return;
-              const fromPos = parseInt(dragExamEl.dataset.pos);
-              const toPos = parseInt(el.dataset.pos);
-              if (fromPos < toPos) el.after(dragExamEl); else el.before(dragExamEl);
-              // Update positions
-              list.querySelectorAll('.drag-exam').forEach((x, i) => {
-                x.dataset.pos = i;
-                x.querySelector('.text-xs.font-bold').textContent = i + 1;
-              });
-            });
-          });
+        const isReordering = reorderDiv.style.display !== 'none';
+
+        if (isReordering) {
+          reorderDiv.style.display = 'none';
+          grid.style.display = '';
+          if (toggleBtn) toggleBtn.textContent = '↕️ Reorder';
+        } else {
+          reorderDiv.style.display = '';
+          grid.style.display = 'none';
+          if (toggleBtn) toggleBtn.textContent = '✕ Cancel';
+          initExamDragList(subjectId);
         }
       };
+
+      function initExamDragList(subjectId) {
+        const list = document.querySelector('.exam-reorder-list[data-subject-id="' + subjectId + '"]');
+        if (!list) return;
+
+        // Clone rows to strip old listeners
+        list.querySelectorAll('.drag-exam').forEach(el => {
+          const fresh = el.cloneNode(true);
+          el.parentNode.replaceChild(fresh, el);
+        });
+
+        let dragExamEl = null;
+
+        list.querySelectorAll('.drag-exam').forEach(row => {
+          row.addEventListener('dragstart', (e) => {
+            dragExamEl = row;
+            row.classList.add('opacity-40');
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          row.addEventListener('dragend', () => {
+            row.classList.remove('opacity-40');
+            dragExamEl = null;
+            list.querySelectorAll('.drag-exam').forEach(x => x.classList.remove('bg-brand-50'));
+          });
+          row.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            row.classList.add('bg-brand-50');
+          });
+          row.addEventListener('dragleave', () => row.classList.remove('bg-brand-50'));
+          row.addEventListener('drop', (e) => {
+            e.preventDefault();
+            row.classList.remove('bg-brand-50');
+            if (!dragExamEl || dragExamEl === row) return;
+
+            const allRows = Array.from(list.querySelectorAll('.drag-exam'));
+            const srcIdx = allRows.indexOf(dragExamEl);
+            const tgtIdx = allRows.indexOf(row);
+
+            if (srcIdx < tgtIdx) {
+              list.insertBefore(dragExamEl, row.nextSibling);
+            } else {
+              list.insertBefore(dragExamEl, row);
+            }
+
+            list.querySelectorAll('.drag-exam').forEach((r, i) => {
+              r.dataset.pos = i;
+              const numEl = r.querySelector('.position-num');
+              if (numEl) numEl.textContent = i + 1;
+            });
+          });
+        });
+      }
 
       window.saveExamOrder = async (subjectId) => {
         const list = document.querySelector('.exam-reorder-list[data-subject-id="' + subjectId + '"]');
         if (!list) return;
-        const ids = Array.from(list.querySelectorAll('.drag-exam')).map(el => el.dataset.eid);
+        const ids = Array.from(list.querySelectorAll('.drag-exam')).map(el => el.dataset.eid).filter(Boolean);
+        if (ids.length === 0) { window.showToast('কোনো exam পাওয়া যায়নি', 'error'); return; }
         try {
           const res = await fetch('/api/admin/exams/reorder', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ subjectId, orderedIds: ids })
           });
-          if (res.ok) { window.showToast('Exam order saved'); loadManageList(); }
-          else { window.showToast('Failed to save order'); }
-        } catch { window.showToast('Error saving order'); }
+          if (res.ok) {
+            window.showToast('এক্সাম ক্রম সেভ হয়েছে ✓');
+            toggleExamReorder(subjectId);
+            loadManageList();
+          } else { window.showToast('সেভ হয়নি', 'error'); }
+        } catch { window.showToast('নেটওয়ার্ক এরর', 'error'); }
       };
 
       // Search & filter
