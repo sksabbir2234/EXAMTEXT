@@ -1,0 +1,49 @@
+---
+---
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>অফলাইন — ExamText</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans Bengali', system-ui, sans-serif;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+    }
+    .icon { font-size: 4rem; margin-bottom: 1rem; }
+    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #a5b4fc; }
+    p { color: #94a3b8; max-width: 320px; line-height: 1.7; font-size: 0.95rem; }
+    button {
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      background: #6366f1;
+      color: white;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover { background: #4f46e5; }
+  </style>
+</head>
+<body>
+  <div class="icon">📡</div>
+  <h1>ইন্টারনেট সংযোগ নেই</h1>
+  <p>পরীক্ষা দিতে ইন্টারনেট দরকার। সংযোগ ঠিক হলে আবার চেষ্টা করুন।</p>
+  <button onclick="window.location.reload()">আবার চেষ্টা করুন</button>
+</body>
+</html>

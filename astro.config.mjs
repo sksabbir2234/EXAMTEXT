@@ -9,4 +9,19 @@ export default defineConfig({
   redirects: {
     '/cse-exams': '/subject?id=cse-college-teacher',
   },
+  headers: [
+    {
+      source: '/sw.js',
+      headers: [
+        { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
+        { key: 'Service-Worker-Allowed', value: '/' },
+      ],
+    },
+    {
+      source: '/manifest.json',
+      headers: [
+        { key: 'Content-Type', value: 'application/manifest+json' },
+      ],
+    },
+  ],
 });

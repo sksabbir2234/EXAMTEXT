@@ -1,0 +1,217 @@
+{
+  "subject": "English Idioms & Phrases",
+  "examTitle": "Unit 2.1 — Idioms in Context",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "What does the idiom 'A bolt from the blue' mean?",
+      "options": ["A sudden and unexpected event", "A clear sky after rain", "A lightning strike", "A pleasant surprise"],
+      "correctOptionIndex": 0,
+      "explanation": "A bolt from the blue refers to something completely unexpected and surprising, like a lightning bolt from a clear blue sky.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is a 'Maiden speech'?",
+      "options": ["A speech made by a new bride", "A first speech made by a new member in a formal setting", "A romantic speech", "A farewell speech"],
+      "correctOptionIndex": 1,
+      "explanation": "A maiden speech is the first formal speech made by a newly elected member of parliament or any similar formal body.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'To smell a rat' mean?",
+      "options": ["To detect a bad odor", "To suspect something is wrong", "To chase after something", "To be afraid of rodents"],
+      "correctOptionIndex": 1,
+      "explanation": "To smell a rat means to suspect that something is wrong or that someone is being dishonest.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is an 'Apple of discord'?",
+      "options": ["A type of fruit", "A cause of disagreement or quarrel", "A peaceful resolution", "A prize worth winning"],
+      "correctOptionIndex": 1,
+      "explanation": "An apple of discord is a subject or issue that causes disagreement, dispute, or argument among people.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'At the eleventh hour' mean?",
+      "options": ["At 11 o'clock", "At the last possible moment", "Early in the morning", "During the lunch break"],
+      "correctOptionIndex": 1,
+      "explanation": "At the eleventh hour means at the last possible moment or just before a deadline.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Burning the midnight oil' mean?",
+      "options": ["Wasting resources", "Working late into the night", "Starting a fire at night", "Being wasteful with money"],
+      "correctOptionIndex": 1,
+      "explanation": "Burning the midnight oil means to work or study late into the night.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Cry over spilt milk' mean?",
+      "options": ["To be upset about a minor problem", "To cry when milk spills", "To waste food", "To complain about service"],
+      "correctOptionIndex": 0,
+      "explanation": "Don't cry over spilt milk means there is no use being upset about something that has already happened and cannot be changed.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Kill two birds with one stone' mean?",
+      "options": ["To be violent", "To accomplish two things with a single action", "To waste time", "To make a mistake"],
+      "correctOptionIndex": 1,
+      "explanation": "To kill two birds with one stone means to achieve two objectives with a single effort or action.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Let the cat out of the bag' mean?",
+      "options": ["To release a pet", "To reveal a secret", "To cause trouble", "To be careless"],
+      "correctOptionIndex": 1,
+      "explanation": "To let the cat out of the bag means to accidentally reveal a secret or confidential information.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Piece of cake' mean?",
+      "options": ["A dessert item", "Something very easy to do", "A reward", "A small portion"],
+      "correctOptionIndex": 1,
+      "explanation": "A piece of cake refers to something that is very easy to accomplish.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Break the ice' mean?",
+      "options": ["To shatter glass", "To initiate conversation in an awkward situation", "To cool down", "To start a fight"],
+      "correctOptionIndex": 1,
+      "explanation": "To break the ice means to initiate conversation or ease tension in a formal or awkward social situation.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Hit the nail on the head' mean?",
+      "options": ["To do manual labor", "To be exactly right about something", "To cause pain", "To make a mistake"],
+      "correctOptionIndex": 1,
+      "explanation": "To hit the nail on the head means to be precisely correct or to describe something exactly right.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Spill the beans' mean?",
+      "options": ["To waste food", "To reveal a secret", "To make a mess", "To share resources"],
+      "correctOptionIndex": 1,
+      "explanation": "To spill the beans means to reveal secret or confidential information, often prematurely.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Under the weather' mean?",
+      "options": ["Outdoors in bad weather", "Feeling ill or unwell", "In a difficult situation", "Feeling cold"],
+      "correctOptionIndex": 1,
+      "explanation": "Under the weather means feeling slightly ill, unwell, or not in one's best condition.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Add fuel to the fire' mean?",
+      "options": ["To make something burn better", "To worsen a situation", "To help someone", "To cook efficiently"],
+      "correctOptionIndex": 1,
+      "explanation": "Add fuel to the fire means to make a bad situation even worse or to aggravate a problem.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Bite the bullet' mean?",
+      "options": ["To eat something hard", "To endure a difficult situation with courage", "To be reckless", "To make a complaint"],
+      "correctOptionIndex": 1,
+      "explanation": "To bite the bullet means to force yourself to endure a painful or difficult situation with bravery.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Burn the candle at both ends' mean?",
+      "options": ["To waste resources", "To overwork by staying up late and waking up early", "To be careless", "To enjoy life fully"],
+      "correctOptionIndex": 1,
+      "explanation": "Burn the candle at both ends means to exhaust oneself by working too hard, often staying up late and rising early.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Cost an arm and a leg' mean?",
+      "options": ["To be dangerous", "To be very expensive", "To require great effort", "To cause injury"],
+      "correctOptionIndex": 1,
+      "explanation": "Cost an arm and a leg means something is extremely expensive or costs a lot of money.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Get out of hand' mean?",
+      "options": ["To lose control", "To leave a place", "To be dismissed", "To become free"],
+      "correctOptionIndex": 0,
+      "explanation": "Get out of hand means to lose control of a situation or for something to become unmanageable.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Once in a blue moon' mean?",
+      "options": ["Every night", "Very rarely or almost never", "Once a month", "During a special occasion"],
+      "correctOptionIndex": 1,
+      "explanation": "Once in a blue moon means something that happens very rarely or almost never.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'A blessing in disguise' mean?",
+      "options": ["Something good that seems bad at first", "A hidden blessing", "A lucky charm", "A religious blessing"],
+      "correctOptionIndex": 0,
+      "explanation": "A blessing in disguise is something that seems bad or unfortunate at first but turns out to have positive results.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Beat around the bush' mean?",
+      "options": ["To search thoroughly", "To avoid talking about the main topic", "To be direct", "To prepare for something"],
+      "correctOptionIndex": 1,
+      "explanation": "To beat around the bush means to avoid discussing the main topic or to talk around a subject without getting to the point.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Better late than never' mean?",
+      "options": ["Punctuality is important", "It is better to do something late than not at all", "Being late is acceptable", "Never give up"],
+      "correctOptionIndex": 1,
+      "explanation": "Better late than never means it is better to do something after the expected time than to not do it at all.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Bite off more than you can chew' mean?",
+      "options": ["To eat too much", "To take on more responsibility than one can handle", "To be greedy", "To overestimate oneself"],
+      "correctOptionIndex": 1,
+      "explanation": "To bite off more than you can chew means to take on a task or responsibility that is too large to manage.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Burn bridges' mean?",
+      "options": ["To destroy connections", "To build new relationships", "To repair old friendships", "To move forward"],
+      "correctOptionIndex": 0,
+      "explanation": "To burn bridges means to destroy relationships or connections, making it impossible to go back to a previous situation.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Cold feet' mean?",
+      "options": ["Feeling physically cold", "Losing courage or nerve before doing something", "Being unfriendly", "Feeling refreshed"],
+      "correctOptionIndex": 1,
+      "explanation": "Cold feet refers to losing courage or becoming nervous about doing something, especially before a big event.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Cup of tea' mean?",
+      "options": ["A hot beverage", "Something one enjoys or is interested in", "A small meal", "A type of cookie"],
+      "correctOptionIndex": 1,
+      "explanation": "Someone's cup of tea refers to something that a person enjoys, prefers, or is interested in.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Easy as pie' mean?",
+      "options": ["Very simple to do", "Delicious to eat", "Quick to prepare", "Enjoyable to share"],
+      "correctOptionIndex": 0,
+      "explanation": "Easy as pie means something that is very simple and easy to accomplish.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Get the ball rolling' mean?",
+      "options": ["To play a sport", "To start an activity or process", "To make progress quickly", "To lose control"],
+      "correctOptionIndex": 1,
+      "explanation": "To get the ball rolling means to start something or begin an activity or process.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Give the cold shoulder' mean?",
+      "options": ["To be physically cold", "To ignore or treat someone unfriendlily", "To give a compliment", "To be polite"],
+      "correctOptionIndex": 1,
+      "explanation": "To give the cold shoulder means to deliberately ignore someone or treat them in an unfriendly manner.",
+      "marks": 1
+    }
+  ]
+}

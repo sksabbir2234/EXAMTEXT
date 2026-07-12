@@ -1,0 +1,217 @@
+{
+  "subject": "English Idioms & Phrases",
+  "examTitle": "Unit 2.2 — Additional Exam Idioms",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "What does 'Hit the sack' mean?",
+      "options": ["To fight someone", "To go to bed or sleep", "To carry something heavy", "To prepare for a journey"],
+      "correctOptionIndex": 1,
+      "explanation": "Hit the sack is an informal expression meaning to go to bed or go to sleep.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'It takes two to tango' mean?",
+      "options": ["Dancing requires a partner", "Both parties are responsible for a situation", "Teamwork is important", "Competition is healthy"],
+      "correctOptionIndex": 1,
+      "explanation": "It takes two to tango means both people involved in a situation are equally responsible for the outcome.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Jump on the bandwagon' mean?",
+      "options": ["To start a musical career", "To join a popular trend or activity", "To travel quickly", "To support a team"],
+      "correctOptionIndex": 1,
+      "explanation": "To jump on the bandwagon means to join something that has become popular or fashionable, often without careful thought.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Keep your chin up' mean?",
+      "options": ["To maintain good posture", "To stay positive during difficult times", "To look up at the sky", "To remain confident physically"],
+      "correctOptionIndex": 1,
+      "explanation": "Keep your chin up means to stay cheerful and optimistic, especially during a difficult or challenging situation.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Let someone off the hook' mean?",
+      "options": ["To free someone from a fishing net", "To release someone from an obligation or punishment", "To help someone escape", "To teach someone a lesson"],
+      "correctOptionIndex": 1,
+      "explanation": "To let someone off the hook means to free someone from a responsibility, obligation, or punishment.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Make a long story short' mean?",
+      "options": ["To tell a brief story", "To summarize or give the essential details", "To be a good storyteller", "To avoid details"],
+      "correctOptionIndex": 1,
+      "explanation": "Make a long story short means to give a brief summary of something, leaving out unnecessary details.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Miss the boat' mean?",
+      "options": ["To lose a vehicle", "To miss an opportunity", "To be late for travel", "To make a mistake"],
+      "correctOptionIndex": 1,
+      "explanation": "To miss the boat means to miss an opportunity or fail to take advantage of a situation in time.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'No pain no gain' mean?",
+      "options": ["Exercise causes injury", "Effort and hard work are necessary for achievement", "Suffering is pointless", "Nothing comes easily"],
+      "correctOptionIndex": 1,
+      "explanation": "No pain no gain means that one must work hard and endure difficulties to achieve something worthwhile.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'On the ball' mean?",
+      "options": ["Playing a sport", "Being alert, competent, and quick to respond", "Being on time", "Being well-prepared"],
+      "correctOptionIndex": 1,
+      "explanation": "On the ball means being alert, attentive, and capable of handling a situation efficiently.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Pull someone's leg' mean?",
+      "options": ["To trip someone", "To joke with or deceive someone playfully", "To help someone", "To slow someone down"],
+      "correctOptionIndex": 1,
+      "explanation": "To pull someone's leg means to joke with someone or tell them something untrue as a prank.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Rain cats and dogs' mean?",
+      "options": ["Animals are falling", "To rain very heavily", "To be noisy", "To have a pet parade"],
+      "correctOptionIndex": 1,
+      "explanation": "Rain cats and dogs is an idiom meaning it is raining very heavily or torrentially.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'See eye to eye' mean?",
+      "options": ["To look directly at someone", "To agree with someone", "To have good eyesight", "To understand clearly"],
+      "correctOptionIndex": 1,
+      "explanation": "To see eye to eye means to agree with someone or share the same opinion on a matter.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Sit on the fence' mean?",
+      "options": ["To be indecisive", "To rest on a boundary", "To avoid commitment", "To observe a situation"],
+      "correctOptionIndex": 0,
+      "explanation": "To sit on the fence means to remain undecided or avoid making a choice between two options.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Speak of the devil' mean?",
+      "options": ["To talk about evil", "Said when someone you were just talking about appears", "To curse someone", "To be negative"],
+      "correctOptionIndex": 1,
+      "explanation": "Speak of the devil is said when a person you were just discussing unexpectedly appears or arrives.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'That rings a bell' mean?",
+      "options": ["To hear a bell ring", "Something sounds familiar", "To remember a song", "To be alerted"],
+      "correctOptionIndex": 1,
+      "explanation": "That rings a bell means something sounds familiar or that you vaguely remember it.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'The best of both worlds' mean?",
+      "options": ["Having advantages of two different situations", "Living in two countries", "Being the best person", "Winning two prizes"],
+      "correctOptionIndex": 0,
+      "explanation": "The best of both worlds means enjoying the advantages of two different situations at the same time.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'The devil is in the details' mean?",
+      "options": ["Details are always bad", "Small things can cause big problems", "Devils hide in small places", "Details are unimportant"],
+      "correctOptionIndex": 1,
+      "explanation": "The devil is in the details means that small, often overlooked elements can cause significant issues or complications.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'The whole nine yards' mean?",
+      "options": ["A measurement of distance", "Everything or the full extent of something", "A large area", "A complete construction project"],
+      "correctOptionIndex": 1,
+      "explanation": "The whole nine yards means everything possible, the full extent, or all available options.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Through thick and thin' mean?",
+      "options": ["Through difficult terrain", "In good times and bad times", "Through heavy traffic", "Despite obstacles"],
+      "correctOptionIndex": 1,
+      "explanation": "Through thick and thin means to stay together and support each other during both good and difficult times.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Time flies' mean?",
+      "options": ["Birds move quickly", "Time passes very quickly", "Clocks run fast", "Moments are special"],
+      "correctOptionIndex": 1,
+      "explanation": "Time flies is said when you realize that time has passed very quickly, often when you are busy or enjoying yourself.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Two wrongs don't make a right' mean?",
+      "options": ["Two mistakes cancel each other", "Responding to a wrong with another wrong does not fix it", "Mistakes are always wrong", "Two people cannot both be wrong"],
+      "correctOptionIndex": 1,
+      "explanation": "Two wrongs don't make a right means that reacting to a wrong action with another wrong action does not make the situation better.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'We'll cross that bridge when we come to it' mean?",
+      "options": ["We will travel across a bridge", "We will deal with a problem when it arises", "We will build a bridge later", "We will avoid the problem"],
+      "correctOptionIndex": 1,
+      "explanation": "This idiom means you will deal with a problem or difficulty when the time comes, not before.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Wrap your head around something' mean?",
+      "options": ["To protect your head", "To understand something difficult", "To cover something", "To think quickly"],
+      "correctOptionIndex": 1,
+      "explanation": "To wrap your head around something means to try to understand something complex or difficult to grasp.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'You can say that again' mean?",
+      "options": ["Please repeat", "I completely agree with you", "That was interesting", "Say it louder"],
+      "correctOptionIndex": 1,
+      "explanation": "You can say that again is an expression of strong agreement with what someone has just said.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Your guess is as good as mine' mean?",
+      "options": ["We should guess together", "I have no idea, just like you", "My guess is better", "We need more information"],
+      "correctOptionIndex": 1,
+      "explanation": "Your guess is as good as mine means the speaker has no more idea than the listener about the answer.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Actions speak louder than words' mean?",
+      "options": ["Doing is better than talking", "People should talk less", "Words are meaningless", "Silence is golden"],
+      "correctOptionIndex": 0,
+      "explanation": "Actions speak louder than words means what people do is more important and revealing than what they say.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Barking up the wrong tree' mean?",
+      "options": ["A dog is confused", "Pursuing a wrong course of action or making a false assumption", "Looking in the wrong place", "Making too much noise"],
+      "correctOptionIndex": 1,
+      "explanation": "Barking up the wrong tree means to pursue a mistaken or misguided course of action or to make a false assumption.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Break a leg' mean?",
+      "options": ["To injure yourself", "Good luck, especially before a performance", "To fail badly", "To move quickly"],
+      "correctOptionIndex": 1,
+      "explanation": "Break a leg is a way of wishing someone good luck, especially before a performance or important event.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'A piece of cake' mean?",
+      "options": ["A dessert", "Something very easy to do", "A small reward", "A broken item"],
+      "correctOptionIndex": 1,
+      "explanation": "A piece of cake refers to something that is very simple and easy to accomplish.",
+      "marks": 1
+    },
+    {
+      "questionText": "What does 'Let the cat out of the bag' mean?",
+      "options": ["To release a pet", "To reveal a secret", "To cause damage", "To forget something"],
+      "correctOptionIndex": 1,
+      "explanation": "To let the cat out of the bag means to accidentally reveal a secret or confidential information.",
+      "marks": 1
+    }
+  ]
+}

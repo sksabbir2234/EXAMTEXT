@@ -1,0 +1,224 @@
+{
+  "subject": "English Grammar",
+  "examTitle": "Unit 1.5 — Gerund, Infinitive & Participle",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "Swimming is my favorite hobby.",
+      "options": ["This is a gerund.", "This is an infinitive.", "This is a past participle.", "This is a present participle."],
+      "correctOptionIndex": 0,
+      "explanation": "'Swimming' is a gerund (verb+ing) acting as a noun (subject of the sentence).",
+      "marks": 1
+    },
+    {
+      "questionText": "She decided _____ abroad next year.",
+      "options": ["studying", "to study", "study", "studied"],
+      "correctOptionIndex": 1,
+      "explanation": "'Decide' is followed by the infinitive (to + verb).",
+      "marks": 1
+    },
+    {
+      "questionText": "The running water made a soothing sound.",
+      "options": ["'Running' is a gerund.", "'Running' is a present participle.", "'Running' is a past participle.", "'Running' is an infinitive."],
+      "correctOptionIndex": 1,
+      "explanation": "'Running' is a present participle used as an adjective modifying 'water'.",
+      "marks": 1
+    },
+    {
+      "questionText": "The broken window was repaired yesterday.",
+      "options": ["'Broken' is a present participle.", "'Broken' is a past participle.", "'Broken' is a gerund.", "'Broken' is an infinitive."],
+      "correctOptionIndex": 1,
+      "explanation": "'Broken' is a past participle used as an adjective modifying 'window'.",
+      "marks": 1
+    },
+    {
+      "questionText": "I enjoy _____ in the library.",
+      "options": ["to read", "reading", "read", "to reading"],
+      "correctOptionIndex": 1,
+      "explanation": "'Enjoy' is followed by the gerund (verb+ing).",
+      "marks": 1
+    },
+    {
+      "questionText": "She wants _____ a doctor when she grows up.",
+      "options": ["becoming", "to become", "become", "to becoming"],
+      "correctOptionIndex": 1,
+      "explanation": "'Want' is followed by the infinitive (to + verb).",
+      "marks": 1
+    },
+    {
+      "questionText": "I can't mind _____ so loud.",
+      "options": ["to play", "playing", "play", "played"],
+      "correctOptionIndex": 1,
+      "explanation": "'Mind' is followed by the gerund (verb+ing).",
+      "marks": 1
+    },
+    {
+      "questionText": "He decided _____ the party.",
+      "options": ["not attend", "not to attend", "to not attend", "not attending"],
+      "correctOptionIndex": 1,
+      "explanation": "The negative infinitive is 'not + to + verb'.",
+      "marks": 1
+    },
+    {
+      "questionText": "Walking along the beach, we found seashells.",
+      "options": ["'Walking' is a gerund.", "'Walking' is a present participle.", "'Walking' is a past participle.", "'Walking' is an infinitive."],
+      "correctOptionIndex": 1,
+      "explanation": "'Walking' is a present participle in a participial phrase modifying 'we'.",
+      "marks": 1
+    },
+    {
+      "questionText": "She avoids _____ junk food.",
+      "options": ["to eat", "eating", "eat", "eaten"],
+      "correctOptionIndex": 1,
+      "explanation": "'Avoid' is followed by the gerund (verb+ing).",
+      "marks": 1
+    },
+    {
+      "questionText": "He promised _____ on time.",
+      "options": ["being", "to be", "be", "been"],
+      "correctOptionIndex": 1,
+      "explanation": "'Promise' is followed by the infinitive (to + verb).",
+      "marks": 1
+    },
+    {
+      "questionText": "I stopped _____ a cigarette.",
+      "options": ["to smoke", "smoking", "smoke", "smoked"],
+      "correctOptionIndex": 1,
+      "explanation": "'Stop + gerund' means to cease an activity.",
+      "marks": 1
+    },
+    {
+      "questionText": "He stopped _____ a cigarette.",
+      "options": ["to smoke", "smoking", "smoke", "smoked"],
+      "correctOptionIndex": 0,
+      "explanation": "'Stop + infinitive' means to pause in order to do something.",
+      "marks": 1
+    },
+    {
+      "questionText": "I remember _____ him at the meeting.",
+      "options": ["to see", "seeing", "see", "saw"],
+      "correctOptionIndex": 1,
+      "explanation": "'Remember + gerund' refers to a past memory.",
+      "marks": 1
+    },
+    {
+      "questionText": "Remember _____ your keys before you leave.",
+      "options": ["to take", "taking", "take", "taken"],
+      "correctOptionIndex": 0,
+      "explanation": "'Remember + infinitive' refers to a future task.",
+      "marks": 1
+    },
+    {
+      "questionText": "I forgot _____ him about the meeting.",
+      "options": ["to tell", "telling", "tell", "told"],
+      "correctOptionIndex": 1,
+      "explanation": "'Forget + gerund' refers to a past memory that didn't happen.",
+      "marks": 1
+    },
+    {
+      "questionText": "Don't forget _____ the door when you leave.",
+      "options": ["locking", "to lock", "lock", "locked"],
+      "correctOptionIndex": 1,
+      "explanation": "'Forget + infinitive' refers to a future task.",
+      "marks": 1
+    },
+    {
+      "questionText": "She tried _____ the window but it was stuck.",
+      "options": ["opening", "to open", "open", "opened"],
+      "correctOptionIndex": 1,
+      "explanation": "'Try + infinitive' means to attempt something.",
+      "marks": 1
+    },
+    {
+      "questionText": "Try _____ more water every day for better health.",
+      "options": ["to drink", "drinking", "drink", "drank"],
+      "correctOptionIndex": 1,
+      "explanation": "'Try + gerund' means to experiment with something.",
+      "marks": 1
+    },
+    {
+      "questionText": "The excited children ran towards the playground.",
+      "options": ["'Excited' is a present participle.", "'Excited' is a past participle.", "'Excited' is a gerund.", "'Excited' is an infinitive."],
+      "correctOptionIndex": 1,
+      "explanation": "'Excited' is a past participle used as an adjective modifying 'children'.",
+      "marks": 1
+    },
+    {
+      "questionText": "She suggested _____ the meeting until Friday.",
+      "options": ["to postpone", "postponing", "postpone", "postponed"],
+      "correctOptionIndex": 1,
+      "explanation": "'Suggest' is followed by the gerund (verb+ing).",
+      "marks": 1
+    },
+    {
+      "questionText": "He kept _____ for hours.",
+      "options": ["to talk", "talking", "talk", "talked"],
+      "correctOptionIndex": 1,
+      "explanation": "'Keep' is followed by the gerund (verb+ing).",
+      "marks": 1
+    },
+    {
+      "questionText": "She practiced _____ the piano every day.",
+      "options": ["to play", "playing", "play", "played"],
+      "correctOptionIndex": 1,
+      "explanation": "'Practice' is followed by the gerund (verb+ing).",
+      "marks": 1
+    },
+    {
+      "questionText": "I hope _____ from you soon.",
+      "options": ["hearing", "to hear", "hear", "heard"],
+      "correctOptionIndex": 1,
+      "explanation": "'Hope' is followed by the infinitive (to + verb).",
+      "marks": 1
+    },
+    {
+      "questionText": "She refused _____ the information.",
+      "options": ["to share", "sharing", "share", "shared"],
+      "correctOptionIndex": 0,
+      "explanation": "'Refuse' is followed by the infinitive (to + verb).",
+      "marks": 1
+    },
+    {
+      "questionText": "The boy _____ by the window is my brother.",
+      "options": ["sitting", "sat", "to sit", "sit"],
+      "correctOptionIndex": 0,
+      "explanation": "'Sitting' is a present participle in a participial phrase modifying 'boy'.",
+      "marks": 1
+    },
+    {
+      "questionText": "Running quickly, the athlete won the race.",
+      "options": ["This sentence has a dangling modifier.", "This sentence is correct.", "This sentence has a misplaced modifier.", "This sentence has no modifier."],
+      "correctOptionIndex": 1,
+      "explanation": "The participial phrase 'Running quickly' correctly modifies 'the athlete'.",
+      "marks": 1
+    },
+    {
+      "questionText": "Running quickly, the finish line was reached.",
+      "options": ["This sentence is correct.", "This sentence has a dangling modifier.", "This sentence has a misplaced modifier.", "This sentence is unclear."],
+      "correctOptionIndex": 1,
+      "explanation": "The participial phrase 'Running quickly' incorrectly modifies 'the finish line' instead of a person.",
+      "marks": 1
+    },
+    {
+      "questionText": "She agreed _____ the project.",
+      "options": ["to lead", "leading", "lead", "led"],
+      "correctOptionIndex": 0,
+      "explanation": "'Agree' is followed by the infinitive (to + verb).",
+      "marks": 1
+    },
+    {
+      "questionText": "I don't feel like _____ today.",
+      "options": ["to cook", "cooking", "cook", "cooked"],
+      "correctOptionIndex": 1,
+      "explanation": "'Feel like' is followed by the gerund (verb+ing).",
+      "marks": 1
+    },
+    {
+      "questionText": "The broken bridge was dangerous to cross.",
+      "options": ["'Broken' is a present participle.", "'Broken' is a past participle.", "'Broken' is a gerund.", "'Broken' is an adjective only."],
+      "correctOptionIndex": 1,
+      "explanation": "'Broken' is a past participle used as an adjective modifying 'bridge'.",
+      "marks": 1
+    }
+  ]
+}

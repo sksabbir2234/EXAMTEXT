@@ -1,0 +1,224 @@
+{
+  "subject": "English Grammar",
+  "examTitle": "Unit 1.4 — Conditionals & Subjunctive",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "If it _____, we will cancel the picnic.",
+      "options": ["rains", "rained", "will rain", "has rained"],
+      "correctOptionIndex": 0,
+      "explanation": "Zero conditional / first conditional: if + present simple, will + base verb.",
+      "marks": 1
+    },
+    {
+      "questionText": "If I _____ rich, I would travel the world.",
+      "options": ["am", "was", "were", "would be"],
+      "correctOptionIndex": 2,
+      "explanation": "Second conditional uses 'if + past subjunctive'; 'were' is preferred for all persons.",
+      "marks": 1
+    },
+    {
+      "questionText": "If she had studied harder, she _____ the exam.",
+      "options": ["would pass", "would have passed", "passed", "will pass"],
+      "correctOptionIndex": 1,
+      "explanation": "Third conditional: if + past perfect, would have + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "If you heat water to 100°C, it _____.",
+      "options": ["boils", "will boil", "boiled", "would boil"],
+      "correctOptionIndex": 0,
+      "explanation": "Zero conditional expresses general truths: if + present simple, present simple.",
+      "marks": 1
+    },
+    {
+      "questionText": "I wish I _____ more free time.",
+      "options": ["have", "had", "would have", "having"],
+      "correctOptionIndex": 1,
+      "explanation": "'Wish + past simple' expresses a desire for something different in the present.",
+      "marks": 1
+    },
+    {
+      "questionText": "I wish I _____ that mistake yesterday.",
+      "options": ["didn't make", "hadn't made", "wouldn't make", "don't make"],
+      "correctOptionIndex": 1,
+      "explanation": "'Wish + past perfect' expresses regret about something in the past.",
+      "marks": 1
+    },
+    {
+      "questionText": "He acts as if he _____ the boss.",
+      "options": ["is", "was", "were", "would be"],
+      "correctOptionIndex": 2,
+      "explanation": "'As if/as though + past subjunctive' is used for hypothetical or unreal comparisons.",
+      "marks": 1
+    },
+    {
+      "questionText": "It's time we _____ for the airport.",
+      "options": ["leave", "left", "will leave", "are leaving"],
+      "correctOptionIndex": 1,
+      "explanation": "'It's time + past simple' suggests it's time to do something now.",
+      "marks": 1
+    },
+    {
+      "questionText": "The doctor recommended that she _____ more rest.",
+      "options": ["gets", "get", "got", "would get"],
+      "correctOptionIndex": 1,
+      "explanation": "After 'recommend', the subjunctive (base form) is used in formal English.",
+      "marks": 1
+    },
+    {
+      "questionText": "I would rather _____ at home tonight.",
+      "options": ["stay", "staying", "to stay", "stayed"],
+      "correctOptionIndex": 0,
+      "explanation": "'Would rather + base form' expresses a preference.",
+      "marks": 1
+    },
+    {
+      "questionText": "If only I _____ where she went!",
+      "options": ["know", "knew", "would know", "have known"],
+      "correctOptionIndex": 1,
+      "explanation": "'If only + past simple' expresses a wish about the present.",
+      "marks": 1
+    },
+    {
+      "questionText": "You had better _____ your homework now.",
+      "options": ["do", "doing", "to do", "did"],
+      "correctOptionIndex": 0,
+      "explanation": "'Had better + base form' gives strong advice or warning.",
+      "marks": 1
+    },
+    {
+      "questionText": "If it _____ tomorrow, we will stay indoors.",
+      "options": ["rains", "rained", "will rain", "would rain"],
+      "correctOptionIndex": 0,
+      "explanation": "First conditional: if + present simple, will + base verb.",
+      "marks": 1
+    },
+    {
+      "questionText": "If I _____ you, I would apologize immediately.",
+      "options": ["am", "was", "were", "will be"],
+      "correctOptionIndex": 2,
+      "explanation": "Second conditional: 'if I were you' is a fixed expression for giving advice.",
+      "marks": 1
+    },
+    {
+      "questionText": "If they had left earlier, they _____ the traffic.",
+      "options": ["would avoid", "would have avoided", "avoided", "will avoid"],
+      "correctOptionIndex": 1,
+      "explanation": "Third conditional: if + past perfect, would have + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "She speaks as though she _____ French fluently.",
+      "options": ["speaks", "spoke", "has spoken", "will speak"],
+      "correctOptionIndex": 1,
+      "explanation": "'As though + past simple' is used for unreal or hypothetical comparisons.",
+      "marks": 1
+    },
+    {
+      "questionText": "It's about time the government _____ action on pollution.",
+      "options": ["takes", "took", "will take", "taken"],
+      "correctOptionIndex": 1,
+      "explanation": "'It's about time + past simple' suggests something should happen now.",
+      "marks": 1
+    },
+    {
+      "questionText": "The teacher suggested that the students _____ more practice.",
+      "options": ["do", "doing", "to do", "did"],
+      "correctOptionIndex": 0,
+      "explanation": "'Suggest + base form (subjunctive)' is used in formal English.",
+      "marks": 1
+    },
+    {
+      "questionText": "I would rather you _____ smoking in the house.",
+      "options": ["don't stop", "didn't smoke", "not smoke", "wouldn't smoke"],
+      "correctOptionIndex": 2,
+      "explanation": "'Would rather + someone + base form' or 'would rather + someone + not + base form'.",
+      "marks": 1
+    },
+    {
+      "questionText": "If only I _____ more carefully!",
+      "options": ["drove", "had driven", "drive", "would drive"],
+      "correctOptionIndex": 1,
+      "explanation": "'If only + past perfect' expresses regret about a past action.",
+      "marks": 1
+    },
+    {
+      "questionText": "You had better _____ late again, or you will lose your job.",
+      "options": ["not be", "not being", "be not", "not to be"],
+      "correctOptionIndex": 0,
+      "explanation": "'Had better + not + base form' gives strong negative advice.",
+      "marks": 1
+    },
+    {
+      "questionText": "If I _____ the lottery, I would buy a house.",
+      "options": ["win", "won", "will win", "would win"],
+      "correctOptionIndex": 1,
+      "explanation": "Second conditional: if + past simple, would + base verb.",
+      "marks": 1
+    },
+    {
+      "questionText": "If you had told me, I _____ you.",
+      "options": ["would help", "would have helped", "helped", "will help"],
+      "correctOptionIndex": 1,
+      "explanation": "Third conditional: if + past perfect, would have + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "I wish the weather _____ better today.",
+      "options": ["is", "was", "were", "would be"],
+      "correctOptionIndex": 1,
+      "explanation": "'Wish + past simple' expresses a desire for something different in the present.",
+      "marks": 1
+    },
+    {
+      "questionText": "She looks as if she _____ been crying.",
+      "options": ["has", "had", "have", "having"],
+      "correctOptionIndex": 1,
+      "explanation": "'As if + past perfect' is used for hypothetical past situations.",
+      "marks": 1
+    },
+    {
+      "questionText": "If I were you, I _____ accept the offer.",
+      "options": ["will", "would", "shall", "can"],
+      "correctOptionIndex": 1,
+      "explanation": "Second conditional: 'if I were you, would + base verb' gives advice.",
+      "marks": 1
+    },
+    {
+      "questionText": "It's high time the children _____ to bed.",
+      "options": ["go", "went", "will go", "gone"],
+      "correctOptionIndex": 1,
+      "explanation": "'It's high time + past simple' suggests something should happen now.",
+      "marks": 1
+    },
+    {
+      "questionText": "The doctor insisted that he _____ a complete rest.",
+      "options": ["has", "have", "had", "having"],
+      "correctOptionIndex": 1,
+      "explanation": "'Insist + base form (subjunctive)' is used in formal English.",
+      "marks": 1
+    },
+    {
+      "questionText": "If it _____ not been for your help, I would have failed.",
+      "options": ["has", "had", "have", "having"],
+      "correctOptionIndex": 1,
+      "explanation": "'If it had not been for' is a third conditional structure expressing past counterfactual.",
+      "marks": 1
+    },
+    {
+      "questionText": "I would rather _____ a coffee than tea.",
+      "options": ["have", "having", "to have", "had"],
+      "correctOptionIndex": 0,
+      "explanation": "'Would rather + base form' expresses a preference.",
+      "marks": 1
+    },
+    {
+      "questionText": "She acts as though she _____ everything.",
+      "options": ["knows", "knew", "known", "will know"],
+      "correctOptionIndex": 1,
+      "explanation": "'As though + past simple' is used for hypothetical or unreal present situations.",
+      "marks": 1
+    }
+  ]
+}

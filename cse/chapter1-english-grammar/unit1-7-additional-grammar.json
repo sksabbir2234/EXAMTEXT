@@ -1,0 +1,224 @@
+{
+  "subject": "English Grammar",
+  "examTitle": "Unit 1.7 — Additional Grammar",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "She is _____ honest person.",
+      "options": ["a", "an", "the", "no article"],
+      "correctOptionIndex": 1,
+      "explanation": "'An' is used before words starting with a vowel sound. 'Honest' starts with a silent 'h'.",
+      "marks": 1
+    },
+    {
+      "questionText": "Please close _____ door.",
+      "options": ["a", "an", "the", "no article"],
+      "correctOptionIndex": 2,
+      "explanation": "'The' is used for specific nouns that both speaker and listener know.",
+      "marks": 1
+    },
+    {
+      "questionText": "This book is _____ than that one.",
+      "options": ["more interesting", "most interesting", "interestinger", "very interesting"],
+      "correctOptionIndex": 0,
+      "explanation": "Comparative form: for long adjectives, use 'more + adjective'.",
+      "marks": 1
+    },
+    {
+      "questionText": "Mount Everest is _____ mountain in the world.",
+      "options": ["the taller", "the tallest", "taller", "tallest"],
+      "correctOptionIndex": 1,
+      "explanation": "Superlative form: 'the + adjective + -est' or 'the most + adjective'.",
+      "marks": 1
+    },
+    {
+      "questionText": "She is _____ her sister.",
+      "options": ["tall", "taller", "tallest", "more tall"],
+      "correctOptionIndex": 1,
+      "explanation": "Comparative: 'taller than' compares two things.",
+      "marks": 1
+    },
+    {
+      "questionText": "I went to the store _____ I needed milk.",
+      "options": ["but", "because", "and", "or"],
+      "correctOptionIndex": 1,
+      "explanation": "'Because' is a subordinating conjunction showing reason.",
+      "marks": 1
+    },
+    {
+      "questionText": "She likes tea, _____ he prefers coffee.",
+      "options": ["and", "but", "so", "because"],
+      "correctOptionIndex": 1,
+      "explanation": "'But' is a coordinating conjunction showing contrast.",
+      "marks": 1
+    },
+    {
+      "questionText": "He said, 'I am tired.' (Change to reported speech)",
+      "options": ["He said that he was tired.", "He said that he is tired.", "He said he is tired.", "He said that I was tired."],
+      "correctOptionIndex": 0,
+      "explanation": "Reported speech: pronoun changes, tense backshifts, and 'that' is optional.",
+      "marks": 1
+    },
+    {
+      "questionText": "She asked, 'Where do you live?' (Change to reported speech)",
+      "options": ["She asked where I lived.", "She asked where do I live.", "She asked where I live.", "She asked where I was living."],
+      "correctOptionIndex": 0,
+      "explanation": "Reported questions: word order changes to statement order, and tense backshifts.",
+      "marks": 1
+    },
+    {
+      "questionText": "The man _____ car was stolen reported to the police.",
+      "options": ["who", "whose", "which", "whom"],
+      "correctOptionIndex": 1,
+      "explanation": "'Whose' is the possessive relative pronoun.",
+      "marks": 1
+    },
+    {
+      "questionText": "The book _____ I bought yesterday is interesting.",
+      "options": ["who", "whose", "which", "where"],
+      "correctOptionIndex": 2,
+      "explanation": "'Which' is used for things in relative clauses.",
+      "marks": 1
+    },
+    {
+      "questionText": "The city _____ I was born is very old.",
+      "options": ["which", "who", "where", "when"],
+      "correctOptionIndex": 2,
+      "explanation": "'Where' is used for places in relative clauses.",
+      "marks": 1
+    },
+    {
+      "questionText": "I'll meet you _____ 3 o'clock.",
+      "options": ["in", "on", "at", "by"],
+      "correctOptionIndex": 2,
+      "explanation": "'At' is used with specific times.",
+      "marks": 1
+    },
+    {
+      "questionText": "The book is _____ the table.",
+      "options": ["in", "on", "at", "by"],
+      "correctOptionIndex": 1,
+      "explanation": "'On' is used for surfaces.",
+      "marks": 1
+    },
+    {
+      "questionText": "_____ book is this? — It's mine.",
+      "options": ["This", "That", "These", "Those"],
+      "correctOptionIndex": 0,
+      "explanation": "'This' is used for singular objects near the speaker.",
+      "marks": 1
+    },
+    {
+      "questionText": "Would you like _____ coffee?",
+      "options": ["some", "any", "much", "many"],
+      "correctOptionIndex": 0,
+      "explanation": "'Some' is used in offers and requests.",
+      "marks": 1
+    },
+    {
+      "questionText": "There aren't _____ cookies left.",
+      "options": ["some", "any", "much", "few"],
+      "correctOptionIndex": 1,
+      "explanation": "'Any' is used in negative sentences and questions.",
+      "marks": 1
+    },
+    {
+      "questionText": "How _____ water do you drink a day?",
+      "options": ["much", "many", "few", "little"],
+      "correctOptionIndex": 0,
+      "explanation": "'Much' is used with uncountable nouns.",
+      "marks": 1
+    },
+    {
+      "questionText": "How _____ students are in your class?",
+      "options": ["much", "many", "few", "little"],
+      "correctOptionIndex": 1,
+      "explanation": "'Many' is used with countable nouns.",
+      "marks": 1
+    },
+    {
+      "questionText": "There are _____ books on the shelf.",
+      "options": ["few", "a few", "little", "a little"],
+      "correctOptionIndex": 1,
+      "explanation": "'A few' means a small number (positive meaning) with countable nouns.",
+      "marks": 1
+    },
+    {
+      "questionText": "She speaks English very well, _____?",
+      "options": ["doesn't she", "isn't she", "won't she", "can't she"],
+      "correctOptionIndex": 0,
+      "explanation": "Tag question: positive statement → negative tag with auxiliary 'does'.",
+      "marks": 1
+    },
+    {
+      "questionText": "He won't come to the party, _____?",
+      "options": ["will he", "won't he", "doesn't he", "isn't he"],
+      "correctOptionIndex": 0,
+      "explanation": "Tag question: negative statement → positive tag.",
+      "marks": 1
+    },
+    {
+      "questionText": "_____ eat too much junk food.",
+      "options": ["Do", "Does", "Did", "Done"],
+      "correctOptionIndex": 0,
+      "explanation": "'Do' is used for emphasis with base form verbs.",
+      "marks": 1
+    },
+    {
+      "questionText": "She _____ finish the project on time.",
+      "options": ["do", "does", "did", "done"],
+      "correctOptionIndex": 2,
+      "explanation": "'Did' is used for emphasis in past tense.",
+      "marks": 1
+    },
+    {
+      "questionText": "Never _____ I seen such a beautiful sunset.",
+      "options": ["have", "has", "had", "did"],
+      "correctOptionIndex": 0,
+      "explanation": "Inversion after negative adverbs: 'Never have I...' (auxiliary before subject).",
+      "marks": 1
+    },
+    {
+      "questionText": "Not only _____ the exam, but she also got the highest score.",
+      "options": ["she passed", "did she pass", "she did pass", "passed she"],
+      "correctOptionIndex": 1,
+      "explanation": "Inversion after 'not only': auxiliary verb comes before the subject.",
+      "marks": 1
+    },
+    {
+      "questionText": "He is _____ to arrive on time.",
+      "options": ["likely", "unlikely", "possible", "certainly"],
+      "correctOptionIndex": 0,
+      "explanation": "'Likely' is an adjective meaning probable.",
+      "marks": 1
+    },
+    {
+      "questionText": "Hardly _____ I sat down when the phone rang.",
+      "options": ["had", "did", "have", "was"],
+      "correctOptionIndex": 0,
+      "explanation": "Inversion after 'hardly': 'Hardly had I...' (past perfect inversion).",
+      "marks": 1
+    },
+    {
+      "questionText": "This is _____ interesting book I've ever read.",
+      "options": ["a", "an", "the", "no article"],
+      "correctOptionIndex": 2,
+      "explanation": "'The' is used with superlatives: 'the most interesting'.",
+      "marks": 1
+    },
+    {
+      "questionText": "She arrived _____ Monday.",
+      "options": ["in", "on", "at", "by"],
+      "correctOptionIndex": 1,
+      "explanation": "'On' is used with days of the week.",
+      "marks": 1
+    },
+    {
+      "questionText": "They have _____ finished the assignment.",
+      "options": ["already", "yet", "since", "for"],
+      "correctOptionIndex": 0,
+      "explanation": "'Already' is used in affirmative sentences with present perfect.",
+      "marks": 1
+    }
+  ]
+}

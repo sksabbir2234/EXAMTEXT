@@ -35,6 +35,11 @@ const examId = Astro.url.searchParams.get('id') || '';
     <div id="qnav" class="flex gap-2 overflow-x-auto pb-2 no-print"></div>
   </div>
 
+  <!-- Negative marking notice -->
+  <div class="max-w-3xl mx-auto px-4 mt-2">
+    <div class="p-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 text-xs font-medium text-center">⚠️ প্রতি ৪টি ভুল উত্তরে ১ নম্বর কাটা যাবে। বাদ দিলে কোনো পেনাল্টি নেই।</div>
+  </div>
+
   <!-- Cheat warning banner -->
   <div id="cheat-banner" class="hidden max-w-3xl mx-auto px-4 mt-2">
     <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-700 text-xs font-medium text-center">⚠️ Tab switching detected (<span id="cheat-count">0</span>). Leaving the exam may auto-submit.</div>
@@ -300,12 +305,13 @@ const examId = Astro.url.searchParams.get('id') || '';
         }));
       } catch {}
 
-      // Minimal anonymous leaderboard write (fire-and-forget, no detailed data).
+      // Minimal anonymous leaderboard write with negative marking fields.
+      const skipped = total - correct - wrong;
       try {
-        fetch('/api/attempt', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ examId, studentName, score: finalScore, total, timeTaken: secondsElapsed }) });
+        fetch('/api/attempt', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ examId, studentName, score: finalScore, correct, wrong, skipped, penalty, total, timeTaken: secondsElapsed }) });
       } catch {}
 
-      window.location.href = `/result?examId=${examId}&score=${finalScore}&correct=${correct}&wrong=${wrong}&total=${total}`;
+      window.location.href = `/result?examId=${examId}&score=${finalScore}&correct=${correct}&wrong=${wrong}&skipped=${skipped}&penalty=${penalty}&total=${total}`;
     }
 
     function showPracticeResult(originalAnswers, correct, wrong, penalty, finalScore, total) {

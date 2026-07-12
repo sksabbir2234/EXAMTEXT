@@ -108,9 +108,50 @@ html.dark .toast { background: #e2e8f0; color: #0f172a; }
 
 /* ============ PRINT (Result / Review) ============ */
 @media print {
-  body { background: #ffffff !important; }
-  nav, #timer, #theme-toggle, .no-print, #review-actions { display: none !important; }
-  .card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; break-inside: avoid; }
-  html.dark .card, html.dark body { background: #ffffff !important; color: #0f172a !important; }
-  html.dark .text-surface-800, html.dark .text-surface-900 { color: #0f172a !important; }
+  body { background: #ffffff !important; color: #0f172a !important; }
+  nav, #timer, #theme-toggle, .no-print, #review-actions, [data-no-print] { display: none !important; }
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    break-inside: avoid;
+    backdrop-filter: none !important;
+    background: white !important;
+  }
+  .glass {
+    backdrop-filter: none !important;
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+  /* Force color printing */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  /* Gradient text readable */
+  .gradient-text {
+    background: none !important;
+    -webkit-text-fill-color: #1e1b4b !important;
+    color: #1e1b4b !important;
+  }
+  /* Correct/wrong markers */
+  .text-emerald-500, .text-emerald-600 { color: #16a34a !important; }
+  .text-red-500, .text-red-600 { color: #dc2626 !important; }
+  /* Score breakdown table */
+  .bg-surface-50 { background: #f8fafc !important; }
+  /* Full width */
+  .max-w-3xl, .max-w-4xl, .max-w-2xl, .container {
+    max-width: 100% !important;
+    padding: 0 16px !important;
+    margin: 0 auto !important;
+  }
+  /* Table page breaks */
+  table { page-break-inside: auto; }
+  tr { page-break-inside: avoid; break-inside: avoid; }
+  /* Print-only header */
+  .print-header { display: block !important; }
+}
+/* Print-only header (hidden on screen) */
+.print-header { display: none; }
+@media screen {
+  .print-header { display: none !important; }
 }

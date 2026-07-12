@@ -132,6 +132,21 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- Manage List -->
+        <!-- Subject Reorder Section -->
+        <div id="subject-reorder-section" class="card p-6 mb-6 hidden">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-lg">↕️</div>
+              <div>
+                <h3 class="font-bold text-surface-900">Subject Order</h3>
+                <p class="text-xs text-surface-400">Drag to reorder subjects on the front page</p>
+              </div>
+            </div>
+            <button id="save-subject-order" class="px-4 py-2 bg-emerald-500 text-white rounded-xl text-sm font-semibold hover:bg-emerald-600 transition hidden">Save Order</button>
+          </div>
+          <div id="subject-reorder-list" class="space-y-2"></div>
+        </div>
+
         <div id="bulk-actions" class="hidden mb-4 p-3 bg-brand-50 border border-brand-200 rounded-2xl flex items-center justify-between">
           <div class="flex items-center gap-3">
             <input type="checkbox" id="select-all-exams" class="w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer">
@@ -481,10 +496,21 @@ import Layout from '../layouts/Layout.astro';
         queueListEl.innerHTML = examFileQueue.map((f, i) => {
           const statusCls = f.status === 'done' ? 'text-emerald-500' : f.status === 'error' ? 'text-red-500' : f.status === 'uploading' ? 'text-brand-500' : 'text-surface-400';
           const statusText = f.status === 'done' ? '✓ Done' : f.status === 'error' ? '✗ ' + (f.error || 'Error') : f.status === 'uploading' ? '...' : 'Pending';
-          return '<div class="flex items-center gap-2 p-2 bg-surface-50 rounded-xl text-sm"><span class="truncate flex-1 text-surface-700">' + f.name + '</span><span class="text-xs ' + statusCls + ' shrink-0">' + statusText + '</span>' + (f.status === 'pending' ? '<button onclick="removeExamQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0">✕</button>' : '') + '</div>';
+          const canReorder = f.status === 'pending';
+          const upBtn = canReorder && i > 0 ? '<button onclick="moveExamQueue(' + i + ',-1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move up">▲</button>' : '<span class="w-3 shrink-0"></span>';
+          const downBtn = canReorder && i < examFileQueue.length - 1 ? '<button onclick="moveExamQueue(' + i + ',1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move down">▼</button>' : '<span class="w-3 shrink-0"></span>';
+          return '<div class="flex items-center gap-1.5 p-2 bg-surface-50 rounded-xl text-sm"><span class="text-xs font-bold text-surface-300 w-4 text-center shrink-0">' + (i + 1) + '</span>' + upBtn + downBtn + '<span class="truncate flex-1 text-surface-700">' + f.name + '</span><span class="text-xs ' + statusCls + ' shrink-0">' + statusText + '</span>' + (f.status === 'pending' ? '<button onclick="removeExamQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0">✕</button>' : '') + '</div>';
         }).join('');
       }
       window.removeExamQueue = (i) => { examFileQueue.splice(i, 1); renderExamQueue(); };
+      window.moveExamQueue = (i, dir) => {
+        const j = i + dir;
+        if (j < 0 || j >= examFileQueue.length) return;
+        const temp = examFileQueue[i];
+        examFileQueue[i] = examFileQueue[j];
+        examFileQueue[j] = temp;
+        renderExamQueue();
+      };
       document.getElementById('queue-clear').addEventListener('click', () => { examFileQueue = []; renderExamQueue(); });
 
       // Add files to queue from input
@@ -736,7 +762,22 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <div class="subject-exams hidden px-5 pb-4">
               ${s.exams.length === 0 ? '<p class="text-surface-300 text-sm py-4 text-center">No exams in this subject</p>' : `
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-surface-400">${s.exams.length} exam${s.exams.length!==1?'s':''}</span>
+                <button onclick="toggleExamReorder('${s.id}')" class="text-xs font-medium text-brand-600 hover:text-brand-700 transition flex items-center gap-1" data-subject-toggle="${s.id}">
+                  <span class="reorder-label">↕️ Reorder</span>
+                </button>
+              </div>
+              <div id="exam-reorder-${s.id}" class="hidden space-y-2 mb-3">
+                <div class="exam-reorder-list space-y-1.5" data-subject-id="${s.id}">${s.exams.map((e, i) => `
+                  <div class="flex items-center gap-2 p-2.5 bg-surface-50 rounded-xl cursor-move drag-exam" draggable="true" data-eid="${e.id}" data-sid="${s.id}" data-pos="${i}">
+                    <span class="drag-handle text-surface-300 hover:text-surface-500 cursor-grab text-sm select-none">⠿</span>
+                    <span class="text-xs font-bold text-surface-400 w-4 text-center">${i + 1}</span>
+                    <span class="font-medium text-xs text-surface-700 flex-1 truncate">${e.title}</span>
+                  </div>`).join('')}</div>
+                <button onclick="saveExamOrder('${s.id}')" class="w-full py-2 bg-emerald-500 text-white rounded-xl text-xs font-semibold hover:bg-emerald-600 transition">Save Exam Order</button>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="exam-grid-${s.id}">
                 ${s.exams.map(e => `
                   <div class="p-4 border border-surface-100 rounded-2xl hover:border-brand-200 transition group">
                     <div class="flex items-start justify-between mb-2">
@@ -796,8 +837,158 @@ import Layout from '../layouts/Layout.astro';
           if (subjects.error) { el.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-4">⚠️</div><p class="text-red-500 font-medium">${subjects.error}</p><button onclick="loadManageList()" class="btn-ghost text-sm mt-3">Retry</button></div>`; return; }
           allSubjects = subjects;
           renderManageList(document.getElementById('search-input').value, currentFilter);
+          renderSubjectReorder();
         } catch(e) { el.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-4">⚠️</div><p class="text-red-500 font-medium">${e.message}</p><button onclick="loadManageList()" class="btn-ghost text-sm mt-3">Retry</button></div>`; }
       }
+
+      // --- Subject Reorder (Drag & Drop) ---
+      let subjectOrderChanged = false;
+
+      function renderSubjectReorder() {
+        const section = document.getElementById('subject-reorder-section');
+        const list = document.getElementById('subject-reorder-list');
+        if (allSubjects.length === 0) { section.classList.add('hidden'); return; }
+        section.classList.remove('hidden');
+        // Sort by order for display
+        const sorted = [...allSubjects].sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity));
+        list.innerHTML = sorted.map((s, i) => `
+          <div class="flex items-center gap-3 p-3 bg-surface-50 rounded-xl cursor-move drag-subject" draggable="true" data-sid="${s.id}" data-pos="${i}">
+            <span class="drag-handle text-surface-300 hover:text-surface-500 cursor-grab active:cursor-grabbing text-lg select-none">⠿</span>
+            <span class="text-xs font-bold text-surface-400 w-5 text-center">${i + 1}</span>
+            <span class="font-medium text-sm text-surface-800 flex-1">${s.name}</span>
+            <span class="text-xs text-surface-400">${s.exams ? s.exams.length : 0} exams</span>
+          </div>
+        `).join('');
+
+        // Drag & drop handlers
+        let dragEl = null;
+        list.querySelectorAll('.drag-subject').forEach(el => {
+          el.addEventListener('dragstart', (e) => {
+            dragEl = el;
+            el.classList.add('opacity-50');
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          el.addEventListener('dragend', () => {
+            el.classList.remove('opacity-50');
+            dragEl = null;
+            list.querySelectorAll('.drag-subject').forEach(x => x.classList.remove('border-brand-500'));
+          });
+          el.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            el.classList.add('border-brand-500');
+          });
+          el.addEventListener('dragleave', () => {
+            el.classList.remove('border-brand-500');
+          });
+          el.addEventListener('drop', (e) => {
+            e.preventDefault();
+            el.classList.remove('border-brand-500');
+            if (!dragEl || dragEl === el) return;
+            const fromPos = parseInt(dragEl.dataset.pos);
+            const toPos = parseInt(el.dataset.pos);
+            // Reorder in DOM
+            if (fromPos < toPos) {
+              el.after(dragEl);
+            } else {
+              el.before(dragEl);
+            }
+            // Update positions
+            updateSubjectOrderPositions();
+            subjectOrderChanged = true;
+            document.getElementById('save-subject-order').classList.remove('hidden');
+          });
+        });
+      }
+
+      function updateSubjectOrderPositions() {
+        const list = document.getElementById('subject-reorder-list');
+        list.querySelectorAll('.drag-subject').forEach((el, i) => {
+          el.dataset.pos = i;
+          el.querySelector('.text-xs.font-bold').textContent = i + 1;
+        });
+      }
+
+      document.getElementById('save-subject-order').addEventListener('click', async () => {
+        const list = document.getElementById('subject-reorder-list');
+        const ids = Array.from(list.querySelectorAll('.drag-subject')).map(el => el.dataset.sid);
+        try {
+          const res = await fetch('/api/admin/subjects/reorder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ orderedIds: ids })
+          });
+          if (res.ok) {
+            window.showToast('Subject order saved');
+            subjectOrderChanged = false;
+            document.getElementById('save-subject-order').classList.add('hidden');
+          } else {
+            window.showToast('Failed to save order');
+          }
+        } catch { window.showToast('Error saving order'); }
+      });
+
+      // --- Exam Reorder (Drag & Drop within subject) ---
+      window.toggleExamReorder = (subjectId) => {
+        const reorderDiv = document.getElementById('exam-reorder-' + subjectId);
+        const grid = document.getElementById('exam-grid-' + subjectId);
+        if (!reorderDiv || !grid) return;
+        const isHidden = reorderDiv.classList.contains('hidden');
+        reorderDiv.classList.toggle('hidden');
+        grid.classList.toggle('hidden');
+
+        if (isHidden) {
+          // Init drag & drop for exam reorder
+          const list = reorderDiv.querySelector('.exam-reorder-list');
+          let dragExamEl = null;
+          list.querySelectorAll('.drag-exam').forEach(el => {
+            el.addEventListener('dragstart', (e) => {
+              dragExamEl = el;
+              el.classList.add('opacity-50');
+              e.dataTransfer.effectAllowed = 'move';
+            });
+            el.addEventListener('dragend', () => {
+              el.classList.remove('opacity-50');
+              dragExamEl = null;
+              list.querySelectorAll('.drag-exam').forEach(x => x.classList.remove('border-brand-500'));
+            });
+            el.addEventListener('dragover', (e) => {
+              e.preventDefault();
+              e.dataTransfer.dropEffect = 'move';
+              el.classList.add('border-brand-500');
+            });
+            el.addEventListener('dragleave', () => el.classList.remove('border-brand-500'));
+            el.addEventListener('drop', (e) => {
+              e.preventDefault();
+              el.classList.remove('border-brand-500');
+              if (!dragExamEl || dragExamEl === el) return;
+              const fromPos = parseInt(dragExamEl.dataset.pos);
+              const toPos = parseInt(el.dataset.pos);
+              if (fromPos < toPos) el.after(dragExamEl); else el.before(dragExamEl);
+              // Update positions
+              list.querySelectorAll('.drag-exam').forEach((x, i) => {
+                x.dataset.pos = i;
+                x.querySelector('.text-xs.font-bold').textContent = i + 1;
+              });
+            });
+          });
+        }
+      };
+
+      window.saveExamOrder = async (subjectId) => {
+        const list = document.querySelector('.exam-reorder-list[data-subject-id="' + subjectId + '"]');
+        if (!list) return;
+        const ids = Array.from(list.querySelectorAll('.drag-exam')).map(el => el.dataset.eid);
+        try {
+          const res = await fetch('/api/admin/exams/reorder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ subjectId, orderedIds: ids })
+          });
+          if (res.ok) { window.showToast('Exam order saved'); loadManageList(); }
+          else { window.showToast('Failed to save order'); }
+        } catch { window.showToast('Error saving order'); }
+      };
 
       // Search & filter
       let searchTimer;
@@ -872,10 +1063,21 @@ import Layout from '../layouts/Layout.astro';
         blogQueueListEl.innerHTML = blogFileQueue.map((f, i) => {
           const statusCls = f.status === 'done' ? 'text-emerald-500' : f.status === 'error' ? 'text-red-500' : f.status === 'uploading' ? 'text-brand-500' : 'text-surface-400';
           const statusText = f.status === 'done' ? '✓ Done' : f.status === 'error' ? '✗ ' + (f.error || 'Error') : f.status === 'uploading' ? '...' : 'Pending';
-          return '<div class="flex items-center gap-2 p-2 bg-surface-50 rounded-xl text-sm"><span class="truncate flex-1 text-surface-700">' + f.name + '</span><span class="text-xs ' + statusCls + ' shrink-0">' + statusText + '</span>' + (f.status === 'pending' ? '<button onclick="removeBlogQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0">✕</button>' : '') + '</div>';
+          const canReorder = f.status === 'pending';
+          const upBtn = canReorder && i > 0 ? '<button onclick="moveBlogQueue(' + i + ',-1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move up">▲</button>' : '<span class="w-3 shrink-0"></span>';
+          const downBtn = canReorder && i < blogFileQueue.length - 1 ? '<button onclick="moveBlogQueue(' + i + ',1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move down">▼</button>' : '<span class="w-3 shrink-0"></span>';
+          return '<div class="flex items-center gap-1.5 p-2 bg-surface-50 rounded-xl text-sm"><span class="text-xs font-bold text-surface-300 w-4 text-center shrink-0">' + (i + 1) + '</span>' + upBtn + downBtn + '<span class="truncate flex-1 text-surface-700">' + f.name + '</span><span class="text-xs ' + statusCls + ' shrink-0">' + statusText + '</span>' + (f.status === 'pending' ? '<button onclick="removeBlogQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0">✕</button>' : '') + '</div>';
         }).join('');
       }
       window.removeBlogQueue = (i) => { blogFileQueue.splice(i, 1); renderBlogQueue(); };
+      window.moveBlogQueue = (i, dir) => {
+        const j = i + dir;
+        if (j < 0 || j >= blogFileQueue.length) return;
+        const temp = blogFileQueue[i];
+        blogFileQueue[i] = blogFileQueue[j];
+        blogFileQueue[j] = temp;
+        renderBlogQueue();
+      };
       document.getElementById('blog-queue-clear').addEventListener('click', () => { blogFileQueue = []; renderBlogQueue(); });
 
       function addBlogFiles(files) {

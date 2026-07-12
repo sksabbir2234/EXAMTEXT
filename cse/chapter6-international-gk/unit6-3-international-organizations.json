@@ -1,0 +1,224 @@
+{
+  "subject": "International GK",
+  "examTitle": "Unit 6.3 — International Organizations",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "In which year was the United Nations established?",
+      "options": ["1940", "1945", "1950", "1955"],
+      "correctOptionIndex": 1,
+      "explanation": "The United Nations was established in 1945.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the United Nations located?",
+      "options": ["Geneva", "New York", "Paris", "London"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of the United Nations is in New York.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the World Health Organization (WHO)?",
+      "options": ["New York", "Paris", "Geneva", "Rome"],
+      "correctOptionIndex": 2,
+      "explanation": "The headquarters of WHO is in Geneva.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the World Trade Organization (WTO) established?",
+      "options": ["1990", "1995", "2000", "2005"],
+      "correctOptionIndex": 1,
+      "explanation": "The WTO was established in 1995.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the WTO located?",
+      "options": ["New York", "Geneva", "Paris", "Washington D.C."],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of the WTO is in Geneva.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the International Monetary Fund (IMF) established?",
+      "options": ["1940", "1944", "1948", "1952"],
+      "correctOptionIndex": 1,
+      "explanation": "The IMF was established in 1944.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the IMF located?",
+      "options": ["Geneva", "New York", "Washington D.C.", "London"],
+      "correctOptionIndex": 2,
+      "explanation": "The headquarters of the IMF is in Washington D.C.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the World Bank established?",
+      "options": ["1940", "1944", "1948", "1952"],
+      "correctOptionIndex": 1,
+      "explanation": "The World Bank was established in 1944.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the World Bank located?",
+      "options": ["Geneva", "New York", "Washington D.C.", "London"],
+      "correctOptionIndex": 2,
+      "explanation": "The headquarters of the World Bank is in Washington D.C.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of UNESCO located?",
+      "options": ["New York", "Geneva", "Paris", "Rome"],
+      "correctOptionIndex": 2,
+      "explanation": "The headquarters of UNESCO is in Paris.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of UNICEF located?",
+      "options": ["Geneva", "New York", "Paris", "Rome"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of UNICEF is in New York.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the International Criminal Court (ICC) located?",
+      "options": ["Geneva", "The Hague", "Paris", "New York"],
+      "correctOptionIndex": 1,
+      "explanation": "The ICC is located in The Hague.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the International Labour Organization (ILO)?",
+      "options": ["New York", "Geneva", "Paris", "Rome"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of the ILO is in Geneva.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the Food and Agriculture Organization (FAO)?",
+      "options": ["Geneva", "New York", "Rome", "Paris"],
+      "correctOptionIndex": 2,
+      "explanation": "The headquarters of the FAO is in Rome.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the International Atomic Energy Agency (IAEA)?",
+      "options": ["Geneva", "Vienna", "New York", "Paris"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of the IAEA is in Vienna.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the Association of Southeast Asian Nations (ASEAN) established?",
+      "options": ["1960", "1967", "1975", "1980"],
+      "correctOptionIndex": 1,
+      "explanation": "ASEAN was established in 1967.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the European Union (EU) established?",
+      "options": ["1985", "1990", "1993", "2000"],
+      "correctOptionIndex": 2,
+      "explanation": "The EU was established in 1993.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the European Union located?",
+      "options": ["Paris", "Brussels", "Geneva", "Strasbourg"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of the EU is in Brussels.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the North Atlantic Treaty Organization (NATO) established?",
+      "options": ["1945", "1949", "1955", "1960"],
+      "correctOptionIndex": 1,
+      "explanation": "NATO was established in 1949.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of NATO located?",
+      "options": ["Paris", "Brussels", "Geneva", "London"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of NATO is in Brussels.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the Organization of the Petroleum Exporting Countries (OPEC) established?",
+      "options": ["1950", "1955", "1960", "1965"],
+      "correctOptionIndex": 2,
+      "explanation": "OPEC was established in 1960.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of OPEC located?",
+      "options": ["Riyadh", "Vienna", "Geneva", "Paris"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of OPEC is in Vienna.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the South Asian Association for Regional Cooperation (SAARC) established?",
+      "options": ["1980", "1985", "1990", "1995"],
+      "correctOptionIndex": 1,
+      "explanation": "SAARC was established in 1985.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of SAARC located?",
+      "options": ["New Delhi", "Kathmandu", "Colombo", "Dhaka"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of SAARC is in Kathmandu.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the Arab League established?",
+      "options": ["1940", "1945", "1950", "1955"],
+      "correctOptionIndex": 1,
+      "explanation": "The Arab League was established in 1945.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the Arab League located?",
+      "options": ["Riyadh", "Cairo", "Beirut", "Damascus"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of the Arab League is in Cairo.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the African Union located?",
+      "options": ["Nairobi", "Addis Ababa", "Cairo", "Johannesburg"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of the African Union is in Addis Ababa.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the International Red Cross located?",
+      "options": ["Geneva", "Paris", "New York", "Rome"],
+      "correctOptionIndex": 0,
+      "explanation": "The headquarters of the International Red Cross is in Geneva.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of Interpol located?",
+      "options": ["Paris", "Lyon", "Geneva", "The Hague"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of Interpol is in Lyon.",
+      "marks": 1
+    },
+    {
+      "questionText": "In which year was the Organisation of Islamic Cooperation (OIC) established?",
+      "options": ["1960", "1965", "1969", "1975"],
+      "correctOptionIndex": 2,
+      "explanation": "The OIC was established in 1969.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where is the headquarters of the OIC located?",
+      "options": ["Riyadh", "Jeddah", "Cairo", "Istanbul"],
+      "correctOptionIndex": 1,
+      "explanation": "The headquarters of the OIC is in Jeddah.",
+      "marks": 1
+    }
+  ]
+}

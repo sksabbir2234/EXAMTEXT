@@ -6,18 +6,37 @@ const rawScore = Astro.url.searchParams.get('score') || '0';
 const rawTotal = Astro.url.searchParams.get('total') || '0';
 const rawCorrect = Astro.url.searchParams.get('correct');
 const rawWrong = Astro.url.searchParams.get('wrong');
+const rawSkipped = Astro.url.searchParams.get('skipped');
+const rawPenalty = Astro.url.searchParams.get('penalty');
 
 function safeInt(v: string): number {
   const m = v.match(/\d+/);
   return m ? parseInt(m[0], 10) : 0;
 }
 
+function safeFloat(v: string): number {
+  const m = v.match(/[\d.]+/);
+  return m ? parseFloat(m[0]) : 0;
+}
+
 const score = safeInt(rawScore);
 const total = safeInt(rawTotal);
 const correctParam = rawCorrect !== null ? safeInt(rawCorrect) : null;
 const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
+const skippedParam = rawSkipped !== null ? safeInt(rawSkipped) : null;
+const penaltyParam = rawPenalty !== null ? safeFloat(rawPenalty) : null;
 ---
 <Layout title="Result - ExamText" navBack={true} navTitle="Exam Result">
+  <!-- Print-only header -->
+  <div class="print-header max-w-3xl mx-auto px-4 py-4 border-b border-surface-200 mb-4">
+    <h1 class="text-2xl font-bold text-surface-900">ExamText — পরীক্ষার ফলাফল</h1>
+    <p class="text-sm text-surface-400">Printed: <span id="print-date"></span></p>
+  </div>
+  <script is:inline>
+    var pd = document.getElementById('print-date');
+    if (pd) pd.textContent = new Date().toLocaleString('bn-BD');
+  </script>
+
   <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
 
     {(!examId) ? (
@@ -73,6 +92,8 @@ const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
     const total = parseInt(params.get('total') || '0', 10) || 0;
     const correctParam = params.get('correct');
     const wrongParam = params.get('wrong');
+    const skippedParam = params.get('skipped');
+    const penaltyParam = params.get('penalty');
 
     async function init() {
       try {
@@ -83,37 +104,55 @@ const wrongParam = rawWrong !== null ? safeInt(rawWrong) : null;
         const grade = pct >= 80 ? 'Excellent' : pct >= 60 ? 'Good' : pct >= 40 ? 'Fair' : 'Needs Work';
         const gradeColor = pct >= 80 ? 'text-emerald-500' : pct >= 60 ? 'text-brand-500' : pct >= 40 ? 'text-amber-500' : 'text-red-500';
 
-        // correct / wrong (fallback: derive from score if not provided)
-        let correctCount = correctParam !== null ? parseInt(correctParam,10) : score;
-        let wrongCount = wrongParam !== null ? parseInt(wrongParam,10) : (examTotal - score);
-        if (correctCount + wrongCount > examTotal) wrongCount = examTotal - correctCount;
-        const penalty = Math.max(0, correctCount - score);
-        const unanswered = Math.max(0, examTotal - correctCount - wrongCount);
+        // correct / wrong / skipped / penalty from URL params
+        let correctCount = correctParam !== null ? parseInt(correctParam, 10) : 0;
+        let wrongCount = wrongParam !== null ? parseInt(wrongParam, 10) : 0;
+        let skippedCount = skippedParam !== null ? parseInt(skippedParam, 10) : 0;
+        let penaltyAmount = penaltyParam !== null ? parseFloat(penaltyParam) : 0;
+
+        // Fallback: derive from score if params missing (old links)
+        if (correctParam === null && wrongParam === null) {
+          correctCount = score;
+          wrongCount = examTotal - score;
+          penaltyAmount = Math.max(0, correctCount - score);
+          skippedCount = 0;
+        }
+        if (correctCount + wrongCount + skippedCount > examTotal) {
+          skippedCount = Math.max(0, examTotal - correctCount - wrongCount);
+        }
 
         document.getElementById('result-card').innerHTML = `
           <div class="w-20 h-20 rounded-3xl bg-brand-50 flex items-center justify-center text-4xl mx-auto mb-6">🎯</div>
           <div class="text-sm font-semibold text-surface-400 uppercase tracking-wider mb-2">${grade}</div>
           <div class="text-6xl font-black ${gradeColor} mb-2">${pct}%</div>
           <div class="text-xs text-surface-400 mb-6">Final score after negative marking (4 wrong = −1)</div>
-          <div class="flex justify-center gap-10 mt-8 mb-6">
-            <div class="text-center">
-              <div class="text-3xl font-bold text-emerald-500">${correctCount}</div>
-              <div class="text-xs text-surface-400 mt-1 font-medium">Correct</div>
-            </div>
-            <div class="text-center">
-              <div class="text-3xl font-bold text-red-500">${wrongCount}</div>
-              <div class="text-xs text-surface-400 mt-1 font-medium">Wrong</div>
-            </div>
-            ${penalty>0?`<div class="text-center"><div class="text-3xl font-bold text-amber-500">-${penalty}</div><div class="text-xs text-surface-400 mt-1 font-medium">Penalty</div></div>`:''}
-            <div class="text-center">
-              <div class="text-3xl font-bold text-surface-500">${unanswered}</div>
-              <div class="text-xs text-surface-400 mt-1 font-medium">Skipped</div>
+
+          <!-- Score Breakdown -->
+          <div class="bg-surface-50 rounded-2xl p-5 mb-6 text-left max-w-sm mx-auto">
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="flex items-center gap-2 text-surface-600"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> সঠিক উত্তর</span>
+                <span class="font-bold text-emerald-600">${correctCount} টি &nbsp;→&nbsp; +${correctCount}.00</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="flex items-center gap-2 text-surface-600"><span class="w-2 h-2 rounded-full bg-red-500"></span> ভুল উত্তর</span>
+                <span class="font-bold text-red-500">${wrongCount} টি &nbsp;→&nbsp; −${penaltyAmount.toFixed(2)}</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="flex items-center gap-2 text-surface-600"><span class="w-2 h-2 rounded-full bg-surface-300"></span> বাদ দেওয়া</span>
+                <span class="font-bold text-surface-500">${skippedCount} টি &nbsp;→&nbsp; ±0</span>
+              </div>
+              <div class="border-t border-surface-200 pt-3 flex justify-between items-center">
+                <span class="font-semibold text-surface-800">📊 মোট স্কোর</span>
+                <span class="font-black text-lg ${gradeColor}">${score} / ${examTotal}</span>
+              </div>
             </div>
           </div>
+
           <div class="flex flex-wrap justify-center gap-3" id="review-actions">
             <button onclick="navigator.share && navigator.share({title:'My Result',url:window.location.href})" class="btn-ghost text-sm px-5 py-2.5">Share</button>
             <button onclick="navigator.clipboard.writeText(window.location.href);window.showToast('Link copied!')" class="btn-ghost text-sm px-5 py-2.5">Copy Link</button>
-            <button onclick="window.print()" class="btn-ghost text-sm px-5 py-2.5">🖨️ Print</button>
+            <button onclick="window.print()" data-no-print class="btn-ghost text-sm px-5 py-2.5">🖨️ Print</button>
             ${wrongCount>0?`<a href="/exam?id=${examId}&mode=practice" class="btn-primary text-sm px-5 py-2.5">🚩 Practice Wrong (${wrongCount})</a>`:''}
           </div>`;
 

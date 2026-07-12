@@ -1,8 +1,17 @@
-const CACHE = 'examtext-v1';
+const CACHE_NAME = 'examtext-v2';
+const OFFLINE_URL = '/offline';
+
+const PRECACHE_ASSETS = [
+  '/',
+  '/offline',
+  '/manifest.json',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png',
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(['/'])).catch(() => {})
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS)).catch(() => {})
   );
   self.skipWaiting();
 });
@@ -10,44 +19,50 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
     )
   );
   self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
-  const req = event.request;
-  if (req.method !== 'GET') return; // POST/PUT go straight to network
+  const url = new URL(event.request.url);
 
-  const url = new URL(req.url);
-  if (url.pathname.startsWith('/api/admin')) return; // never cache admin APIs
+  if (event.request.method !== 'GET') return;
+  if (url.pathname.startsWith('/api/')) return;
 
-  // Public API GET: stale-while-revalidate (works offline from cache)
-  if (url.pathname.startsWith('/api/')) {
+  // Static assets: cache first
+  if (
+    url.pathname.startsWith('/icons/') ||
+    url.pathname.startsWith('/_astro/') ||
+    url.pathname.endsWith('.css') ||
+    url.pathname.endsWith('.js') ||
+    url.pathname.endsWith('.woff2') ||
+    url.pathname.endsWith('.png') ||
+    url.pathname.endsWith('.svg')
+  ) {
     event.respondWith(
-      caches.open(CACHE).then(async (cache) => {
-        const cached = await cache.match(req);
-        const network = fetch(req)
-          .then((res) => {
-            if (res && res.status === 200) cache.put(req, res.clone());
-            return res;
-          })
-          .catch(() => cached);
-        return cached || network;
-      })
+      caches.match(event.request).then(
+        (cached) => cached || fetch(event.request).then((res) => {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          return res;
+        })
+      )
     );
     return;
   }
 
-  // Pages + static assets: network-first, fall back to cache (then app shell)
+  // Pages: network first, fallback to offline
   event.respondWith(
-    fetch(req)
+    fetch(event.request)
       .then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(req, copy));
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         return res;
       })
-      .catch(() => caches.match(req).then((r) => r || caches.match('/')))
+      .catch(() =>
+        caches.match(event.request).then((cached) => cached || caches.match(OFFLINE_URL))
+      )
   );
 });

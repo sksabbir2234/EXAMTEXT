@@ -1,0 +1,217 @@
+{
+  "subject": "English Grammar",
+  "examTitle": "Unit 1.3 — Tenses",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "She _____ to the gym every morning.",
+      "options": ["go", "goes", "is going", "has gone"],
+      "correctOptionIndex": 1,
+      "explanation": "Present simple with third-person singular 'she' requires 'goes'.",
+      "marks": 1
+    },
+    {
+      "questionText": "Look! It _____ outside.",
+      "options": ["rains", "is raining", "has rained", "was raining"],
+      "correctOptionIndex": 1,
+      "explanation": "Present continuous is used for actions happening right now.",
+      "marks": 1
+    },
+    {
+      "questionText": "I _____ this book since last week.",
+      "options": ["read", "am reading", "have been reading", "was reading"],
+      "correctOptionIndex": 2,
+      "explanation": "'Since' indicates present perfect continuous for an action that started in the past and continues.",
+      "marks": 1
+    },
+    {
+      "questionText": "They _____ here for five years.",
+      "options": ["live", "have lived", "are living", "lived"],
+      "correctOptionIndex": 1,
+      "explanation": "'For' indicates a duration; present perfect is used for an action that started in the past and continues.",
+      "marks": 1
+    },
+    {
+      "questionText": "He _____ his keys yesterday.",
+      "options": ["loses", "lost", "has lost", "is losing"],
+      "correctOptionIndex": 1,
+      "explanation": "'Yesterday' indicates past simple tense.",
+      "marks": 1
+    },
+    {
+      "questionText": "We _____ dinner when the phone rang.",
+      "options": ["cook", "cooked", "were cooking", "had cooked"],
+      "correctOptionIndex": 2,
+      "explanation": "Past continuous is used for an action in progress interrupted by another action.",
+      "marks": 1
+    },
+    {
+      "questionText": "By the time I arrived, they _____ already left.",
+      "options": ["have", "had", "were having", "would have"],
+      "correctOptionIndex": 1,
+      "explanation": "Past perfect is used for an action completed before another past action.",
+      "marks": 1
+    },
+    {
+      "questionText": "She _____ for three hours before she found the lost dog.",
+      "options": ["searched", "was searching", "had been searching", "has been searching"],
+      "correctOptionIndex": 2,
+      "explanation": "Past perfect continuous shows an ongoing action before another past event.",
+      "marks": 1
+    },
+    {
+      "questionText": "I _____ you tomorrow at 10 AM.",
+      "options": ["meet", "will meet", "am meeting", "will be meeting"],
+      "correctOptionIndex": 1,
+      "explanation": "Future simple is used for planned future events.",
+      "marks": 1
+    },
+    {
+      "questionText": "This time tomorrow, I _____ on the beach.",
+      "options": ["will lie", "will be lying", "am lying", "lie"],
+      "correctOptionIndex": 1,
+      "explanation": "Future continuous is used for an action that will be in progress at a specific future time.",
+      "marks": 1
+    },
+    {
+      "questionText": "By next year, she _____ her degree.",
+      "options": ["finishes", "will finish", "will have finished", "is finishing"],
+      "correctOptionIndex": 2,
+      "explanation": "Future perfect is used for an action that will be completed before a specific future time.",
+      "marks": 1
+    },
+    {
+      "questionText": "I _____ this work for two hours by lunchtime.",
+      "options": ["will do", "will have been doing", "am doing", "have been doing"],
+      "correctOptionIndex": 1,
+      "explanation": "Future perfect continuous emphasizes the duration of an action up to a future point.",
+      "marks": 1
+    },
+    {
+      "questionText": "He has lived here _____ 2010.",
+      "options": ["for", "since", "from", "in"],
+      "correctOptionIndex": 1,
+      "explanation": "'Since' is used with a specific point in time.",
+      "marks": 1
+    },
+    {
+      "questionText": "I have _____ finished my homework.",
+      "options": ["yet", "already", "since", "for"],
+      "correctOptionIndex": 1,
+      "explanation": "'Already' is used in affirmative sentences with present perfect to indicate something done before expected.",
+      "marks": 1
+    },
+    {
+      "questionText": "Have you finished your project _____?",
+      "options": ["already", "yet", "since", "just"],
+      "correctOptionIndex": 1,
+      "explanation": "'Yet' is used in questions with present perfect to ask about something expected.",
+      "marks": 1
+    },
+    {
+      "questionText": "I have _____ arrived home.",
+      "options": ["yet", "for", "just", "since"],
+      "correctOptionIndex": 2,
+      "explanation": "'Just' is used with present perfect to indicate something that happened very recently.",
+      "marks": 1
+    },
+    {
+      "questionText": "She _____ French for ten years.",
+      "options": ["studies", "studied", "has studied", "is studying"],
+      "correctOptionIndex": 2,
+      "explanation": "Present perfect is used with 'for' to show an action continuing from past to present.",
+      "marks": 1
+    },
+    {
+      "questionText": "They _____ to Paris last summer.",
+      "options": ["travel", "travelled", "have travelled", "were travelling"],
+      "correctOptionIndex": 1,
+      "explanation": "'Last summer' indicates a finished time in the past, requiring past simple.",
+      "marks": 1
+    },
+    {
+      "questionText": "Right now, the children _____ in the garden.",
+      "options": ["play", "play", "are playing", "have played"],
+      "correctOptionIndex": 2,
+      "explanation": "'Right now' indicates an action happening at the moment, requiring present continuous.",
+      "marks": 1
+    },
+    {
+      "questionText": "I _____ three cups of coffee today.",
+      "options": ["drink", "drank", "have drunk", "am drinking"],
+      "correctOptionIndex": 2,
+      "explanation": "'Today' is a time period continuing to the present, requiring present perfect.",
+      "marks": 1
+    },
+    {
+      "questionText": "When I was young, I _____ to school every day.",
+      "options": ["walk", "walked", "was walking", "had walked"],
+      "correctOptionIndex": 1,
+      "explanation": "Past simple is used for completed habitual actions in the past.",
+      "marks": 1
+    },
+    {
+      "questionText": "She was reading a book while I _____ cooking.",
+      "options": ["cooked", "was cooking", "had cooked", "cook"],
+      "correctOptionIndex": 1,
+      "explanation": "Past continuous is used for two simultaneous ongoing past actions.",
+      "marks": 1
+    },
+    {
+      "questionText": "He _____ already _____ his assignment before the deadline.",
+      "options": ["has...submitted", "had...submitted", "was...submitting", "did...submit"],
+      "correctOptionIndex": 1,
+      "explanation": "Past perfect is used for an action completed before another past event (the deadline).",
+      "marks": 1
+    },
+    {
+      "questionText": "We _____ dinner at 7 PM tonight.",
+      "options": ["will have", "will be having", "have", "are having"],
+      "correctOptionIndex": 1,
+      "explanation": "Future continuous is used for an action that will be in progress at a specific future time.",
+      "marks": 1
+    },
+    {
+      "questionText": "She _____ never _____ sushi before.",
+      "options": ["has...eaten", "had...eaten", "did...eat", "was...eating"],
+      "correctOptionIndex": 0,
+      "explanation": "Present perfect is used with 'never' for life experiences up to now.",
+      "marks": 1
+    },
+    {
+      "questionText": "The train _____ when we reached the station.",
+      "options": ["already left", "had already left", "has already left", "was leaving"],
+      "correctOptionIndex": 1,
+      "explanation": "Past perfect is used because the train left before we arrived.",
+      "marks": 1
+    },
+    {
+      "questionText": "By 2030, scientists _____ a cure for the disease.",
+      "options": ["will find", "will have found", "find", "are finding"],
+      "correctOptionIndex": 1,
+      "explanation": "Future perfect is used for an action that will be completed before a specific future year.",
+      "marks": 1
+    },
+    {
+      "questionText": "I _____ for this company since 2018.",
+      "options": ["work", "worked", "have been working", "am working"],
+      "correctOptionIndex": 2,
+      "explanation": "Present perfect continuous with 'since' emphasizes the duration of an ongoing action.",
+      "marks": 1
+    },
+    {
+      "questionText": "She usually _____ tea in the afternoon.",
+      "options": ["drinks", "is drinking", "drank", "has drunk"],
+      "correctOptionIndex": 0,
+      "explanation": "'Usually' indicates a habitual action, requiring present simple.",
+      "marks": 1
+    },
+    {
+      "questionText": "I _____ the movie twice already.",
+      "options": ["saw", "have seen", "was seeing", "see"],
+      "correctOptionIndex": 1,
+      "explanation": "'Already' and 'twice' with present perfect indicate a repeated experience up to now.",
+      "marks": 1
+    }
+  ]
+}

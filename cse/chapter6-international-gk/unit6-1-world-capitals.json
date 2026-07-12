@@ -1,0 +1,217 @@
+{
+  "subject": "International GK",
+  "examTitle": "Unit 6.1 — World Capitals",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "What is the capital of the United States?",
+      "options": ["New York City", "Washington D.C.", "Los Angeles", "Chicago"],
+      "correctOptionIndex": 1,
+      "explanation": "Washington D.C. is the capital of the United States.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of the United Kingdom?",
+      "options": ["Manchester", "Liverpool", "London", "Edinburgh"],
+      "correctOptionIndex": 2,
+      "explanation": "London is the capital of the United Kingdom.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of France?",
+      "options": ["Lyon", "Marseille", "Paris", "Nice"],
+      "correctOptionIndex": 2,
+      "explanation": "Paris is the capital of France.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Germany?",
+      "options": ["Munich", "Hamburg", "Frankfurt", "Berlin"],
+      "correctOptionIndex": 3,
+      "explanation": "Berlin is the capital of Germany.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Italy?",
+      "options": ["Milan", "Naples", "Rome", "Turin"],
+      "correctOptionIndex": 2,
+      "explanation": "Rome is the capital of Italy.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Japan?",
+      "options": ["Osaka", "Kyoto", "Tokyo", "Yokohama"],
+      "correctOptionIndex": 2,
+      "explanation": "Tokyo is the capital of Japan.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of China?",
+      "options": ["Shanghai", "Beijing", "Guangzhou", "Shenzhen"],
+      "correctOptionIndex": 1,
+      "explanation": "Beijing is the capital of China.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of India?",
+      "options": ["Mumbai", "Kolkata", "New Delhi", "Chennai"],
+      "correctOptionIndex": 2,
+      "explanation": "New Delhi is the capital of India.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Australia?",
+      "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+      "correctOptionIndex": 2,
+      "explanation": "Canberra is the capital of Australia.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Canada?",
+      "options": ["Toronto", "Vancouver", "Montreal", "Ottawa"],
+      "correctOptionIndex": 3,
+      "explanation": "Ottawa is the capital of Canada.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Brazil?",
+      "options": ["Rio de Janeiro", "São Paulo", "Brasilia", "Salvador"],
+      "correctOptionIndex": 2,
+      "explanation": "Brasilia is the capital of Brazil.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Russia?",
+      "options": ["St. Petersburg", "Moscow", "Novosibirsk", "Yekaterinburg"],
+      "correctOptionIndex": 1,
+      "explanation": "Moscow is the capital of Russia.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Turkey?",
+      "options": ["Istanbul", "Ankara", "Izmir", "Antalya"],
+      "correctOptionIndex": 1,
+      "explanation": "Ankara is the capital of Turkey.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Egypt?",
+      "options": ["Alexandria", "Luxor", "Cairo", "Giza"],
+      "correctOptionIndex": 2,
+      "explanation": "Cairo is the capital of Egypt.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Kenya?",
+      "options": ["Mombasa", "Nairobi", "Kisumu", "Nakuru"],
+      "correctOptionIndex": 1,
+      "explanation": "Nairobi is the capital of Kenya.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of South Korea?",
+      "options": ["Busan", "Incheon", "Seoul", "Daegu"],
+      "correctOptionIndex": 2,
+      "explanation": "Seoul is the capital of South Korea.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Thailand?",
+      "options": ["Chiang Mai", "Pattaya", "Bangkok", "Phuket"],
+      "correctOptionIndex": 2,
+      "explanation": "Bangkok is the capital of Thailand.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Vietnam?",
+      "options": ["Ho Chi Minh City", "Da Nang", "Hanoi", "Hai Phong"],
+      "correctOptionIndex": 2,
+      "explanation": "Hanoi is the capital of Vietnam.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Indonesia?",
+      "options": ["Surabaya", "Bandung", "Jakarta", "Medan"],
+      "correctOptionIndex": 2,
+      "explanation": "Jakarta is the capital of Indonesia.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Pakistan?",
+      "options": ["Karachi", "Lahore", "Islamabad", "Faisalabad"],
+      "correctOptionIndex": 2,
+      "explanation": "Islamabad is the capital of Pakistan.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Bangladesh?",
+      "options": ["Chittagong", "Khulna", "Dhaka", "Rajshahi"],
+      "correctOptionIndex": 2,
+      "explanation": "Dhaka is the capital of Bangladesh.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Sri Lanka?",
+      "options": ["Galle", "Kandy", "Colombo", "Jaffna"],
+      "correctOptionIndex": 2,
+      "explanation": "Colombo is the commercial capital of Sri Lanka.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Nepal?",
+      "options": ["Pokhara", "Biratnagar", "Kathmandu", "Lalitpur"],
+      "correctOptionIndex": 2,
+      "explanation": "Kathmandu is the capital of Nepal.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Bhutan?",
+      "options": ["Paro", "Thimphu", "Punakha", "Bumthang"],
+      "correctOptionIndex": 1,
+      "explanation": "Thimphu is the capital of Bhutan.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of the Philippines?",
+      "options": ["Cebu", "Davao", "Manila", "Quezon City"],
+      "correctOptionIndex": 2,
+      "explanation": "Manila is the capital of the Philippines.",
+      "marks": 1
+    },
+    {
+      "questionText": "Singapore is a city-state that serves as its own capital. True or False?",
+      "options": ["True", "False"],
+      "correctOptionIndex": 0,
+      "explanation": "Singapore is a city-state and its own capital.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Vatican City?",
+      "options": ["St. Peter's Square", "Vatican City", "Rome", "The Vatican"],
+      "correctOptionIndex": 1,
+      "explanation": "Vatican City is both the capital and the country.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Switzerland?",
+      "options": ["Zurich", "Geneva", "Bern", "Basel"],
+      "correctOptionIndex": 2,
+      "explanation": "Bern is the capital of Switzerland.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Sweden?",
+      "options": ["Gothenburg", "Malmö", "Stockholm", "Uppsala"],
+      "correctOptionIndex": 2,
+      "explanation": "Stockholm is the capital of Sweden.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the capital of Norway?",
+      "options": ["Bergen", "Oslo", "Trondheim", "Stavanger"],
+      "correctOptionIndex": 1,
+      "explanation": "Oslo is the capital of Norway.",
+      "marks": 1
+    }
+  ]
+}

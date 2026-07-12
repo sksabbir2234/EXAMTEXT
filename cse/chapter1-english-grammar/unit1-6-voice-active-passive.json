@@ -1,0 +1,224 @@
+{
+  "subject": "English Grammar",
+  "examTitle": "Unit 1.6 — Voice (Active-Passive)",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "The cake was baked by my mother. (Change to active voice)",
+      "options": ["My mother baked the cake.", "The cake baked my mother.", "My mother was baking the cake.", "The cake is baked by my mother."],
+      "correctOptionIndex": 0,
+      "explanation": "Active voice: Subject (My mother) + verb (baked) + object (the cake).",
+      "marks": 1
+    },
+    {
+      "questionText": "They build houses. (Change to passive voice)",
+      "options": ["Houses are built by them.", "Houses are being built by them.", "Houses were built by them.", "Houses have been built by them."],
+      "correctOptionIndex": 0,
+      "explanation": "Present simple passive: object + am/is/are + past participle + by + agent.",
+      "marks": 1
+    },
+    {
+      "questionText": "She is writing a letter. (Change to passive voice)",
+      "options": ["A letter is written by her.", "A letter is being written by her.", "A letter was written by her.", "A letter has been written by her."],
+      "correctOptionIndex": 1,
+      "explanation": "Present continuous passive: object + am/is/are + being + past participle + by + agent.",
+      "marks": 1
+    },
+    {
+      "questionText": "They have completed the project. (Change to passive voice)",
+      "options": ["The project is completed.", "The project was completed.", "The project has been completed.", "The project has completed."],
+      "correctOptionIndex": 2,
+      "explanation": "Present perfect passive: object + has/have + been + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "He cleaned the room yesterday. (Change to passive voice)",
+      "options": ["The room was cleaned yesterday.", "The room is cleaned yesterday.", "The room has been cleaned yesterday.", "The room cleaned yesterday."],
+      "correctOptionIndex": 0,
+      "explanation": "Past simple passive: object + was/were + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "They were repairing the road. (Change to passive voice)",
+      "options": ["The road was repaired.", "The road was being repaired.", "The road is being repaired.", "The road has been repaired."],
+      "correctOptionIndex": 1,
+      "explanation": "Past continuous passive: object + was/were + being + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "The thieves had stolen the jewelry. (Change to passive voice)",
+      "options": ["The jewelry was stolen.", "The jewelry is stolen.", "The jewelry had been stolen.", "The jewelry has been stolen."],
+      "correctOptionIndex": 2,
+      "explanation": "Past perfect passive: object + had + been + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "They will publish the results next week. (Change to passive voice)",
+      "options": ["The results will be published next week.", "The results are published next week.", "The results will published next week.", "The results are being published next week."],
+      "correctOptionIndex": 0,
+      "explanation": "Future simple passive: object + will + be + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "They will have finished the work by Friday. (Change to passive voice)",
+      "options": ["The work will be finished by Friday.", "The work will have been finished by Friday.", "The work is finished by Friday.", "The work has been finished by Friday."],
+      "correctOptionIndex": 1,
+      "explanation": "Future perfect passive: object + will + have + been + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "She can solve the problem. (Change to passive voice)",
+      "options": ["The problem can be solved.", "The problem is solved.", "The problem could be solved.", "The problem can solved."],
+      "correctOptionIndex": 0,
+      "explanation": "Modal passive: object + modal + be + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "The window was broken. (Which is correct?)",
+      "options": ["This is passive with no agent.", "This is active voice.", "This is passive with an agent.", "This is incorrect."],
+      "correctOptionIndex": 0,
+      "explanation": "Passive with no agent: the 'by + agent' part is omitted when the agent is unknown or unimportant.",
+      "marks": 1
+    },
+    {
+      "questionText": "My father gave me a watch. (Change to passive — which is correct?)",
+      "options": ["I was given a watch by my father.", "A watch was given me by my father.", "I was given by my father a watch.", "A watch was gave to me by my father."],
+      "correctOptionIndex": 0,
+      "explanation": "Passive with two objects: the person (indirect object) can become the subject.",
+      "marks": 1
+    },
+    {
+      "questionText": "My father gave me a watch. (Change to passive — alternative correct form)",
+      "options": ["A watch was given to me by my father.", "A watch was gave to me.", "I was given a watch.", "Me was given a watch."],
+      "correctOptionIndex": 0,
+      "explanation": "Passive with two objects: the thing (direct object) can also become the subject with 'to'.",
+      "marks": 1
+    },
+    {
+      "questionText": "_____ the report finished yet?",
+      "options": ["Is", "Has", "Was", "Does"],
+      "correctOptionIndex": 1,
+      "explanation": "Present perfect passive question: Has/Have + subject + been + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "Where _____ the meeting held?",
+      "options": ["is", "was", "were", "has"],
+      "correctOptionIndex": 1,
+      "explanation": "Past simple passive question: Where + was/were + subject + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "The homework _____ not _____ yet.",
+      "options": ["is...completed", "has...been completed", "was...completed", "does...complete"],
+      "correctOptionIndex": 1,
+      "explanation": "Present perfect negative passive: has/have + not + been + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "The letter _____ not _____ yesterday.",
+      "options": ["is...sent", "was...sent", "has...been sent", "did...send"],
+      "correctOptionIndex": 1,
+      "explanation": "Past simple negative passive: was/were + not + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "She had her car _____ by the mechanic.",
+      "options": ["repair", "repaired", "repairing", "to repair"],
+      "correctOptionIndex": 1,
+      "explanation": "Causative passive: have + object + past participle (something done by someone else).",
+      "marks": 1
+    },
+    {
+      "questionText": "They made him _____ the rules.",
+      "options": ["to obey", "obey", "obeying", "obeyed"],
+      "correctOptionIndex": 1,
+      "explanation": "In passive causative with 'make', the structure is be made + to + verb.",
+      "marks": 1
+    },
+    {
+      "questionText": "He was made _____ the rules. (Change from active: They made him obey the rules.)",
+      "options": ["obey", "to obey", "obeying", "obeyed"],
+      "correctOptionIndex": 1,
+      "explanation": "Passive causative: be made + to + verb (infinitive with 'to' is restored in passive).",
+      "marks": 1
+    },
+    {
+      "questionText": "The work _____ by tomorrow.",
+      "options": ["will finish", "will be finished", "is finished", "was finished"],
+      "correctOptionIndex": 1,
+      "explanation": "Future simple passive: will + be + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "English _____ in many countries.",
+      "options": ["speaks", "is spoken", "is speaking", "was spoken"],
+      "correctOptionIndex": 1,
+      "explanation": "Present simple passive: is/are + past participle for general truths.",
+      "marks": 1
+    },
+    {
+      "questionText": "The building _____ during the war.",
+      "options": ["destroyed", "was destroyed", "is destroyed", "has destroyed"],
+      "correctOptionIndex": 1,
+      "explanation": "Past simple passive: was/were + past participle for historical events.",
+      "marks": 1
+    },
+    {
+      "questionText": "A new bridge _____ next year.",
+      "options": ["builds", "will build", "will be built", "is built"],
+      "correctOptionIndex": 2,
+      "explanation": "Future simple passive: will + be + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "The dishes _____ every evening.",
+      "options": ["washes", "are washed", "is washed", "were washed"],
+      "correctOptionIndex": 1,
+      "explanation": "Present simple passive: are + past participle for regular activities.",
+      "marks": 1
+    },
+    {
+      "questionText": "The package _____ while we were away.",
+      "options": ["delivered", "was delivered", "is delivered", "has delivered"],
+      "correctOptionIndex": 1,
+      "explanation": "Past simple passive: was/were + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "The report _____ by the time you arrive.",
+      "options": ["will finish", "will have finished", "will be finished", "is finished"],
+      "correctOptionIndex": 2,
+      "explanation": "Future perfect passive: will have been + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "She had her hair _____ at the salon.",
+      "options": ["cut", "to cut", "cutting", "cuts"],
+      "correctOptionIndex": 0,
+      "explanation": "Causative passive: have + object + past participle.",
+      "marks": 1
+    },
+    {
+      "questionText": "The machine _____ by the workers every day.",
+      "options": ["operates", "is operated", "was operated", "has operated"],
+      "correctOptionIndex": 1,
+      "explanation": "Present simple passive: is/are + past participle for habitual actions.",
+      "marks": 1
+    },
+    {
+      "questionText": "The decision _____ at the meeting.",
+      "options": ["announced", "was announced", "is announced", "has announced"],
+      "correctOptionIndex": 1,
+      "explanation": "Past simple passive: was/were + past participle for completed events.",
+      "marks": 1
+    },
+    {
+      "questionText": "The project _____ by the team.",
+      "options": ["is working on", "is being worked on", "works on", "worked on"],
+      "correctOptionIndex": 1,
+      "explanation": "Present continuous passive: is/are + being + past participle.",
+      "marks": 1
+    }
+  ]
+}

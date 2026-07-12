@@ -47,9 +47,18 @@ async function uploadSingleExam(data: any, db: any): Promise<{ id: string; warni
     name: data.subject.trim(), slug, description: '', createdAt: new Date()
   }, { merge: true });
 
+  // Find max order for this subject to assign sequential order
+  const existingExams = await db.collection('exams').where('subjectId', '==', slug).get();
+  let maxOrder = 0;
+  existingExams.docs.forEach(d => {
+    const ord = d.data().order ?? 0;
+    if (ord > maxOrder) maxOrder = ord;
+  });
+
   const examRef = await db.collection('exams').add({
     subjectId: slug, title: data.examTitle.trim(),
     durationMinutes: data.durationMinutes || 0, totalQuestions: data.questions.length,
+    order: maxOrder + 1,
     createdAt: new Date(), published: true
   });
 

@@ -1,8 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getAdminDb } from '../../lib/firebase-admin';
 
-// Minimal anonymous leaderboard write. No detailed attempt/answer data is
-// persisted server-side — full history lives in the student's browser (localStorage).
+// Minimal anonymous leaderboard write with negative marking fields.
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json() as any;
@@ -11,6 +10,10 @@ export const POST: APIRoute = async ({ request }) => {
       examId: body.examId,
       studentName: body.studentName || 'Anonymous',
       score: Number(body.score) || 0,
+      correct: Number(body.correct) || 0,
+      wrong: Number(body.wrong) || 0,
+      skipped: Number(body.skipped) || 0,
+      penalty: Number(body.penalty) || 0,
       total: Number(body.total) || 0,
       timeTaken: Number(body.timeTaken) || 0,
       createdAt: new Date(),

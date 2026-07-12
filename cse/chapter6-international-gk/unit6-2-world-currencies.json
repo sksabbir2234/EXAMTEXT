@@ -1,0 +1,217 @@
+{
+  "subject": "International GK",
+  "examTitle": "Unit 6.2 — World Currencies",
+  "durationMinutes": 30,
+  "questions": [
+    {
+      "questionText": "What is the currency of the United States?",
+      "options": ["Pound", "Euro", "Dollar", "Yen"],
+      "correctOptionIndex": 2,
+      "explanation": "The Dollar is the currency of the United States.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of the United Kingdom?",
+      "options": ["Dollar", "Euro", "Pound", "Franc"],
+      "correctOptionIndex": 2,
+      "explanation": "The Pound (GBP) is the currency of the United Kingdom.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Japan?",
+      "options": ["Yuan", "Won", "Yen", "Ringgit"],
+      "correctOptionIndex": 2,
+      "explanation": "The Yen is the currency of Japan.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of China?",
+      "options": ["Yen", "Yuan/Renminbi", "Won", "Dong"],
+      "correctOptionIndex": 1,
+      "explanation": "The Yuan/Renminbi is the currency of China.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of India?",
+      "options": ["Taka", "Rupee", "Rial", "Riyal"],
+      "correctOptionIndex": 1,
+      "explanation": "The Rupee is the currency of India.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Bangladesh?",
+      "options": ["Rupee", "Taka", "Dong", "Kyat"],
+      "correctOptionIndex": 1,
+      "explanation": "The Taka is the currency of Bangladesh.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of South Korea?",
+      "options": ["Yen", "Yuan", "Won", "Baht"],
+      "correctOptionIndex": 2,
+      "explanation": "The Won is the currency of South Korea.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Thailand?",
+      "options": ["Dong", "Kip", "Baht", "Rupiah"],
+      "correctOptionIndex": 2,
+      "explanation": "The Baht is the currency of Thailand.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Vietnam?",
+      "options": ["Yuan", "Dong", "Kyat", "Kip"],
+      "correctOptionIndex": 1,
+      "explanation": "The Dong is the currency of Vietnam.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Indonesia?",
+      "options": ["Rupiah", "Ringgit", "Peso", "Rupee"],
+      "correctOptionIndex": 0,
+      "explanation": "The Rupiah is the currency of Indonesia.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Brazil?",
+      "options": ["Peso", "Real", "Cruzeiro", "Escudo"],
+      "correctOptionIndex": 1,
+      "explanation": "The Real is the currency of Brazil.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Russia?",
+      "options": ["Ruble", "Riyal", "Rial", "Rand"],
+      "correctOptionIndex": 0,
+      "explanation": "The Ruble is the currency of Russia.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Turkey?",
+      "options": ["Lira", "Dinar", "Dirham", "Dollar"],
+      "correctOptionIndex": 0,
+      "explanation": "The Lira is the currency of Turkey.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Egypt?",
+      "options": ["Dinar", "Pound", "Riyal", "Dirham"],
+      "correctOptionIndex": 1,
+      "explanation": "The Egyptian Pound is the currency of Egypt.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Kenya?",
+      "options": ["Rand", "Shilling", "Cedi", "Naira"],
+      "correctOptionIndex": 1,
+      "explanation": "The Shilling is the currency of Kenya.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Switzerland?",
+      "options": ["Euro", "Franc", "Mark", "Krone"],
+      "correctOptionIndex": 1,
+      "explanation": "The Swiss Franc is the currency of Switzerland.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Sweden?",
+      "options": ["Krone", "Euro", "Franc", "Mark"],
+      "correctOptionIndex": 0,
+      "explanation": "The Krona is the currency of Sweden.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Norway?",
+      "options": ["Krona", "Krone", "Euro", "Mark"],
+      "correctOptionIndex": 1,
+      "explanation": "The Krone is the currency of Norway.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Malaysia?",
+      "options": ["Ringgit", "Rupiah", "Peso", "Baht"],
+      "correctOptionIndex": 0,
+      "explanation": "The Ringgit is the currency of Malaysia.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of the Philippines?",
+      "options": ["Baht", "Dong", "Peso", "Won"],
+      "correctOptionIndex": 2,
+      "explanation": "The Peso is the currency of the Philippines.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Bhutan?",
+      "options": ["Rupee", "Ngultrum", "Taka", "Nepalese Rupee"],
+      "correctOptionIndex": 1,
+      "explanation": "The Ngultrum is the currency of Bhutan.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Nepal?",
+      "options": ["Rupee", "Taka", "Nepalese Rupee", "Ngultrum"],
+      "correctOptionIndex": 2,
+      "explanation": "The Nepalese Rupee is the currency of Nepal.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of the Eurozone countries (Germany, France, Italy)?",
+      "options": ["Mark", "Franc", "Lira", "Euro"],
+      "correctOptionIndex": 3,
+      "explanation": "The Euro is the currency of Eurozone countries including Germany, France, and Italy.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Saudi Arabia?",
+      "options": ["Dinar", "Dirham", "Riyal", "Rial"],
+      "correctOptionIndex": 2,
+      "explanation": "The Riyal is the currency of Saudi Arabia.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of the United Arab Emirates?",
+      "options": ["Dinar", "Riyal", "Dirham", "Rial"],
+      "correctOptionIndex": 2,
+      "explanation": "The Dirham is the currency of the United Arab Emirates.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Kuwait?",
+      "options": ["Riyal", "Dinar", "Dirham", "Rial"],
+      "correctOptionIndex": 1,
+      "explanation": "The Dinar is the currency of Kuwait.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Pakistan?",
+      "options": ["Rupee", "Taka", "Riyal", "Rial"],
+      "correctOptionIndex": 0,
+      "explanation": "The Rupee is the currency of Pakistan.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Sri Lanka?",
+      "options": ["Rupee", "Taka", "Riyal", "Rial"],
+      "correctOptionIndex": 0,
+      "explanation": "The Rupee is the currency of Sri Lanka.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Laos?",
+      "options": ["Kip", "Kyat", "Dong", "Baht"],
+      "correctOptionIndex": 0,
+      "explanation": "The Kip is the currency of Laos.",
+      "marks": 1
+    },
+    {
+      "questionText": "What is the currency of Myanmar?",
+      "options": ["Kyat", "Kip", "Dong", "Baht"],
+      "correctOptionIndex": 0,
+      "explanation": "The Kyat is the currency of Myanmar.",
+      "marks": 1
+    }
+  ]
+}

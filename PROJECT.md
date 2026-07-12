@@ -1,6 +1,6 @@
 # EXAMTEXT — Complete Project Documentation
 
-> **Version:** 4.0.0  
+> **Version:** 5.0.0  
 > **Repo:** `sksabbir2234/EXAMTEXT`  
 > **Live:** `https://examtext.vercel.app`  
 > **Firebase Project:** `examtext-7ba5f`  
@@ -14,8 +14,9 @@
 
 ### Key Features
 - **No student auth** — name-only entry per attempt
-- **10 chapters × 30 MCQs** for "CSE College Teacher" subject
+- **BCS/NTRCA/BANK Competitive Exam** — 6 chapters, 30 units, 907 MCQs
 - **NTRCA School ICT** — 10 topic exams (300 MCQs) + 647 Q&A blog content
+- **CSE College Teacher** — 10 chapter exams (300 MCQs) + blog content
 - **Islamic History** — 30 MCQ exam (Arab history, Seerah, Khulafa-e-Rashideen)
 - **Blog/Study Resource system** — Bangla Q&A guides with folder-style UI
 - **Dynamic OG meta tags** on exam-intro for Messenger/social sharing
@@ -62,44 +63,100 @@ examtext/
 ├── package.json               # Dependencies
 ├── firestore.rules            # Firebase security rules (locked to deny-all)
 ├── PROJECT.md                 # This file
-├── cse/                       # Content files for upload
-│   ├── chapter1-data-structures.json      # 30 MCQs
-│   ├── chapter2-algorithms.json           # 30 MCQs
-│   ├── chapter3-operating-systems.json    # 30 MCQs
-│   ├── chapter4-dbms.json                 # 30 MCQs
-│   ├── chapter5-computer-networks.json    # 30 MCQs
-│   ├── chapter6-software-engineering.json # 30 MCQs
-│   ├── chapter7-oop.json                  # 30 MCQs
-│   ├── chapter8-theory-of-computation.json# 30 MCQs
-│   ├── chapter9-compiler-design.json      # 30 MCQs
-│   ├── chapter10-digital-logic.json       # 30 MCQs
-│   ├── ntrca-ict-blog.json               # 647 Q&A (NTRCA School ICT combined)
-│   ├── gate-pyq-revision-blog.json        # 91 Q&A (GATE PYQ revision)
-│   ├── school/                            # NTRCA School ICT content
-│   │   ├── 01-computer-fundamentals.json  # 60 Q&A blog
-│   │   ├── 02-number-systems-boolean.json # 47 Q&A blog
-│   │   ├── 03-operating-systems.json      # 53 Q&A blog
-│   │   ├── 04-ms-office.json             # 28 Q&A blog
-│   │   ├── 05-networking-internet.json    # 82 Q&A blog
-│   │   ├── 06-programming.json           # 142 Q&A blog
-│   │   ├── 07-database.json              # 65 Q&A blog
-│   │   ├── 08-ict-bangladesh.json        # 42 Q&A blog
-│   │   ├── 09-multimedia.json            # 33 Q&A blog
-│   │   ├── 10-current-trends.json        # 97 Q&A blog
-│   │   ├── exams/                         # NTRCA exam MCQs (30 each)
-│   │   │   ├── exam-01-computer-fundamentals.json
-│   │   │   ├── exam-02-number-systems-boolean.json
-│   │   │   ├── exam-03-operating-systems.json
-│   │   │   ├── exam-04-ms-office.json
-│   │   │   ├── exam-05-networking.json
-│   │   │   ├── exam-06-programming.json
-│   │   │   ├── exam-07-database.json
-│   │   │   ├── exam-08-ict-bangladesh.json
-│   │   │   ├── exam-09-multimedia.json
-│   │   │   ├── exam-10-current-trends.json
-│   │   │   └── exam-11-islamic-history.json  # 30 MCQs
-│   │   └── practice/                      # Practice sets (30 Q&A each)
-│   │       ├── set-01.json through set-10.json
+├── book/                      # Source book content (6 chapters, markdown)
+│   ├── 00_preface_toc.md      # Preface & Table of Contents
+│   ├── 01_ch01_english_grammar.md      # Ch1: Parts of Speech, Tenses, Voice, etc.
+│   ├── 02_ch02_english_idioms.md       # Ch2: Idioms in Context
+│   ├── 03_ch03_bangla_grammar.md       # Ch3: সাধু/চলিত, বাগধারা, সমাস, etc.
+│   ├── 04_ch04_bangladesh_studies.md   # Ch4: ভূগোল, মুক্তিযুদ্ধ, ইতিহাস, etc.
+│   ├── 05_ch05_math.md                 # Ch5: Arithmetic, LCM/HCF, Ratio, etc.
+│   ├── 06_ch06_international_gk.md     # Ch6: Capitals, Currencies, Orgs
+│   └── 06_appendices.md                # Reference appendices
+├── cse/                       # Question files (JSON)
+│   ├── chapter1-english-grammar/       # English Grammar units (7 files)
+│   │   ├── unit1-1-parts-of-speech-verbs.json       # 31 MCQs
+│   │   ├── unit1-2-subject-verb-agreement.json      # 31 MCQs
+│   │   ├── unit1-3-tenses.json                      # 30 MCQs
+│   │   ├── unit1-4-conditionals-subjunctive.json    # 31 MCQs
+│   │   ├── unit1-5-gerund-infinitive-participle.json# 31 MCQs
+│   │   ├── unit1-6-voice-active-passive.json        # 31 MCQs
+│   │   └── unit1-7-additional-grammar.json          # 31 MCQs
+│   ├── chapter2-english-idioms/        # English Idioms units (2 files)
+│   │   ├── unit2-1-idioms-context.json              # 30 MCQs
+│   │   └── unit2-2-additional-exam-idioms.json      # 30 MCQs
+│   ├── chapter3-bangla-grammar/        # Bangla Grammar units (6 files)
+│   │   ├── unit3-1-sadhu-chalit.json                # 30 MCQs
+│   │   ├── unit3-2-bagdhara.json                    # 30 MCQs
+│   │   ├── unit3-3-somaz.json                       # 30 MCQs
+│   │   ├── unit3-4-biramchinha.json                 # 30 MCQs
+│   │   ├── unit3-5-karak.json                       # 30 MCQs
+│   │   └── unit3-6-sandhi.json                      # 30 MCQs
+│   ├── chapter4-bangladesh-studies/    # Bangladesh Studies units (6 files)
+│   │   ├── unit4-1-bhugol.json                      # 30 MCQs
+│   │   ├── unit4-2-muktijuddho.json                 # 30 MCQs
+│   │   ├── unit4-3-prachin-madhyajug.json           # 30 MCQs
+│   │   ├── unit4-4-bhasha-andolon.json              # 30 MCQs
+│   │   ├── unit4-5-prakritik-sampan.json            # 30 MCQs
+│   │   └── unit4-6-janshongkha-shiksha.json         # 30 MCQs
+│   ├── chapter5-math/                  # Mathematics units (6 files)
+│   │   ├── unit5-1-basic-arithmetic.json            # 30 MCQs
+│   │   ├── unit5-2-lcm-hcf-divisibility.json        # 30 MCQs
+│   │   ├── unit5-3-primes-digits-division.json      # 30 MCQs
+│   │   ├── unit5-4-ratio-proportion.json            # 30 MCQs
+│   │   ├── unit5-5-work-time.json                   # 30 MCQs
+│   │   └── unit5-6-pipes-cisterns.json              # 30 MCQs
+│   ├── chapter6-international-gk/      # International GK units (3 files)
+│   │   ├── unit6-1-world-capitals.json              # 30 MCQs
+│   │   ├── unit6-2-world-currencies.json            # 30 MCQs
+│   │   └── unit6-3-international-organizations.json # 31 MCQs
+│   ├── cse-complete-question-bank.json             # All 907 MCQs combined
+│   ├── chapter1-data-structures.json               # CSE College Teacher
+│   ├── chapter2-algorithms.json                    # CSE College Teacher
+│   ├── chapter3-operating-systems.json             # CSE College Teacher
+│   ├── chapter4-dbms.json                          # CSE College Teacher
+│   ├── chapter5-computer-networks.json             # CSE College Teacher
+│   ├── chapter6-software-engineering.json          # CSE College Teacher
+│   ├── chapter7-oop.json                           # CSE College Teacher
+│   ├── chapter8-theory-of-computation.json         # CSE College Teacher
+│   ├── chapter9-compiler-design.json               # CSE College Teacher
+│   ├── chapter10-digital-logic.json                # CSE College Teacher
+│   ├── ntrca-ict-blog.json                         # NTRCA School ICT
+│   ├── gate-pyq-revision-blog.json                 # GATE PYQ revision
+│   ├── data-structures-blog.json                   # Blog
+│   ├── algorithms-blog.json                        # Blog
+│   ├── operating-systems-blog.json                 # Blog
+│   ├── dbms-blog.json                              # Blog
+│   ├── computer-networks-blog.json                 # Blog
+│   ├── software-engineering-blog.json              # Blog
+│   ├── oop-blog.json                               # Blog
+│   ├── theory-of-computation-blog.json             # Blog
+│   ├── compiler-design-blog.json                   # Blog
+│   ├── digital-logic-blog.json                     # Blog
+│   └── school/                                     # NTRCA School ICT
+│       ├── 01-computer-fundamentals.json           # 60 Q&A blog
+│       ├── 02-number-systems-boolean.json          # 47 Q&A blog
+│       ├── 03-operating-systems.json               # 53 Q&A blog
+│       ├── 04-ms-office.json                       # 28 Q&A blog
+│       ├── 05-networking-internet.json             # 82 Q&A blog
+│       ├── 06-programming.json                     # 142 Q&A blog
+│       ├── 07-database.json                        # 65 Q&A blog
+│       ├── 08-ict-bangladesh.json                  # 42 Q&A blog
+│       ├── 09-multimedia.json                      # 33 Q&A blog
+│       ├── 10-current-trends.json                  # 97 Q&A blog
+│       ├── exams/                                  # NTRCA exam MCQs (30 each)
+│       │   ├── exam-01-computer-fundamentals.json
+│       │   ├── exam-02-number-systems-boolean.json
+│       │   ├── exam-03-operating-systems.json
+│       │   ├── exam-04-ms-office.json
+│       │   ├── exam-05-networking.json
+│       │   ├── exam-06-programming.json
+│       │   ├── exam-07-database.json
+│       │   ├── exam-08-ict-bangladesh.json
+│       │   ├── exam-09-multimedia.json
+│       │   ├── exam-10-current-trends.json
+│       │   └── exam-11-islamic-history.json        # 30 MCQs
+│       └── practice/                               # Practice sets (30 Q&A each)
+│           ├── set-01.json through set-10.json
 └── src/
     ├── env.d.ts               # Astro type definitions
     ├── styles/
@@ -549,6 +606,70 @@ git push origin main
 
 ## 15. Content Summary
 
+### BCS/NTRCA/BANK Exam — 6 Chapters, 30 Units (907 MCQs)
+| Chapter | Title | Units | Questions |
+|---------|-------|-------|-----------|
+| 1 | English Grammar | 7 | 216 |
+| 2 | English Idioms & Phrases | 2 | 60 |
+| 3 | বাংলা ব্যাকরণ | 6 | 180 |
+| 4 | বাংলাদেশ বিষয়াবলি | 6 | 180 |
+| 5 | Mathematics | 6 | 180 |
+| 6 | International GK | 3 | 91 |
+
+#### Ch1 — English Grammar (7 units, 216 MCQs)
+| Unit | Title | Questions |
+|------|-------|-----------|
+| 1.1 | Parts of Speech & Verbs | 31 |
+| 1.2 | Subject-Verb Agreement | 31 |
+| 1.3 | Tenses | 30 |
+| 1.4 | Conditionals & Subjunctive | 31 |
+| 1.5 | Gerund, Infinitive & Participle | 31 |
+| 1.6 | Voice (Active-Passive) | 31 |
+| 1.7 | Additional Grammar | 31 |
+
+#### Ch2 — English Idioms & Phrases (2 units, 60 MCQs)
+| Unit | Title | Questions |
+|------|-------|-----------|
+| 2.1 | Idioms in Context | 30 |
+| 2.2 | Additional Exam Idioms | 30 |
+
+#### Ch3 — বাংলা ব্যাকরণ (6 units, 180 MCQs)
+| Unit | Title | Questions |
+|------|-------|-----------|
+| 3.1 | সাধু ও চলিত ভাষা | 30 |
+| 3.2 | বাগধারা | 30 |
+| 3.3 | সমাস | 30 |
+| 3.4 | বিরামচিহ্ন | 30 |
+| 3.5 | কারক | 30 |
+| 3.6 | সন্ধি | 30 |
+
+#### Ch4 — বাংলাদেশ বিষয়াবলি (6 units, 180 MCQs)
+| Unit | Title | Questions |
+|------|-------|-----------|
+| 4.1 | ভূগোল | 30 |
+| 4.2 | মুক্তিযুদ্ধ | 30 |
+| 4.3 | প্রাচীন ও মধ্যযুগ | 30 |
+| 4.4 | ভাষা আন্দোলন ও ঔপনিবেশিক যুগ | 30 |
+| 4.5 | প্রাকৃতিক সম্পদ ও কৃষি | 30 |
+| 4.6 | জনসংখ্যা, শিক্ষা ও স্বাস্থ্য | 30 |
+
+#### Ch5 — Mathematics (6 units, 180 MCQs)
+| Unit | Title | Questions |
+|------|-------|-----------|
+| 5.1 | Basic Arithmetic | 30 |
+| 5.2 | LCM, HCF & Divisibility | 30 |
+| 5.3 | Primes, Digits & Division | 30 |
+| 5.4 | Ratio & Proportion | 30 |
+| 5.5 | Work & Time | 30 |
+| 5.6 | Pipes & Cisterns | 30 |
+
+#### Ch6 — International GK (3 units, 91 MCQs)
+| Unit | Title | Questions |
+|------|-------|-----------|
+| 6.1 | World Capitals | 30 |
+| 6.2 | World Currencies | 30 |
+| 6.3 | International Organizations | 31 |
+
 ### CSE College Teacher — 10 Chapters (300 MCQs)
 | # | Title | File |
 |---|-------|------|
@@ -585,13 +706,14 @@ git push origin main
 ### Blog/Study Resources
 | Content | Q&A Count | File |
 |---------|-----------|------|
-| CSE College Teacher (all chapters) | 1,174 | `cse/*.json` (11 files) |
+| BCS/NTRCA/BANK (all chapters) | 907 | `cse/chapter1-*/unit*.json` (30 files) |
+| CSE College Teacher (all chapters) | 300 | `cse/chapter*-*.json` (10 files) |
 | NTRCA School ICT (combined) | 647 | `cse/ntrca-ict-blog.json` |
 | NTRCA School ICT (by topic) | 649 | `cse/school/*.json` (10 files) |
 | GATE PYQ Revision | 91 | `cse/gate-pyq-revision-blog.json` |
 | Practice Sets | 300 | `cse/school/practice/set-*.json` (10 files) |
 
-**Total: 630 exam MCQs + 2,861 blog Q&A**
+**Total: 1,507 exam MCQs + 2,861 blog Q&A**
 
 ---
 
@@ -609,3 +731,4 @@ To generate prompts for this project, include:
 8. **Deployment**: Vercel auto-deploy from GitHub `main` branch, server-only env vars
 9. **Upload formats**: Exam = `{subject, examTitle, questions[]}`, Blog = `{subject, title, content[]}`, both accept arrays for batch upload
 10. **Bulk operations**: Admin checkboxes for multi-select delete, batch upload via file queue
+11. **Content structure**: Unit-level JSON files in `cse/chapterN-*/unitN-N-*.json`, combined bank in `cse/cse-complete-question-bank.json`
