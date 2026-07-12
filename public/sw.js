@@ -1,10 +1,11 @@
-const CACHE_NAME = 'examtext-v2';
+const CACHE_NAME = 'examtext-v3';
 const OFFLINE_URL = '/offline';
 
 const PRECACHE_ASSETS = [
   '/',
   '/offline',
   '/manifest.json',
+  '/manifest.webmanifest',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
 ];
@@ -39,7 +40,9 @@ self.addEventListener('fetch', (event) => {
     url.pathname.endsWith('.js') ||
     url.pathname.endsWith('.woff2') ||
     url.pathname.endsWith('.png') ||
-    url.pathname.endsWith('.svg')
+    url.pathname.endsWith('.svg') ||
+    url.pathname.endsWith('.webmanifest') ||
+    url.pathname.endsWith('.json')
   ) {
     event.respondWith(
       caches.match(event.request).then(

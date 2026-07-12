@@ -23,5 +23,11 @@ export default defineConfig({
         { key: 'Content-Type', value: 'application/manifest+json' },
       ],
     },
+    {
+      source: '/manifest.webmanifest',
+      headers: [
+        { key: 'Content-Type', value: 'application/manifest+json' },
+      ],
+    },
   ],
 });
