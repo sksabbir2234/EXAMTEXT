@@ -13,6 +13,7 @@ export const POST: APIRoute = async (ctx) => {
     }
 
     const db = getAdminDb();
+    console.log('[SubjectReorder] Saving order for IDs:', orderedIds);
     const batch = db.batch();
     orderedIds.forEach((id, i) => {
       const ref = db.collection('subjects').doc(id);

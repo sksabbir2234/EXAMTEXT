@@ -35,6 +35,12 @@ export const GET: APIRoute = async (ctx) => {
         })
       });
     }
+    // Sort subjects by order field (missing order goes last)
+    subjects.sort((a: any, b: any) => {
+      const aOrder = typeof a.order === 'number' ? a.order : 9999;
+      const bOrder = typeof b.order === 'number' ? b.order : 9999;
+      return aOrder - bOrder;
+    });
     return new Response(JSON.stringify(subjects), { headers: { 'Content-Type': 'application/json' } });
   } catch (e: any) {
     console.error('[Admin All] Error:', e.message);

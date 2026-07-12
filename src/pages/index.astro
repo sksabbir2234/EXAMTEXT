@@ -7,6 +7,11 @@ try {
   const db = getAdminDb();
   const snap = await db.collection('subjects').get();
   subjects = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  subjects.sort((a: any, b: any) => {
+    const aOrder = typeof a.order === 'number' ? a.order : 9999;
+    const bOrder = typeof b.order === 'number' ? b.order : 9999;
+    return aOrder - bOrder;
+  });
 } catch {}
 ---
 <Layout title="ExamText - Online Exam Portal" ogTitle="ExamText" ogDescription="Take exams online - CSE College Teacher">
