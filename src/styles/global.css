@@ -14,6 +14,68 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Prevent native <details> blocks from collapsing badly in the UI */
+details {
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.75);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+details[open] {
+  border-color: #bfdbfe;
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.08);
+}
+
+details > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.875rem 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  background: rgba(248, 250, 252, 0.9);
+  transition: background 0.2s ease;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #64748b;
+  border-bottom: 2px solid #64748b;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+details[open] > summary::after {
+  transform: rotate(225deg);
+  border-color: #2563eb;
+}
+
+details > summary:hover {
+  background: rgba(239, 246, 255, 0.9);
+}
+
+details > *:not(summary) {
+  padding: 0.75rem 1rem 1rem;
+}
+
+/* Keep content stable when collapsed and prevent layout jumps */
+details:not([open]) > *:not(summary) {
+  display: none;
+}
+
 .toast {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
   background: #0f172a; color: white; padding: 12px 28px; border-radius: 12px;
@@ -96,7 +158,10 @@ html.dark .option-card.border-brand-500, html.dark .option-card.bg-brand-50 {
   background: rgba(92,124,250,0.15);
   border-color: #5c7cfa;
 }
-html.dark details > summary:hover { background: #1e293b; }
+html.dark details { background: rgba(15, 23, 42, 0.8); border-color: rgba(148, 163, 184, 0.24); }
+html.dark details > summary { background: rgba(15, 23, 42, 0.9); color: #e2e8f0; }
+html.dark details > summary:hover { background: rgba(30, 41, 59, 0.9); }
+html.dark details > summary::after { border-color: #cbd5e1; }
 html.dark .gradient-text {
   background-image: linear-gradient(135deg, #91a7ff, #a855f7, #c084fc);
 }
