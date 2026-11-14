@@ -1,4 +1,5 @@
 import type { APIContext } from 'astro';
+import nodeCrypto from 'node:crypto';
 
 const COOKIE_NAME = 'adminSession';
 const TOKEN_TTL = 60 * 60 * 8; // 8 hours, in seconds
@@ -7,6 +8,13 @@ function getSecret(): string {
   const secret = import.meta.env.ADMIN_PASSWORD;
   if (!secret) throw new Error('ADMIN_PASSWORD env var is not set');
   return secret;
+}
+
+export function timingSafeCompare(a: string, b: string): boolean {
+  const bufA = Buffer.from(a);
+  const bufB = Buffer.from(b);
+  if (bufA.length !== bufB.length) return false;
+  return nodeCrypto.timingSafeEqual(bufA, bufB);
 }
 
 async function sign(payload: string): Promise<string> {
@@ -32,11 +40,10 @@ export async function isValidSession(token: string | undefined | null): Promise<
   if (!token) return false;
   const [payload, sig] = token.split('.');
   if (!payload || !sig) return false;
-  const expected = await sign(payload);
-  if (sig !== expected) return false;
   const expires = Number(payload);
   if (!Number.isFinite(expires) || Date.now() > expires) return false;
-  return true;
+  const expected = await sign(payload);
+  return timingSafeCompare(sig, expected);
 }
 
 export function setSessionCookie(ctx: APIContext, token: string) {

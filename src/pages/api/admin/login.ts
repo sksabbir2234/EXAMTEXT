@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { createSession, setSessionCookie, clearSessionCookie } from '../../../lib/auth';
+import { createSession, setSessionCookie, clearSessionCookie, timingSafeCompare } from '../../../lib/auth';
 
 const ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD || '';
 
@@ -17,7 +17,7 @@ export const POST: APIRoute = async (ctx) => {
     }
 
     // Login
-    if (body.password !== ADMIN_PASSWORD) {
+    if (typeof body.password !== 'string' || !timingSafeCompare(body.password, ADMIN_PASSWORD)) {
       return new Response(JSON.stringify({ error: 'Wrong password' }), { status: 401 });
     }
     const token = await createSession();
