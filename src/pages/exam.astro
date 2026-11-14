@@ -140,12 +140,12 @@ const examId = Astro.url.searchParams.get('id') || '';
           <div class="flex items-start gap-3 mb-5">
             <span class="shrink-0 w-8 h-8 rounded-xl bg-brand-500 text-white flex items-center justify-center text-sm font-bold">${qi+1}</span>
             <p class="text-surface-800 font-medium leading-relaxed pt-0.5 flex-1">${questions[d.origIdx].questionText}</p>
-            <button class="flag-btn shrink-0 w-8 h-8 rounded-xl flex items-center justify-center text-lg transition-colors ${flags[qi] ? 'bg-amber-100' : 'bg-surface-100 hover:bg-surface-200'}" data-qi="${qi}" title="Flag for review">${flags[qi] ? '🚩' : '🏳️'}</button>
+            <button class="flag-btn shrink-0 w-8 h-8 rounded-xl flex items-center justify-center text-lg transition-colors ${flags[qi] ? 'bg-amber-100' : 'bg-surface-100 hover:bg-surface-200'}" data-qi="${qi}" title="Flag for review" aria-label="Flag question ${qi+1} for review">${flags[qi] ? '🚩' : '🏳️'}</button>
           </div>
           <div class="space-y-3 ml-11">
             ${d.options.map((opt, oi) => `
-              <div class="option-card flex items-center gap-3 p-4 border-2 border-surface-200 rounded-2xl cursor-pointer hover:border-brand-300 hover:bg-brand-50/50 transition-all duration-200 group"
-                   data-qi="${qi}" data-oi="${oi}">
+              <div class="option-card flex items-center gap-3 p-4 border-2 border-surface-200 rounded-2xl cursor-pointer hover:border-brand-300 hover:bg-brand-50/50 transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-brand-400"
+                   data-qi="${qi}" data-oi="${oi}" role="button" tabindex="0" aria-label="Option ${labels[oi]}">
                 <span class="w-8 h-8 rounded-full bg-surface-100 group-hover:bg-brand-100 flex items-center justify-center text-xs font-bold shrink-0 transition-colors">${labels[oi]}</span>
                 <span class="font-medium text-surface-700">${opt.text}</span>
               </div>
@@ -169,6 +169,16 @@ const examId = Astro.url.searchParams.get('id') || '';
         const card = e.target.closest('.option-card');
         if (!card) return;
         selectOption(parseInt(card.dataset.qi), parseInt(card.dataset.oi));
+      });
+
+      document.getElementById('questions').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const card = e.target.closest('.option-card');
+          if (card) {
+            e.preventDefault();
+            selectOption(parseInt(card.dataset.qi), parseInt(card.dataset.oi));
+          }
+        }
       });
     }
 
@@ -197,7 +207,7 @@ const examId = Astro.url.searchParams.get('id') || '';
     function renderNavigator() {
       const nav = document.getElementById('qnav');
       nav.innerHTML = display.map((_, qi) => `
-        <button class="qnav-btn shrink-0 w-9 h-9 rounded-xl text-sm font-bold border-2 transition-all" data-qi="${qi}">${qi+1}</button>
+        <button class="qnav-btn shrink-0 w-9 h-9 rounded-xl text-sm font-bold border-2 transition-all" data-qi="${qi}" aria-label="Question ${qi+1}">${qi+1}</button>
       `).join('');
       nav.querySelectorAll('.qnav-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -224,13 +234,16 @@ const examId = Astro.url.searchParams.get('id') || '';
       });
     }
 
+    let timerStartTime = null;
+
     function startTimer(total) {
       const wrapper = document.getElementById('timer');
       const textEl = document.getElementById('timer-text');
       wrapper.classList.remove('hidden');
+      timerStartTime = Date.now();
       timerInterval = setInterval(() => {
-        secondsElapsed++;
-        const rem = total - secondsElapsed;
+        secondsElapsed = Math.floor((Date.now() - timerStartTime) / 1000);
+        const rem = Math.max(0, total - secondsElapsed);
         if (rem <= 0) { clearInterval(timerInterval); submitExam(); return; }
         const m = Math.floor(rem/60), s = rem%60;
         textEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;

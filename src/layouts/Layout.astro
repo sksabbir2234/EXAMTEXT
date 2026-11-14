@@ -14,7 +14,7 @@ const {
   title = 'ExamText',
   ogTitle = 'ExamText',
   ogDescription = 'Online Exam Portal - CSE College Teacher',
-  ogImage = '/exam-preview.png',
+  ogImage = '/screenshots/mobile-home.png',
   navBack = false,
   navTitle = '',
   showNav = true,
@@ -26,6 +26,7 @@ const {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>{title}</title>
+  <meta name="description" content={ogDescription}>
   <meta property="og:title" content={ogTitle}>
   <meta property="og:description" content={ogDescription}>
   <meta property="og:type" content="website">
@@ -36,6 +37,17 @@ const {
   <meta name="theme-color" content="#4c6ef5" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="mobile-web-app-capable" content="yes" />
+  <!-- Inline theme initialization to avoid flash of light theme -->
+  <script is:inline>
+    (() => {
+      try {
+        const saved = localStorage.getItem('examtext_theme');
+        if (saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch {}
+    })();
+  </script>
   <!-- iOS PWA Support -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -52,10 +64,10 @@ const {
 <body class="min-h-screen bg-surface-50 text-surface-800 antialiased">
   {showNav && (
     <nav class="sticky top-0 z-40 glass border-b border-surface-100/60">
-      <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="max-w-6xl mx-auto px-3 sm:px-4 h-16 flex items-center justify-between">
         <div class="flex items-center gap-2">
           {navBack ? (
-            <a href="/" class="w-9 h-9 rounded-xl bg-surface-100 hover:bg-surface-200 flex items-center justify-center transition-colors">
+            <a href="/" class="w-9 h-9 rounded-xl bg-surface-100 hover:bg-surface-200 flex items-center justify-center transition-colors" aria-label="হোম পেজে ফিরে যান">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
             </a>
           ) : (
@@ -66,7 +78,7 @@ const {
           )}
           <button
             id="navbar-install-btn"
-            class="md:hidden flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150"
+            class="md:hidden flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-semibold px-2.5 sm:px-3 py-1.5 rounded-lg transition-all duration-150"
             style="display:none;"
             aria-label="অ্যাপ ইনস্টল করুন"
           >
@@ -76,7 +88,7 @@ const {
             </svg>
             ইনস্টল
           </button>
-          {navTitle && <span class="font-semibold text-surface-800 text-sm sm:text-base truncate max-w-[200px]">{navTitle}</span>}
+          {navTitle && <span class="font-semibold text-surface-800 text-xs sm:text-base truncate max-w-[130px] sm:max-w-[200px]">{navTitle}</span>}
         </div>
         <div class="flex items-center gap-2">
           <div class="hidden sm:flex items-center gap-1 mr-1">
@@ -142,6 +154,8 @@ const {
       }
     });
 
+    var isIos = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+
     if (navInstallBtn) {
       navInstallBtn.addEventListener('click', function() {
         if (window.__pwaPrompt) {
@@ -153,6 +167,8 @@ const {
               navInstallBtn.style.display = 'none';
             }
           });
+        } else if (isIos) {
+          alert('iPhone/iPad-এ ইনস্টল করতে:\n১. নিচে শেয়ার বোতাম (Share / ⎋) চাপুন।\n২. নিচে স্ক্রল করে "Add to Home Screen" বা "হোম স্ক্রিনে যোগ করুন" সিলেক্ট করুন।');
         } else {
           alert('ইনস্টল করতে: ব্রাউজার মেনু (⋮) → "Add to Home Screen" বা "হোম স্ক্রিনে যোগ করুন" সিলেক্ট করুন।');
         }
@@ -171,11 +187,9 @@ const {
     });
 
     // iOS: show install button (no beforeinstallprompt on iOS)
-    var isIos = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
     var isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-    if (isIos && !isStandalone && !localStorage.getItem('ios-hint-shown')) {
+    if (isIos && !isStandalone && !localStorage.getItem('pwa-installed')) {
       if (navInstallBtn) navInstallBtn.style.display = 'flex';
-      localStorage.setItem('ios-hint-shown', '1');
     }
   </script>
 </body>
