@@ -1,4 +1,412 @@
-(() => {
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Admin - ExamText" showNav={false}>
+
+  <!-- Password Gate -->
+  <div id="gate" class="min-h-screen flex items-center justify-center px-4 bg-surface-50">
+    <div class="card p-8 w-full max-w-sm text-center animate-scale-in">
+      <div class="w-16 h-16 rounded-3xl bg-brand-50 flex items-center justify-center text-3xl mx-auto mb-6">🔒</div>
+      <h1 class="text-xl font-bold text-surface-900 mb-2">Admin Access</h1>
+      <p class="text-surface-400 text-sm mb-6">Enter password to continue</p>
+      <form id="gate-form" class="space-y-4">
+        <input type="password" id="gate-pass" placeholder="Password" required autocomplete="current-password"
+               class="w-full px-4 py-3.5 rounded-2xl border-2 border-surface-200 focus:border-brand-500 focus:ring-0 outline-none transition text-center font-mono text-lg tracking-widest placeholder:text-surface-300 placeholder:tracking-normal placeholder:text-base">
+        <button type="submit" id="gate-btn" class="btn-primary w-full">Unlock</button>
+        <p id="gate-error" class="text-red-500 text-sm hidden"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="admin-content" class="hidden min-h-screen">
+    <!-- Header -->
+    <div class="glass border-b border-surface-100/60 sticky top-0 z-40">
+      <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <a href="/" class="w-8 h-8 rounded-lg bg-surface-100 hover:bg-surface-200 flex items-center justify-center transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </a>
+          <span class="font-bold text-surface-900">Admin</span>
+        </div>
+        <button id="lock-btn" class="text-sm font-medium text-surface-400 hover:text-red-500 transition flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Lock
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <!-- Tabs -->
+      <div class="flex flex-wrap gap-1 p-1 bg-surface-100 rounded-2xl mb-6 max-w-lg">
+        <button data-tab="upload" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-white text-brand-600 shadow-sm">Upload</button>
+        <button data-tab="manage" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">Manage</button>
+        <button data-tab="blog" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">Blog</button>
+        <button data-tab="monitor" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">📡 Monitor</button>
+        <button data-tab="subjects" class="tab-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-surface-500 hover:text-surface-700">📚 Subjects</button>
+      </div>
+
+      <!-- Upload Tab -->
+      <div id="tab-upload" class="tab-content">
+        <div class="card p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-lg">📤</div>
+            <div>
+              <h2 class="text-lg font-bold text-surface-900">Upload Exam</h2>
+              <p class="text-sm text-surface-400" id="upload-subtitle">Paste JSON or drop a file</p>
+            </div>
+          </div>
+
+          <!-- Drag & Drop Zone -->
+          <div id="drop-zone" class="relative border-2 border-dashed border-surface-200 rounded-2xl p-8 text-center hover:border-brand-400 hover:bg-brand-50/30 transition-all cursor-pointer mb-4">
+            <div class="text-3xl mb-2">📁</div>
+            <p class="text-sm text-surface-400">Drag & drop .json files here, or <span class="text-brand-600 font-semibold">browse</span></p>
+            <p class="text-xs text-surface-300 mt-1">Select multiple files to upload in batch</p>
+            <input type="file" id="json-file" accept=".json" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+          </div>
+
+          <!-- File Queue -->
+          <div id="file-queue" class="hidden mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-surface-700" id="queue-count">0 files</span>
+              <button id="queue-clear" class="text-xs text-red-400 hover:text-red-600 transition">Clear all</button>
+            </div>
+            <div id="queue-list" class="space-y-2 max-h-48 overflow-auto"></div>
+            <button id="upload-all-btn" class="btn-primary w-full mt-3 text-sm">Upload All</button>
+            <div id="batch-progress" class="hidden mt-3">
+              <div class="w-full bg-surface-100 rounded-full h-2 mb-2"><div id="batch-bar" class="bg-brand-500 h-2 rounded-full transition-all" style="width:0%"></div></div>
+              <p id="batch-status" class="text-xs text-surface-400 text-center"></p>
+            </div>
+          </div>
+
+        <textarea id="json-text" rows="8" placeholder='{"subject":"CSE College Teacher","examTitle":"Chapter 1","durationMinutes":20,"questions":[...]}' class="w-full p-4 border-2 border-surface-200 rounded-2xl font-mono text-sm focus:border-brand-500 outline-none transition resize-none text-surface-600 placeholder:text-surface-300"></textarea>
+
+          <!-- Live validation -->
+          <div id="live-validation" class="hidden mt-3">
+            <div class="flex items-center justify-between mb-2">
+              <span id="q-counter" class="text-sm font-medium text-surface-500"></span>
+              <span id="q-status" class="text-xs font-semibold px-2 py-0.5 rounded-full"></span>
+            </div>
+            <div id="validation-errors" class="space-y-1"></div>
+          </div>
+
+          <div class="flex gap-3 mt-4">
+            <button id="preview-btn" class="btn-primary text-sm">Preview</button>
+            <button id="clear-btn" class="btn-ghost text-sm">Clear</button>
+          </div>
+
+          <!-- Preview -->
+          <div id="preview-area" class="hidden mt-5">
+            <div id="preview-content" class="bg-surface-50 rounded-2xl p-5 text-sm max-h-[80vh] overflow-auto border border-surface-200 mb-4"></div>
+            <div class="flex gap-3">
+              <button id="confirm-btn" class="px-6 py-3 bg-emerald-500 text-white rounded-2xl font-semibold hover:bg-emerald-600 transition-all">Confirm Upload</button>
+              <button id="cancel-preview" class="btn-ghost text-sm">Cancel</button>
+            </div>
+          </div>
+          <div id="upload-result" class="mt-4"></div>
+        </div>
+      </div>
+
+      <!-- Manage Tab -->
+      <div id="tab-manage" class="tab-content hidden">
+        <!-- Stats Strip -->
+        <div id="stats-strip" class="grid grid-cols-3 sm:grid-cols-5 gap-3 mb-6">
+          <div class="card p-4 text-center"><div class="text-2xl font-black text-brand-600" id="stat-subjects">-</div><div class="text-xs text-surface-400 mt-0.5 font-medium">Subjects</div></div>
+          <div class="card p-4 text-center"><div class="text-2xl font-black text-brand-600" id="stat-exams">-</div><div class="text-xs text-surface-400 mt-0.5 font-medium">Exams</div></div>
+          <div class="card p-4 text-center"><div class="text-2xl font-black text-brand-600" id="stat-questions">-</div><div class="text-xs text-surface-400 mt-0.5 font-medium">Questions</div></div>
+          <div class="card p-4 text-center"><div class="text-2xl font-black text-emerald-500" id="stat-published">-</div><div class="text-xs text-surface-400 mt-0.5 font-medium">Published</div></div>
+          <div class="card p-4 text-center"><div class="text-2xl font-black text-purple-500" id="stat-attempts">-</div><div class="text-xs text-surface-400 mt-0.5 font-medium">Attempts</div></div>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-5">
+          <div class="relative flex-1">
+            <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="search-input" placeholder="Search subjects or exams..." class="w-full pl-10 pr-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+          </div>
+          <div class="flex gap-1 p-1 bg-surface-100 rounded-xl">
+            <button data-filter="all" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-brand-600 shadow-sm transition-all">All</button>
+            <button data-filter="published" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-surface-500 hover:text-surface-700 transition-all">Published</button>
+            <button data-filter="draft" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-surface-500 hover:text-surface-700 transition-all">Draft</button>
+          </div>
+        </div>
+
+        <!-- Manage List -->
+        <!-- Subject Reorder Section -->
+        <div id="subject-reorder-section" class="card p-6 mb-6 hidden">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-lg">↕️</div>
+              <div>
+                <h3 class="font-bold text-surface-900">Subject Order</h3>
+                <p class="text-xs text-surface-400">Drag to reorder subjects on the front page</p>
+              </div>
+            </div>
+            <button id="save-subject-order" class="px-4 py-2 bg-emerald-500 text-white rounded-xl text-sm font-semibold hover:bg-emerald-600 transition hidden">Save Order</button>
+          </div>
+          <div id="subject-reorder-list" class="space-y-2"></div>
+        </div>
+
+        <div id="bulk-actions" class="hidden mb-4 p-3 bg-brand-50 border border-brand-200 rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="select-all-exams" class="w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer">
+            <span class="text-sm font-medium text-surface-700"><span id="selected-count">0</span> selected</span>
+          </div>
+          <button id="bulk-delete-exams" class="px-4 py-1.5 text-xs font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600 transition">Delete Selected</button>
+        </div>
+        <div id="manage-list">
+          <div class="flex justify-center py-12">
+            <div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Tab -->
+      <div id="tab-blog" class="tab-content hidden">
+        <!-- Create Blog -->
+        <div class="card p-6 md:p-8 mb-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-lg">📖</div>
+            <div>
+              <h2 class="text-lg font-bold text-surface-900">Create / Upload Blog</h2>
+              <p class="text-sm text-surface-400" id="blog-upload-subtitle">Paste JSON or drop a file</p>
+            </div>
+          </div>
+
+          <div id="blog-drop-zone" class="relative border-2 border-dashed border-surface-200 rounded-2xl p-8 text-center hover:border-brand-400 hover:bg-brand-50/30 transition-all cursor-pointer mb-4">
+            <div class="text-3xl mb-2">📁</div>
+            <p class="text-sm text-surface-400">Drag & drop .json files here, or <span class="text-brand-600 font-semibold">browse</span></p>
+            <p class="text-xs text-surface-300 mt-1">Select multiple files to upload in batch</p>
+            <input type="file" id="blog-json-file" accept=".json" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+          </div>
+
+          <!-- Blog File Queue -->
+          <div id="blog-file-queue" class="hidden mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-surface-700" id="blog-queue-count">0 files</span>
+              <button id="blog-queue-clear" class="text-xs text-red-400 hover:text-red-600 transition">Clear all</button>
+            </div>
+            <div id="blog-queue-list" class="space-y-2 max-h-48 overflow-auto"></div>
+            <button id="blog-upload-all-btn" class="btn-primary w-full mt-3 text-sm">Upload All</button>
+            <div id="blog-batch-progress" class="hidden mt-3">
+              <div class="w-full bg-surface-100 rounded-full h-2 mb-2"><div id="blog-batch-bar" class="bg-brand-500 h-2 rounded-full transition-all" style="width:0%"></div></div>
+              <p id="blog-batch-status" class="text-xs text-surface-400 text-center"></p>
+            </div>
+          </div>
+
+          <textarea id="blog-json-text" rows="8" placeholder='{"subject":"CSE College Teacher","title":"Data Structures Guide","content":[{"question":"...","answer":"..."}]}' class="w-full p-4 border-2 border-surface-200 rounded-2xl font-mono text-sm focus:border-brand-500 outline-none transition resize-none text-surface-600 placeholder:text-surface-300"></textarea>
+
+          <div id="blog-live-validation" class="hidden mt-3">
+            <div class="flex items-center justify-between mb-2">
+              <span id="blog-q-counter" class="text-sm font-medium text-surface-500"></span>
+              <span id="blog-q-status" class="text-xs font-semibold px-2 py-0.5 rounded-full"></span>
+            </div>
+            <div id="blog-validation-errors" class="space-y-1"></div>
+          </div>
+
+          <div class="flex gap-3 mt-4">
+            <button id="blog-preview-btn" class="btn-primary text-sm">Preview</button>
+            <button id="blog-clear-btn" class="btn-ghost text-sm">Clear</button>
+          </div>
+
+          <div id="blog-preview-area" class="hidden mt-5">
+            <div id="blog-preview-content" class="bg-surface-50 rounded-2xl p-5 text-sm max-h-[400px] overflow-auto border border-surface-200 mb-4"></div>
+            <div class="flex gap-3">
+              <button id="blog-confirm-btn" class="px-6 py-3 bg-emerald-500 text-white rounded-2xl font-semibold hover:bg-emerald-600 transition-all">Confirm Upload</button>
+              <button id="blog-cancel-preview" class="btn-ghost text-sm">Cancel</button>
+            </div>
+          </div>
+          <div id="blog-upload-result" class="mt-4"></div>
+        </div>
+
+        <!-- Manage Blogs -->
+        <div class="card p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-lg">📚</div>
+            <h2 class="text-lg font-bold text-surface-900">Manage Blogs</h2>
+          </div>
+          <div id="blog-bulk-actions" class="hidden mb-4 p-3 bg-brand-50 border border-brand-200 rounded-2xl flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" id="select-all-blogs" class="w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer">
+              <span class="text-sm font-medium text-surface-700"><span id="blog-selected-count">0</span> selected</span>
+            </div>
+            <button id="bulk-delete-blogs" class="px-4 py-1.5 text-xs font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600 transition">Delete Selected</button>
+          </div>
+          <div id="blog-manage-list">
+            <div class="flex justify-center py-12">
+              <div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Edit Form (hidden by default) -->
+        <div id="blog-edit-form" class="card p-6 md:p-8 mt-6 hidden">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-lg">✏️</div>
+            <h2 class="text-lg font-bold text-surface-900">Edit Blog</h2>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-surface-700 mb-1">Title</label>
+              <input type="text" id="blog-edit-title" class="w-full px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-surface-700 mb-1">Description</label>
+              <input type="text" id="blog-edit-desc" class="w-full px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-surface-700 mb-1">Slide URL (optional)</label>
+              <input type="url" id="blog-edit-slide" class="w-full px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-surface-700 mb-1">Linked Exam ID (optional)</label>
+              <input type="text" id="blog-edit-exam" class="w-full px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition" placeholder="Firestore exam document ID">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-surface-700 mb-1">Content (JSON array)</label>
+              <textarea id="blog-edit-content" rows="10" class="w-full p-4 border-2 border-surface-200 rounded-2xl font-mono text-sm focus:border-brand-500 outline-none transition resize-none text-surface-600"></textarea>
+            </div>
+          </div>
+          <div class="flex gap-3 mt-4">
+            <button id="blog-edit-save" class="px-6 py-2.5 bg-emerald-500 text-white rounded-2xl font-semibold hover:bg-emerald-600 transition-all text-sm">Save Changes</button>
+            <button id="blog-edit-cancel" class="btn-ghost text-sm">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monitor Tab -->
+      <div id="tab-monitor" class="tab-content hidden">
+        <div class="space-y-4">
+          <!-- Header -->
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-lg font-bold text-surface-900 flex items-center gap-2">📡 Live Student Monitor</h2>
+              <span id="monitor-last-updated" class="text-xs text-surface-400"></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="monitor-refresh-btn" class="btn-ghost text-sm flex items-center gap-1.5">
+                <svg id="monitor-refresh-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                Refresh
+              </button>
+              <button id="clear-attempts-btn" class="btn-ghost text-sm flex items-center gap-1.5 text-red-500 hover:text-red-600">
+                🗑️ Clear Data
+              </button>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <input type="text" id="monitor-search" placeholder="Search student name..." class="w-full pl-10 pr-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+            </div>
+            <select id="monitor-subject-filter" class="px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition bg-white">
+              <option value="">All Subjects</option>
+            </select>
+            <select id="monitor-exam-filter" class="px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition bg-white">
+              <option value="">All Exams</option>
+            </select>
+          </div>
+
+          <!-- Stats Strip -->
+          <div class="grid grid-cols-3 gap-3">
+            <div class="card p-4 text-center">
+              <div class="text-2xl font-black text-brand-600" id="monitor-stat-total">-</div>
+              <div class="text-xs text-surface-400 mt-0.5 font-medium">Today's Attempts</div>
+            </div>
+            <div class="card p-4 text-center">
+              <div class="text-2xl font-black text-emerald-500" id="monitor-stat-avg">-</div>
+              <div class="text-xs text-surface-400 mt-0.5 font-medium">Avg Score Today</div>
+            </div>
+            <div class="card p-4 text-center">
+              <div class="text-2xl font-black text-purple-500" id="monitor-stat-top">-</div>
+              <div class="text-xs text-surface-400 mt-0.5 font-medium">Top Scorer Today</div>
+            </div>
+          </div>
+
+          <!-- Analytics: avg score per exam -->
+          <div class="card p-6 animate-fade-up">
+            <h2 class="text-lg font-bold text-surface-900 mb-1 flex items-center gap-2">
+              <span class="text-xl">📊</span> Chapter Performance
+            </h2>
+            <p class="text-xs text-surface-400 mb-4">Average score per exam (lower = weaker chapter). Negative marking applied.</p>
+            <div id="analytics-bars" class="space-y-2.5"></div>
+          </div>
+
+          <!-- Table -->
+          <div class="card overflow-hidden">
+            <div id="monitor-loading" class="flex justify-center py-12">
+              <div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div>
+            </div>
+            <div id="monitor-empty" class="hidden text-center py-12">
+              <div class="w-16 h-16 rounded-3xl bg-surface-100 flex items-center justify-center text-3xl mx-auto mb-4">📭</div>
+              <p class="text-surface-400 font-medium">কোনো পরীক্ষার্থী নেই</p>
+              <p class="text-surface-300 text-sm mt-1">Attempts will appear here in real-time</p>
+            </div>
+            <div id="monitor-table-wrap" class="hidden overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-surface-50 border-b border-surface-200">
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Student</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Exam</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Score</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">%</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Grade</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">Time</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-surface-500 uppercase tracking-wider">When</th>
+                  </tr>
+                </thead>
+                <tbody id="monitor-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Subjects Tab -->
+    <div id="tab-subjects" class="tab-content hidden">
+      <div class="card p-6 md:p-8 mb-6">
+        <h2 class="text-lg font-bold text-surface-900 mb-1">Create Subject</h2>
+        <p class="text-sm text-surface-400 mb-4">Subjects are created from a name. Exams and blogs link to a subject by this name (slug).</p>
+        <form id="subject-create-form" class="flex flex-col sm:flex-row gap-3">
+          <input id="subject-name" type="text" placeholder="Subject name (e.g. CSE College Teacher)" required autocomplete="off" class="flex-1 px-4 py-2.5 border-2 border-surface-200 rounded-xl text-sm focus:border-brand-500 outline-none transition">
+          <button type="submit" class="btn-primary text-sm whitespace-nowrap">Create Subject</button>
+        </form>
+      </div>
+      <div class="card p-6 md:p-8">
+        <h2 class="text-lg font-bold text-surface-900 mb-4">All Subjects</h2>
+        <div id="subjects-list"><div class="flex justify-center py-12"><div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div></div></div>
+      </div>
+    </div>
+
+  <!-- Confirm Modal -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-surface-900/40 backdrop-blur-sm" id="modal-backdrop"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="card p-6 w-full max-w-sm animate-scale-in relative z-10">
+        <div class="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-2xl mx-auto mb-4">⚠️</div>
+        <h3 id="modal-title" class="text-lg font-bold text-surface-900 text-center mb-2"></h3>
+        <p id="modal-desc" class="text-sm text-surface-400 text-center mb-6"></p>
+        <div class="flex gap-3">
+          <button id="modal-cancel" class="btn-ghost flex-1 text-sm py-2.5">Cancel</button>
+          <button id="modal-confirm" class="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-2xl font-semibold hover:bg-red-600 transition-all text-sm">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
       const gate = document.getElementById('gate');
       const content = document.getElementById('admin-content');
       const gateForm = document.getElementById('gate-form');
@@ -83,15 +491,6 @@
       const liveValidation = document.getElementById('live-validation');
       const uploadSubtitle = document.getElementById('upload-subtitle');
 
-      function escapeHtml(value) {
-        return String(value ?? '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
       // File queue for batch upload
       let examFileQueue = [];
       const fileQueueEl = document.getElementById('file-queue');
@@ -106,9 +505,9 @@
           const statusCls = f.status === 'done' ? 'text-emerald-500' : f.status === 'error' ? 'text-red-500' : f.status === 'uploading' ? 'text-brand-500' : 'text-surface-400';
           const statusText = f.status === 'done' ? '✓ Done' : f.status === 'error' ? '✗ ' + (f.error || 'Error') : f.status === 'uploading' ? '...' : 'Pending';
           const canReorder = f.status === 'pending';
-          const upBtn = canReorder && i > 0 ? '<button onclick="moveExamQueue(' + i + ',-1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move up">▲</button>' : '<span class="w-3"></span>';
-          const downBtn = canReorder && i < examFileQueue.length - 1 ? '<button onclick="moveExamQueue(' + i + ',1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move down">▼</button>' : '<span class="w-3"></span>';
-          return '<div class="flex items-center gap-1.5 p-2 bg-surface-50 rounded-xl text-sm"><span class="text-xs font-bold text-surface-300 w-4 text-center shrink-0">' + (i + 1) + '</span>' + upBtn + downBtn + '<span class="truncate flex-1 text-surface-700">' + escapeHtml(f.name) + '</span><span class="text-xs ' + statusCls + '">' + escapeHtml(statusText) + '</span><button onclick="removeExamQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0 text-xs" title="Remove">✕</button></div>';
+          const upBtn = canReorder && i > 0 ? '<button onclick="moveExamQueue(' + i + ',-1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move up">▲</button>' : '<span class="w-3 shrink-0"></span>';
+          const downBtn = canReorder && i < examFileQueue.length - 1 ? '<button onclick="moveExamQueue(' + i + ',1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move down">▼</button>' : '<span class="w-3 shrink-0"></span>';
+          return '<div class="flex items-center gap-1.5 p-2 bg-surface-50 rounded-xl text-sm"><span class="text-xs font-bold text-surface-300 w-4 text-center shrink-0">' + (i + 1) + '</span>' + upBtn + downBtn + '<span class="truncate flex-1 text-surface-700">' + f.name + '</span><span class="text-xs ' + statusCls + ' shrink-0">' + statusText + '</span>' + (f.status === 'pending' ? '<button onclick="removeExamQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0">✕</button>' : '') + '</div>';
         }).join('');
       }
       window.removeExamQueue = (i) => { examFileQueue.splice(i, 1); renderExamQueue(); };
@@ -186,16 +585,10 @@
           } else {
             qStatus.textContent = `${errs.length} error${errs.length !== 1 ? 's' : ''}`;
             qStatus.className = 'text-xs font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-600';
-            validationErrors.innerHTML = errs.map(e => `<div class="text-xs text-red-500 flex items-center gap-1.5"><svg class="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-5h2V5H9v8zm0 4h2v-2H9v2z" clip-rule="evenodd"/></svg><span>${escapeHtml(e)}</span></div>`).join('');
+            validationErrors.innerHTML = errs.map(e => `<div class="text-xs text-red-500 flex items-center gap-1.5"><svg class="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>${e}</div>`).join('');
           }
           liveValidation.classList.remove('hidden');
-        } catch {
-          qCounter.textContent = '';
-          qStatus.textContent = 'Invalid JSON';
-          qStatus.className = 'text-xs font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-600';
-          validationErrors.innerHTML = '<div class="text-xs text-red-500">Cannot parse JSON</div>';
-          liveValidation.classList.remove('hidden');
-        }
+        } catch { qCounter.textContent = ''; qStatus.textContent = 'Invalid JSON'; qStatus.className = 'text-xs font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-600'; validationErrors.innerHTML = '<div class="text-xs text-red-500">Cannot parse JSON</div>'; liveValidation.classList.remove('hidden'); }
       }
 
       // Preview
@@ -205,21 +598,13 @@
           const errs = validateQuestions(parsedData.questions || []);
           if (errs.length > 0) { window.showToast(errs[0]); parsedData = null; return; }
           if (!parsedData.questions || !parsedData.questions.length) { window.showToast('No questions'); parsedData = null; return; }
-
-          let html = `<div class="grid grid-cols-2 gap-3 mb-4 text-sm"><div><strong>Subject:</strong> ${escapeHtml(parsedData.subject || '-')}</div><div><strong>Title:</strong> ${escapeHtml(parsedData.examTitle || '-')}</div></div>`;
-          html += `<div class="text-xs text-surface-500 mb-3">Duration: ${escapeHtml(String(parsedData.durationMinutes || 0))} min</div>`;
-
+          let html = `<div class="grid grid-cols-2 gap-3 mb-4 text-sm"><div><strong>Subject:</strong> ${escapeHtml(parsedData.subject || '-')}</div><div><strong>Title:</strong> ${escapeHtml(parsedData.examTitle || '-')}</div><div><strong>Duration:</strong> ${escapeHtml(String(parsedData.durationMinutes || 0))}m</div><div><strong>Questions:</strong> ${parsedData.questions.length}</div></div><hr class="border-surface-200 mb-4">`;
           parsedData.questions.forEach((q, i) => {
-            html += `<div class="mb-3 pb-3 border-b border-surface-200 last:border-0"><div class="font-semibold text-sm mb-1">Q${i + 1}: ${escapeHtml(q.questionText || '')}</div>`;
-            q.options.forEach((opt, oi) => {
-              const isCorrect = oi === q.correctOptionIndex;
-              const prefix = labels[oi] || (oi + 1);
-              html += `<div class="text-sm ml-4 ${isCorrect ? 'text-emerald-600 font-semibold' : ''}">${escapeHtml(prefix)}. ${escapeHtml(opt || '')}${isCorrect ? ' ✅' : ''}</div>`;
-            });
+            html += `<div class="mb-3 pb-3 border-b border-surface-200 last:border-0"><div class="font-semibold text-sm mb-1">Q${i+1}: ${escapeHtml(q.questionText || '')}</div>`;
+            q.options.forEach((opt, oi) => { html += `<div class="text-sm ml-4 ${oi===q.correctOptionIndex?'text-emerald-600 font-semibold':''}">${labels[oi]}. ${escapeHtml(opt || '')}${oi===q.correctOptionIndex?' ✓':''}</div>`; });
             if (q.explanation) html += `<div class="text-xs text-surface-400 mt-1 ml-4">💡 ${escapeHtml(q.explanation)}</div>`;
             html += '</div>';
           });
-
           document.getElementById('preview-content').innerHTML = html;
           document.getElementById('preview-area').classList.remove('hidden');
         } catch(e) { window.showToast('Invalid JSON: ' + e.message); parsedData = null; }
@@ -245,7 +630,7 @@
             let msg = editMode ? 'Exam updated!' : 'Uploaded!';
             if (data.warning) msg += ' ⚠️ ' + data.warning;
             const url = window.location.origin + '/exam-intro/' + (data.id || editMode);
-            document.getElementById('upload-result').innerHTML = `<div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl"><h3 class="font-bold text-emerald-700 mb-2">${escapeHtml(msg)}</h3><div class="flex gap-2"><input value="${escapeHtml(url)}" readonly class="flex-1 px-3 py-2 border border-emerald-200 rounded-xl text-sm bg-white" /><button onclick="navigator.clipboard.writeText('${escapeHtml(url)}'); window.showToast('Copied!')" class="px-4 py-2 bg-emerald-500 text-white rounded-xl text-sm font-semibold">Copy</button></div></div>`;
+            document.getElementById('upload-result').innerHTML = `<div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl"><h3 class="font-bold text-emerald-700 mb-2">${msg}</h3><div class="flex gap-2"><input value="${url}" readonly class="flex-1 px-3 py-2 border border-emerald-200 rounded-xl text-sm bg-white"><button onclick="navigator.clipboard.writeText('${url}');window.showToast('Copied!')" class="px-4 py-2 bg-emerald-500 text-white rounded-xl text-sm font-semibold">Copy</button></div></div>`;
             window.showToast(editMode ? 'Exam updated' : 'Exam uploaded');
             editMode = null;
             jsonText.value = '';
@@ -258,10 +643,10 @@
           } else {
             let errMsg = data.error || 'Upload failed';
             if (data.details) errMsg += ': ' + data.details.join('; ');
-            document.getElementById('upload-result').innerHTML = `<p class="text-red-500 text-sm">${escapeHtml(errMsg)}</p>`;
+            document.getElementById('upload-result').innerHTML = `<p class="text-red-500 text-sm">${errMsg}</p>`;
             window.showToast('Upload failed');
           }
-        } catch(e) { document.getElementById('upload-result').innerHTML = `<p class="text-red-500 text-sm">${escapeHtml(e.message)}</p>`; window.showToast('Error'); }
+        } catch(e) { document.getElementById('upload-result').innerHTML = `<p class="text-red-500 text-sm">${e.message}</p>`; window.showToast('Error'); }
         btn.disabled = false; btn.textContent = editMode ? 'Save Changes' : 'Confirm Upload';
       });
 
@@ -296,6 +681,1002 @@
         setTimeout(() => { document.getElementById('batch-progress').classList.add('hidden'); }, 3000);
       });
 
-      document.getElementById('preview-content').classList.remove('max-h-[400px]');
-      document.getElementById('preview-content').classList.add('max-h-[80vh]');
+      // --- Manage Tab ---
+      let allSubjects = [];
+      let currentFilter = 'all';
+      let selectedExams = new Set();
+
+      function updateExamBulkUI() {
+        const bar = document.getElementById('bulk-actions');
+        const allExamIds = [];
+        allSubjects.forEach(s => s.exams.forEach(e => allExamIds.push(e.id)));
+        if (allExamIds.length === 0) { bar.classList.add('hidden'); return; }
+        bar.classList.remove('hidden');
+        document.getElementById('selected-count').textContent = selectedExams.size;
+        const selectAll = document.getElementById('select-all-exams');
+        selectAll.checked = selectedExams.size > 0 && selectedExams.size === allExamIds.length;
+        selectAll.indeterminate = selectedExams.size > 0 && selectedExams.size < allExamIds.length;
+      }
+
+      document.getElementById('select-all-exams').addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        selectedExams.clear();
+        if (checked) { allSubjects.forEach(s => s.exams.forEach(ex => selectedExams.add(ex.id))); }
+        document.querySelectorAll('.exam-check').forEach(cb => cb.checked = checked);
+        updateExamBulkUI();
+      });
+
+      document.getElementById('bulk-delete-exams').addEventListener('click', async () => {
+        if (selectedExams.size === 0) return;
+        const ok = await showConfirm('Delete ' + selectedExams.size + ' exam(s)?', 'This cannot be undone.', 'Delete All');
+        if (!ok) return;
+        let done = 0;
+        for (const id of selectedExams) {
+          try { await fetch('/api/admin/exam/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); done++; } catch {}
+        }
+        selectedExams.clear();
+        window.showToast('Deleted ' + done + ' exams');
+        loadManageList();
+      });
+
+      function renderManageList(filter = '', pubFilter = 'all') {
+        const el = document.getElementById('manage-list');
+        let filtered = allSubjects;
+        selectedExams.clear();
+
+        if (filter) {
+          const q = filter.toLowerCase();
+          filtered = filtered.map(s => ({
+            ...s,
+            exams: s.exams.filter(e => e.title?.toLowerCase().includes(q) || s.name?.toLowerCase().includes(q))
+          })).filter(s => s.exams.length > 0 || s.name?.toLowerCase().includes(q));
+        }
+
+        if (pubFilter === 'published') filtered = filtered.map(s => ({ ...s, exams: s.exams.filter(e => e.published) })).filter(s => s.exams.length > 0);
+        if (pubFilter === 'draft') filtered = filtered.map(s => ({ ...s, exams: s.exams.filter(e => !e.published) })).filter(s => s.exams.length > 0);
+
+        // Stats
+        const totalExams = allSubjects.reduce((a, s) => a + s.exams.length, 0);
+        const totalQ = allSubjects.reduce((a, s) => a + s.exams.reduce((b, e) => b + (e.totalQuestions || 0), 0), 0);
+        const published = allSubjects.reduce((a, s) => a + s.exams.filter(e => e.published).length, 0);
+        const totalAttempts = allSubjects.reduce((a, s) => a + s.exams.reduce((b, e) => b + (e.attemptCount || 0), 0), 0);
+        document.getElementById('stat-subjects').textContent = allSubjects.length;
+        document.getElementById('stat-exams').textContent = totalExams;
+        document.getElementById('stat-questions').textContent = totalQ;
+        document.getElementById('stat-published').textContent = published;
+        document.getElementById('stat-attempts').textContent = totalAttempts;
+
+        updateExamBulkUI();
+
+        if (filtered.length === 0) {
+          el.innerHTML = `<div class="text-center py-16"><div class="w-16 h-16 rounded-3xl bg-surface-100 flex items-center justify-center text-3xl mx-auto mb-4">📭</div><p class="text-surface-400 font-medium">${filter ? 'No matching results' : 'No data yet'}</p><p class="text-surface-300 text-sm mt-1">${filter ? 'Try a different search' : 'Upload an exam to get started'}</p></div>`;
+          return;
+        }
+
+        el.innerHTML = filtered.map(s => `
+          <div class="card mb-4 overflow-hidden subject-card" data-subject-id="${s.id}">
+            <div class="subject-toggle w-full px-5 py-4 flex items-center justify-between hover:bg-surface-50 transition text-left cursor-pointer" role="button" tabindex="0">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-50 flex items-center justify-center text-sm font-bold text-brand-600">${s.exams.length}</div>
+                <div>
+                  <div class="font-bold text-surface-900">${s.name}</div>
+                  <div class="text-xs text-surface-400">${s.exams.length} exam${s.exams.length!==1?'s':''}</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="event.stopPropagation();deleteSubjectConfirm('${s.id}','${s.name}')" class="px-2.5 py-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition text-xs font-medium">Delete</button>
+                <svg class="w-4 h-4 text-surface-300 transition-transform subject-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+            <div class="subject-exams hidden px-5 pb-4">
+              ${s.exams.length === 0 ? '<p class="text-surface-300 text-sm py-4 text-center">No exams in this subject</p>' : `
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-surface-400">${s.exams.length} exam${s.exams.length!==1?'s':''}</span>
+                <button id="reorder-toggle-${s.id}" onclick="toggleExamReorder('${s.id}')" class="text-xs font-medium text-brand-600 hover:text-brand-700 transition flex items-center gap-1">
+                  ↕️ Reorder
+                </button>
+              </div>
+              <div id="exam-reorder-${s.id}" style="display:none;" class="space-y-2 mb-3">
+                <div class="exam-reorder-list space-y-1.5" data-subject-id="${s.id}">${s.exams.sort((a,b) => (a.sortOrder??9999)-(b.sortOrder??9999)).map((e, i) => `
+                  <div class="flex items-center gap-2 p-2.5 bg-surface-50 rounded-xl cursor-move drag-exam" draggable="true" data-eid="${e.id}" data-pos="${i}">
+                    <span class="drag-handle text-surface-300 hover:text-surface-500 cursor-grab text-sm select-none">⠿</span>
+                    <span class="position-num text-xs font-bold text-surface-400 w-4 text-center">${i + 1}</span>
+                    <span class="font-medium text-xs text-surface-700 flex-1 truncate">${e.title}</span>
+                    <span class="text-xs text-surface-400">${e.totalQuestions||0}Q</span>
+                  </div>`).join('')}</div>
+                <button onclick="saveExamOrder('${s.id}')" class="w-full py-2 bg-emerald-500 text-white rounded-xl text-xs font-semibold hover:bg-emerald-600 transition">✓ ক্রম সেভ করুন</button>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="exam-grid-${s.id}">
+                ${s.exams.map(e => `
+                  <div class="p-4 border border-surface-100 rounded-2xl hover:border-brand-200 transition group">
+                    <div class="flex items-start justify-between mb-2">
+                      <div class="flex items-center gap-2 min-w-0 flex-1">
+                        <input type="checkbox" class="exam-check w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer shrink-0" data-eid="${e.id}" onchange="toggleExamSelect('${e.id}',this.checked)">
+                        <div class="min-w-0 flex-1"><div class="font-semibold text-sm text-surface-800 truncate">${e.title}</div>
+                        <div class="flex items-center gap-2 mt-1 text-xs text-surface-400">
+                          <span>${e.totalQuestions||0} Q</span><span>·</span><span>${e.durationMinutes||0}m</span>
+                        </div></div>
+                      </div>
+                      <label class="relative inline-flex items-center cursor-pointer shrink-0 ml-2"><input type="checkbox" ${e.published?'checked':''} onchange="togglePub('${e.id}',this.checked)" class="sr-only peer"><div class="w-9 h-5 bg-surface-200 rounded-full peer peer-checked:bg-emerald-500 transition-colors after:content-[''] after:absolute after:w-4 after:h-4 after:bg-white after:rounded-full after:left-0.5 after:top-0.5 after:transition peer-checked:after:translate-x-4"></div></label>
+                    </div>
+                    <div class="flex items-center gap-3 mt-2 text-xs">
+                      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full ${e.attemptCount>0?'bg-brand-50 text-brand-600':'bg-surface-100 text-surface-400'}">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        ${e.attemptCount||0} taken
+                      </span>
+                      ${e.avgScore>0?`<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600">Avg: ${e.avgScore}/${e.totalQuestions||0}</span>`:''}
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                      <button onclick="editExam('${e.id}')" class="flex-1 px-3 py-1.5 text-xs font-medium text-brand-600 bg-brand-50 rounded-lg hover:bg-brand-100 transition">Edit</button>
+                      <button onclick="deleteExamConfirm('${e.id}','${e.title}')" class="flex-1 px-3 py-1.5 text-xs font-medium text-red-500 bg-red-50 rounded-lg hover:bg-red-100 transition">Delete</button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>`}
+            </div>
+          </div>
+        `).join('');
+
+        // Toggle handlers
+        el.querySelectorAll('.subject-toggle').forEach(toggle => {
+          const handler = () => {
+            const card = toggle.closest('.subject-card');
+            const exams = card?.querySelector('.subject-exams');
+            const chevron = card?.querySelector('.subject-chevron');
+            if (!exams || !chevron) return;
+            exams.classList.toggle('hidden');
+            chevron.style.transform = exams.classList.contains('hidden') ? '' : 'rotate(180deg)';
+          };
+          toggle.addEventListener('click', handler);
+          toggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); }
+          });
+        });
+      }
+
+      async function loadManageList() {
+        const el = document.getElementById('manage-list');
+        el.innerHTML = '<div class="flex justify-center py-12"><div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div></div>';
+        try {
+          const res = await fetch('/api/admin/all');
+          if (res.status === 401) { window.location.reload(); return; }
+          const text = await res.text();
+          let subjects;
+          try { subjects = JSON.parse(text); } catch { el.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-4">⚠️</div><p class="text-red-500 font-medium">API error (${res.status})</p><button onclick="loadManageList()" class="btn-ghost text-sm mt-3">Retry</button></div>`; return; }
+          if (subjects.error) { el.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-4">⚠️</div><p class="text-red-500 font-medium">${subjects.error}</p><button onclick="loadManageList()" class="btn-ghost text-sm mt-3">Retry</button></div>`; return; }
+          allSubjects = subjects;
+          renderManageList(document.getElementById('search-input').value, currentFilter);
+          renderSubjectReorder();
+        } catch(e) { el.innerHTML = `<div class="text-center py-12"><div class="w-16 h-16 rounded-3xl bg-red-50 flex items-center justify-center text-3xl mx-auto mb-4">⚠️</div><p class="text-red-500 font-medium">${e.message}</p><button onclick="loadManageList()" class="btn-ghost text-sm mt-3">Retry</button></div>`; }
+      }
+
+      // --- Subject Reorder (Drag & Drop) ---
+      let subjectOrderChanged = false;
+
+      function renderSubjectReorder() {
+        const section = document.getElementById('subject-reorder-section');
+        const list = document.getElementById('subject-reorder-list');
+        if (allSubjects.length === 0) { section.classList.add('hidden'); return; }
+        section.classList.remove('hidden');
+        // Sort by order for display
+        const sorted = [...allSubjects].sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity));
+        list.innerHTML = sorted.map((s, i) => `
+          <div class="flex items-center gap-3 p-3 bg-surface-50 rounded-xl cursor-move drag-subject" draggable="true" data-sid="${s.id}" data-pos="${i}">
+            <span class="drag-handle text-surface-300 hover:text-surface-500 cursor-grab active:cursor-grabbing text-lg select-none">⠿</span>
+            <span class="text-xs font-bold text-surface-400 w-5 text-center">${i + 1}</span>
+            <span class="font-medium text-sm text-surface-800 flex-1">${s.name}</span>
+            <span class="text-xs text-surface-400">${s.exams ? s.exams.length : 0} exams</span>
+          </div>
+        `).join('');
+
+        // Drag & drop handlers
+        let dragEl = null;
+        list.querySelectorAll('.drag-subject').forEach(el => {
+          el.addEventListener('dragstart', (e) => {
+            dragEl = el;
+            el.classList.add('opacity-50');
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          el.addEventListener('dragend', () => {
+            el.classList.remove('opacity-50');
+            dragEl = null;
+            list.querySelectorAll('.drag-subject').forEach(x => x.classList.remove('border-brand-500'));
+          });
+          el.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            el.classList.add('border-brand-500');
+          });
+          el.addEventListener('dragleave', () => {
+            el.classList.remove('border-brand-500');
+          });
+          el.addEventListener('drop', (e) => {
+            e.preventDefault();
+            el.classList.remove('border-brand-500');
+            if (!dragEl || dragEl === el) return;
+            const fromPos = parseInt(dragEl.dataset.pos);
+            const toPos = parseInt(el.dataset.pos);
+            // Reorder in DOM
+            if (fromPos < toPos) {
+              el.after(dragEl);
+            } else {
+              el.before(dragEl);
+            }
+            // Update positions
+            updateSubjectOrderPositions();
+            subjectOrderChanged = true;
+            document.getElementById('save-subject-order').classList.remove('hidden');
+          });
+        });
+      }
+
+      function updateSubjectOrderPositions() {
+        const list = document.getElementById('subject-reorder-list');
+        list.querySelectorAll('.drag-subject').forEach((el, i) => {
+          el.dataset.pos = i;
+          el.querySelector('.text-xs.font-bold').textContent = i + 1;
+        });
+      }
+
+      document.getElementById('save-subject-order').addEventListener('click', async () => {
+        const list = document.getElementById('subject-reorder-list');
+        const ids = Array.from(list.querySelectorAll('.drag-subject')).map(el => el.dataset.sid);
+        try {
+          const res = await fetch('/api/admin/subjects/reorder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ orderedIds: ids })
+          });
+          if (res.ok) {
+            window.showToast('Subject order saved');
+            subjectOrderChanged = false;
+            document.getElementById('save-subject-order').classList.add('hidden');
+          } else {
+            window.showToast('Failed to save order');
+          }
+        } catch { window.showToast('Error saving order'); }
+      });
+
+      // --- Exam Reorder (Drag & Drop within subject) ---
+      window.toggleExamReorder = (subjectId) => {
+        const reorderDiv = document.getElementById('exam-reorder-' + subjectId);
+        const grid = document.getElementById('exam-grid-' + subjectId);
+        const toggleBtn = document.getElementById('reorder-toggle-' + subjectId);
+        if (!reorderDiv || !grid) return;
+
+        const isReordering = reorderDiv.style.display !== 'none';
+
+        if (isReordering) {
+          reorderDiv.style.display = 'none';
+          grid.style.display = '';
+          if (toggleBtn) toggleBtn.textContent = '↕️ Reorder';
+        } else {
+          reorderDiv.style.display = '';
+          grid.style.display = 'none';
+          if (toggleBtn) toggleBtn.textContent = '✕ Cancel';
+          initExamDragList(subjectId);
+        }
+      };
+
+      function initExamDragList(subjectId) {
+        const list = document.querySelector('.exam-reorder-list[data-subject-id="' + subjectId + '"]');
+        if (!list) return;
+
+        // Clone rows to strip old listeners
+        list.querySelectorAll('.drag-exam').forEach(el => {
+          const fresh = el.cloneNode(true);
+          el.parentNode.replaceChild(fresh, el);
+        });
+
+        let dragExamEl = null;
+
+        list.querySelectorAll('.drag-exam').forEach(row => {
+          row.addEventListener('dragstart', (e) => {
+            dragExamEl = row;
+            row.classList.add('opacity-40');
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          row.addEventListener('dragend', () => {
+            row.classList.remove('opacity-40');
+            dragExamEl = null;
+            list.querySelectorAll('.drag-exam').forEach(x => x.classList.remove('bg-brand-50'));
+          });
+          row.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            row.classList.add('bg-brand-50');
+          });
+          row.addEventListener('dragleave', () => row.classList.remove('bg-brand-50'));
+          row.addEventListener('drop', (e) => {
+            e.preventDefault();
+            row.classList.remove('bg-brand-50');
+            if (!dragExamEl || dragExamEl === row) return;
+
+            const allRows = Array.from(list.querySelectorAll('.drag-exam'));
+            const srcIdx = allRows.indexOf(dragExamEl);
+            const tgtIdx = allRows.indexOf(row);
+
+            if (srcIdx < tgtIdx) {
+              list.insertBefore(dragExamEl, row.nextSibling);
+            } else {
+              list.insertBefore(dragExamEl, row);
+            }
+
+            list.querySelectorAll('.drag-exam').forEach((r, i) => {
+              r.dataset.pos = i;
+              const numEl = r.querySelector('.position-num');
+              if (numEl) numEl.textContent = i + 1;
+            });
+          });
+        });
+      }
+
+      window.saveExamOrder = async (subjectId) => {
+        const list = document.querySelector('.exam-reorder-list[data-subject-id="' + subjectId + '"]');
+        if (!list) return;
+        const rows = list.querySelectorAll('.drag-exam');
+        console.log('[saveExamOrder] Found rows:', rows.length);
+        const ids = Array.from(rows).map(el => {
+          const id = el.getAttribute('data-eid');
+          console.log('  data-eid:', id, '|', el.textContent.trim().substring(0, 30));
+          return id;
+        }).filter(Boolean);
+        console.log('[saveExamOrder] orderedIds:', ids);
+        if (ids.length === 0) { window.showToast('কোনো exam পাওয়া যায়নি — data-eid খালি', 'error'); return; }
+        try {
+          const res = await fetch('/api/admin/exams/reorder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ subjectId, orderedIds: ids })
+          });
+          if (res.ok) {
+            window.showToast('এক্সাম ক্রম সেভ হয়েছে ✓');
+            toggleExamReorder(subjectId);
+            loadManageList();
+          } else { window.showToast('সেভ হয়নি', 'error'); }
+        } catch { window.showToast('নেটওয়ার্ক এরর', 'error'); }
+      };
+
+      // Search & filter
+      let searchTimer;
+      document.getElementById('search-input').addEventListener('input', e => { clearTimeout(searchTimer); searchTimer = setTimeout(() => renderManageList(e.target.value, currentFilter), 200); });
+      document.querySelectorAll('[data-filter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentFilter = btn.dataset.filter;
+          document.querySelectorAll('.filter-btn').forEach(b => { b.classList.toggle('bg-white', b.dataset.filter === currentFilter); b.classList.toggle('shadow-sm', b.dataset.filter === currentFilter); b.classList.toggle('text-brand-600', b.dataset.filter === currentFilter); b.classList.toggle('text-surface-500', b.dataset.filter !== currentFilter); });
+          renderManageList(document.getElementById('search-input').value, currentFilter);
+        });
+      });
+
+      // Global actions
+      window.togglePub = async (id, val) => {
+        try {
+          await fetch(`/api/admin/exam/${id}/publish`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ published: val }) });
+          window.showToast(val ? 'Published' : 'Unpublished');
+          loadManageList();
+        } catch { window.showToast('Error'); }
+      };
+
+      window.editExam = async (id) => {
+        try {
+          const res = await fetch(`/api/admin/exam/${id}`);
+          if (!res.ok) { window.showToast('Failed to load exam'); return; }
+          const exam = await res.json();
+          const json = { subject: exam.subjectId, examTitle: exam.title, durationMinutes: exam.durationMinutes, questions: exam.questions || [] };
+          jsonText.value = JSON.stringify(json, null, 2);
+          editMode = id;
+          uploadSubtitle.textContent = `Editing: ${exam.title}`;
+          document.querySelectorAll('[data-tab]').forEach(b => { if (b.dataset.tab === 'upload') b.click(); });
+          validateLive();
+          window.showToast('Loaded for editing');
+        } catch { window.showToast('Error loading exam'); }
+      };
+
+      window.deleteExamConfirm = async (id, title) => {
+        const ok = await showConfirm('Delete Exam?', `Delete "${title}" and all its questions.`, 'Delete');
+        if (!ok) return;
+        try { await fetch(`/api/admin/exam/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); window.showToast('Deleted'); loadManageList(); } catch { window.showToast('Error'); }
+      };
+
+      window.deleteSubjectConfirm = async (id, name) => {
+        const ok = await showConfirm('Delete Subject?', `Delete "${name}" and ALL its exams.`, 'Delete All');
+        if (!ok) return;
+        try { await fetch(`/api/admin/subject/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); window.showToast('Deleted'); loadManageList(); } catch { window.showToast('Error'); }
+      };
+
+      window.toggleExamSelect = (id, checked) => {
+        if (checked) selectedExams.add(id); else selectedExams.delete(id);
+        updateExamBulkUI();
+      };
+
+      // --- Blog Tab ---
+      let blogParsedData = null;
+      let blogEditMode = null;
+      const blogJsonText = document.getElementById('blog-json-text');
+      const blogDropZone = document.getElementById('blog-drop-zone');
+      const blogLiveValidation = document.getElementById('blog-live-validation');
+      const blogUploadSubtitle = document.getElementById('blog-upload-subtitle');
+
+      // Blog file queue for batch upload
+      let blogFileQueue = [];
+      const blogFileQueueEl = document.getElementById('blog-file-queue');
+      const blogQueueListEl = document.getElementById('blog-queue-list');
+      const blogQueueCountEl = document.getElementById('blog-queue-count');
+
+      function renderBlogQueue() {
+        if (blogFileQueue.length === 0) { blogFileQueueEl.classList.add('hidden'); return; }
+        blogFileQueueEl.classList.remove('hidden');
+        blogQueueCountEl.textContent = blogFileQueue.length + ' file' + (blogFileQueue.length !== 1 ? 's' : '');
+        blogQueueListEl.innerHTML = blogFileQueue.map((f, i) => {
+          const statusCls = f.status === 'done' ? 'text-emerald-500' : f.status === 'error' ? 'text-red-500' : f.status === 'uploading' ? 'text-brand-500' : 'text-surface-400';
+          const statusText = f.status === 'done' ? '✓ Done' : f.status === 'error' ? '✗ ' + (f.error || 'Error') : f.status === 'uploading' ? '...' : 'Pending';
+          const canReorder = f.status === 'pending';
+          const upBtn = canReorder && i > 0 ? '<button onclick="moveBlogQueue(' + i + ',-1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move up">▲</button>' : '<span class="w-3 shrink-0"></span>';
+          const downBtn = canReorder && i < blogFileQueue.length - 1 ? '<button onclick="moveBlogQueue(' + i + ',1)" class="text-surface-300 hover:text-brand-500 shrink-0 text-xs" title="Move down">▼</button>' : '<span class="w-3 shrink-0"></span>';
+          return '<div class="flex items-center gap-1.5 p-2 bg-surface-50 rounded-xl text-sm"><span class="text-xs font-bold text-surface-300 w-4 text-center shrink-0">' + (i + 1) + '</span>' + upBtn + downBtn + '<span class="truncate flex-1 text-surface-700">' + f.name + '</span><span class="text-xs ' + statusCls + ' shrink-0">' + statusText + '</span>' + (f.status === 'pending' ? '<button onclick="removeBlogQueue(' + i + ')" class="text-surface-300 hover:text-red-500 shrink-0">✕</button>' : '') + '</div>';
+        }).join('');
+      }
+      window.removeBlogQueue = (i) => { blogFileQueue.splice(i, 1); renderBlogQueue(); };
+      window.moveBlogQueue = (i, dir) => {
+        const j = i + dir;
+        if (j < 0 || j >= blogFileQueue.length) return;
+        const temp = blogFileQueue[i];
+        blogFileQueue[i] = blogFileQueue[j];
+        blogFileQueue[j] = temp;
+        renderBlogQueue();
+      };
+      document.getElementById('blog-queue-clear').addEventListener('click', () => { blogFileQueue = []; renderBlogQueue(); });
+
+      function addBlogFiles(files) {
+        for (const f of files) {
+          if (!f.name.endsWith('.json')) continue;
+          const reader = new FileReader();
+          reader.onload = ev => {
+            blogFileQueue.push({ name: f.name, content: ev.target.result, status: 'pending' });
+            renderBlogQueue();
+          };
+          reader.readAsText(f);
+        }
+      }
+
+      // Blog drag & drop (single or multi)
+      ['dragenter','dragover'].forEach(e => blogDropZone.addEventListener(e, ev => { ev.preventDefault(); blogDropZone.classList.add('border-brand-400','bg-brand-50/30'); }));
+      ['dragleave','drop'].forEach(e => blogDropZone.addEventListener(e, ev => { ev.preventDefault(); blogDropZone.classList.remove('border-brand-400','bg-brand-50/30'); }));
+      blogDropZone.addEventListener('drop', e => {
+        const files = e.dataTransfer?.files;
+        if (files && files.length > 1) { addBlogFiles(files); return; }
+        if (files && files.length === 1) { const r = new FileReader(); r.onload = ev => { blogJsonText.value = ev.target.result; blogValidateLive(); }; r.readAsText(files[0]); }
+      });
+      document.getElementById('blog-json-file').addEventListener('change', e => {
+        const files = e.target.files;
+        if (files.length > 1) { addBlogFiles(files); e.target.value = ''; return; }
+        if (files[0]) { const r = new FileReader(); r.onload = ev => { blogJsonText.value = ev.target.result; blogValidateLive(); }; r.readAsText(files[0]); }
+        e.target.value = '';
+      });
+
+      function blogValidateContent(content) {
+        const errs = [];
+        if (!Array.isArray(content) || content.length === 0) { errs.push('content must be a non-empty array'); return errs; }
+        content.forEach((item, i) => {
+          const n = i + 1;
+          if (!item.question || typeof item.question !== 'string') errs.push(`Item ${n}: missing question`);
+          if (!item.answer || typeof item.answer !== 'string') errs.push(`Item ${n}: missing answer`);
+        });
+        return errs;
+      }
+
+      let blogDebounce;
+      blogJsonText.addEventListener('input', () => { clearTimeout(blogDebounce); blogDebounce = setTimeout(blogValidateLive, 300); });
+
+      function blogValidateLive() {
+        const raw = blogJsonText.value.trim();
+        if (!raw) { blogLiveValidation.classList.add('hidden'); return; }
+        try {
+          const data = JSON.parse(raw);
+          const errs = blogValidateContent(data.content || []);
+          const count = Array.isArray(data.content) ? data.content.length : 0;
+          document.getElementById('blog-q-counter').textContent = `${count} Q&A pair${count !== 1 ? 's' : ''}`;
+          const status = document.getElementById('blog-q-status');
+          const errDiv = document.getElementById('blog-validation-errors');
+          if (errs.length === 0 && count > 0) {
+            status.textContent = 'Valid';
+            status.className = 'text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600';
+            errDiv.innerHTML = '';
+          } else {
+            status.textContent = `${errs.length} error${errs.length !== 1 ? 's' : ''}`;
+            status.className = 'text-xs font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-600';
+            errDiv.innerHTML = errs.map(e => `<div class="text-xs text-red-500 flex items-center gap-1.5"><svg class="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>${e}</div>`).join('');
+          }
+          blogLiveValidation.classList.remove('hidden');
+        } catch { document.getElementById('blog-q-counter').textContent = ''; document.getElementById('blog-q-status').textContent = 'Invalid JSON'; document.getElementById('blog-q-status').className = 'text-xs font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-600'; document.getElementById('blog-validation-errors').innerHTML = '<div class="text-xs text-red-500">Cannot parse JSON</div>'; blogLiveValidation.classList.remove('hidden'); }
+      }
+
+      // Blog Preview
+      document.getElementById('blog-preview-btn').addEventListener('click', () => {
+        try {
+          blogParsedData = JSON.parse(blogJsonText.value.trim());
+          const errs = blogValidateContent(blogParsedData.content || []);
+          if (errs.length > 0) { window.showToast(errs[0]); blogParsedData = null; return; }
+          if (!blogParsedData.content || !blogParsedData.content.length) { window.showToast('No content'); blogParsedData = null; return; }
+          let html = `<div class="grid grid-cols-2 gap-3 mb-4 text-sm"><div><strong>Subject:</strong> ${blogParsedData.subject||'-'}</div><div><strong>Title:</strong> ${blogParsedData.title||'-'}</div><div><strong>Exam ID:</strong> ${blogParsedData.examId||'None'}</div><div><strong>Slide URL:</strong> ${blogParsedData.slideUrl||'None'}</div><div><strong>Q&A Count:</strong> ${blogParsedData.content.length}</div></div><hr class="border-surface-200 mb-4">`;
+          blogParsedData.content.slice(0, 3).forEach((item, i) => {
+            html += `<div class="mb-3 pb-3 border-b border-surface-200 last:border-0"><div class="font-semibold text-sm mb-1">Q${i+1}: ${item.question}</div><div class="text-sm text-surface-500 ml-4">${item.answer.substring(0, 100)}${item.answer.length > 100 ? '...' : ''}</div></div>`;
+          });
+          if (blogParsedData.content.length > 3) html += `<div class="text-xs text-surface-400 text-center mt-2">... and ${blogParsedData.content.length - 3} more</div>`;
+          document.getElementById('blog-preview-content').innerHTML = html;
+          document.getElementById('blog-preview-area').classList.remove('hidden');
+        } catch(e) { window.showToast('Invalid JSON: ' + e.message); blogParsedData = null; }
+      });
+
+      document.getElementById('blog-cancel-preview').addEventListener('click', () => { document.getElementById('blog-preview-area').classList.add('hidden'); blogParsedData = null; });
+      document.getElementById('blog-clear-btn').addEventListener('click', () => { blogJsonText.value = ''; blogParsedData = null; blogEditMode = null; blogUploadSubtitle.textContent = 'Paste JSON or drop a file'; blogLiveValidation.classList.add('hidden'); document.getElementById('blog-preview-area').classList.add('hidden'); document.getElementById('blog-upload-result').innerHTML = ''; });
+
+      // Blog Confirm Upload
+      document.getElementById('blog-confirm-btn').addEventListener('click', async () => {
+        if (!blogParsedData) return;
+        const btn = document.getElementById('blog-confirm-btn');
+        btn.disabled = true; btn.textContent = blogEditMode ? 'Saving...' : 'Uploading...';
+        try {
+          let res;
+          if (blogEditMode) {
+            res = await fetch(`/api/admin/blog/${blogEditMode}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(blogParsedData) });
+          } else {
+            res = await fetch('/api/admin/blog/upload', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(blogParsedData) });
+          }
+          const data = await res.json();
+          if (res.ok) {
+            document.getElementById('blog-upload-result').innerHTML = `<div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl"><h3 class="font-bold text-emerald-700 mb-2">${blogEditMode ? 'Blog updated!' : 'Blog created as draft!'}</h3><p class="text-sm text-emerald-600">${data.message || ''}</p></div>`;
+            window.showToast(blogEditMode ? 'Blog updated' : 'Blog created');
+            blogEditMode = null;
+            blogJsonText.value = '';
+            blogParsedData = null;
+            document.getElementById('blog-preview-area').classList.add('hidden');
+            document.getElementById('blog-json-file').value = '';
+            blogUploadSubtitle.textContent = 'Paste JSON or drop a file';
+            blogLiveValidation.classList.add('hidden');
+            loadBlogList();
+          } else {
+            let errMsg = data.error || 'Upload failed';
+            if (data.details) errMsg += ': ' + data.details.join('; ');
+            document.getElementById('blog-upload-result').innerHTML = `<p class="text-red-500 text-sm">${errMsg}</p>`;
+            window.showToast('Upload failed');
+          }
+        } catch(e) { document.getElementById('blog-upload-result').innerHTML = `<p class="text-red-500 text-sm">${e.message}</p>`; window.showToast('Error'); }
+        btn.disabled = false; btn.textContent = blogEditMode ? 'Save Changes' : 'Confirm Upload';
+      });
+
+      // Batch upload all queued blog files
+      document.getElementById('blog-upload-all-btn').addEventListener('click', async () => {
+        const pending = blogFileQueue.filter(f => f.status === 'pending');
+        if (pending.length === 0) { window.showToast('No pending files'); return; }
+        const btn = document.getElementById('blog-upload-all-btn');
+        btn.disabled = true; btn.textContent = 'Uploading...';
+        document.getElementById('blog-batch-progress').classList.remove('hidden');
+        let done = 0;
+        const total = pending.length;
+        for (const f of pending) {
+          f.status = 'uploading'; renderBlogQueue();
+          document.getElementById('blog-batch-status').textContent = 'Uploading ' + f.name + ' (' + (done + 1) + '/' + total + ')';
+          document.getElementById('blog-batch-bar').style.width = Math.round((done / total) * 100) + '%';
+          try {
+            const parsed = JSON.parse(f.content);
+            const res = await fetch('/api/admin/blog/upload', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+            const data = await res.json();
+            if (res.ok) { f.status = 'done'; } else { f.status = 'error'; f.error = data.error || 'Failed'; }
+          } catch (e) { f.status = 'error'; f.error = e.message; }
+          done++;
+          document.getElementById('blog-batch-bar').style.width = Math.round((done / total) * 100) + '%';
+          renderBlogQueue();
+        }
+        document.getElementById('blog-batch-status').textContent = 'Done! ' + blogFileQueue.filter(f => f.status === 'done').length + '/' + total + ' uploaded';
+        document.getElementById('blog-batch-bar').style.width = '100%';
+        btn.disabled = false; btn.textContent = 'Upload All';
+        window.showToast('Batch upload complete');
+        loadBlogList();
+        setTimeout(() => { document.getElementById('blog-batch-progress').classList.add('hidden'); }, 3000);
+      });
+
+      // Blog Manage List
+      let selectedBlogs = new Set();
+
+      function updateBlogBulkUI() {
+        const bar = document.getElementById('blog-bulk-actions');
+        const allBlogEls = document.querySelectorAll('.blog-check');
+        if (allBlogEls.length === 0) { bar.classList.add('hidden'); return; }
+        bar.classList.remove('hidden');
+        document.getElementById('blog-selected-count').textContent = selectedBlogs.size;
+        const selectAll = document.getElementById('select-all-blogs');
+        selectAll.checked = selectedBlogs.size > 0 && selectedBlogs.size === allBlogEls.length;
+        selectAll.indeterminate = selectedBlogs.size > 0 && selectedBlogs.size < allBlogEls.length;
+      }
+
+      window.toggleBlogSelect = (id, checked) => {
+        if (checked) selectedBlogs.add(id); else selectedBlogs.delete(id);
+        updateBlogBulkUI();
+      };
+
+      document.getElementById('select-all-blogs').addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        selectedBlogs.clear();
+        if (checked) { document.querySelectorAll('.blog-check').forEach(cb => { cb.checked = true; selectedBlogs.add(cb.dataset.bid); }); }
+        else { document.querySelectorAll('.blog-check').forEach(cb => { cb.checked = false; }); }
+        updateBlogBulkUI();
+      });
+
+      document.getElementById('bulk-delete-blogs').addEventListener('click', async () => {
+        if (selectedBlogs.size === 0) return;
+        const ok = await showConfirm('Delete ' + selectedBlogs.size + ' blog(s)?', 'This cannot be undone.', 'Delete All');
+        if (!ok) return;
+        let done = 0;
+        for (const id of selectedBlogs) {
+          try { await fetch('/api/admin/blog/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); done++; } catch {}
+        }
+        selectedBlogs.clear();
+        window.showToast('Deleted ' + done + ' blogs');
+        loadBlogList();
+      });
+
+      async function loadBlogList() {
+        const el = document.getElementById('blog-manage-list');
+        selectedBlogs.clear();
+        el.innerHTML = '<div class="flex justify-center py-12"><div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div></div>';
+        try {
+          const res = await fetch('/api/admin/blogs');
+          if (res.status === 401) { window.location.reload(); return; }
+          const blogs = await res.json();
+          if (blogs.error) { el.innerHTML = `<div class="text-center py-12"><p class="text-red-500 font-medium">${blogs.error}</p></div>`; return; }
+          if (blogs.length === 0) {
+            el.innerHTML = '<div class="text-center py-12"><div class="w-16 h-16 rounded-3xl bg-surface-100 flex items-center justify-center text-3xl mx-auto mb-4">📭</div><p class="text-surface-400 font-medium">No blogs yet</p><p class="text-surface-300 text-sm mt-1">Create one above</p></div>';
+            document.getElementById('blog-bulk-actions').classList.add('hidden');
+            return;
+          }
+          updateBlogBulkUI();
+          el.innerHTML = blogs.map(b => `
+            <div class="p-4 border border-surface-100 rounded-2xl mb-3 hover:border-brand-200 transition">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-2 min-w-0 flex-1">
+                  <input type="checkbox" class="blog-check w-4 h-4 mt-0.5 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer shrink-0" data-bid="${b.id}" onchange="toggleBlogSelect('${b.id}',this.checked)">
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="font-semibold text-sm text-surface-800 truncate">${b.title}</span>
+                      <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${b.published ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}">${b.published ? 'Published' : 'Draft'}</span>
+                    </div>
+                    <div class="text-xs text-surface-400 mb-2">${b.contentCount || 0} Q&A · ${b.subjectId || '-'}</div>
+                    ${b.examId ? `<div class="text-xs text-surface-400">Linked exam: ${b.examId}</div>` : ''}
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-2 mt-3">
+                <button onclick="blogTogglePub('${b.id}',${!b.published})" class="px-3 py-1.5 text-xs font-medium ${b.published ? 'text-amber-600 bg-amber-50 hover:bg-amber-100' : 'text-emerald-600 bg-emerald-50 hover:bg-emerald-100'} rounded-lg transition">${b.published ? 'Unpublish' : 'Publish'}</button>
+                <button onclick="blogEdit('${b.id}')" class="px-3 py-1.5 text-xs font-medium text-brand-600 bg-brand-50 rounded-lg hover:bg-brand-100 transition">Edit</button>
+                <button onclick="blogDeleteConfirm('${b.id}','${b.title.replace(/'/g,"\\'")}')" class="px-3 py-1.5 text-xs font-medium text-red-500 bg-red-50 rounded-lg hover:bg-red-100 transition">Delete</button>
+              </div>
+            </div>
+          `).join('');
+        } catch(e) { el.innerHTML = `<div class="text-center py-12"><p class="text-red-500 font-medium">${e.message}</p></div>`; }
+      }
+
+      window.blogTogglePub = async (id, val) => {
+        try {
+          await fetch(`/api/admin/blog/${id}/publish`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ published: val }) });
+          window.showToast(val ? 'Published' : 'Unpublished');
+          loadBlogList();
+        } catch { window.showToast('Error'); }
+      };
+
+      window.blogEdit = async (id) => {
+        try {
+          const res = await fetch(`/api/admin/blog/${id}`);
+          if (!res.ok) { window.showToast('Failed to load blog'); return; }
+          const blog = await res.json();
+          document.getElementById('blog-edit-title').value = blog.title || '';
+          document.getElementById('blog-edit-desc').value = blog.description || '';
+          document.getElementById('blog-edit-slide').value = blog.slideUrl || '';
+          document.getElementById('blog-edit-exam').value = blog.examId || '';
+          document.getElementById('blog-edit-content').value = JSON.stringify(blog.content || [], null, 2);
+          document.getElementById('blog-edit-form').classList.remove('hidden');
+          document.getElementById('blog-edit-form').dataset.blogId = id;
+          window.showToast('Loaded for editing');
+        } catch { window.showToast('Error loading blog'); }
+      };
+
+      document.getElementById('blog-edit-save').addEventListener('click', async () => {
+        const id = document.getElementById('blog-edit-form').dataset.blogId;
+        if (!id) return;
+        const btn = document.getElementById('blog-edit-save');
+        btn.disabled = true; btn.textContent = 'Saving...';
+        try {
+          let content;
+          try { content = JSON.parse(document.getElementById('blog-edit-content').value); } catch { window.showToast('Invalid JSON in content'); btn.disabled = false; btn.textContent = 'Save Changes'; return; }
+          const res = await fetch(`/api/admin/blog/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+            title: document.getElementById('blog-edit-title').value,
+            description: document.getElementById('blog-edit-desc').value,
+            slideUrl: document.getElementById('blog-edit-slide').value || null,
+            examId: document.getElementById('blog-edit-exam').value || null,
+            content,
+          })});
+          if (res.ok) {
+            window.showToast('Blog updated');
+            document.getElementById('blog-edit-form').classList.add('hidden');
+            loadBlogList();
+          } else {
+            const d = await res.json();
+            window.showToast(d.error || 'Update failed');
+          }
+        } catch(e) { window.showToast('Error: ' + e.message); }
+        btn.disabled = false; btn.textContent = 'Save Changes';
+      });
+
+      document.getElementById('blog-edit-cancel').addEventListener('click', () => { document.getElementById('blog-edit-form').classList.add('hidden'); });
+
+      window.blogDeleteConfirm = async (id, title) => {
+        const ok = await showConfirm('Delete Blog?', `Delete "${title}".`, 'Delete');
+        if (!ok) return;
+        try { await fetch(`/api/admin/blog/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) }); window.showToast('Deleted'); loadBlogList(); } catch { window.showToast('Error'); }
+      };
+
+      // --- Subjects Tab ---
+      async function loadSubjects() {
+        var el = document.getElementById('subjects-list');
+        el.innerHTML = '<div class="flex justify-center py-12"><div class="w-8 h-8 border-4 border-surface-200 border-t-brand-500 rounded-full animate-spin"></div></div>';
+        try {
+          var res = await fetch('/api/admin/subjects');
+          if (!res.ok) throw new Error('Failed to load');
+          var subjects = await res.json();
+          if (!subjects.length) {
+            el.innerHTML = '<div class="text-center py-12"><p class="text-surface-400 font-medium">No subjects yet</p><p class="text-surface-300 text-sm mt-1">Create one above</p></div>';
+            return;
+          }
+          el.innerHTML = subjects.map(function(s) {
+            return '<div class="flex items-center justify-between p-4 border border-surface-100 rounded-2xl mb-3 hover:border-brand-200 transition">'
+              + '<div class="min-w-0 flex-1">'
+              + '<div class="font-semibold text-sm text-surface-800 truncate">' + s.name + '</div>'
+              + '<div class="text-xs text-surface-400 mt-0.5">slug: ' + s.slug + '</div>'
+              + '</div>'
+              + '<div class="flex gap-2 shrink-0 ml-3">'
+              + '<button onclick="renameSubjectPrompt(\'' + s.slug + '\',\'' + s.name.replace(/'/g,"\\'") + '\')" class="px-3 py-1.5 text-xs font-medium text-brand-600 bg-brand-50 rounded-lg hover:bg-brand-100 transition">Rename</button>'
+              + '<button onclick="deleteSubjectConfirm(\'' + s.slug + '\',\'' + s.name.replace(/'/g,"\\'") + '\')" class="px-3 py-1.5 text-xs font-medium text-red-500 bg-red-50 rounded-lg hover:bg-red-100 transition">Delete</button>'
+              + '</div></div>';
+          }).join('');
+        } catch(e) { el.innerHTML = '<div class="text-center py-12"><p class="text-red-500 font-medium">' + e.message + '</p></div>'; }
+      }
+
+      document.getElementById('subject-create-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        var nameEl = document.getElementById('subject-name');
+        var name = nameEl.value.trim();
+        if (!name) return;
+        try {
+          var res = await fetch('/api/admin/subject', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) });
+          if (res.ok) {
+            window.showToast('Subject created');
+            nameEl.value = '';
+            loadSubjects();
+          } else {
+            var d = await res.json();
+            window.showToast(d.error || 'Failed');
+          }
+        } catch { window.showToast('Error'); }
+      });
+
+      window.renameSubjectPrompt = async (slug, oldName) => {
+        var newName = prompt('Rename subject "' + oldName + '" to:', oldName);
+        if (!newName || newName.trim() === oldName) return;
+        try {
+          var res = await fetch('/api/admin/subject/' + slug, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: newName.trim() }) });
+          if (res.ok) { window.showToast('Renamed'); loadSubjects(); }
+          else { var d = await res.json(); window.showToast(d.error || 'Failed'); }
+        } catch { window.showToast('Error'); }
+      };
+
+      window.deleteSubjectConfirm = async (slug, name) => {
+        var ok = await showConfirm('Delete Subject?', 'Delete "' + name + '" and all its exams and blogs. This cannot be undone.', 'Delete');
+        if (!ok) return;
+        try {
+          await fetch('/api/admin/subject/' + slug, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'delete' }) });
+          window.showToast('Deleted');
+          loadSubjects();
+        } catch { window.showToast('Error'); }
+      };
+
+      // --- Clear Attempts ---
+      document.getElementById('clear-attempts-btn').addEventListener('click', async () => {
+        var ok = await showConfirm('Clear All Attempts?', 'This will permanently delete ALL leaderboard data. This cannot be undone.', 'Clear All');
+        if (!ok) return;
+        try {
+          var res = await fetch('/api/admin/attempts', { method: 'DELETE' });
+          if (res.ok) {
+            var d = await res.json();
+            window.showToast('Cleared ' + d.deleted + ' attempts');
+            loadMonitorData();
+          } else { window.showToast('Failed'); }
+        } catch { window.showToast('Error'); }
+      });
+
+      // Load blogs when switching to blog tab
+      const origTabClick = document.querySelectorAll('[data-tab]');
+      origTabClick.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.dataset.tab === 'blog') loadBlogList();
+          if (btn.dataset.tab === 'subjects') loadSubjects();
+          if (btn.dataset.tab === 'monitor') { loadMonitorData(); startMonitorRefresh(); }
+          else { stopMonitorRefresh(); }
+        });
+      });
+
+      // --- Monitor Tab ---
+      window.monitorData = [];
+      var monitorInterval = null;
+
+      function getGrade(pct) {
+        if (pct >= 80) return { label: 'A+', color: 'text-emerald-500' };
+        if (pct >= 70) return { label: 'A',  color: 'text-green-500' };
+        if (pct >= 60) return { label: 'B',  color: 'text-blue-500' };
+        if (pct >= 50) return { label: 'C',  color: 'text-yellow-500' };
+        if (pct >= 40) return { label: 'D',  color: 'text-orange-500' };
+        return { label: 'F', color: 'text-red-500' };
+      }
+
+      function timeAgo(seconds) {
+        var diff = Math.floor(Date.now() / 1000) - seconds;
+        if (diff < 0) return 'just now';
+        if (diff < 60) return diff + 's ago';
+        if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+        return Math.floor(diff / 86400) + 'd ago';
+      }
+
+      function formatTime(secs) {
+        var m = Math.floor(secs / 60);
+        var s = secs % 60;
+        return m + 'm ' + s + 's';
+      }
+
+      function startMonitorRefresh() {
+        if (monitorInterval) clearInterval(monitorInterval);
+        monitorInterval = setInterval(function() { loadMonitorData(); }, 30000);
+      }
+
+      function stopMonitorRefresh() {
+        if (monitorInterval) clearInterval(monitorInterval);
+        monitorInterval = null;
+      }
+
+      async function loadMonitorData() {
+        var loading = document.getElementById('monitor-loading');
+        var empty = document.getElementById('monitor-empty');
+        var tableWrap = document.getElementById('monitor-table-wrap');
+        loading.classList.remove('hidden');
+        empty.classList.add('hidden');
+        tableWrap.classList.add('hidden');
+
+        try {
+          var res = await fetch('/api/admin/attempts?limit=100');
+          if (res.status === 401) { window.location.reload(); return; }
+          var data = await res.json();
+          if (data.error) { loading.classList.add('hidden'); empty.classList.remove('hidden'); return; }
+          window.monitorData = data;
+          populateSubjectFilter(data);
+          populateExamFilter(data);
+          renderMonitorTable(getFilteredData());
+          renderMonitorStats(data);
+          renderAnalytics(data);
+          document.getElementById('monitor-last-updated').textContent = 'Auto-refreshes every 30s · Last: ' + new Date().toLocaleTimeString();
+        } catch(e) {
+          loading.classList.add('hidden');
+          empty.classList.remove('hidden');
+        }
+      }
+
+      function populateSubjectFilter(data) {
+        var sel = document.getElementById('monitor-subject-filter');
+        var current = sel.value;
+        var subjects = {};
+        data.forEach(function(a) { if (a.subjectId) subjects[a.subjectId] = a.subjectId; });
+        sel.innerHTML = '<option value="">All Subjects</option>' + Object.keys(subjects).sort().map(function(s) {
+          return '<option value="' + s + '"' + (s === current ? ' selected' : '') + '>' + s + '</option>';
+        }).join('');
+      }
+
+      function populateExamFilter(data) {
+        var sel = document.getElementById('monitor-exam-filter');
+        var current = sel.value;
+        var exams = {};
+        data.forEach(function(a) { if (a.examId) exams[a.examId] = a.examTitle; });
+        sel.innerHTML = '<option value="">All Exams</option>' + Object.keys(exams).sort().map(function(eid) {
+          return '<option value="' + eid + '"' + (eid === current ? ' selected' : '') + '>' + exams[eid] + '</option>';
+        }).join('');
+      }
+
+      function getFilteredData() {
+        var search = document.getElementById('monitor-search').value.toLowerCase();
+        var subject = document.getElementById('monitor-subject-filter').value;
+        var exam = document.getElementById('monitor-exam-filter').value;
+        return window.monitorData.filter(function(a) {
+          var nameMatch = !search || a.studentName.toLowerCase().includes(search);
+          var subjectMatch = !subject || a.subjectId === subject;
+          var examMatch = !exam || a.examId === exam;
+          return nameMatch && subjectMatch && examMatch;
+        });
+      }
+
+      function renderMonitorStats(data) {
+        var now = Math.floor(Date.now() / 1000);
+        var todayData = data.filter(function(a) {
+          var ts = a.createdAt && (a.createdAt._seconds || a.createdAt.seconds || 0);
+          return (now - ts) < 86400;
+        });
+        var totalToday = todayData.length;
+        var avgToday = totalToday > 0
+          ? Math.round(todayData.reduce(function(s, a) { return s + (a.score / a.total * 100); }, 0) / totalToday)
+          : 0;
+        var topToday = todayData.reduce(function(best, a) {
+          return (!best || a.score > best.score) ? a : best;
+        }, null);
+        document.getElementById('monitor-stat-total').textContent = totalToday;
+        document.getElementById('monitor-stat-avg').textContent = totalToday > 0 ? avgToday + '%' : '-';
+        document.getElementById('monitor-stat-top').textContent = topToday ? topToday.studentName + ' ' + topToday.score + '/' + topToday.total : '-';
+      }
+
+      function renderMonitorTable(data) {
+        var tbody = document.getElementById('monitor-tbody');
+        var loading = document.getElementById('monitor-loading');
+        var empty = document.getElementById('monitor-empty');
+        var tableWrap = document.getElementById('monitor-table-wrap');
+        loading.classList.add('hidden');
+        if (!data.length) {
+          empty.classList.remove('hidden');
+          tableWrap.classList.add('hidden');
+          return;
+        }
+        empty.classList.add('hidden');
+        tableWrap.classList.remove('hidden');
+        tbody.innerHTML = data.map(function(a) {
+          var pct = a.total > 0 ? Math.round(a.score / a.total * 100) : 0;
+          var grade = getGrade(pct);
+          var ts = a.createdAt && (a.createdAt._seconds || a.createdAt.seconds || 0);
+          var rowBg = pct >= 80 ? 'bg-emerald-50' : pct < 40 ? 'bg-red-50' : '';
+          return '<tr class="border-b border-surface-100 hover:bg-surface-50 transition-colors ' + rowBg + '">'
+            + '<td class="px-4 py-3 font-medium text-surface-800">' + escapeHtml(a.studentName || 'Anonymous') + '</td>'
+            + '<td class="px-4 py-3 text-surface-500 text-sm max-w-[200px] truncate">' + escapeHtml(a.examTitle || '-') + '</td>'
+            + '<td class="px-4 py-3 font-mono font-bold text-surface-800">' + a.score + '/' + a.total + '</td>'
+            + '<td class="px-4 py-3 text-surface-500">' + pct + '%</td>'
+            + '<td class="px-4 py-3 font-bold ' + grade.color + '">' + grade.label + '</td>'
+            + '<td class="px-4 py-3 text-surface-400 text-sm">' + formatTime(a.timeTaken) + '</td>'
+            + '<td class="px-4 py-3 text-surface-400 text-xs">' + timeAgo(ts) + '</td>'
+            + '</tr>';
+        }).join('');
+      }
+
+      function renderAnalytics(data) {
+        var wrap = document.getElementById('analytics-bars');
+        if (!wrap) return;
+        var byExam = {};
+        data.forEach(function(a) {
+          if (!a.examId) return;
+          if (!byExam[a.examId]) byExam[a.examId] = { title: a.examTitle || a.examId, sum: 0, n: 0 };
+          byExam[a.examId].sum += (a.total > 0 ? a.score / a.total * 100 : 0);
+          byExam[a.examId].n++;
+        });
+        var rows = Object.keys(byExam).map(function(k) {
+          var e = byExam[k];
+          return { title: e.title, avg: e.n > 0 ? Math.round(e.sum / e.n) : 0, n: e.n };
+        }).sort(function(a, b) { return a.avg - b.avg; });
+        if (!rows.length) { wrap.innerHTML = '<p class="text-sm text-surface-400 text-center py-4">No attempt data yet.</p>'; return; }
+        wrap.innerHTML = rows.map(function(r) {
+          var color = r.avg >= 80 ? 'bg-emerald-500' : r.avg >= 50 ? 'bg-amber-500' : 'bg-red-500';
+          return '<div>'
+            + '<div class="flex items-center justify-between text-xs mb-1"><span class="font-medium text-surface-700 truncate pr-2">' + r.title + '</span><span class="font-bold ' + (r.avg>=80?'text-emerald-600':r.avg>=50?'text-amber-600':'text-red-600') + '">' + r.avg + '%</span></div>'
+            + '<div class="w-full bg-surface-100 rounded-full h-2"><div class="' + color + ' h-2 rounded-full transition-all" style="width:' + r.avg + '%"></div></div>'
+            + '</div>';
+        }).join('');
+      }
+
+      // Filter event listeners
+      document.getElementById('monitor-search').addEventListener('input', function() { renderMonitorTable(getFilteredData()); });
+      document.getElementById('monitor-subject-filter').addEventListener('change', function() { renderMonitorTable(getFilteredData()); });
+      document.getElementById('monitor-exam-filter').addEventListener('change', function() { renderMonitorTable(getFilteredData()); });
+      document.getElementById('monitor-refresh-btn').addEventListener('click', function() { loadMonitorData(); });
     })();
+  </script>
+</Layout>
