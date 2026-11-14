@@ -1,31 +1,15 @@
 # Firestore Security Rules
 
-Copy-paste this into Firebase Console → Firestore Database → Rules, then click Publish.
+Copy-paste this into **Firebase Console → Firestore Database → Rules**, then click **Publish**.
 
 ```rules
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /subjects/{subjectId} {
-      allow read: if true;
-      allow write: if true;
-    }
-
-    match /exams/{examId} {
-      allow read: if true;
-      allow write: if true;
-
-      match /questions/{questionId} {
-        allow read: if true;
-        allow write: if true;
-      }
-    }
-
-    match /attempts/{attemptId} {
-      allow create: if true;
-      allow read: if true;
-      allow update: if false;
-      allow delete: if false;
+    // All client access denied. The app interacts with Firestore exclusively
+    // through the Firebase Admin SDK on the server, which bypasses security rules.
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
@@ -33,6 +17,8 @@ service cloud.firestore {
 
 ## Notes
 
-- This app uses the Firebase Admin SDK for the server-side exam uploads, while public data is meant to be readable from the browser.
-- Private service-account keys must never be committed to a repository.
-- Rotate any real Firebase service account credentials immediately if they were exposed in a previous commit.
+- This application interacts with Firestore exclusively via the Firebase Admin SDK running inside server-side endpoints on Vercel.
+- The Firebase Admin SDK uses service account credentials that automatically bypass Firestore security rules.
+- Public client reads and writes are strictly denied so that anyone with the project ID cannot inspect, tamper with, or delete data (subjects, exams, questions, and student attempts).
+- Private service account keys must never be committed to the repository or included in client code.
+- If a service account private key was ever exposed in previous commits or public repositories, rotate/revoke it immediately in the Google Cloud / Firebase Console.
